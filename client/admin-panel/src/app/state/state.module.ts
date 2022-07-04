@@ -4,15 +4,23 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
-import { reducers, metaReducers } from 'src/app/reducers';
+
+export interface State {}
+
+export const reducers: ActionReducerMap<State> = {};
+
+export const metaReducers: MetaReducer<State>[] = !environment.production
+  ? []
+  : [];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
@@ -22,4 +30,4 @@ import { reducers, metaReducers } from 'src/app/reducers';
     }),
   ],
 })
-export class ngrxStoreModule {}
+export class StateModule {} 
