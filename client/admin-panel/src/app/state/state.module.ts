@@ -6,13 +6,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from 'src/environments/environment';
-import { userReducer } from 'src/app/model/user.reducer';
+import { userReducer } from 'src/app/state/user/user.reducer';
+
+const reducers = { user: userReducer };
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
