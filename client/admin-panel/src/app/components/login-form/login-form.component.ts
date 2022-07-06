@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 import { Store } from '@ngrx/store';
-import { HttpService } from 'src/app/services/http.service';
-import { login, logout } from 'src/app/state/user/user.actions';
+
+import { UserFacade } from 'src/app/state/user/user.facade';
+import { UserLogin } from 'src/app/state/user/user.model';
 
 @Component({
   selector: 'app-login-form',
@@ -11,24 +13,23 @@ import { login, logout } from 'src/app/state/user/user.actions';
 })
 export class LoginFormComponent {
   public loginForm: FormGroup;
-  constructor(private store: Store, private http: HttpService) {
+
+  constructor(private store: Store, private facade: UserFacade) {
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
     });
   }
 
-  public login(loginForm: FormGroup): void {
-    let credentials = {
-      email: loginForm.value.email,
-      password: loginForm.value.password,
-    };
-    this.http
-      .login(credentials)
-      .subscribe((value) => this.store.dispatch(login({ user: value.user })));
+  public login(): void {
+    const login = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    } as UserLogin;
+    this.facade.login(login);
   }
 
   public logout(): void {
-    this.store.dispatch(logout());
+    this.facade.logout();
   }
 }
