@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -16,16 +16,16 @@ export class LoginFormComponent {
 
   constructor(private store: Store, private facade: UserFacade) {
     this.loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 
   public login(): void {
-    const login = {
+    const login: UserLogin = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
-    } as UserLogin;
+    };
     this.facade.login(login);
   }
 

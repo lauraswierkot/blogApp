@@ -16,9 +16,9 @@ export interface UserLogin {
 }
 
 export interface UserState {
-  user: Omit<User, 'token'> | null;
+  user: Omit<User, 'token'>;
   error: any;
-  token: User['token'] | null;
+  token: User['token'];
 }
 
 export const initialState: UserState = {

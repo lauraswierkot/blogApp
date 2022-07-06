@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 const modules = [MatFormFieldModule, MatIconModule];
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule, ...modules],
   exports: [...modules],
 })
