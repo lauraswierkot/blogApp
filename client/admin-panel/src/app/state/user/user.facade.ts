@@ -5,7 +5,10 @@ import * as selector from './user.selectors';
 import * as action from './user.actions';
 import { UserLogin } from './user.model';
 
-@Injectable()
+@Injectable
+({
+  providedIn: 'root',
+})
 export class UserFacade {
   public user$ = this.store.select(selector.selectUserData);
 

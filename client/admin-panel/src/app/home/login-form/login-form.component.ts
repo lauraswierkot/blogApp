@@ -16,9 +16,20 @@ export class LoginFormComponent {
 
   constructor(private store: Store, private facade: UserFacade) {
     this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      email: new FormControl('', {
+        validators: Validators.email,
+        updateOn: 'blur',
+      }),
+      password: new FormControl('', { validators: Validators.required }),
     });
+  }
+
+  public get email() {
+    return this.loginForm.get('email');
+  }
+
+  public get password() {
+    return this.loginForm.get('password');
   }
 
   public login(): void {

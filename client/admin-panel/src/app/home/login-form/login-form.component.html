@@ -3,13 +3,18 @@
     formControlName="email"
     placeholder="Type your email here"
     name="email"
-    required/>
+    required
+  />
+  <div *ngIf="email.errors?.['email']">
+    Email not valid.
+  </div> 
   <input
     type="password"
     formControlName="password"
     placeholder="Type your passwordhere"
     name="password"
-    required/>
-  <button class="submitButton" type="submit">Login</button><br />
+    required
+  />
+  <button [disabled]="password.errors" class="submitButton" type="submit">Login</button>
+  <button (click)="logout()">Log out</button>
 </form>
-<button (click)="logout()">Log out</button>

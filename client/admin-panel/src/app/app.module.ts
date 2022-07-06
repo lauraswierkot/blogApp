@@ -9,8 +9,6 @@ import { MaterialModule } from './material-module/material.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 
-const components = [AppComponent];
-
 const modules = [
   BrowserModule,
   AppRoutingModule,
@@ -22,7 +20,7 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [AppComponent],
   imports: [...modules],
   providers: [],
   bootstrap: [AppComponent],
