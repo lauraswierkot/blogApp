@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -24,11 +24,11 @@ export class LoginFormComponent {
     });
   }
 
-  public get email() {
+  public get email(): AbstractControl {
     return this.loginForm.get('email');
   }
 
-  public get password() {
+  public get password(): AbstractControl {
     return this.loginForm.get('password');
   }
 
