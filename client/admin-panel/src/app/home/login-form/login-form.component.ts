@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -20,7 +25,9 @@ export class LoginFormComponent {
         validators: Validators.email,
         updateOn: 'blur',
       }),
-      password: new FormControl('', { validators: Validators.required }),
+      password: new FormControl('', {
+        validators: Validators.required,
+      }),
     });
   }
 

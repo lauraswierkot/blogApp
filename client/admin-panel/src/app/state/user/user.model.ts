@@ -1,11 +1,15 @@
 export type StatePart<K extends keyof UserState> = Pick<UserState, K>;
 
-export const userFeatureKey = 'user';
+export const userFeatureKey = 'users';
+export type UserResponse = Record<'user', User>;
 
 export interface User {
-  email: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  email: number;
   username: string;
-  bio: string;
+  bio?: string;
   image?: string;
   token: string;
 }
