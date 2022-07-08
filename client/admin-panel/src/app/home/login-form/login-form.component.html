@@ -1,6 +1,6 @@
 <div class="wrapper">
   <form class="form" [formGroup]="loginForm" (ngSubmit)="login()" class="form">
-    <label for="email" id="top">Email</label>
+    <label for="email" class="label_email">Email</label>
     <div class="row">
       <i class="material-icons">person</i>
       <input
@@ -30,7 +30,7 @@
     <div class="row">
       <button (click)="logout()">Log out</button>
     </div>
-    <div class="row" id="register">
+    <div class="row row_register">
       <span>No account? Sign up</span>
     </div>
   </form>

@@ -24,10 +24,7 @@ export class UserEffects {
       ofType(action.login),
       switchMap(({ loginForm }) => {
         return this.http.login(loginForm).pipe(
-          map((loginResponse: User) => action.loginSuccess({ loginResponse })),
-          tap(()=> {
-            return this.router.navigate(['']);
-          }),
+          map((loginResponse: User) => { this.router.navigate(['']); return action.loginSuccess({ loginResponse }) } ),
           catchError((error: HttpErrorResponse) => [
             action.loginFailed({ error }),
           ])
