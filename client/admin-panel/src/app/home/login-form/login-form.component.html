@@ -1,20 +1,37 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
-  <input
-    formControlName="email"
-    placeholder="Type your email here"
-    name="email"
-    required
-  />
-  <div *ngIf="email.errors?.['email']">
-    Email not valid.
-  </div> 
-  <input
-    type="password"
-    formControlName="password"
-    placeholder="Type your passwordhere"
-    name="password"
-    required
-  />
-  <button [disabled]="password.errors" class="submitButton" type="submit">Login</button>
-  <button (click)="logout()">Log out</button>
-</form>
+<div class="wrapper">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="login()" class="form">
+    <label for="email" id="top">Email</label>
+    <div class="row">
+      <i class="material-icons">person</i>
+      <input
+        formControlName="email"
+        placeholder="Type your email here"
+        name="email"
+        required
+      />
+      <div *ngIf="email.errors?.['email']">Email not valid.</div>
+    </div>
+    <label for="password">Password</label>
+    <div class="row">
+      <i class="material-icons">key</i>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Type your password here"
+        name="password"
+        required
+      />
+    </div>
+    <div class="row">
+      <button [disabled]="password.errors" class="submitButton" type="submit">
+        Login
+      </button>
+    </div>
+    <div class="row">
+      <button (click)="logout()">Log out</button>
+    </div>
+    <div class="row" id="register">
+      <span>No account? Sign up</span>
+    </div>
+  </form>
+</div>

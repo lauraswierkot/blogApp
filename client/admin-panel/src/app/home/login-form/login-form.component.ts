@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -19,7 +20,7 @@ import { UserLogin } from 'src/app/state/user/user.model';
 export class LoginFormComponent {
   public loginForm: FormGroup;
 
-  constructor(private store: Store, private facade: UserFacade) {
+  constructor(private facade: UserFacade, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: Validators.email,

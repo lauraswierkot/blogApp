@@ -23,6 +23,7 @@ const modules = [
   declarations: [AppComponent],
   imports: [...modules],
   providers: [],
+  exports:[AppRoutingModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
