@@ -16,26 +16,24 @@ import { environment } from 'src/environments/environment';
 import { userReducer } from 'src/app/state/user/user.reducer';
 import { State } from './state';
 
-import merge from 'lodash.merge';
+import { UserEffects } from './user/user.effects';
 
-const reducers: ActionReducerMap<State> = {
+const effects = [UserEffects];
+
+const reducers: ActionReducerMap<any> = {
   users: userReducer,
-};
-const mergeReducer = (state: State, rehydratedState: State, action: Action) => {
-  state = merge(state, rehydratedState);
-  return state;
 };
 
 export function localStorageSyncReducer(
-  reducer: ActionReducer<State>
-): ActionReducer<State> {
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
   return localStorageSync({
     keys: ['users'],
     rehydrate: true,
-    mergeReducer,
   })(reducer);
 }
-export const metaReducers: Array<MetaReducer<State, any>> = [
+
+export const metaReducers: Array<MetaReducer<any, any>> = [
   localStorageSyncReducer,
 ];
 
@@ -44,7 +42,7 @@ export const metaReducers: Array<MetaReducer<State, any>> = [
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
       maxAge: 25,

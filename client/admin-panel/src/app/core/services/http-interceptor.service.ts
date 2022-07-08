@@ -1,30 +1,27 @@
 import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { first, mergeMap, Observable } from 'rxjs';
 import { UserFacade } from 'src/app/home';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpInterceptorService {
-  constructor(private facade: UserFacade) {}
+  constructor(private userFacade: UserFacade) {}
 
   intercept(
-    req: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let idToken = '';
-    this.facade.token$.subscribe((value) => (idToken = value));
-
-    if (idToken) {
-      const cloned = req.clone({
-        headers: req.headers.set('Authorization', 'Bearer ' + idToken),
-      });
-
-      return next.handle(cloned);
-    } else {
-      return next.handle(req);
-    }
+    return this.userFacade.token$.pipe(
+      first(),
+      mergeMap((token) => {
+        const authReq = !!token
+          ? request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+          : request;
+        return next.handle(authReq);
+      })
+    );
   }
 }

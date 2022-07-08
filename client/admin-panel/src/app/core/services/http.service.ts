@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
@@ -14,13 +14,8 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   public login(loginForm: UserLogin): Observable<User> {
-    const headers = new HttpHeaders({});
     return this.http
-      .post<UserResponse>(
-        `${apiUrl}/users/login`,
-        { user: loginForm },
-        { headers: headers }
-      )
+      .post<UserResponse>(`${apiUrl}/users/login`, { user: loginForm })
       .pipe(map((userResponse) => userResponse.user));
   }
 }

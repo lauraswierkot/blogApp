@@ -16,11 +16,7 @@ export class UserFacade {
   constructor(private store: Store, private http: HttpService) {}
 
   public login(loginForm: UserLogin): void {
-    this.http
-      .login(loginForm)
-      .subscribe((value) =>
-        this.store.dispatch(action.loginSuccess({ loginResponse: value }))
-      );
+    this.store.dispatch(action.login({ loginForm }));
   }
 
   public logout(): void {
