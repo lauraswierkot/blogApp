@@ -18,7 +18,7 @@ import { UserLogin } from 'src/app/state/user/user.model';
 export class LoginFormComponent {
   public loginForm: FormGroup;
 
-  constructor(private facade: UserFacade, private router: Router) {
+  constructor(private facade: UserFacade) {
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: Validators.email,

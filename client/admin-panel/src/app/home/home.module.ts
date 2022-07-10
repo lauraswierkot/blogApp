@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LoginFormComponent } from '.';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { LoginFormComponent, AdminPanelComponent, RegisterFormComponent } from '.';
 
 const modules = [FormsModule, ReactiveFormsModule, CommonModule];
 
-const components = [LoginFormComponent, AdminPanelComponent];
+const components = [LoginFormComponent, AdminPanelComponent, RegisterFormComponent];
 
 @NgModule({
   declarations: [...components],
