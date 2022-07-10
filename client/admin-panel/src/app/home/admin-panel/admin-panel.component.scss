@@ -1,0 +1,17 @@
+button {
+    width: 200px;
+    max-width: 50%;
+    height: 3em;
+    border-radius: 7px;
+    justify-content: center;
+    border: none;
+    display: flex;
+    padding: 0.5em;
+    background-color: #e7e7e7;
+    margin-top: 1em;
+  }
+  
+  button:hover {
+    cursor: pointer;
+    background-color: #dddbdb;
+  }

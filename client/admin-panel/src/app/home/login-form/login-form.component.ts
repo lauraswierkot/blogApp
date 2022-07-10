@@ -7,8 +7,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Store } from '@ngrx/store';
-
 import { UserFacade } from 'src/app/state/user/user.facade';
 import { UserLogin } from 'src/app/state/user/user.model';
 
@@ -46,9 +44,5 @@ export class LoginFormComponent {
       password: this.loginForm.value.password,
     };
     this.facade.login(login);
-  }
-
-  public logout(): void {
-    this.facade.logout();
   }
 }

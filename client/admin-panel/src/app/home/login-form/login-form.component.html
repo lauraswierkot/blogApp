@@ -1,8 +1,8 @@
-<div class="wrapper">
-  <form class="form" [formGroup]="loginForm" (ngSubmit)="login()" class="form">
-    <label for="email" class="label_email">Email</label>
-    <div class="row">
-      <i class="material-icons">person</i>
+<div class="container">
+  <form class="forms" [formGroup]="loginForm" (ngSubmit)="login()">
+    <header>Login panel</header>
+    <div class="form form_email">
+      <span class="material-icons">person</span>
       <input
         formControlName="email"
         placeholder="Type your email here"
@@ -11,9 +11,8 @@
       />
       <div *ngIf="email.errors?.['email']">Email not valid.</div>
     </div>
-    <label for="password">Password</label>
-    <div class="row">
-      <i class="material-icons">key</i>
+    <div class="form form_password">
+      <span class="material-icons">key</span>
       <input
         type="password"
         formControlName="password"
@@ -22,16 +21,14 @@
         required
       />
     </div>
-    <div class="row">
+    <div class="form form_submit">
       <button [disabled]="password.errors" class="submitButton" type="submit">
-        Login
+        <span>Login</span>
       </button>
     </div>
-    <div class="row">
-      <button (click)="logout()">Log out</button>
-    </div>
-    <div class="row row_register">
+    <div class="form form_register">
       <span>No account? Sign up</span>
+      <span class="material-icons arrow">trending_flat</span>
     </div>
   </form>
 </div>

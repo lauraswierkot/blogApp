@@ -14,7 +14,6 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { environment } from 'src/environments/environment';
 import { userReducer } from 'src/app/state/user/user.reducer';
-import { State } from './state';
 
 import { UserEffects } from './user/user.effects';
 

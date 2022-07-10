@@ -8,6 +8,7 @@ import { StateModule } from './state/state.module';
 import { MaterialModule } from './material-module/material.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const modules = [
   BrowserModule,
@@ -16,7 +17,8 @@ const modules = [
   MaterialModule,
   HttpClientModule,
   CoreModule,
-  HomeModule
+  HomeModule,
+  BrowserAnimationsModule
 ];
 
 @NgModule({
