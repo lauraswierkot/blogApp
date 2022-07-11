@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as selector from './user.selectors';
 import * as action from './user.actions';
-import { UserLogin } from './user.model';
+import { UserLogin, UserRegister } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,9 @@ export class UserFacade {
 
   public logout(): void {
     this.store.dispatch(action.logout());
+  }
+
+  public register(registerForm: UserRegister): void {
+    this.store.dispatch(action.register({registerForm}));
   }
 }

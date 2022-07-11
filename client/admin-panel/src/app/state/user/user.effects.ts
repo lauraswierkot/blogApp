@@ -64,4 +64,21 @@ export class UserEffects {
       ),
     { dispatch: false }
   );
+
+  register$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(action.register),
+      switchMap(({ registerForm }) => {
+        return this.http.register(registerForm).pipe(
+          map((registerResponse: User) => {
+            this.router.navigate(['']);
+            return action.registerSuccess({ registerResponse });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.registerFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
 }

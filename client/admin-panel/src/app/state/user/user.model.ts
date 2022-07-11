@@ -26,6 +26,13 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UserRegister {
+  username: string;
+  email: string;
+  password: string;
+  age: number;
+}
+
 export interface UserState {
   user: Omit<User, 'token'>;
   error: any;
