@@ -1,9 +1,10 @@
 <div class="container">
   <form class="forms" [formGroup]="loginForm" (ngSubmit)="login()">
-    <header>Login panel</header>
-    <div class="form form_email">
+    <header class="title">Login panel</header>
+    <div class="form">
       <span class="material-icons">person</span>
-      <input
+      <input 
+        class="input"
         formControlName="email"
         placeholder="Type your email here"
         name="email"
@@ -11,9 +12,10 @@
       />
       <div *ngIf="email.errors?.['email']">Email not valid.</div>
     </div>
-    <div class="form form_password">
+    <div class="form">
       <span class="material-icons">key</span>
       <input
+        class="input"
         type="password"
         formControlName="password"
         placeholder="Type your password here"
@@ -21,8 +23,8 @@
         required
       />
     </div>
-    <div class="form form_submit">
-      <button [disabled]="password.errors" class="submitButton" type="submit">
+    <div class="form">
+      <button [disabled]="password.errors" class="button" type="submit">
         <span>Login</span>
       </button>
     </div>

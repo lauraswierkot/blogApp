@@ -1,2 +1,2 @@
 export { LoginFormComponent } from "./login-form/login-form.component";
-export { UserFacade } from "../state/user/user.facade";
+export { AdminPanelComponent } from "./admin-panel/admin-panel.component";

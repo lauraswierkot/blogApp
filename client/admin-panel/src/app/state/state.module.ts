@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { userReducer } from 'src/app/state/user/user.reducer';
 
 import { UserEffects } from './user/user.effects';
+import { userFeatureKey } from './user/user.model';
 
 const effects = [UserEffects];
 
@@ -27,7 +28,7 @@ export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: ['users'],
+    keys: [userFeatureKey],
     rehydrate: true,
   })(reducer);
 }
