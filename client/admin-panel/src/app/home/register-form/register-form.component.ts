@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserFacade } from 'src/app/state/user/user.facade';
@@ -8,15 +13,14 @@ import { UserLogin, UserRegister } from 'src/app/state/user/user.model';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss']
+  styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
-
   public registerForm: FormGroup;
 
   constructor(private facade: UserFacade, private router: Router) {
     this.registerForm = new FormGroup({
-      username: new FormControl('', {validators: Validators.required}),
+      username: new FormControl('', { validators: Validators.required }),
       email: new FormControl('', {
         validators: Validators.email,
         updateOn: 'blur',
@@ -25,8 +29,8 @@ export class RegisterFormComponent {
         validators: Validators.required,
       }),
       age: new FormControl('', {
-        validators: Validators.required
-      })
+        validators: Validators.min(18),
+      }),
     });
   }
 
@@ -51,7 +55,7 @@ export class RegisterFormComponent {
       username: this.registerForm.value.username,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password,
-      age: this.registerForm.value.age
+      age: this.registerForm.value.age,
     };
     this.facade.register(register);
   }
@@ -59,5 +63,4 @@ export class RegisterFormComponent {
   public toLoginForm(): void {
     this.router.navigate(['/login']);
   }
-
 }

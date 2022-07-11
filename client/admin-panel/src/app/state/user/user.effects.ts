@@ -37,18 +37,36 @@ export class UserEffects {
       })
     )
   );
-  
+
   loginFailed$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(action.loginFailed),
         tap(({ error }) => {
-          if(typeof error.error.error == "string"){
-            this.snackBar.open(error.error.error, 'x')
+          if (typeof error.error.error == 'string') {
+            this.snackBar.open(error.error.error, 'x');
           } else {
-          error.error.error.forEach((element) => {
-            this.snackBar.open(element, 'x', {horizontalPosition: 'end' });
-          });}
+            error.error.error.forEach((element) => {
+              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
+            });
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  registerFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.registerFailed),
+        tap(({ error }) => {
+          if (typeof error.error.error == 'string') {
+            this.snackBar.open(error.error.error, 'x');
+          } else {
+            error.error.error.forEach((element) => {
+              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
+            });
+          }
         })
       ),
     { dispatch: false }
@@ -65,13 +83,21 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  register$ = createEffect(()=>
+  register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.register),
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
-            this.router.navigate(['']);
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 2700);
+            this.snackBar.open('Successfully registered', 'x', {
+              duration: 2500,
+            });
+            this.snackBar.open('Successfully registered', 'x', {
+              duration: 2500,
+            });
             return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [

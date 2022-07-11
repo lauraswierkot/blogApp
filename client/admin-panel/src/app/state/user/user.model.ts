@@ -18,7 +18,7 @@ export interface Error {
   error: {
     error: any;
     statusCode: string;
-  } 
+  };
 }
 
 export interface UserLogin {
