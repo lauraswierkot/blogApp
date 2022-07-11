@@ -1,4 +1,4 @@
-button {
+.button {
     width: 200px;
     max-width: 50%;
     height: 3em;
@@ -11,7 +11,7 @@ button {
     margin-top: 1em;
   }
   
-  button:hover {
+.button:hover {
     cursor: pointer;
     background-color: #dddbdb;
-  }
+}

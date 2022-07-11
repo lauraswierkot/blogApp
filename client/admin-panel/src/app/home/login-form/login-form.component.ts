@@ -18,7 +18,7 @@ import { UserLogin } from 'src/app/state/user/user.model';
 export class LoginFormComponent {
   public loginForm: FormGroup;
 
-  constructor(private facade: UserFacade) {
+  constructor(private facade: UserFacade, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: Validators.email,
@@ -44,5 +44,9 @@ export class LoginFormComponent {
       password: this.loginForm.value.password,
     };
     this.facade.login(login);
+  }
+
+  public toRegisterForm(): void {
+    this.router.navigate(['/register']);
   }
 }
