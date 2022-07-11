@@ -1,28 +1,48 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StoreModule } from '@ngrx/store';
+import {
+  Action,
+  ActionReducer,
+  ActionReducerMap,
+  MetaReducer,
+  StoreModule,
+} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { environment } from 'src/environments/environment';
+import { userReducer } from 'src/app/state/user/user.reducer';
 
-export interface State {}
+import { UserEffects } from './user/user.effects';
+import { userFeatureKey } from './user/user.model';
 
-export const reducers: ActionReducerMap<State> = {};
+const effects = [UserEffects];
 
-export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? []
-  : [];
+const reducers: ActionReducerMap<any> = {
+  users: userReducer,
+};
+
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return localStorageSync({
+    keys: [userFeatureKey],
+    rehydrate: true,
+  })(reducer);
+}
+
+export const metaReducers: Array<MetaReducer<any, any>> = [
+  localStorageSyncReducer,
+];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot(effects),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -30,4 +50,4 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
     }),
   ],
 })
-export class StateModule {} 
+export class StateModule {}
