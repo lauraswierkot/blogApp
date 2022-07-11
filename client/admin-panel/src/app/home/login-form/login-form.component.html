@@ -2,7 +2,7 @@
   <form class="container__form" [formGroup]="loginForm" (ngSubmit)="login()">
     <header class="container__form--title">Login panel</header>
     <div class="container__form__field">
-      <span class="material-icons container__form--icons">person</span>
+      <span class="material-icons container__form__field--icons">person</span>
       <input 
         class="container__form__field--input"
         formControlName="email"
@@ -13,7 +13,7 @@
       <div *ngIf="email.errors?.['email']">Email not valid.</div>
     </div>
     <div class="container__form__field">
-      <span class="material-icons">key</span>
+      <span class="material-icons container__form__field--icons">key</span>
       <input
         class="container__form__field--input"
         type="password"
