@@ -38,10 +38,12 @@
         class="container__form__field--input"
         type="number"
         formControlName="age"
-        placeholder="Type your age here. You must be over 18 to register."
+        placeholder="Type your age here."
         name="age"
         required/>
-      <div *ngIf="age.errors?.['age']">You must be over 18 to register.</div>
+      <div class="container__form__field--age" *ngIf="age.errors && age.touched">
+        You must be over 18 to register.
+      </div>
     </div>
     <div class="container__form__field">
       <button
