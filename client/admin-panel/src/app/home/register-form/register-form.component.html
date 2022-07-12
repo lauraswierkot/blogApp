@@ -2,8 +2,7 @@
   <form
     class="container__form"
     [formGroup]="registerForm"
-    (ngSubmit)="register()"
-  >
+    (ngSubmit)="register()">
     <header class="container__form--title">Register panel</header>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">person</span>
@@ -12,8 +11,7 @@
         formControlName="username"
         placeholder="Type your username here"
         name="username"
-        required
-      />
+        required/>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">email</span>
@@ -22,8 +20,7 @@
         formControlName="email"
         placeholder="Type your email here"
         name="email"
-        required
-      />
+        required/>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">key</span>
@@ -33,8 +30,7 @@
         formControlName="password"
         placeholder="Type your password here"
         name="password"
-        required
-      />
+        required/>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">cake</span>
@@ -42,18 +38,16 @@
         class="container__form__field--input"
         type="number"
         formControlName="age"
-        placeholder="Type your age here"
+        placeholder="Type your age here. You must be over 18 to register."
         name="age"
-        required
-      />
+        required/>
       <div *ngIf="age.errors?.['age']">You must be over 18 to register.</div>
     </div>
     <div class="container__form__field">
       <button
         class="container__form__field--button"
         [disabled]="age.errors"
-        type="submit"
-      >
+        type="submit">
         <span>Sign up</span>
       </button>
     </div>
@@ -62,8 +56,7 @@
       <span
         class="material-icons container__form__field--icons arrow"
         (click)="toLoginForm()"
-        >trending_flat</span
-      >
+        >trending_flat</span>
     </div>
   </form>
 </div>

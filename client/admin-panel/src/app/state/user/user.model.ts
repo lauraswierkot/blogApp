@@ -26,10 +26,8 @@ export interface UserLogin {
   password: string;
 }
 
-export interface UserRegister {
+export interface UserRegister extends UserLogin {
   username: string;
-  email: string;
-  password: string;
   age: number;
 }
 

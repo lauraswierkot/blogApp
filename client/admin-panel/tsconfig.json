@@ -27,7 +27,7 @@
     "strictTemplates": true,
     "paths": {
       "@reducers": ["src/app/reducers/*"],
-      "@store": ["src/app/core/*"]
+      "@store": ["src/app/state/*"]
     }
   }
 }

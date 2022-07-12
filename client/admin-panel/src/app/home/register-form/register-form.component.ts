@@ -17,19 +17,20 @@ import { UserLogin, UserRegister } from 'src/app/state/user/user.model';
 })
 export class RegisterFormComponent {
   public registerForm: FormGroup;
+  private minAge: number = 18;
 
   constructor(private facade: UserFacade, private router: Router) {
     this.registerForm = new FormGroup({
       username: new FormControl('', { validators: Validators.required }),
       email: new FormControl('', {
         validators: Validators.email,
-        updateOn: 'blur',
       }),
       password: new FormControl('', {
         validators: Validators.required,
       }),
       age: new FormControl('', {
-        validators: Validators.min(18),
+        validators: Validators.min(this.minAge),
+        updateOn: 'blur',
       }),
     });
   }

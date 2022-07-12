@@ -23,6 +23,6 @@ export class UserFacade {
   }
 
   public register(registerForm: UserRegister): void {
-    this.store.dispatch(action.register({registerForm}));
+    this.store.dispatch(action.register({ registerForm }));
   }
 }

@@ -28,48 +28,45 @@
     justify-content: center;
     text-align: -webkit-center;
   }
+  &_field {
+    margin: 0.5em;
+  }
 }
 
 .container__form__field {
-  margin: 0.5em;
-}
-
-.container__form__field--input {
-  width: 80%;
-  min-height: 3em;
-  margin-bottom: 1em;
-  border: black;
-}
-
-.container__form__field--icons {
-  font-size: 30px;
-  display: inline-flex;
-  vertical-align: text-bottom;
+  &--input {
+    width: 80%;
+    min-height: 3em;
+    margin-bottom: 2em;
+    border: black;
+  }
+  &--icons {
+    font-size: 30px;
+    display: inline-flex;
+    vertical-align: text-bottom;
+  }
+  &--button {
+    width: 200px;
+    max-width: 50%;
+    height: 3em;
+    border-radius: 7px;
+    justify-content: center;
+    border: none;
+    display: flex;
+    padding: 0.5em;
+    background-color: #e7e7e7;
+    margin-top: 1em;
+  }
+  &--button:hover:enabled {
+    cursor: pointer;
+    background-color: #dddbdb;
+  }
+  &--login {
+    margin: 2em 0 1em 0;
+  }
 }
 
 .arrow:hover {
   cursor: pointer;
   opacity: 70%;
-}
-
-.container__form__field--button {
-  width: 200px;
-  max-width: 50%;
-  height: 3em;
-  border-radius: 7px;
-  justify-content: center;
-  border: none;
-  display: flex;
-  padding: 0.5em;
-  background-color: #e7e7e7;
-  margin-top: 1em;
-}
-
-.container__form__field--button:hover {
-  cursor: pointer;
-  background-color: #dddbdb;
-}
-
-.container__form__field--login {
-  margin: 2em 0 1em 0;
 }
