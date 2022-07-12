@@ -22,7 +22,7 @@ export class HttpService {
 
   public register(registerForm: UserRegister): Observable<User> {
     return this.http
-      .post<UserResponse>(`${apiUrl}/users`,  registerForm  )
+      .post<UserResponse>(`${apiUrl}/users/register`,  registerForm  )
       .pipe(map((userResponse) => userResponse.user));
   }
 }

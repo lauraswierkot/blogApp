@@ -12,16 +12,16 @@ import { join } from 'path';
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
         transport: {
-          host: config.get('MAIL_HOST'),
-          port: config.get('MAIL_PORT'),
+          host: 'smtp.mailtrap.io',
+          port: 25,
           secure: false,
           auth: {
-            user: config.get('MAIL_USER'),
-            pass: config.get('MAIL_PASSWORD'),
+            user: 'ed6f5308466f37',
+            pass: 'd83537bc65defa',
           },
         },
         defaults: {
-          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
+          from: `"No Reply" <'laura@gmail.com'>`,
         },
         template: {
           dir: join(__dirname, 'templates'),

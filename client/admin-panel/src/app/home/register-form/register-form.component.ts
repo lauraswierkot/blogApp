@@ -56,7 +56,7 @@ export class RegisterFormComponent {
       username: this.registerForm.value.username,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password,
-      age: this.registerForm.value.age,
+      age: new Date(this.registerForm.value.age).toISOString(),
     };
     this.facade.register(register);
   }

@@ -28,7 +28,7 @@ export interface UserLogin {
 
 export interface UserRegister extends UserLogin {
   username: string;
-  age: number;
+  age: string;
 }
 
 export interface UserState {
