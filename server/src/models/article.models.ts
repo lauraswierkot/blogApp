@@ -5,20 +5,29 @@ import { ProfileResponse } from './user.model';
 
 export class CreateArticleDTO {
   @IsString()
+  @IsOptional()
   @ApiProperty()
   title: string;
 
   @IsString()
+  @IsOptional()
   @ApiProperty()
   body: string;
 
   @IsString()
+  @IsOptional()
+  @ApiProperty()
+  image: string;
+
+  @IsString()
+  @IsOptional()
   @ApiProperty()
   description: string;
 
-  @IsArray()
+  @IsString()
+  @IsOptional()
   @ApiProperty()
-  tagList: string[];
+  tagList: string;
 }
 
 export class CreateArticleBody {
@@ -40,6 +49,11 @@ export class UpdateArticleDTO {
   @IsString()
   @IsOptional()
   @ApiProperty()
+  image: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
   description: string;
 
   @IsArray()
@@ -56,12 +70,14 @@ export class UpdateArticleBody {
 export interface FindFeedQuery {
   limit?: number;
   offset?: number;
+  page?: number;
 }
 
 export interface FindAllQuery extends FindFeedQuery {
   tag?: string;
-  author?: string;
-  favorited?: string;
+  searchTerm?: string;
+  title?: string;
+  body?: string;
 }
 
 export interface ArticleResponse {
@@ -72,7 +88,5 @@ export interface ArticleResponse {
   tagList: string[];
   createdAt: Date | string;
   updatedAt: Date | string;
-  favorited: boolean | null;
-  favoritesCount: number;
   author: ProfileResponse;
 }

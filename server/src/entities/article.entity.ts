@@ -30,6 +30,9 @@ export class ArticleEntity extends AbstractEntity {
   @Column()
   body: string;
 
+  @Column()
+  image: string;
+
   @ManyToMany(
     type => UserEntity,
     user => user.favorites,
