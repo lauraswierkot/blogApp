@@ -7,6 +7,7 @@ import { UserEntity } from 'src/entities/user.entity';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { JwtStrategy } from './jwt.strategy';
       },
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
+    MailModule
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
