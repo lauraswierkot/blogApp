@@ -5,6 +5,7 @@ import {
   LoginFormComponent,
   AdminPanelComponent,
   RegisterFormComponent,
+  ConfirmationPageComponent,
 } from './home';
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterFormComponent,
+  },
+  {
+    path: 'email-confirmation/:token',
+    component: ConfirmationPageComponent,
   },
 ];
 

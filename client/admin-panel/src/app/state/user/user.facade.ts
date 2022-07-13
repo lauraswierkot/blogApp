@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import * as selector from './user.selectors';
 import * as action from './user.actions';
 import { UserLogin, UserRegister } from './user.model';
+import { HttpService } from 'src/app/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,7 @@ export class UserFacade {
   public user$ = this.store.select(selector.selectUserData);
   public token$ = this.store.select(selector.selectToken);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private http: HttpService) {}
 
   public login(loginForm: UserLogin): void {
     this.store.dispatch(action.login({ loginForm }));
@@ -24,5 +26,9 @@ export class UserFacade {
 
   public register(registerForm: UserRegister): void {
     this.store.dispatch(action.register({ registerForm }));
+  }
+
+  public confirmEmail(token: string): void {
+    this.http.confirmEmail(token).subscribe((value) => value);
   }
 }

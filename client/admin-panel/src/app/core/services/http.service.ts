@@ -22,7 +22,13 @@ export class HttpService {
 
   public register(registerForm: UserRegister): Observable<User> {
     return this.http
-      .post<UserResponse>(`${apiUrl}/users/register`,  registerForm  )
+      .post<UserResponse>(`${apiUrl}/users/register`, registerForm)
+      .pipe(map((userResponse) => userResponse.user));
+  }
+
+  public confirmEmail(token: string): Observable<User> {
+    return this.http
+      .post<UserResponse>(`${apiUrl}/users/confirm`, { confirmToken: token })
       .pipe(map((userResponse) => userResponse.user));
   }
 }

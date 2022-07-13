@@ -7,7 +7,6 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
-  
   constructor(private facade: UserFacade) {}
 
   public logout(): void {

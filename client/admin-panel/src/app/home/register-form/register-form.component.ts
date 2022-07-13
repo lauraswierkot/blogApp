@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { UserFacade } from 'src/app/state/user/user.facade';
-import { UserLogin, UserRegister } from 'src/app/state/user/user.model';
+import { UserRegister } from 'src/app/state/user/user.model';
 
 @Component({
   selector: 'app-register-form',
@@ -28,10 +29,10 @@ export class RegisterFormComponent {
       password: new FormControl('', {
         validators: Validators.required,
       }),
-      age: new FormControl('', {
-        validators: Validators.min(this.minAge),
-        updateOn: 'blur',
-      }),
+      age: new FormControl(
+        '',
+        RxwebValidators.minDate({ value: '25.07.2018' })
+      ),
     });
   }
 

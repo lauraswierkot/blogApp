@@ -12,13 +12,6 @@
   overflow: hidden;
 }
 
-.container__form--title {
-  font-size: 30px;
-  margin: 1em 0 2em 0;
-  margin-bottom: 2em;
-  text-decoration: underline brown 4px;
-}
-
 .container {
   &__form {
     display: flex;
@@ -27,6 +20,11 @@
     height: 750px;
     justify-content: center;
     text-align: -webkit-center;
+    &--title {
+      font-size: 30px;
+      margin: 1em 0 2em 0;
+      text-decoration: underline brown 4px;
+    }
   }
   &_field {
     margin: 0.5em;

@@ -23,6 +23,7 @@
     "@ngrx/effects": "^14.0.1",
     "@ngrx/store": "^14.0.1",
     "@ngrx/store-devtools": "^14.0.1",
+    "@rxweb/reactive-form-validators": "^2.1.7",
     "lodash.merge": "^4.6.2",
     "ngrx-store-localstorage": "^14.0.0",
     "rxjs": "~7.5.0",
