@@ -7,7 +7,9 @@ import {
   AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
+  ArticlesComponent
 } from '.';
+import { ArticleFormComponent } from './articles/article-form/article-form.component';
 
 const modules = [FormsModule, ReactiveFormsModule, CommonModule];
 
@@ -19,7 +21,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, ArticleFormComponent],
   imports: [...modules],
   exports: [...components],
 })

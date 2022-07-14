@@ -23,10 +23,10 @@ export class RegisterFormComponent {
     this.registerForm = new FormGroup({
       username: new FormControl('', { validators: Validators.required }),
       email: new FormControl('', {
-        validators: Validators.email,
+        validators: Validators.email
       }),
       password: new FormControl('', {
-        validators: Validators.required,
+        validators: Validators.required
       }),
       age: new FormControl('', ageValidation())
     });

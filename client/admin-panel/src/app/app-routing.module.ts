@@ -6,6 +6,7 @@ import {
   AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
+  ArticleFormComponent
 } from './home';
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
     path: 'email-confirmation/:token',
     component: ConfirmationPageComponent,
   },
+  {
+    path: 'articles',
+    component: ArticleFormComponent
+  }
 ];
 
 @NgModule({

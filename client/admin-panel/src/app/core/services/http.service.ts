@@ -2,6 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
+import {
+  Article,
+  ArticleForm,
+  ArticleResponse,
+} from 'src/app/state/articles/article.model';
 
 import { environment } from 'src/environments/environment';
 import { User, UserLogin, UserRegister, UserResponse } from '../../state';
@@ -30,5 +35,11 @@ export class HttpService {
     return this.http
       .post<UserResponse>(`${apiUrl}/users/confirm`, { confirmToken: token })
       .pipe(map((userResponse) => userResponse.user));
+  }
+
+  public createArticle(articleForm: ArticleForm): Observable<Article> {
+    return this.http
+      .post<ArticleResponse>(`${apiUrl}/articles`, articleForm)
+      .pipe(map((articleResponse) => articleResponse.article));
   }
 }

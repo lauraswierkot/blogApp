@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { UserFacade } from 'src/app/state/user/user.facade';
 
 @Component({
@@ -7,9 +9,13 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
-  constructor(private facade: UserFacade) {}
+  constructor(private userFacade: UserFacade, private router: Router) {}
 
   public logout(): void {
-    this.facade.logout();
+    this.userFacade.logout();
+  }
+
+  public createArticle(): void {
+    this.router.navigate(['articles']);
   }
 }

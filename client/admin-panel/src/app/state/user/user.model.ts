@@ -42,3 +42,7 @@ export const initialState: UserState = {
   error: null,
   token: null,
 };
+
+export interface ProfileResponse extends UserResponse {
+  following: boolean | null;
+}

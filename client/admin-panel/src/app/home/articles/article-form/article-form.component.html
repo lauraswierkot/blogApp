@@ -1,0 +1,65 @@
+<div class="container">
+  <form class="container__form">
+    <header class="container__form--title">Create an article</header>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons"></span>
+      <input
+        class="container__form__field--input"
+        formControlName="title"
+        placeholder="Type title here"
+        name="title"
+        required/>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons"></span>
+      <input
+        class="container__form__field--input body"
+        formControlName="body"
+        placeholder="Type body here"
+        name="body"
+        required/>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons"></span>
+      <input
+        class="container__form__field--input"
+        type="text"
+        formControlName="description"
+        placeholder="Type description here"
+        name="description"
+        required/>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons"></span>
+      <input
+        class="container__form__field--input"
+        type="text"
+        formControlName="tagList"
+        placeholder="Type tag list here"
+        name="tagList"
+        required/>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons"></span>
+      <input
+        class="container__form__field--input"
+        type="image"
+        formControlName="image"
+        placeholder="You can insert picture as well"
+        name="image"
+        required/>
+    </div>
+    <div class="container__form__field">
+      <button class="container__form__field--button" type="submit">
+        <span>Create</span>
+      </button>
+    </div>
+    <div class="container_form__field container__form__field--login">
+      <span>Do not want an article for now? Back to Admin Panel</span>
+      <span
+        class="material-icons container__form__field--icons arrow"
+        (click)="toAdminPanel()"
+        >trending_flat</span>
+    </div>
+  </form>
+</div>
