@@ -7,9 +7,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { UserFacade } from 'src/app/state/user/user.facade';
 import { UserRegister } from 'src/app/state/user/user.model';
+import { ageValidation } from './validator';
 
 @Component({
   selector: 'app-register-form',
@@ -18,8 +18,7 @@ import { UserRegister } from 'src/app/state/user/user.model';
 })
 export class RegisterFormComponent {
   public registerForm: FormGroup;
-  private minAge: number = 18;
-
+  
   constructor(private facade: UserFacade, private router: Router) {
     this.registerForm = new FormGroup({
       username: new FormControl('', { validators: Validators.required }),
@@ -29,10 +28,7 @@ export class RegisterFormComponent {
       password: new FormControl('', {
         validators: Validators.required,
       }),
-      age: new FormControl(
-        '',
-        RxwebValidators.minDate({ value: '25.07.2018' })
-      ),
+      age: new FormControl('', ageValidation())
     });
   }
 

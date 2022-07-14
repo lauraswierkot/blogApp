@@ -38,11 +38,11 @@
         class="container__form__field--input"
         type="date"
         formControlName="age"
-        placeholder="Type your age here."
+        placeholder="Type your birthdate here"
         name="age"
         required/>
-      <div class="container__form__field--age" *ngIf="age.errors && age.touched">
-        You must be over 18 to register.
+      <div class="container__form__field--age"  *ngIf="age.errors?.['adolescent'] && age.touched">
+        You must be over 18 years old to register.
       </div>
     </div>
     <div class="container__form__field">
