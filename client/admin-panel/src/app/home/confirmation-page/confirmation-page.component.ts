@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserFacade } from 'src/app/state/user/user.facade';
 
@@ -7,7 +7,7 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   templateUrl: './confirmation-page.component.html',
   styleUrls: ['./confirmation-page.component.scss'],
 })
-export class ConfirmationPageComponent {
+export class ConfirmationPageComponent implements OnInit {
   public token: string = '';
 
   constructor(
@@ -16,10 +16,8 @@ export class ConfirmationPageComponent {
     private facade: UserFacade
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(
-      (routerValues) => (this.token = routerValues['token'])
-    );
+  public ngOnInit(): void {
+    this.token = this.route.snapshot.params['token'];
   }
 
   public toLoginForm(): void {

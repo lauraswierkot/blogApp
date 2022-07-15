@@ -95,9 +95,6 @@ export class UserEffects {
             this.snackBar.open('Successfully registered', 'x', {
               duration: 2500,
             });
-            this.snackBar.open('Successfully registered', 'x', {
-              duration: 2500,
-            });
             return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [

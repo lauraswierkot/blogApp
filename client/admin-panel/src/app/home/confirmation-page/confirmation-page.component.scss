@@ -23,9 +23,11 @@
     margin: 1em 0 2em 0;
     text-decoration: underline brown 4px;
   }
+
   &__content {
     margin: 1em 0 2em 0;
   }
+
   &__button {
     width: 200px;
     max-width: 50%;
@@ -39,6 +41,7 @@
     background-color: #e7e7e7;
     margin-top: 1em;
   }
+
   &__button:hover {
     cursor: pointer;
     background-color: #dddbdb;
