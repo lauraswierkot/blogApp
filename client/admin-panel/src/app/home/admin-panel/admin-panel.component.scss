@@ -9,9 +9,9 @@
   padding: 0.5em;
   background-color: #e7e7e7;
   margin-top: 1em;
-}
 
-.button:hover {
-  cursor: pointer;
-  background-color: #dddbdb;
+   &:hover {
+    cursor: pointer;
+    background-color: #dddbdb;
+   }
 }
