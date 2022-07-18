@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 export function ageValidation(): ValidatorFn {
   const yearGap: number = 18;
@@ -9,5 +14,24 @@ export function ageValidation(): ValidatorFn {
       dateToday.setFullYear(dateToday.getFullYear() - yearGap)
     );
     return dateEighteenYearsAgo < dateFromControl ? { adolescent: true } : null;
+  };
+}
+
+export function confirmPasswordValidation(
+  controlName: string,
+  matchingControlName: string
+): ValidatorFn {
+  return (formGroup: FormGroup) => {
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
+
+    if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
+      return null;
+    }
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
   };
 }

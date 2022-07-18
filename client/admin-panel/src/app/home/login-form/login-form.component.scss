@@ -13,7 +13,6 @@
 }
 
 .container {
-
   &__form {
     display: flex;
     flex-direction: column;
@@ -60,11 +59,11 @@
     padding: 0.5em;
     background-color: #e7e7e7;
     margin-top: 1em;
-  }
 
-  &--button:hover:enabled {
-    cursor: pointer;
-    background-color: #dddbdb;
+      &:hover:enabled {
+      cursor: pointer;
+      background-color: #dddbdb;
+    }
   }
 
   &--register {

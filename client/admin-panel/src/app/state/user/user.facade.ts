@@ -29,6 +29,6 @@ export class UserFacade {
   }
 
   public confirmEmail(token: string): void {
-    this.http.confirmEmail(token).subscribe((value) => value);
+    this.store.dispatch(action.confirmEmail({ token }));
   }
 }

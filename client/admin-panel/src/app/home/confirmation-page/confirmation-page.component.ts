@@ -11,7 +11,6 @@ export class ConfirmationPageComponent implements OnInit {
   public token: string = '';
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private facade: UserFacade
   ) {}
@@ -22,6 +21,5 @@ export class ConfirmationPageComponent implements OnInit {
 
   public toLoginForm(): void {
     this.facade.confirmEmail(this.token);
-    this.router.navigate(['/login']);
   }
 }

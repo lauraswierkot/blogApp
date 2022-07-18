@@ -36,10 +36,14 @@
 .container__form__field {
   &--input {
     width: 80%;
-    min-height: 3em;
-    margin-bottom: 2em;
+    min-height: 2.7em;
+    margin-bottom: 1.5em;
     margin-left: 0.5em;
     border: black;
+
+    &:hover::after{
+      margin-bottom: 0;
+    }
   }
 
   &--icons {
@@ -58,19 +62,18 @@
     display: flex;
     padding: 0.5em;
     background-color: #e7e7e7;
-    margin-top: 1em;
-  }
 
-  &--button:hover:enabled {
-    cursor: pointer;
-    background-color: #dddbdb;
+      &:hover:enabled {
+      cursor: pointer;
+      background-color: #dddbdb;
+    }
   }
 
   &--login {
     margin: 2em 0 1em 0;
   }
 
-  &--age {
+  &--message {
     font-size: 15px;
     padding-bottom: 1em;
   }

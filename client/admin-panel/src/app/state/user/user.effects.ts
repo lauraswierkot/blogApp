@@ -104,4 +104,32 @@ export class UserEffects {
       })
     )
   );
+
+  confirmEmail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.confirmEmail),
+      switchMap(({ token }) => {
+        return this.http.confirmEmail(token).pipe(
+          map(() => {
+            this.router.navigate(['/login']);
+            return action.confirmEmailSuccess();
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.confirmEmailFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
+
+  confirmEmailFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.confirmEmailFailed),
+        tap(({ error }) => {
+          this.snackBar.open(error.error.error, 'x');
+        })
+      ),
+    { dispatch: false }
+  );
 }
