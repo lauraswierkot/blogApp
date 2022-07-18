@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="container__form">
+  <form class="container__form" [formGroup]="articleForm" (ngSubmit)="createArticle()">
     <header class="container__form--title">Create an article</header>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons"></span>

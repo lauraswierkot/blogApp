@@ -1,4 +1,3 @@
-import { ProfileResponse } from '../user/user.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -13,7 +12,7 @@ export interface Article {
   tagList: string[];
   createdAt: Date | string;
   updatedAt: Date | string;
-  author: ProfileResponse;
+  author: string;
 }
 
 export interface ArticleState {
@@ -29,7 +28,7 @@ export const initialState: ArticleState = {
 export interface ArticleForm {
   title: string;
   body: string;
-  image: string;
+  image?: string;
   description: string;
   tagList: string;
 }

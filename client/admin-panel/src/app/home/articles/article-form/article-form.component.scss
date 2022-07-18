@@ -3,7 +3,7 @@
   border-radius: 7px;
   margin: 0;
   position: fixed;
-  max-width: 950px;
+  max-width: 1400px;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -16,8 +16,8 @@
   &__form {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    height: 850px;
+    flex-wrap: nowrap;
+    height: 750px;
     justify-content: center;
     text-align: -webkit-center;
     &--title {
@@ -35,7 +35,7 @@
   &--input {
     width: 80%;
     min-height: 3em;
-    margin-bottom: 2em;
+    margin-bottom: 0.5em;
     margin-left: 0.5em;
     border: black;
   }
@@ -70,7 +70,7 @@
 }
 
 .body {
-  height: 160px;
+  height: 10em;
 }
 
 .arrow:hover {

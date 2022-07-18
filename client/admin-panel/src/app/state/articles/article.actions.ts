@@ -12,7 +12,7 @@ export const createArticleSuccess = createAction(
   props<{ articleResponse: Article }>()
 );
 
-export const createArticleFail = createAction(
+export const createArticleFailed = createAction(
   '[Article] Create Article fail',
   props<{ error: Error }>()
 );

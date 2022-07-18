@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  Action,
   ActionReducer,
   ActionReducerMap,
   MetaReducer,
@@ -14,21 +13,25 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { environment } from 'src/environments/environment';
 import { userReducer } from 'src/app/state/user/user.reducer';
+import { articleReducer } from  'src/app/state/articles/article.reducer'
 
 import { UserEffects } from './user/user.effects';
+import { ArticleEffects } from './articles/article.effects';
 import { userFeatureKey } from './user/user.model';
+import { articleFeatureKey } from './articles/article.model';
 
-const effects = [UserEffects];
+const effects = [UserEffects, ArticleEffects];
 
 const reducers: ActionReducerMap<any> = {
   users: userReducer,
+  articles: articleReducer
 };
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [userFeatureKey],
+    keys: [userFeatureKey, articleFeatureKey],
     rehydrate: true,
   })(reducer);
 }

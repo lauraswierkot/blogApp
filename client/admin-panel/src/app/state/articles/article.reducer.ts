@@ -1,7 +1,14 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 
-import { initialState } from './article.model';
+import { ArticleState, initialState } from './article.model';
 import * as action from './article.actions';
+
+export function articleReducer(
+  state: ArticleState = initialState,
+  action: Action
+): ArticleState {
+  return reducer(state, action);
+}
 
 export const reducer = createReducer(
   initialState,
@@ -9,5 +16,5 @@ export const reducer = createReducer(
     ...state,
     articleResponse,
   })),
-  on(action.createArticleFail, (state, { error }) => ({ ...state, error }))
+  on(action.createArticleFailed, (state, { error }) => ({ ...state, error }))
 );
