@@ -18,4 +18,8 @@ export class AdminPanelComponent {
   public createArticle(): void {
     this.router.navigate(['articles']);
   }
+
+  public showAllArticles():void {
+    this.router.navigate(['articles-list'])
+  }
 }

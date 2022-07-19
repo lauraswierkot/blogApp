@@ -6,7 +6,8 @@ import {
   AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
-  ArticleFormComponent
+  ArticleFormComponent,
+  ArticlesComponent
 } from './home';
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'articles',
     component: ArticleFormComponent
+  },
+  {
+    path: 'articles-list',
+    component: ArticlesComponent
   }
 ];
 

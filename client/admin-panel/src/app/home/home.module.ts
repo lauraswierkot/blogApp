@@ -18,10 +18,12 @@ const components = [
   AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
+  ArticlesComponent,
+  ArticleFormComponent
 ];
 
 @NgModule({
-  declarations: [...components, ArticleFormComponent],
+  declarations: [...components],
   imports: [...modules],
   exports: [...components],
 })
