@@ -18,16 +18,18 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2020", "dom"]
+    "lib": ["es2020", "dom"],
+    "paths": {
+      "@reducers": ["src/app/reducers/*"],
+      "@state/*": ["src/app/state/*"],
+      "@home": ["src/app/home/*"],
+      "@core": ["src/app/core/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "paths": {
-      "@reducers": ["src/app/reducers/*"],
-      "@store": ["src/app/state/*"]
-    }
   }
 }

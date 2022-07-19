@@ -16,7 +16,7 @@ export interface User {
 
 export interface Error {
   error: {
-    error: any;
+    error: string | string[];
     statusCode: string;
   };
 }

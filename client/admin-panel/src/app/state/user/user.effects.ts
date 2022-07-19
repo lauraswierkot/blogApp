@@ -127,7 +127,13 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.confirmEmailFailed),
         tap(({ error }) => {
-          this.snackBar.open(error.error.error, 'x');
+          if (typeof error.error.error == 'string') {
+            this.snackBar.open(error.error.error, 'x');
+          } else {
+            error.error.error.forEach((element) => {
+              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
+            });
+          }
         })
       ),
     { dispatch: false }

@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserFacade } from 'src/app/state/user/user.facade';
-import { UserRegister } from 'src/app/state/user/user.model';
+import { UserFacade } from '../../state';
+import { UserRegister } from '../../state';
 import { ageValidation, confirmPasswordValidation } from './validator';
 
 @Component({
@@ -20,14 +20,14 @@ export class RegisterFormComponent {
   public registerForm: FormGroup;
 
   constructor(private facade: UserFacade, private router: Router) {
-    (this.registerForm = new FormGroup({
+    this.registerForm = new FormGroup({
       username: new FormControl('', { validators: Validators.required }),
       email: new FormControl('', { validators: Validators.email }),
       password: new FormControl('', { validators: Validators.required }),
       confirmPassword: new FormControl('', { validators: Validators.required }),
       age: new FormControl('', ageValidation()),
     }),
-      { validator: confirmPasswordValidation('password', 'confirmPassword') })
+      { validator: confirmPasswordValidation('password', 'confirmPassword') };
   }
 
   public get username(): AbstractControl {
