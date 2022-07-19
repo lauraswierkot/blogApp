@@ -7,12 +7,9 @@ import { ArticleFacade } from './state/articles/article.facade';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public title = 'admin-panel';
 
   constructor(private facadeArticle: ArticleFacade) {}
 
-  ngOnInit(): void {
-    //this.facadeArticle.getArticles();
-  }
 }

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ArticleFacade } from 'src/app/state/articles/article.facade';
+import { ArticleFacade } from '@state/articles/article.facade';
 
 @Component({
   selector: 'app-article-form',

@@ -6,7 +6,7 @@ import {
   Article,
   ArticleForm,
   ArticleResponse,
-} from 'src/app/state/articles/article.model';
+} from '@state/articles/article.model';
 
 import { environment } from 'environments/environment';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
