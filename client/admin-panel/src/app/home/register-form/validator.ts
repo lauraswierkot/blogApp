@@ -25,13 +25,10 @@ export function confirmPasswordValidation(
     const control = formGroup.controls[controlName];
     const matchingControl = formGroup.controls[matchingControlName];
 
-    if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
-      return null;
-    }
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
+    return !!matchingControl &&
+      !!control &&
+      control.value !== matchingControl.value
+      ? { mismatch: true }
+      : null;
   };
 }

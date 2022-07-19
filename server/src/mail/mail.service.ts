@@ -39,7 +39,7 @@ export class MailService {
     token: AuthResponse['token'],
   ): Promise<void> {
     const url = `${this.configService.get(
-      'http://localhost:4200/email-confirmation',
+      process.env.LOCALHOST_URL,
     )}/${token}`;
     await this.mailerService
       .sendMail({
