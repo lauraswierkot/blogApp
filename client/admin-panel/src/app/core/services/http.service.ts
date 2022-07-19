@@ -37,7 +37,7 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
-  public createArticle(articleForm: ArticleForm): Observable<Article> {
+  public createArticle(articleForm: FormData): Observable<Article> {
     return this.http
       .post<ArticleResponse>(`${apiUrl}/articles`, articleForm)
       .pipe(map((articleResponse) => articleResponse.article));

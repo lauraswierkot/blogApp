@@ -43,10 +43,10 @@
       <span class="material-icons container__form__field--icons"></span>
       <input
         class="container__form__field--input"
-        type="image"
-        formControlName="image"
-        placeholder="You can insert picture as well"
-        name="image"
+        type="file" (change)="onFileSelect($event)" 
+        formControlName="file"
+        placeholder="Insert image here"
+        name="file"
         required/>
     </div>
     <div class="container__form__field">

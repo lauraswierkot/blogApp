@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
+  FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ArticleFacade } from 'src/app/state/articles/article.facade';
-import { ArticleForm } from 'src/app/state/articles/article.model';
 
 @Component({
   selector: 'app-article-form',
@@ -18,13 +17,17 @@ import { ArticleForm } from 'src/app/state/articles/article.model';
 export class ArticleFormComponent {
   public articleForm: FormGroup;
 
-  constructor(private facade: ArticleFacade, private router: Router) {
-    this.articleForm = new FormGroup({
-      title: new FormControl('', { validators: Validators.required }),
-      body: new FormControl('', { validators: Validators.required }),
-      image: new FormControl('', { validators: Validators.required }),
-      description: new FormControl('', { validators: Validators.required }),
-      tagList: new FormControl('', Validators.required),
+  constructor(
+    private facade: ArticleFacade,
+    private router: Router,
+    public formBuilder: FormBuilder
+  ) {
+    this.articleForm = formBuilder.group({
+      title: ['tes', Validators.required],
+      body: ['test', Validators.required],
+      file: ['', Validators.required],
+      description: ['test', Validators.required],
+      tagList: ['test', Validators.required],
     });
   }
 
@@ -36,8 +39,8 @@ export class ArticleFormComponent {
     return this.articleForm.get('body');
   }
 
-  public get image(): AbstractControl {
-    return this.articleForm.get('image');
+  public get file(): AbstractControl {
+    return this.articleForm.get('file');
   }
 
   public get description(): AbstractControl {
@@ -49,14 +52,20 @@ export class ArticleFormComponent {
   }
 
   public createArticle(): void {
-    const article: ArticleForm = {
-      title: this.articleForm.value.article,
-      body: this.articleForm.value.body,
-      image: this.articleForm.value.image,
-      description: this.articleForm.value.description,
-      tagList: this.articleForm.value.tagList,
-    };
-    this.facade.createArticle(article);
+    var formData: FormData = new FormData();
+    formData.append('title', this.title.value);
+    formData.append('description', this.description.value);
+    formData.append('body', this.body.value);
+    formData.append('file', this.file.value);
+    formData.append('tagList', this.tagList.value);
+    this.facade.createArticle(formData);
+  }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.articleForm.get('file').setValue(file);
+    }
   }
 
   public toAdminPanel(): void {

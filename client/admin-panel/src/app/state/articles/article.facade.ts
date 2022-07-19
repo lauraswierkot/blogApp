@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
-import { ArticleForm } from './article.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +9,7 @@ import { ArticleForm } from './article.model';
 export class ArticleFacade {
   constructor(private store: Store) {}
 
-  public createArticle(articleForm: ArticleForm): void {
+  public createArticle(articleForm: FormData): void {
     this.store.dispatch(action.createArticle({ articleForm }));
   }
 }

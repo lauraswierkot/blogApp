@@ -4,7 +4,7 @@ import { Article, ArticleForm } from './article.model';
 
 export const createArticle = createAction(
   '[Article] Create Article',
-  props<{ articleForm: ArticleForm }>()
+  props<{ articleForm: FormData }>()
 );
 
 export const createArticleSuccess = createAction(
