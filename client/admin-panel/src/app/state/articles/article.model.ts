@@ -1,4 +1,3 @@
-
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
 export const articleFeatureKey = 'articles';

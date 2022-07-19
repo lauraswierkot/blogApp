@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import * as action from './article.actions';
 import * as selector from './article.selectors';
 
-
 @Injectable({
   providedIn: 'root',
 })

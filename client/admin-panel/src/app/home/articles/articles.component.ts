@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article, ArticleResponse } from '@state/articles/article.model';
+import { Article } from '@state/articles/article.model';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss']
+  styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;

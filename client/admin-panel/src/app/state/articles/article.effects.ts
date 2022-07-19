@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs';
 
 import * as action from './article.actions';
 import { HttpService } from '@core/index';
-import { Article, ArticleResponse } from './article.model';
+import { Article } from './article.model';
 
 @Injectable()
 export class ArticleEffects {
@@ -62,6 +62,6 @@ export class ArticleEffects {
           ])
         );
       })
-    ) 
+    )
   );
 }

@@ -2,9 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Article } from './article.model';
 
-export const getArticles = createAction(
-  '[Article] Get Articles'
-);
+export const getArticles = createAction('[Article] Get Articles');
 
 export const getArticlesSuccess = createAction(
   '[Article] Get Articles Success',

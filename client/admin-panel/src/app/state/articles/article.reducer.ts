@@ -19,7 +19,7 @@ export const reducer = createReducer(
   on(action.createArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.getArticlesSuccess, (state, { articles }) => ({
     ...state,
-    articles: articles
+    articles: articles,
   })),
   on(action.getArticlesFailed, (state, { error }) => ({ ...state, error }))
 );
