@@ -71,7 +71,7 @@ export class AuthController {
     return await this.authService.changePassword(email, data);
   }
 
-  @Post()
+  @Post('register')
   @ApiCreatedResponse({ description: 'User Registration' })
   @ApiBody({ type: RegisterBody })
   async register(

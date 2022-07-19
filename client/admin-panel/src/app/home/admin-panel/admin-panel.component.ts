@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { UserFacade } from 'src/app/state/user/user.facade';
+import { UserFacade } from '@state/index';
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,7 +8,6 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
-  
   constructor(private facade: UserFacade) {}
 
   public logout(): void {

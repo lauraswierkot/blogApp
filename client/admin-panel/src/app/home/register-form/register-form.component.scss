@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 600px;
+    height: 750px;
     justify-content: center;
     text-align: -webkit-center;
 
@@ -36,10 +36,14 @@
 .container__form__field {
   &--input {
     width: 80%;
-    min-height: 3em;
-    margin-bottom: 2em;
+    min-height: 2.7em;
+    margin-bottom: 1.5em;
     margin-left: 0.5em;
     border: black;
+
+    &:hover::after{
+      margin-bottom: 0;
+    }
   }
 
   &--icons {
@@ -58,7 +62,6 @@
     display: flex;
     padding: 0.5em;
     background-color: #e7e7e7;
-    margin-top: 1em;
 
       &:hover:enabled {
       cursor: pointer;
@@ -66,8 +69,13 @@
     }
   }
 
-  &--register {
+  &--login {
     margin: 2em 0 1em 0;
+  }
+
+  &--message {
+    font-size: 15px;
+    padding-bottom: 1em;
   }
 }
 

@@ -1,0 +1,95 @@
+<div class="container">
+  <form
+    class="container__form"
+    [formGroup]="registerForm"
+    (ngSubmit)="register()">
+    <header class="container__form--title">Register panel</header>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">person</span>
+      <input
+        class="container__form__field--input"
+        formControlName="username"
+        placeholder="Type your username here"
+        name="username"
+        required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="username.errors && username.touched">
+        Username is missing.
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">email</span>
+      <input
+        class="container__form__field--input"
+        formControlName="email"
+        placeholder="Type your email here"
+        name="email"
+        required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="email.errors && email.touched">
+        Email is missing.
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">key</span>
+      <input
+        class="container__form__field--input"
+        type="password"
+        formControlName="password"
+        placeholder="Type your password here"
+        name="password"
+        required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="password.errors && password.touched">
+        Password is missing.
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">key</span>
+      <input
+        class="container__form__field--input"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirm your password here"
+        name="confirmPassword"
+        required/>
+      <div
+        *ngIf="confirmPassword.errors?.['confirmPasswordValidation'] && confirmPassword.touched">
+        Passwords must match
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">cake</span>
+      <input
+        class="container__form__field--input"
+        type="date"
+        formControlName="age"
+        placeholder="Type your birthdate here"
+        name="age"
+        required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="age.errors?.['adolescent'] && age.touched">
+        You must be over 18 years old to register.
+      </div>
+    </div>
+    <div class="container__form__field">
+      <button
+        class="container__form__field--button"
+        [disabled]="age.errors"
+        type="submit">
+        <span>Sign up</span>
+      </button>
+    </div>
+    <div class="container_form__field container__form__field--login">
+      <span>Already have an account? Sign in</span>
+      <span
+        class="material-icons container__form__field--icons arrow"
+        (click)="toLoginForm()"
+        >trending_flat</span>
+    </div>
+  </form>
+</div>

@@ -3,13 +3,12 @@
     <header class="container__form--title">Login panel</header>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">person</span>
-      <input 
+      <input
         class="container__form__field--input"
         formControlName="email"
         placeholder="Type your email here"
         name="email"
-        required
-      />
+        required/>
       <div *ngIf="email.errors?.['email']">Email not valid.</div>
     </div>
     <div class="container__form__field">
@@ -20,17 +19,23 @@
         formControlName="password"
         placeholder="Type your password here"
         name="password"
-        required
-      />
+        required/>
     </div>
     <div class="container__form__field">
-      <button [disabled]="password.errors" class="container__form__field--button" type="submit">
+      <button
+        class="container__form__field--button"
+        [disabled]="password.errors"
+        type="submit">
         <span>Login</span>
       </button>
     </div>
     <div class="container_form__field container__form__field--register">
       <span>No account? Sign up</span>
-      <span class="material-icons container__form__field--icons arrow">trending_flat</span>
+      <span
+        (click)="toRegisterForm()"
+        class="material-icons container__form__field--icons arrow">
+        trending_flat
+      </span>
     </div>
   </form>
 </div>

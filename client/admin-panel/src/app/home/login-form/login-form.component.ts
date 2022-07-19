@@ -7,8 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserFacade } from 'src/app/state/user/user.facade';
-import { UserLogin } from 'src/app/state/user/user.model';
+import { UserFacade, UserLogin } from '@state/index';
 
 @Component({
   selector: 'app-login-form',
@@ -44,5 +43,9 @@ export class LoginFormComponent {
       password: this.loginForm.value.password,
     };
     this.facade.login(login);
+  }
+
+  public toRegisterForm(): void {
+    this.router.navigate(['/register']);
   }
 }

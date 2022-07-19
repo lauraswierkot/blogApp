@@ -16,14 +16,19 @@ export interface User {
 
 export interface Error {
   error: {
-    error: any;
+    error: string | string[];
     statusCode: string;
-  } 
+  };
 }
 
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export interface UserRegister extends UserLogin {
+  username: string;
+  age: string;
 }
 
 export interface UserState {

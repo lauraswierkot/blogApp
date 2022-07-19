@@ -12,16 +12,16 @@ import { join } from 'path';
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
         transport: {
-          host: config.get('MAIL_HOST'),
-          port: config.get('MAIL_PORT'),
+          host: process.env.MAIL_HOST,
+          port: Number(process.env.MAIL_PORT),
           secure: false,
           auth: {
-            user: config.get('MAIL_USER'),
-            pass: config.get('MAIL_PASSWORD'),
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD,
           },
         },
         defaults: {
-          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
+          from: `"No Reply" <${process.env.FROM}>`,
         },
         template: {
           dir: join(__dirname, 'templates'),
