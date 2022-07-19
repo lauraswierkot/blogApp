@@ -16,7 +16,7 @@ export interface Article {
 }
 
 export interface ArticleState {
-  articles: Article[];
+  articles: ArticleResponse[];
   error: any;
 }
 
@@ -27,8 +27,8 @@ export const initialState: ArticleState = {
 
 export interface ArticleForm {
   title: string;
-  body: string;
-  image?: string;
   description: string;
+  body: string;
   tagList: string;
+  file: File;
 }

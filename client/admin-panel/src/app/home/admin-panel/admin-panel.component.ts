@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ArticleFacade } from 'src/app/state/articles/article.facade';
 
 import { UserFacade } from 'src/app/state/user/user.facade';
 
@@ -9,7 +10,7 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
-  constructor(private userFacade: UserFacade, private router: Router) {}
+  constructor(private userFacade: UserFacade, private router: Router, private facadeArticle: ArticleFacade) {}
 
   public logout(): void {
     this.userFacade.logout();
@@ -20,6 +21,6 @@ export class AdminPanelComponent {
   }
 
   public showAllArticles():void {
-    this.router.navigate(['articles-list'])
+    this.router.navigate(['articles-list']) 
   }
 }

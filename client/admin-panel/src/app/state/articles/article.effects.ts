@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs';
 
 import * as action from './article.actions';
 import { HttpService } from 'src/app/core';
-import { Article } from './article.model';
+import { Article, ArticleResponse } from './article.model';
 
 @Injectable()
 export class ArticleEffects {
@@ -22,29 +22,46 @@ export class ArticleEffects {
   ) {}
 
   createArticle$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(action.createArticle),
-    switchMap(({ articleForm }) => {
-      return this.http.createArticle(articleForm).pipe(
-        map((articleResponse: Article) => {
-          this.router.navigate(['']);
-          return action.createArticleSuccess({ articleResponse });
-        }),
-        catchError((error: HttpErrorResponse) => [
-          action.createArticleFailed({ error }),
-        ])
-      );
-    })
-  )
-);
+    this.actions$.pipe(
+      ofType(action.createArticle),
+      switchMap(({ articleForm }) => {
+        return this.http.createArticle(articleForm).pipe(
+          map((articleResponse: ArticleResponse) => {
+            this.router.navigate(['']);
+            return action.createArticleSuccess({ articleResponse });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.createArticleFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
 
- createArticleFailed$ = createEffect(() =>
+  createArticleFailed$ = createEffect(
+    () =>
       this.actions$.pipe(
         ofType(action.createArticleFailed),
-        tap(({ error }) => {  
-            this.snackBar.open(error.message, 'x');
-       })
+        tap(({ error }) => {
+          this.snackBar.open(error.message, 'x');
+        })
       ),
     { dispatch: false }
+  );
+
+  getArticles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.getArticles),
+      switchMap(() => {
+        return this.http.getArticles().pipe(
+          map((articles: ArticleResponse[]) => {
+            return action.getArticlesSuccess({ articles });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.getArticlesFailed({ error }),
+          ])
+        );
+      })
+    )
   );
 }

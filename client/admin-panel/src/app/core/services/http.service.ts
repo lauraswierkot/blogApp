@@ -37,9 +37,15 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
-  public createArticle(articleForm: FormData): Observable<Article> {
+  public createArticle(articleForm: FormData): Observable<ArticleResponse> {
     return this.http
       .post<ArticleResponse>(`${apiUrl}/articles`, articleForm)
-      .pipe(map((articleResponse) => articleResponse.article));
+      .pipe(map((articleResponse) => articleResponse));
+  }
+
+  public getArticles(): Observable<ArticleResponse[]> {
+    return this.http
+      .get<{ articles: ArticleResponse[] }>(`${apiUrl}/articles`)
+      .pipe(map((response) => response.articles));
   }
 }
