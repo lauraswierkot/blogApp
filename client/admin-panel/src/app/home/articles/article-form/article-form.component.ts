@@ -52,7 +52,7 @@ export class ArticleFormComponent {
   }
 
   public createArticle(): void {
-    var formData: FormData = new FormData();
+    let formData: FormData = new FormData();
     formData.append('title', this.title.value);
     formData.append('description', this.description.value);
     formData.append('body', this.body.value);
@@ -61,7 +61,7 @@ export class ArticleFormComponent {
     this.facade.createArticle(formData);
   }
 
-  onFileSelect(event) {
+  public onFileSelect(event: any): void {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.articleForm.get('file').setValue(file);
