@@ -26,9 +26,9 @@ export class ArticleEffects {
       ofType(action.createArticle),
       switchMap(({ articleForm }) => {
         return this.http.createArticle(articleForm).pipe(
-          map((articleResponse: ArticleResponse) => {
+          map((article: Article) => {
             this.router.navigate(['']);
-            return action.createArticleSuccess({ articleResponse });
+            return action.createArticleSuccess({ article });
           }),
           catchError((error: HttpErrorResponse) => [
             action.createArticleFailed({ error }),
@@ -54,7 +54,7 @@ export class ArticleEffects {
       ofType(action.getArticles),
       switchMap(() => {
         return this.http.getArticles().pipe(
-          map((articles: ArticleResponse[]) => {
+          map((articles: Article[]) => {
             return action.getArticlesSuccess({ articles });
           }),
           catchError((error: HttpErrorResponse) => [
@@ -62,6 +62,6 @@ export class ArticleEffects {
           ])
         );
       })
-    )
+    ) 
   );
 }

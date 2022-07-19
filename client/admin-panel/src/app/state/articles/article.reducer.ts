@@ -12,14 +12,14 @@ export function articleReducer(
 
 export const reducer = createReducer(
   initialState,
-  on(action.createArticleSuccess, (state, { articleResponse }) => ({
+  on(action.createArticleSuccess, (state, { article }) => ({
     ...state,
-   articles: [...state.articles, articleResponse]
+    articles: [...state.articles, article],
   })),
   on(action.createArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.getArticlesSuccess, (state, { articles }) => ({
     ...state,
-    articles,
+    articles: articles
   })),
   on(action.getArticlesFailed, (state, { error }) => ({ ...state, error }))
 );

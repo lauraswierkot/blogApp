@@ -1,6 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { ArticleFacade } from './state/articles/article.facade';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +7,4 @@ import { ArticleFacade } from './state/articles/article.facade';
 })
 export class AppComponent {
   public title = 'admin-panel';
-
-  constructor(private facadeArticle: ArticleFacade) {}
-
 }

@@ -1,5 +1,6 @@
 <div class="articles-container">
-  <ng-container *ngFor="let article of articlesList">
-    Title: {{article.article.title}}
+  <h2>Articles list:</h2>
+  <ng-container *ngFor="let article of articlesList | async">
+    <p>Title: {{article.title}}</p>
   </ng-container>
 </div>

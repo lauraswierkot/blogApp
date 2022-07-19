@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
-import { ArticleResponse } from '@state/articles/article.model';
+import { Component, OnInit } from '@angular/core';
+import { ArticleFacade } from '@state/articles/article.facade';
+import { Article, ArticleResponse } from '@state/articles/article.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent {
-  public articlesList: ArticleResponse[] = [];
+export class ArticlesComponent implements OnInit {
+  public articlesList: Observable<Article[]>;
+  constructor(private facade: ArticleFacade) {}
+
+  public ngOnInit(): void {
+    this.articlesList = this.facade.articles$;
+    this.facade.getArticles();
+  }
 }

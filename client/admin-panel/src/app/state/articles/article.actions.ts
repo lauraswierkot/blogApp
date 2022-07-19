@@ -1,18 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Article, ArticleResponse } from './article.model';
+import { Article } from './article.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles'
 );
 
 export const getArticlesSuccess = createAction(
-  '[Article] Get Articles',
-  props<{ articles: ArticleResponse[] }>()
+  '[Article] Get Articles Success',
+  props<{ articles: Article[] }>()
 );
 
 export const getArticlesFailed = createAction(
-  '[Article] Get Articles',
+  '[Article] Get Articles Failed',
   props<{ error: any }>()
 );
 
@@ -23,7 +23,7 @@ export const createArticle = createAction(
 
 export const createArticleSuccess = createAction(
   '[Article] Create Article success',
-  props<{ articleResponse: ArticleResponse }>()
+  props<{ article: Article }>()
 );
 
 export const createArticleFailed = createAction(

@@ -16,12 +16,12 @@ export interface Article {
 }
 
 export interface ArticleState {
-  articles: ArticleResponse[];
+  articles: Article[];
   error: any;
 }
 
 export const initialState: ArticleState = {
-  articles: null,
+  articles: [],
   error: null,
 };
 
