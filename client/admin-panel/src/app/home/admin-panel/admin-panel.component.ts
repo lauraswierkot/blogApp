@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArticleFacade } from 'src/app/state/articles/article.facade';
 
-import { UserFacade } from 'src/app/state/user/user.facade';
+import { UserFacade } from '@state/index';
 
 @Component({
   selector: 'app-admin-panel',
@@ -10,7 +9,7 @@ import { UserFacade } from 'src/app/state/user/user.facade';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
-  constructor(private userFacade: UserFacade, private router: Router, private facadeArticle: ArticleFacade) {}
+  constructor(private userFacade: UserFacade, private router: Router) {}
 
   public logout(): void {
     this.userFacade.logout();

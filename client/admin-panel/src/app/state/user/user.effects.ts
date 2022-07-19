@@ -9,7 +9,7 @@ import { catchError, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './user.actions';
-import { HttpService } from 'src/app/core';
+import { HttpService } from '@core/index';
 import { User } from './user.model';
 
 @Injectable()
@@ -103,5 +103,39 @@ export class UserEffects {
         );
       })
     )
+  );
+
+  confirmEmail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.confirmEmail),
+      switchMap(({ token }) => {
+        return this.http.confirmEmail(token).pipe(
+          map(() => {
+            this.router.navigate(['/login']);
+            return action.confirmEmailSuccess();
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.confirmEmailFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
+
+  confirmEmailFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.confirmEmailFailed),
+        tap(({ error }) => {
+          if (typeof error.error.error == 'string') {
+            this.snackBar.open(error.error.error, 'x');
+          } else {
+            error.error.error.forEach((element) => {
+              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
+            });
+          }
+        })
+      ),
+    { dispatch: false }
   );
 }

@@ -12,6 +12,11 @@
         placeholder="Type your username here"
         name="username"
         required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="username.errors && username.touched">
+        Username is missing.
+      </div>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">email</span>
@@ -21,6 +26,11 @@
         placeholder="Type your email here"
         name="email"
         required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="email.errors && email.touched">
+        Email is missing.
+      </div>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">key</span>
@@ -31,6 +41,25 @@
         placeholder="Type your password here"
         name="password"
         required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="password.errors && password.touched">
+        Password is missing.
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">key</span>
+      <input
+        class="container__form__field--input"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirm your password here"
+        name="confirmPassword"
+        required/>
+      <div
+        *ngIf="confirmPassword.errors?.['confirmPasswordValidation'] && confirmPassword.touched">
+        Passwords must match
+      </div>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">cake</span>
@@ -41,7 +70,9 @@
         placeholder="Type your birthdate here"
         name="age"
         required/>
-      <div class="container__form__field--age"  *ngIf="age.errors?.['adolescent'] && age.touched">
+      <div
+        class="container__form__field--message"
+        *ngIf="age.errors?.['adolescent'] && age.touched">
         You must be over 18 years old to register.
       </div>
     </div>

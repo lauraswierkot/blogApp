@@ -7,9 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserFacade } from 'src/app/state/user/user.facade';
-import { UserRegister } from 'src/app/state/user/user.model';
-import { ageValidation } from './validator';
+import { UserFacade, UserRegister } from '@state/index';
+import { ageValidation, confirmPasswordValidation } from './validator';
 
 @Component({
   selector: 'app-register-form',
@@ -18,18 +17,16 @@ import { ageValidation } from './validator';
 })
 export class RegisterFormComponent {
   public registerForm: FormGroup;
-  
+
   constructor(private facade: UserFacade, private router: Router) {
     this.registerForm = new FormGroup({
       username: new FormControl('', { validators: Validators.required }),
-      email: new FormControl('', {
-        validators: Validators.email
-      }),
-      password: new FormControl('', {
-        validators: Validators.required
-      }),
-      age: new FormControl('', ageValidation())
-    });
+      email: new FormControl('', { validators: Validators.email }),
+      password: new FormControl('', { validators: Validators.required }),
+      confirmPassword: new FormControl('', { validators: Validators.required }),
+      age: new FormControl('', ageValidation()),
+    }),
+      { validator: confirmPasswordValidation('password', 'confirmPassword') };
   }
 
   public get username(): AbstractControl {
@@ -42,6 +39,10 @@ export class RegisterFormComponent {
 
   public get password(): AbstractControl {
     return this.registerForm.get('password');
+  }
+
+  public get confirmPassword(): AbstractControl {
+    return this.registerForm.get('confirmPassword');
   }
 
   public get age(): AbstractControl {

@@ -33,3 +33,17 @@ export const registerFailed = createAction(
   '[User] Register user fail',
   props<{ error: Error }>()
 );
+
+export const confirmEmail = createAction(
+  '[User] Confirm email',
+  props<{ token: string }>()
+);
+
+export const confirmEmailSuccess = createAction(
+ '[User] Confirm email success'
+ );
+
+ export const confirmEmailFailed = createAction(
+  '[User] Confirm email fail',
+   props<{ error: Error }>()
+);
