@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import * as selector from './user.selectors';
 import * as action from './user.actions';
 import { UserLogin, UserRegister } from './user.model';
-import { HttpService } from 'src/app/core';
-import { Observable } from 'rxjs';
+import { HttpService } from '@core/index';
 
 @Injectable({
   providedIn: 'root',

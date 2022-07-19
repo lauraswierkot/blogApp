@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserFacade } from 'src/app/state/user/user.facade';
+import { ActivatedRoute } from '@angular/router';
+
+import { UserFacade } from '@state/index';
 
 @Component({
   selector: 'app-confirmation-page',

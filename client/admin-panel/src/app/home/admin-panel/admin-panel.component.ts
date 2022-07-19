@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { UserFacade } from 'src/app/state/user/user.facade';
+
+import { UserFacade } from '@state/index';
 
 @Component({
   selector: 'app-admin-panel',

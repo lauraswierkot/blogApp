@@ -9,7 +9,7 @@ import { catchError, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './user.actions';
-import { HttpService } from 'src/app/core';
+import { HttpService } from '@core/index';
 import { User } from './user.model';
 
 @Injectable()

@@ -12,9 +12,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
-import { environment } from 'src/environments/environment';
-import { userReducer } from 'src/app/state/user/user.reducer';
+import { environment } from 'environments/environment';
 
+import { userReducer } from './user/user.reducer';
 import { UserEffects } from './user/user.effects';
 import { userFeatureKey } from './user/user.model';
 

@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { first, mergeMap, Observable } from 'rxjs';
-import { UserFacade } from 'src/app/state/user/user.facade';
+import { UserFacade } from '@state/index';
 
 @Injectable({
   providedIn: 'root',

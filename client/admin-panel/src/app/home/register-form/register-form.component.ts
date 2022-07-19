@@ -7,8 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserFacade } from '../../state';
-import { UserRegister } from '../../state';
+import { UserFacade, UserRegister } from '@state/index';
 import { ageValidation, confirmPasswordValidation } from './validator';
 
 @Component({
