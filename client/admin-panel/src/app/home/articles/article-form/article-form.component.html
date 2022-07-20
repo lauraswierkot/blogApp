@@ -1,56 +1,102 @@
 <div class="container">
-  <form class="container__form" [formGroup]="articleForm" (ngSubmit)="createArticle()">
+  <form
+    class="container__form"
+    [formGroup]="articleForm"
+    (ngSubmit)="createArticle()">
     <header class="container__form--title">Create an article</header>
     <div class="container__form__field">
-      <span class="material-icons container__form__field--icons"></span>
       <input
         class="container__form__field--input"
         formControlName="title"
         placeholder="Type title here"
         name="title"
         required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="title.errors && title.touched">
+        Title is missing.
+      </div>
     </div>
     <div class="container__form__field">
-      <span class="material-icons container__form__field--icons"></span>
-      <input
+      <textarea
         class="container__form__field--input body"
         formControlName="body"
         placeholder="Type body here"
         name="body"
-        required/>
+        required>
+      </textarea>
+      <div
+        class="container__form__field--message"
+        *ngIf="body.errors && body.touched">
+        Body is missing.
+      </div>
     </div>
     <div class="container__form__field">
-      <span class="material-icons container__form__field--icons"></span>
-      <input
+      <textarea
         class="container__form__field--input"
         type="text"
         formControlName="description"
         placeholder="Type description here"
         name="description"
-        required/>
+        required>
+      </textarea>
+      <div
+        class="container__form__field--message"
+        *ngIf="description.errors && description.touched">
+        Description is missing.
+      </div>
     </div>
     <div class="container__form__field">
-      <span class="material-icons container__form__field--icons"></span>
-      <input
+      <mat-form-field
+        appearance="fill"
         class="container__form__field--input"
-        type="text"
-        formControlName="tagList"
-        placeholder="Type tag list here"
-        name="tagList"
-        required/>
+        >
+        <mat-chip-list
+          #chipList
+          aria-label="Enter tags"
+          formControlName="tagList">
+          <mat-chip
+            *ngFor="let tag of articleForm.controls['tagList'].value"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeTag(tag)">
+            {{ tag }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Add tag & hit enter"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addTag($event)"/>
+        </mat-chip-list>
+      </mat-form-field>
     </div>
     <div class="container__form__field">
-      <span class="material-icons container__form__field--icons"></span>
       <input
         class="container__form__field--input"
-        type="file" (change)="onFileSelect($event)" 
+        type="file"
+        (change)="onFileSelect($event)"
         formControlName="file"
         placeholder="Insert image here"
         name="file"
         required/>
+      <div
+        class="container__form__field--message"
+        *ngIf="file.errors && file.touched">
+        File is missing.
+      </div>
     </div>
     <div class="container__form__field">
-      <button class="container__form__field--button" type="submit">
+      <button
+        class="container__form__field--button"
+        type="submit"
+        [disabled]="
+          title.errors ||
+          body.errors ||
+          description.errors ||
+          tagList.errors ||
+          file.errors">
         <span>Create</span>
       </button>
     </div>
@@ -59,7 +105,8 @@
       <span
         class="material-icons container__form__field--icons arrow"
         (click)="toAdminPanel()"
-        >trending_flat</span>
+        >trending_flat
+      </span>
     </div>
   </form>
 </div>

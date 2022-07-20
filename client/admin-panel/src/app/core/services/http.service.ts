@@ -2,13 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
-import {
-  Article,
-  ArticleForm,
-  ArticleResponse,
-} from '@state/articles/article.model';
-
 import { environment } from 'environments/environment';
+
+import { Article } from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
 
 const apiUrl = environment.apiUrl;

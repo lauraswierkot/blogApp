@@ -28,7 +28,7 @@ const routes: Routes = [
     component: ConfirmationPageComponent,
   },
   {
-    path: 'articles',
+    path: 'article',
     component: ArticleFormComponent
   },
   {

@@ -15,11 +15,7 @@ export class AdminPanelComponent {
     this.userFacade.logout();
   }
 
-  public createArticle(): void {
-    this.router.navigate(['articles']);
-  }
-
-  public showAllArticles():void {
-    this.router.navigate(['articles-list']) 
+  public toArticles(): void {
+    this.router.navigate(['articles-list']);
   }
 }

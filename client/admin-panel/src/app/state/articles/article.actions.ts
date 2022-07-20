@@ -11,7 +11,7 @@ export const getArticlesSuccess = createAction(
 
 export const getArticlesFailed = createAction(
   '[Article] Get Articles Failed',
-  props<{ error: any }>()
+  props<{ error: Error }>()
 );
 
 export const createArticle = createAction(

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs';
+
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-articles',
@@ -10,10 +14,15 @@ import { Observable } from 'rxjs';
 })
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;
-  constructor(private facade: ArticleFacade) {}
+  
+  constructor(private facade: ArticleFacade, private router: Router) {}
 
   public ngOnInit(): void {
     this.articlesList = this.facade.articles$;
     this.facade.getArticles();
+  }
+
+  public createArticle(): void {
+    this.router.navigate(['article']);
   }
 }

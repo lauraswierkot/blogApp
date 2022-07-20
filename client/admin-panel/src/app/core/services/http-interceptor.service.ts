@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { first, mergeMap, Observable } from 'rxjs';
+
 import { UserFacade } from '@state/index';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { UserFacade } from '@state/index';
 export class HttpInterceptorService {
   constructor(private userFacade: UserFacade) {}
 
-  intercept(
+  public intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {

@@ -9,8 +9,8 @@ export interface Article {
   description: string;
   body: string;
   tagList: string[];
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: Date;
+  updatedAt: Date;
   author: string;
 }
 
@@ -28,6 +28,13 @@ export interface ArticleForm {
   title: string;
   description: string;
   body: string;
-  tagList: string;
+  tagList: string[];
   file: File;
+}
+
+export interface Error {
+  error: {
+    error: string | string[];
+    statusCode: string;
+  };
 }

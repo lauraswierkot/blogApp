@@ -10,9 +10,7 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   overflow: hidden;
-}
 
-.container {
   &__form {
     display: flex;
     flex-direction: column;
@@ -20,30 +18,35 @@
     height: 750px;
     justify-content: center;
     text-align: -webkit-center;
+
     &--title {
       font-size: 30px;
       margin: 1em 0 2em 0;
       text-decoration: underline brown 4px;
     }
   }
-  &_field {
+
+  &__field {
     margin: 0.5em;
   }
 }
 
 .container__form__field {
   &--input {
-    width: 80%;
+    max-width: 80%;
+    min-width: 80%;
     min-height: 3em;
     margin-bottom: 0.5em;
     margin-left: 0.5em;
     border: black;
   }
+
   &--icons {
     font-size: 30px;
     display: inline-flex;
     vertical-align: text-bottom;
   }
+
   &--button {
     width: 200px;
     max-width: 50%;
@@ -56,15 +59,22 @@
     background-color: #e7e7e7;
     margin-top: 1em;
   }
+
   &--button:hover:enabled {
     cursor: pointer;
     background-color: #dddbdb;
   }
+
   &--login {
     margin: 2em 0 1em 0;
   }
+
   &--age {
     font-size: 15px;
+    padding-bottom: 1em;
+  }
+  &--message {
+    font-size: 13px;
     padding-bottom: 1em;
   }
 }

@@ -11,10 +11,7 @@ import { UserFacade } from '@state/index';
 export class ConfirmationPageComponent implements OnInit {
   public token: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private facade: UserFacade
-  ) {}
+  constructor(private route: ActivatedRoute, private facade: UserFacade) {}
 
   public ngOnInit(): void {
     this.token = this.route.snapshot.params['token'];

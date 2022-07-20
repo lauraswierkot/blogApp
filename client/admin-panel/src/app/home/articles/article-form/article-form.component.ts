@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 
@@ -16,6 +18,10 @@ import { ArticleFacade } from '@state/articles/article.facade';
 })
 export class ArticleFormComponent {
   public articleForm: FormGroup;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  public selectable: boolean = true;
+  public removable: boolean = true;
+  public addOnBlur: boolean = true;
 
   constructor(
     private facade: ArticleFacade,
@@ -23,11 +29,11 @@ export class ArticleFormComponent {
     public formBuilder: FormBuilder
   ) {
     this.articleForm = formBuilder.group({
-      title: ['tes', Validators.required],
-      body: ['test', Validators.required],
+      title: ['', Validators.required],
+      body: ['', Validators.required],
       file: ['', Validators.required],
-      description: ['test', Validators.required],
-      tagList: ['test', Validators.required],
+      description: ['', Validators.required],
+      tagList: ['', Validators.required],
     });
   }
 
@@ -52,7 +58,7 @@ export class ArticleFormComponent {
   }
 
   public createArticle(): void {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('title', this.title.value);
     formData.append('description', this.description.value);
     formData.append('body', this.body.value);
@@ -70,5 +76,30 @@ export class ArticleFormComponent {
 
   public toAdminPanel(): void {
     this.router.navigate(['']);
+  }
+
+  public addTag(event: MatChipInputEvent): void {
+    const input = event.value;
+    const value = event.value;
+    if ((value || '').trim()) {
+      if (value.length < 21) {
+        this.articleForm.controls['tagList'].setValue([
+          ...this.articleForm.controls['tagList'].value,
+          value.trim(),
+        ]);
+        this.articleForm.controls['tagList'].updateValueAndValidity();
+      }
+    }
+    if(input){
+      input[value] = '';
+    }
+  }
+
+  public removeTag(tag: string): void {
+    const index = this.articleForm.controls['tagList'].value.indexOf(tag);
+    if (index >= 0) {
+      this.articleForm.controls['tagList'].value.splice(index, 1);
+      this.articleForm.controls['tagList'].updateValueAndValidity();
+    }
   }
 }

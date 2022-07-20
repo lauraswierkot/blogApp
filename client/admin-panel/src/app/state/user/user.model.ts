@@ -44,5 +44,5 @@ export const initialState: UserState = {
 };
 
 export interface ProfileResponse extends UserResponse {
-  following: boolean | null;
+  following: boolean;
 }
