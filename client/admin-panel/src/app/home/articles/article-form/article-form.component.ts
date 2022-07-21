@@ -79,20 +79,15 @@ export class ArticleFormComponent {
   }
 
   public addTag(event: MatChipInputEvent): void {
-    const maxTaglength = 21;
-    const input = event.chipInput;
-    const value = event.value;
-    if ((value || '').trim()) {
-      if (value.length < maxTaglength) {
-        this.articleForm.controls['tagList'].patchValue([
-          ...this.articleForm.controls['tagList'].value,
-          value.trim(),
-        ]);
-        this.articleForm.controls['tagList'].updateValueAndValidity();
-      }
-    }
-    if(input){
-      input['value'] = '';
+    const maxTagLength = 50;
+    const value = event.value.trim();
+    if (value && value !== '' && value.length < maxTagLength) {
+      this.articleForm.controls['tagList'].patchValue([
+        ...this.articleForm.controls['tagList'].value,
+        value,
+      ]);
+      this.articleForm.controls['tagList'].updateValueAndValidity();
+      event.chipInput.clear();
     }
   }
 
