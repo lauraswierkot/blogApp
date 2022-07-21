@@ -5,13 +5,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 const modules = [
   MatFormFieldModule,
   MatIconModule,
   MatSnackBarModule,
   MatChipsModule,
-  MatCardModule
+  MatCardModule,
+  MatSelectModule
 ];
 
 @NgModule({

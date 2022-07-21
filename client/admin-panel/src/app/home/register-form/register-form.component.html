@@ -60,7 +60,23 @@
         *ngIf="confirmPassword.errors?.['confirmPasswordValidation'] && confirmPassword.touched">
         Passwords must match
       </div>
-    </div>
+      </div>
+      <div class="container__form__field">
+        <span class="material-icons container__form__field--icons">admin_panel_settings</span>
+        <select
+          formControlName="role"
+          name="role"
+          class="container__form__field--input">
+          <option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+        <div
+          class="container__form__field--message"
+          *ngIf="role.errors && role.touched">
+          Choose role.
+        </div>
+      </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">cake</span>
       <input
@@ -77,9 +93,7 @@
       </div>
     </div>
     <div class="container__form__field">
-      <button
-        [disabled]="age.errors"
-        type="submit">
+      <button [disabled]="age.errors" type="submit">
         <span>Sign up</span>
       </button>
     </div>
@@ -87,8 +101,8 @@
       <span>Already have an account? Sign in</span>
       <span
         class="material-icons container__form__field--icons arrow"
-        (click)="toLoginForm()"
-        >trending_flat</span>
+        (click)="toLoginForm()">trending_flat
+      </span>
     </div>
   </form>
 </div>

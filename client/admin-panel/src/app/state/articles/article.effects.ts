@@ -27,7 +27,7 @@ export class ArticleEffects {
       switchMap(({ articleForm }) => {
         return this.http.createArticle(articleForm).pipe(
           map((article: Article) => {
-            this.router.navigate(['']);
+            this.router.navigate(['articles-panel']);
             return action.createArticleSuccess({ article });
           }),
           catchError((error: HttpErrorResponse) => [
@@ -59,6 +59,38 @@ export class ArticleEffects {
           }),
           catchError((error: HttpErrorResponse) => [
             action.getArticlesFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
+
+  deleteArticle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.deleteArticle),
+      switchMap(({ slug }) => {
+        return this.http.deleteArticle(slug).pipe(
+          map((article: Article) => {
+            return action.deleteArticleSuccess({ slug });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.deleteArticleFailed({ error }),
+          ])
+        );
+      })
+    )
+  );
+
+  updateArticle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.updateArticle),
+      switchMap(({ slug, articleForm }) => {
+        return this.http.updateArticle(slug, articleForm).pipe(
+          map((article: Article) => {
+            return action.updateArticleSuccess({ slug, article });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.updateArticleFailed({ error }),
           ])
         );
       })

@@ -19,4 +19,12 @@ export class ArticleFacade {
   public getArticles(): void {
     this.store.dispatch(action.getArticles());
   }
+
+  public deleteArticle(slug: string): void {
+    this.store.dispatch(action.deleteArticle({ slug }));
+  }
+
+  public updateArticle(slug: string, articleForm: FormData): void {
+    this.store.dispatch(action.updateArticle({ slug, articleForm }));
+  }
 }

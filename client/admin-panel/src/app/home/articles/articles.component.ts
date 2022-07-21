@@ -14,6 +14,7 @@ import { Article } from '@state/articles/article.model';
 })
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;
+  public articleForm: FormData; 
   
   constructor(private facade: ArticleFacade, private router: Router) {}
 
@@ -25,4 +26,13 @@ export class ArticlesComponent implements OnInit {
   public createArticle(): void {
     this.router.navigate(['article']);
   }
+
+  public deleteArticle(slug: string): void {
+    this.facade.deleteArticle(slug);
+  }
+
+  public toUpdateArticle(): void {
+    this.router.navigate(['update-article']);
+  }
+ 
 }

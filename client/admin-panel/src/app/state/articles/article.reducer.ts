@@ -21,5 +21,10 @@ export const reducer = createReducer(
     ...state,
     articles: articles,
   })),
-  on(action.getArticlesFailed, (state, { error }) => ({ ...state, error }))
+  on(action.getArticlesFailed, (state, { error }) => ({ ...state, error })),
+  on(action.deleteArticleSuccess, (state, { slug }) => ({ ...state, articles: state.articles.filter(value => value.slug != slug) })),
+  on(action.deleteArticleFailed, (state, { error }) => ({ ...state, error })),
+  on(action.updateArticleSuccess, (state, { slug, article }) => ({...state,  articles: state.articles.map(x => (x.slug === slug ?  article  : x))})),
+  on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
+  on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
 );

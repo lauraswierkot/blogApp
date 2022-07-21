@@ -1,3 +1,5 @@
+import { RouterLink } from "@angular/router";
+
 export type StatePart<K extends keyof UserState> = Pick<UserState, K>;
 
 export const userFeatureKey = 'users';
@@ -29,6 +31,7 @@ export interface UserLogin {
 export interface UserRegister extends UserLogin {
   username: string;
   age: string;
+  role: Role;
 }
 
 export interface UserState {
@@ -45,4 +48,9 @@ export const initialState: UserState = {
 
 export interface ProfileResponse extends UserResponse {
   following: boolean;
+}
+
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
 }

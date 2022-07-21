@@ -1,13 +1,11 @@
 <button (click)="createArticle()">Create an article</button>
 <div class="list">
   <div class="list--title">All articles</div>
-  <div *ngFor="let article of articlesList | async">
-    <mat-card class="list__card">
-      <mat-card-title>{{ article.title }}</mat-card-title>
-      <mat-card-actions>
-        <button mat-button>Edit</button>
-        <button mat-button>Delete</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+  <mat-card class="list__card" *ngFor="let article of articlesList | async">
+    <mat-card-title>{{ article.title }}</mat-card-title>
+    <mat-card-actions>
+      <button mat-button (click)="toUpdateArticle()">Edit</button>
+      <button mat-button (click)="deleteArticle(article.slug)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

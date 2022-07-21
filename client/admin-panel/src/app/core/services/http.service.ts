@@ -44,4 +44,16 @@ export class HttpService {
       .get<{ articles: Article[] }>(`${apiUrl}/articles`)
       .pipe(map((response) => response.articles));
   }
+
+  public deleteArticle(slug: string): Observable<Article> {
+    return this.http
+      .delete<{ article: Article }>(`${apiUrl}/articles/${slug}`)
+      .pipe(map((response) => response.article));
+  }
+
+  public updateArticle(slug: string, articleForm: FormData): Observable<Article> {
+    return this.http
+      .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
+      .pipe(map((response) => response.article));
+  }
 }
