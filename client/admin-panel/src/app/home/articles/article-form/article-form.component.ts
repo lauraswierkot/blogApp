@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, T } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleFacade } from '@state/articles/article.facade';
@@ -18,10 +18,10 @@ import { ArticleFacade } from '@state/articles/article.facade';
 })
 export class ArticleFormComponent {
   public articleForm: FormGroup;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  public selectable: boolean = true;
-  public removable: boolean = true;
-  public addOnBlur: boolean = true;
+  readonly separatorKeysCodes = [ENTER, COMMA];
+  public selectable = true;
+  public removable = true;
+  public addOnBlur = true;
 
   constructor(
     private facade: ArticleFacade,
@@ -79,11 +79,12 @@ export class ArticleFormComponent {
   }
 
   public addTag(event: MatChipInputEvent): void {
-    const input = event.value;
+    const maxTaglength = 21;
+    const input = event.chipInput;
     const value = event.value;
     if ((value || '').trim()) {
-      if (value.length < 21) {
-        this.articleForm.controls['tagList'].setValue([
+      if (value.length < maxTaglength) {
+        this.articleForm.controls['tagList'].patchValue([
           ...this.articleForm.controls['tagList'].value,
           value.trim(),
         ]);
@@ -91,7 +92,7 @@ export class ArticleFormComponent {
       }
     }
     if(input){
-      input[value] = '';
+      input['value'] = '';
     }
   }
 

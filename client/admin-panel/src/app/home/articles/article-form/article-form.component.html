@@ -19,7 +19,7 @@
     </div>
     <div class="container__form__field">
       <textarea
-        class="container__form__field--input body"
+        class="container__form__field--input"
         formControlName="body"
         placeholder="Type body here"
         name="body"
@@ -91,12 +91,7 @@
       <button
         class="container__form__field--button"
         type="submit"
-        [disabled]="
-          title.errors ||
-          body.errors ||
-          description.errors ||
-          tagList.errors ||
-          file.errors">
+        [disabled]="!articleForm.valid">
         <span>Create</span>
       </button>
     </div>
