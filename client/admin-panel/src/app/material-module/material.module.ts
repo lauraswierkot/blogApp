@@ -4,12 +4,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
 
 const modules = [
   MatFormFieldModule,
   MatIconModule,
   MatSnackBarModule,
   MatChipsModule,
+  MatCardModule
 ];
 
 @NgModule({

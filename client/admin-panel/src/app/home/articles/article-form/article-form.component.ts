@@ -80,8 +80,8 @@ export class ArticleFormComponent {
 
   public addTag(event: MatChipInputEvent): void {
     const maxTagLength = 50;
-    const value = event.value.trim();
-    if (value && value !== '' && value.length < maxTagLength) {
+    const value = event?.value?.trim();
+    if (value && !!value?.length) {
       this.articleForm.controls['tagList'].patchValue([
         ...this.articleForm.controls['tagList'].value,
         value,

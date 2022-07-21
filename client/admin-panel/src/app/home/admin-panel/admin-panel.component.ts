@@ -16,6 +16,6 @@ export class AdminPanelComponent {
   }
 
   public toArticles(): void {
-    this.router.navigate(['articles-list']);
+    this.router.navigate(['articles-panel']);
   }
 }

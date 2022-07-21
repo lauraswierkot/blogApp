@@ -32,7 +32,7 @@ const routes: Routes = [
     component: ArticleFormComponent
   },
   {
-    path: 'articles-list',
+    path: 'articles-panel',
     component: ArticlesComponent
   }
 ];

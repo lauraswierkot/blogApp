@@ -89,7 +89,6 @@
     </div>
     <div class="container__form__field">
       <button
-        class="container__form__field--button"
         type="submit"
         [disabled]="!articleForm.valid">
         <span>Create</span>
@@ -99,8 +98,7 @@
       <span>Do not want an article for now? Back to Admin Panel</span>
       <span
         class="material-icons container__form__field--icons arrow"
-        (click)="toAdminPanel()"
-        >trending_flat
+        (click)="toAdminPanel()">trending_flat
       </span>
     </div>
   </form>

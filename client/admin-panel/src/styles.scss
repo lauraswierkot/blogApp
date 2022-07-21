@@ -1,6 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-*{
-    font-family: 'Poppins', sans-serif;
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  width: 200px;
+  max-width: 50%;
+  height: 3em;
+  border-radius: 7px;
+  justify-content: center;
+  border: none;
+  display: flex;
+  padding: 0.5em;
+  background-color: #e7e7e7;
+  margin-top: 1em;
+
+  &:hover:enabled {
+    cursor: pointer;
+    background-color: #dddbdb;
+  }
 }
