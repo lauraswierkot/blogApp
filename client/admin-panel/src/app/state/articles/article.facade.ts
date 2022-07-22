@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
+import { Article } from './article.model';
 import * as selector from './article.selectors';
 
 @Injectable({
@@ -26,5 +27,13 @@ export class ArticleFacade {
 
   public updateArticle(slug: string, articleForm: FormData): void {
     this.store.dispatch(action.updateArticle({ slug, articleForm }));
+  }
+
+  public selectArticle(article: Article): void {
+    this.store.dispatch(action.selectArticle({ article }));
+  }
+
+  public resetArticle(): void {
+    this.store.dispatch(action.resetArticle());
   }
 }

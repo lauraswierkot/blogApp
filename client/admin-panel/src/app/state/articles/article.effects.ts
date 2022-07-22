@@ -87,6 +87,7 @@ export class ArticleEffects {
       switchMap(({ slug, articleForm }) => {
         return this.http.updateArticle(slug, articleForm).pipe(
           map((article: Article) => {
+            this.router.navigate(['articles-panel']);
             return action.updateArticleSuccess({ slug, article });
           }),
           catchError((error: HttpErrorResponse) => [

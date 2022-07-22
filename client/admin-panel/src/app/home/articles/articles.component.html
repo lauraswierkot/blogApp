@@ -4,7 +4,7 @@
   <mat-card class="list__card" *ngFor="let article of articlesList | async">
     <mat-card-title>{{ article.title }}</mat-card-title>
     <mat-card-actions>
-      <button mat-button (click)="toUpdateArticle()">Edit</button>
+      <button mat-button (click)="toUpdateArticle(article.slug, article)">Edit</button>
       <button mat-button (click)="deleteArticle(article.slug)">Delete</button>
     </mat-card-actions>
   </mat-card>

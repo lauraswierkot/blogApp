@@ -12,15 +12,18 @@ export interface Article {
   createdAt: Date;
   updatedAt: Date;
   author: string;
+  file: File;
 }
 
 export interface ArticleState {
   articles: Article[];
+  selectedArticle: Article;
   error: any;
 }
 
 export const initialState: ArticleState = {
   articles: [],
+  selectedArticle: null,
   error: null,
 };
 

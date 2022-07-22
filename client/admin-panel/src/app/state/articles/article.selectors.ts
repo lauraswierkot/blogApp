@@ -9,3 +9,8 @@ export const selectArticleData = createSelector(
   selectArticleState,
   (state) => state.articles
 );
+
+export const selectSelectedArticle = createSelector(
+  selectArticleState,
+  (state) => state.selectedArticle
+);

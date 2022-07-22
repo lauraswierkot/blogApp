@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -10,14 +10,21 @@ import { COMMA, ENTER, T } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleFacade } from '@state/articles/article.facade';
+import { Article } from '@state/articles/article.model';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectSelectedArticle } from '@state/articles/article.selectors';
 
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.component.html',
   styleUrls: ['./article-form.component.scss'],
 })
-export class ArticleFormComponent {
+export class ArticleFormComponent implements OnInit {
   public articleForm: FormGroup;
+  public selectedArticle: Article;
+  public subscription: Subscription;
+
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
   public removable = true;
@@ -26,14 +33,20 @@ export class ArticleFormComponent {
   constructor(
     private facade: ArticleFacade,
     private router: Router,
-    public formBuilder: FormBuilder
-  ) {
-    this.articleForm = formBuilder.group({
-      title: ['', Validators.required],
-      body: ['', Validators.required],
-      file: ['', Validators.required],
-      description: ['', Validators.required],
-      tagList: ['', Validators.required],
+    public formBuilder: FormBuilder,
+    private store: Store
+  ) {}
+
+  public ngOnInit(): void {
+    this.subscription = this.store
+      .select(selectSelectedArticle)
+      .subscribe((article: Article) => (this.selectedArticle = article));
+    this.articleForm = this.formBuilder.group({
+      title: [this.selectedArticle?.title, Validators.required],
+      body: [this.selectedArticle?.body, Validators.required],
+      file: [this.selectedArticle?.file, Validators.required],
+      description: [this.selectedArticle?.description, Validators.required],
+      tagList: [this.selectedArticle?.tagList, Validators.required]
     });
   }
 
@@ -57,14 +70,18 @@ export class ArticleFormComponent {
     return this.articleForm.get('tagList');
   }
 
-  public createArticle(): void {
+  public submitForm(): void {
     const formData: FormData = new FormData();
     formData.append('title', this.title.value);
     formData.append('description', this.description.value);
     formData.append('body', this.body.value);
     formData.append('file', this.file.value);
     formData.append('tagList', this.tagList.value);
-    this.facade.createArticle(formData);
+    if (this.selectedArticle !== null) {
+      this.facade.updateArticle(this.selectedArticle.slug, formData);
+    } else {
+      this.facade.createArticle(formData);
+    }
   }
 
   public onFileSelect(event: any): void {
@@ -97,5 +114,10 @@ export class ArticleFormComponent {
       this.articleForm.controls['tagList'].value.splice(index, 1);
       this.articleForm.controls['tagList'].updateValueAndValidity();
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.facade.resetArticle();
+    this.subscription.unsubscribe();
   }
 }

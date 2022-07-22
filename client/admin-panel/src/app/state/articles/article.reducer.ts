@@ -27,4 +27,6 @@ export const reducer = createReducer(
   on(action.updateArticleSuccess, (state, { slug, article }) => ({...state,  articles: state.articles.map(x => (x.slug === slug ?  article  : x))})),
   on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
+  on(action.selectArticle, (state, { article }) => ({ ...state, selectedArticle: article })),
+  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null }))
 );

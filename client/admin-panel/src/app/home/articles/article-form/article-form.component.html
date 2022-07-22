@@ -2,7 +2,7 @@
   <form
     class="container__form"
     [formGroup]="articleForm"
-    (ngSubmit)="createArticle()">
+    (ngSubmit)="submitForm()">
     <header class="container__form--title">Create an article</header>
     <div class="container__form__field">
       <input
@@ -91,7 +91,7 @@
       <button
         type="submit"
         [disabled]="!articleForm.valid">
-        <span>Create</span>
+        <span>Submit</span>
       </button>
     </div>
     <div class="container_form__field container__form__field--login">

@@ -58,3 +58,12 @@ export const updateArticleFailed = createAction(
   '[Article] Update Article fail',
   props<{ error: Error }>()
 );
+
+export const selectArticle = createAction(
+  '[Article] Article Selected',
+  props<{ article: Article }>()
+);
+
+export const resetArticle = createAction(
+  '[Article] Article Reset'
+);

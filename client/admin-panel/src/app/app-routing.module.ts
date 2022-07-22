@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'articles-panel',
     component: ArticlesComponent
+  },
+  {
+    path: 'article/:slug',
+    component: ArticleFormComponent
   }
 ];
 
