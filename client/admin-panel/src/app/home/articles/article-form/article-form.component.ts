@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { COMMA, ENTER, T } from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleFacade } from '@state/articles/article.facade';
@@ -20,7 +20,7 @@ import { selectSelectedArticle } from '@state/articles/article.selectors';
   templateUrl: './article-form.component.html',
   styleUrls: ['./article-form.component.scss'],
 })
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent implements OnInit, OnDestroy {
   public articleForm: FormGroup;
   public selectedArticle: Article;
   public subscription: Subscription;
