@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
@@ -39,9 +39,10 @@ export class HttpService {
       .pipe(map((articleResponse) => articleResponse.article));
   }
 
-  public getArticles(): Observable<Article[]> {
+  public getArticles(searchTerm: string): Observable<Article[]> {
+    const params = new HttpParams().set('searchTerm', searchTerm);
     return this.http
-      .get<{ articles: Article[] }>(`${apiUrl}/articles`)
+      .get<{ articles: Article[] }>(`${apiUrl}/articles`, { params })
       .pipe(map((response) => response.articles));
   }
 
@@ -51,7 +52,10 @@ export class HttpService {
       .pipe(map((response) => response.article));
   }
 
-  public updateArticle(slug: string, articleForm: FormData): Observable<Article> {
+  public updateArticle(
+    slug: string,
+    articleForm: FormData
+  ): Observable<Article> {
     return this.http
       .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
       .pipe(map((response) => response.article));

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
 
-
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
@@ -15,12 +14,17 @@ import { Article } from '@state/articles/article.model';
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;
   public articleForm: FormData; 
+  public searchTerm: string;
   
   constructor(private facade: ArticleFacade, private router: Router) {}
 
   public ngOnInit(): void {
     this.articlesList = this.facade.articles$;
     this.facade.getArticles();
+  }
+
+  public search(): void {
+    this.facade.getArticles(this.searchTerm);
   }
 
   public createArticle(): void {

@@ -27,6 +27,6 @@ const components = [
   declarations: [...components],
   imports: [...modules],
   exports: [...components],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {}

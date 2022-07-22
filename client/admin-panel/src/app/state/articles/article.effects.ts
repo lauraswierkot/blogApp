@@ -52,8 +52,8 @@ export class ArticleEffects {
   getArticles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.getArticles),
-      switchMap(() => {
-        return this.http.getArticles().pipe(
+      switchMap(({ searchTerm }) => {
+        return this.http.getArticles(searchTerm).pipe(
           map((articles: Article[]) => {
             return action.getArticlesSuccess({ articles });
           }),

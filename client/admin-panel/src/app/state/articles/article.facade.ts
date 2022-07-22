@@ -17,8 +17,8 @@ export class ArticleFacade {
     this.store.dispatch(action.createArticle({ articleForm }));
   }
 
-  public getArticles(): void {
-    this.store.dispatch(action.getArticles());
+  public getArticles(searchTerm: string = ''): void {
+    this.store.dispatch(action.getArticles({ searchTerm }));
   }
 
   public deleteArticle(slug: string): void {

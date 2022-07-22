@@ -2,15 +2,18 @@ import { createAction, props } from '@ngrx/store';
 
 import { Article } from './article.model';
 
-export const getArticles = createAction('[Article] Get Articles');
+export const getArticles = createAction(
+  '[Article] Get Articles',
+  props<{ searchTerm: string }>()
+);
 
 export const getArticlesSuccess = createAction(
-  '[Article] Get Articles Success',
+  '[Article] Get Articles success',
   props<{ articles: Article[] }>()
 );
 
 export const getArticlesFailed = createAction(
-  '[Article] Get Articles Failed',
+  '[Article] Get Articles faile',
   props<{ error: Error }>()
 );
 
@@ -46,12 +49,12 @@ export const deleteArticleFailed = createAction(
 
 export const updateArticle = createAction(
   '[Article] Update Article',
-  props<{ slug: string, articleForm: FormData }>()
+  props<{ slug: string; articleForm: FormData }>()
 );
 
 export const updateArticleSuccess = createAction(
   '[Article] Update Article success',
-  props<{ slug: string, article: Article }>()
+  props<{ slug: string; article: Article }>()
 );
 
 export const updateArticleFailed = createAction(
@@ -64,6 +67,4 @@ export const selectArticle = createAction(
   props<{ article: Article }>()
 );
 
-export const resetArticle = createAction(
-  '[Article] Article Reset'
-);
+export const resetArticle = createAction('[Article] Article Reset');

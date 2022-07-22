@@ -46,7 +46,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       body: [this.selectedArticle?.body, Validators.required],
       file: [this.selectedArticle?.file, Validators.required],
       description: [this.selectedArticle?.description, Validators.required],
-      tagList: [this.selectedArticle?.tagList, Validators.required]
+      tagList: [
+        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
+        Validators.required,
+      ],
     });
   }
 

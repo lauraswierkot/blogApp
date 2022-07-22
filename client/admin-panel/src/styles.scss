@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
   font-family: "Poppins", sans-serif;
@@ -17,6 +18,7 @@ button {
   padding: 0.5em;
   background-color: #e7e7e7;
   margin-top: 1em;
+  display: inline;
 
   &:hover:enabled {
     cursor: pointer;
