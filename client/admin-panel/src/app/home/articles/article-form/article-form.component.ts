@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { Subscription } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
@@ -24,7 +23,6 @@ import { Article } from '@state/articles/article.model';
 export class ArticleFormComponent implements OnInit, OnDestroy {
   public articleForm: FormGroup;
   public selectedArticle: Article;
-  public subscription: Subscription;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
@@ -38,7 +36,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.facade.selectedArticles$.subscribe(
+    this.facade.selectedArticles$.pipe(untilDestroyed(this)).subscribe(
       (article: Article) => (this.selectedArticle = article)
     );
     this.articleForm = this.formBuilder.group({
