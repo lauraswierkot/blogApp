@@ -4,12 +4,15 @@ import { Store } from '@ngrx/store';
 import * as action from './article.actions';
 import { Article } from './article.model';
 import * as selector from './article.selectors';
+import { selectSelectedArticle } from '@state/articles/article.selectors';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
+  public selectedArticles$ = this.store.select(selector.selectSelectedArticle);
 
   constructor(private store: Store) {}
 
@@ -36,4 +39,5 @@ export class ArticleFacade {
   public resetArticle(): void {
     this.store.dispatch(action.resetArticle());
   }
+
 }

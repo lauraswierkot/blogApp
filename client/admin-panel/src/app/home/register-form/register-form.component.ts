@@ -18,8 +18,7 @@ import { ageValidation, confirmPasswordValidation } from './validator';
 })
 export class RegisterFormComponent {
   public selectedValue: string;
-  public defaultSelect = Role.User;
-  public options: Role[] = [Role.Admin, Role.User];
+  public options: Role[] = [Role.User, Role.Admin];
   public registerForm: FormGroup;
 
   constructor(private facade: UserFacade, private router: Router) {
@@ -28,7 +27,7 @@ export class RegisterFormComponent {
       email: new FormControl('', { validators: Validators.email }),
       password: new FormControl('', { validators: Validators.required }),
       confirmPassword: new FormControl('', { validators: Validators.required }),
-      role: new FormControl(this.defaultSelect, { validators: Validators.required }),
+      role: new FormControl(this.options[0], { validators: Validators.required }),
       age: new FormControl('', ageValidation())
     }),
       { validator: confirmPasswordValidation('password', 'confirmPassword') };

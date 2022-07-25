@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Subscription } from 'rxjs';
+
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
-import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { selectSelectedArticle } from '@state/articles/article.selectors';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.component.html',
@@ -33,14 +34,13 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   constructor(
     private facade: ArticleFacade,
     private router: Router,
-    public formBuilder: FormBuilder,
-    private store: Store
+    public formBuilder: FormBuilder
   ) {}
 
   public ngOnInit(): void {
-    this.subscription = this.store
-      .select(selectSelectedArticle)
-      .subscribe((article: Article) => (this.selectedArticle = article));
+    this.facade.selectedArticles$.subscribe(
+      (article: Article) => (this.selectedArticle = article)
+    );
     this.articleForm = this.formBuilder.group({
       title: [this.selectedArticle?.title, Validators.required],
       body: [this.selectedArticle?.body, Validators.required],
@@ -121,6 +121,5 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.facade.resetArticle();
-    this.subscription.unsubscribe();
   }
 }

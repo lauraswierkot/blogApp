@@ -93,7 +93,7 @@
       </div>
     </div>
     <div class="container__form__field">
-      <button [disabled]="age.errors" type="submit">
+      <button [disabled]="!registerForm.valid" type="submit">
         <span>Sign up</span>
       </button>
     </div>

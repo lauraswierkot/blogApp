@@ -15,18 +15,6 @@ export interface Article {
   file: File;
 }
 
-export interface ArticleState {
-  articles: Article[];
-  selectedArticle: Article;
-  error: any;
-}
-
-export const initialState: ArticleState = {
-  articles: [],
-  selectedArticle: null,
-  error: null,
-};
-
 export interface ArticleForm {
   title: string;
   description: string;
@@ -41,3 +29,15 @@ export interface Error {
     statusCode: string;
   };
 }
+
+export interface ArticleState {
+  articles: Article[];
+  selectedArticle: Article;
+  error: any;
+}
+
+export const initialState: ArticleState = {
+  articles: [],
+  selectedArticle: null,
+  error: null,
+};

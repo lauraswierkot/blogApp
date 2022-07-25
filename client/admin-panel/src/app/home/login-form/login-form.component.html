@@ -23,7 +23,7 @@
     </div>
     <div class="container__form__field">
       <button
-        [disabled]="password.errors"
+        [disabled]="!loginForm.valid"
         type="submit">
         <span>Login</span>
       </button>

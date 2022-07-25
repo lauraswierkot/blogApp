@@ -34,6 +34,15 @@ export interface UserRegister extends UserLogin {
   role: Role;
 }
 
+export interface ProfileResponse extends UserResponse {
+  following: boolean;
+}
+
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
+}
+
 export interface UserState {
   user: Omit<User, 'token'>;
   error: any;
@@ -45,12 +54,3 @@ export const initialState: UserState = {
   error: null,
   token: null,
 };
-
-export interface ProfileResponse extends UserResponse {
-  following: boolean;
-}
-
-export enum Role {
-  User = 'user',
-  Admin = 'admin',
-}
