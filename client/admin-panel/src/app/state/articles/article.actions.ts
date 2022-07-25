@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Article } from './article.model';
+import { Error } from '@state/notifications/notification.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles',
@@ -13,7 +14,7 @@ export const getArticlesSuccess = createAction(
 );
 
 export const getArticlesFailed = createAction(
-  '[Article] Get Articles faile',
+  '[Article] Get Articles fail',
   props<{ error: Error }>()
 );
 

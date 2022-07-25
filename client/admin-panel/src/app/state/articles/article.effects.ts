@@ -11,6 +11,7 @@ import { map, tap } from 'rxjs';
 import * as action from './article.actions';
 import { HttpService } from '@core/index';
 import { Article } from './article.model';
+import { NotificationFacade } from '@state/notifications/notification.facade';
 
 @Injectable()
 export class ArticleEffects {
@@ -18,7 +19,8 @@ export class ArticleEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public notificationFacade: NotificationFacade
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -43,10 +45,10 @@ export class ArticleEffects {
       this.actions$.pipe(
         ofType(action.createArticleFailed),
         tap(({ error }) => {
-          this.snackBar.open(error.message, 'x');
+          this.notificationFacade.sendErrorMessage(error);
         })
       ),
-    { dispatch: false }
+      { dispatch: false }
   );
 
   getArticles$ = createEffect(() =>

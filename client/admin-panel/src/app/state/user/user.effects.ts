@@ -11,6 +11,7 @@ import { map } from 'rxjs';
 import * as action from './user.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
+import { NotificationFacade } from '@state/notifications/notification.facade';
 
 @Injectable()
 export class UserEffects {
@@ -18,6 +19,7 @@ export class UserEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
+    private notificationFacade: NotificationFacade,
     public snackBar: MatSnackBar
   ) {}
 
@@ -31,44 +33,30 @@ export class UserEffects {
             return action.loginSuccess({ loginResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.loginFailed({ error }),
+          action.loginFailed({ error }),
           ])
         );
       })
     )
   );
 
-  loginFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.loginFailed),
-        tap(({ error }) => {
-          if (typeof error.error.error == 'string') {
-            this.snackBar.open(error.error.error, 'x');
-          } else {
-            error.error.error.forEach((element) => {
-              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
-            });
-          }
-        })
-      ),
+  loginFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.loginFailed),
+      tap(({ error }) => {
+        this.notificationFacade.sendErrorMessage(error);
+      })
+    ),
     { dispatch: false }
   );
 
-  registerFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.registerFailed),
-        tap(({ error }) => {
-          if (typeof error.error.error == 'string') {
-            this.snackBar.open(error.error.error, 'x');
-          } else {
-            error.error.error.forEach((element) => {
-              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
-            });
-          }
-        })
-      ),
+  registerFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.registerFailed),
+      tap(({ error }) => {
+        this.notificationFacade.sendErrorMessage(error);
+      })
+    ),
     { dispatch: false }
   );
 
@@ -92,9 +80,13 @@ export class UserEffects {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2700);
-            this.snackBar.open('Successfully registered. Please confirm via email', 'x', {
-              duration: 2000,
-            });
+            this.snackBar.open(
+              'Successfully registered. Please confirm via email',
+              'x',
+              {
+                duration: 2000,
+              }
+            );
             return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [
@@ -124,20 +116,13 @@ export class UserEffects {
     )
   );
 
-  confirmEmailFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.confirmEmailFailed),
-        tap(({ error }) => {
-          if (typeof error.error.error == 'string') {
-            this.snackBar.open(error.error.error, 'x');
-          } else {
-            error.error.error.forEach((element) => {
-              this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
-            });
-          }
-        })
-      ),
+  confirmEmailFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.confirmEmailFailed),
+      tap(({ error }) => {
+        this.notificationFacade.sendErrorMessage(error);
+      })
+    ),
     { dispatch: false }
   );
 }

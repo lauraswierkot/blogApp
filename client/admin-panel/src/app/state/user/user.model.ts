@@ -16,13 +16,6 @@ export interface User {
   token: string;
 }
 
-export interface Error {
-  error: {
-    error: string | string[];
-    statusCode: string;
-  };
-}
-
 export interface UserLogin {
   email: string;
   password: string;
