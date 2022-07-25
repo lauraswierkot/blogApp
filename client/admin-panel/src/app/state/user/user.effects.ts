@@ -90,10 +90,10 @@ export class UserEffects {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['/login']);
             }, 2700);
-            this.snackBar.open('Successfully registered', 'x', {
-              duration: 2500,
+            this.snackBar.open('Successfully registered. Please confirm via email', 'x', {
+              duration: 2000,
             });
             return action.registerSuccess({ registerResponse });
           }),
@@ -111,7 +111,9 @@ export class UserEffects {
       switchMap(({ token }) => {
         return this.http.confirmEmail(token).pipe(
           map(() => {
-            this.router.navigate(['/login']);
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2000);
             return action.confirmEmailSuccess();
           }),
           catchError((error: HttpErrorResponse) => [

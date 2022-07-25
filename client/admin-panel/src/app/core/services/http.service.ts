@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
-
 import { environment } from 'environments/environment';
+
+import { Article } from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
 
 const apiUrl = environment.apiUrl;
@@ -30,5 +31,33 @@ export class HttpService {
     return this.http
       .post<UserResponse>(`${apiUrl}/users/confirm`, { confirmToken: token })
       .pipe(map((userResponse) => userResponse.user));
+  }
+
+  public createArticle(articleForm: FormData): Observable<Article> {
+    return this.http
+      .post<{ article: Article }>(`${apiUrl}/articles`, articleForm)
+      .pipe(map((articleResponse) => articleResponse.article));
+  }
+
+  public getArticles(searchTerm: string): Observable<Article[]> {
+    const params = new HttpParams().set('searchTerm', searchTerm);
+    return this.http
+      .get<{ articles: Article[] }>(`${apiUrl}/articles`, { params })
+      .pipe(map((response) => response.articles));
+  }
+
+  public deleteArticle(slug: string): Observable<Article> {
+    return this.http
+      .delete<{ article: Article }>(`${apiUrl}/articles/${slug}`)
+      .pipe(map((response) => response.article));
+  }
+
+  public updateArticle(
+    slug: string,
+    articleForm: FormData
+  ): Observable<Article> {
+    return this.http
+      .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
+      .pipe(map((response) => response.article));
   }
 }

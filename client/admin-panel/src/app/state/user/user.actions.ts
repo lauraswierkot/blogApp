@@ -39,11 +39,9 @@ export const confirmEmail = createAction(
   props<{ token: string }>()
 );
 
-export const confirmEmailSuccess = createAction(
- '[User] Confirm email success'
- );
+export const confirmEmailSuccess = createAction('[User] Confirm email success');
 
- export const confirmEmailFailed = createAction(
+export const confirmEmailFailed = createAction(
   '[User] Confirm email fail',
-   props<{ error: Error }>()
+  props<{ error: Error }>()
 );

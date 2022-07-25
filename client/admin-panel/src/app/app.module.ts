@@ -26,6 +26,6 @@ const modules = [
   imports: [...modules],
   providers: [],
   exports:[AppRoutingModule],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

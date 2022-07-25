@@ -3,7 +3,7 @@
   border-radius: 7px;
   margin: 0;
   position: fixed;
-  max-width: 650px;
+  max-width: 1400px;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -14,8 +14,8 @@
   &__form {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    height: 600px;
+    flex-wrap: nowrap;
+    height: 750px;
     justify-content: center;
     text-align: -webkit-center;
 
@@ -26,16 +26,17 @@
     }
   }
 
-  &_field {
+  &__field {
     margin: 0.5em;
   }
 }
 
 .container__form__field {
   &--input {
-    width: 80%;
+    max-width: 80%;
+    min-width: 80%;
     min-height: 3em;
-    margin-bottom: 2em;
+    margin-bottom: 0.5em;
     margin-left: 0.5em;
     border: black;
   }
@@ -46,8 +47,17 @@
     vertical-align: text-bottom;
   }
 
-  &--register {
+  &--login {
     margin: 2em 0 1em 0;
+  }
+
+  &--age {
+    font-size: 15px;
+    padding-bottom: 1em;
+  }
+  &--message {
+    font-size: 13px;
+    padding-bottom: 1em;
   }
 }
 

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 
 import { UserFacade, UserRegister } from '@state/index';
+import { Role } from '@state/user/user.model';
 import { ageValidation, confirmPasswordValidation } from './validator';
 
 @Component({
@@ -16,6 +17,8 @@ import { ageValidation, confirmPasswordValidation } from './validator';
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
+  public selectedValue: string;
+  public options: Role[] = [Role.User, Role.Admin];
   public registerForm: FormGroup;
 
   constructor(private facade: UserFacade, private router: Router) {
@@ -24,7 +27,8 @@ export class RegisterFormComponent {
       email: new FormControl('', { validators: Validators.email }),
       password: new FormControl('', { validators: Validators.required }),
       confirmPassword: new FormControl('', { validators: Validators.required }),
-      age: new FormControl('', ageValidation()),
+      role: new FormControl(this.options[0], { validators: Validators.required }),
+      age: new FormControl('', ageValidation())
     }),
       { validator: confirmPasswordValidation('password', 'confirmPassword') };
   }
@@ -45,6 +49,10 @@ export class RegisterFormComponent {
     return this.registerForm.get('confirmPassword');
   }
 
+  public get role(): AbstractControl {
+    return this.registerForm.get('role');
+  }
+
   public get age(): AbstractControl {
     return this.registerForm.get('age');
   }
@@ -54,6 +62,7 @@ export class RegisterFormComponent {
       username: this.registerForm.value.username,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password,
+      role: this.registerForm.value.role,
       age: new Date(this.registerForm.value.age).toISOString(),
     };
     this.facade.register(register);
