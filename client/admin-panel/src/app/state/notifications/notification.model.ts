@@ -1,5 +1,3 @@
-export const notificationFeatureKey = 'notifications';
-
 export interface Error {
   error: {
     error: string | string[];
@@ -17,9 +15,3 @@ export class Message implements IMessage {
     this.message = message;
   }
 }
-
-export interface NotificationState {
-}
-
-export const initialState: NotificationState = {
-};
