@@ -1,0 +1,26 @@
+.menu__container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &--title {
+    margin-left: 8px;
+  }
+}
+
+.sidenav {
+  flex: 1;
+}
+
+.menu-is-mobile .toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.menu-is-mobile .sidenav {
+  flex: 1 0 auto;
+}
