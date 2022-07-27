@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +11,10 @@ import { StateModule } from './state/state.module';
 import { MaterialModule } from './material-module/material.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const modules = [
   BrowserModule,
@@ -18,14 +24,22 @@ const modules = [
   HttpClientModule,
   CoreModule,
   HomeModule,
-  BrowserAnimationsModule
+  BrowserAnimationsModule,
+  TranslateModule.forRoot({
+    defaultLanguage: 'en',
+    loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient],
+    },
+  }),
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [...modules],
   providers: [],
-  exports:[AppRoutingModule],
-  bootstrap: [AppComponent]
+  exports: [AppRoutingModule],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
