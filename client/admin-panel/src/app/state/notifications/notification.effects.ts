@@ -16,12 +16,12 @@ export class NotificationEffects {
   receivedErrorMessage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(action.receivedErrorMessage),
+        ofType(action.createErrorNotification),
         tap(({ error }) => {
-          if (typeof error.error.error == 'string') {
-            this.snackBar.open(error.error.error, 'x');
+          if (typeof error.error == 'string') {
+            this.snackBar.open(error.error, 'x');
           } else {
-            error.error.error.forEach((element) => {
+            error.error.forEach((element) => {
               this.snackBar.open(element, 'x', { horizontalPosition: 'end' });
             });
           }
@@ -33,9 +33,9 @@ export class NotificationEffects {
   receivedSuccessMessage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(action.receivedSuccessMessage),
+        ofType(action.createSuccessNotification),
         tap(({ message }) => {
-            this.snackBar.open(message.message, 'x');
+            this.snackBar.open(message, 'x');
         })
       ),
     { dispatch: false }

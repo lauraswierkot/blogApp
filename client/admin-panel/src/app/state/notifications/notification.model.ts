@@ -5,13 +5,6 @@ export interface Error {
   };
 }
 
-export interface IMessage {
+export interface Message {
   message: string;
-}
-
-export class Message implements IMessage {
-  public message: string;
-  constructor(message = 'success') {
-    this.message = message;
-  }
 }

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, UserLogin, UserRegister } from './user.model';
+import { Message, User, UserLogin, UserRegister } from './user.model';
 import { Error } from '@state/notifications/notification.model';
 
 export const login = createAction(
@@ -27,7 +27,7 @@ export const register = createAction(
 
 export const registerSuccess = createAction(
   '[User] Register user success',
-  props<{ registerResponse: User }>()
+  props<{ registerResponse: User, message: Message }>()
 );
 
 export const registerFailed = createAction(

@@ -45,10 +45,10 @@ export class ArticleEffects {
       this.actions$.pipe(
         ofType(action.createArticleFailed),
         tap(({ error }) => {
-          this.notificationFacade.sendErrorMessage(error);
+          this.notificationFacade.sendErrorNotification(error.error);
         })
       ),
-      { dispatch: false }
+    { dispatch: false }
   );
 
   getArticles$ = createEffect(() =>

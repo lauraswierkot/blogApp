@@ -10,11 +10,11 @@ import { Message, Error } from './notification.model';
 export class NotificationFacade {
   constructor(private store: Store) {}
   
-  public sendErrorMessage(error: Error): void {
-    this.store.dispatch(action.receivedErrorMessage({error}));
+  public sendErrorNotification(error: Error['error']): void {
+    this.store.dispatch(action.createErrorNotification({error}));
   }
 
-  public sendSuccessMessage(message: Message): void {
-    this.store.dispatch(action.receivedSuccessMessage({message}));
+  public sendSuccessNotification(message: Message['message']): void {
+    this.store.dispatch(action.createSuccessNotification({message}));
   }
 }

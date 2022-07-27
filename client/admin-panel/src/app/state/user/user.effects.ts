@@ -12,6 +12,7 @@ import * as action from './user.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
+import { Message } from '@state/notifications/notification.model';
 
 @Injectable()
 export class UserEffects {
@@ -33,30 +34,32 @@ export class UserEffects {
             return action.loginSuccess({ loginResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-          action.loginFailed({ error }),
+            action.loginFailed({ error }),
           ])
         );
       })
     )
   );
 
-  loginFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.loginFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
+  loginFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.loginFailed),
+        tap(({ error }) => {
+          this.notificationFacade.sendErrorNotification(error.error);
+        })
+      ),
     { dispatch: false }
   );
 
-  registerFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.registerFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
+  registerFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.registerFailed),
+        tap(({ error }) => {
+          this.notificationFacade.sendErrorNotification(error.error);
+        })
+      ),
     { dispatch: false }
   );
 
@@ -77,17 +80,11 @@ export class UserEffects {
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
-            setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 2700);
-            this.snackBar.open(
-              'Successfully registered. Please confirm via email',
-              'x',
-              {
-                duration: 2000,
-              }
-            );
-            return action.registerSuccess({ registerResponse });
+            const message: Message = {
+              message: 'Successfully registered. Please confirm via email.',
+            };
+            this.router.navigate(['/login']);
+            return action.registerSuccess({ registerResponse, message });
           }),
           catchError((error: HttpErrorResponse) => [
             action.registerFailed({ error }),
@@ -95,6 +92,17 @@ export class UserEffects {
         );
       })
     )
+  );
+
+  registerSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.registerSuccess),
+        tap(({ message }) => {
+          this.notificationFacade.sendSuccessNotification(message.message);
+        })
+      ),
+    { dispatch: false }
   );
 
   confirmEmail$ = createEffect(() =>
@@ -116,13 +124,14 @@ export class UserEffects {
     )
   );
 
-  confirmEmailFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.confirmEmailFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
+  confirmEmailFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.confirmEmailFailed),
+        tap(({ error }) => {
+          this.notificationFacade.sendErrorNotification(error.error);
+        })
+      ),
     { dispatch: false }
   );
 }
