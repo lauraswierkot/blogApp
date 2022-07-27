@@ -9,5 +9,5 @@ export const createErrorNotification = createAction(
 
 export const createSuccessNotification = createAction(
   '[Notification] Received Success Message',
-  props<{ message: Message['message']}>()
+  props<{ message: Message['message'] }>()
 );
