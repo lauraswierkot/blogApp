@@ -45,7 +45,7 @@ export class ArticleEffects {
       this.actions$.pipe(
         ofType(action.createArticleFailed),
         tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error.error);
+          this.notificationFacade.sendErrorNotification(error);
         })
       ),
     { dispatch: false }

@@ -46,7 +46,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.loginFailed),
         tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error.error);
+          this.notificationFacade.sendErrorNotification(error);
         })
       ),
     { dispatch: false }
@@ -57,7 +57,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.registerFailed),
         tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error.error);
+          this.notificationFacade.sendErrorNotification(error);
         })
       ),
     { dispatch: false }
@@ -99,7 +99,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.registerSuccess),
         tap(({ message }) => {
-          this.notificationFacade.sendSuccessNotification(message.message);
+          this.notificationFacade.sendSuccessNotification(message);
         })
       ),
     { dispatch: false }
@@ -129,7 +129,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.confirmEmailFailed),
         tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error.error);
+          this.notificationFacade.sendErrorNotification(error);
         })
       ),
     { dispatch: false }

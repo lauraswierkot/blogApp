@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
-
+import { NotificationFacade } from '@state/notifications/notification.facade';
+import { Error } from '@state/notifications/notification.model';
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
