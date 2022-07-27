@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { LoaderService } from './core';
 
 @Component({
@@ -8,7 +8,7 @@ import { LoaderService } from './core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  public isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
 
   constructor(private loaderService: LoaderService) {}
 
