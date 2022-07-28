@@ -2,16 +2,22 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { catchError, switchMap } from 'rxjs';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 import * as action from './article.actions';
+import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { Article } from './article.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
+import {
+  Notification,
+  NotificationType,
+} from '@state/notifications/notification.model';
 
 @Injectable()
 export class ArticleEffects {
@@ -30,25 +36,26 @@ export class ArticleEffects {
         return this.http.createArticle(articleForm).pipe(
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
+            this.notificationFacade.sendNotification({
+              id: uuid.v4(),
+              message: 'Article created',
+              notificationType: NotificationType.Message,
+            });
             return action.createArticleSuccess({ article });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.createArticleFailed({ error }),
+            action.createArticleFailed(),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
     )
-  );
-
-  createArticleFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.createArticleFailed),
-        tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error);
-        })
-      ),
-    { dispatch: false }
   );
 
   getArticles$ = createEffect(() =>
@@ -60,7 +67,13 @@ export class ArticleEffects {
             return action.getArticlesSuccess({ articles });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.getArticlesFailed({ error }),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
@@ -73,10 +86,20 @@ export class ArticleEffects {
       switchMap(({ slug }) => {
         return this.http.deleteArticle(slug).pipe(
           map((article: Article) => {
+            this.notificationFacade.sendNotification({
+              message: 'Article deleted',
+              notificationType: NotificationType.Message,
+            } as Notification);
             return action.deleteArticleSuccess({ slug });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.deleteArticleFailed({ error }),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
@@ -90,10 +113,21 @@ export class ArticleEffects {
         return this.http.updateArticle(slug, articleForm).pipe(
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
+            this.notificationFacade.sendNotification({
+              id: uuid.v4(),
+              message: 'Article created',
+              notificationType: NotificationType.Message,
+            });
             return action.updateArticleSuccess({ slug, article });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.updateArticleFailed({ error }),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })

@@ -9,12 +9,7 @@ export const selectNotificationState = createFeatureSelector<NotificationState>(
   notificationFeatureKey
 );
 
-export const selectErrorData = createSelector(
+export const selectNotifications = createSelector(
   selectNotificationState,
-  (state) => state.error
-);
-
-export const selectMessageData = createSelector(
-  selectNotificationState,
-  (state) => state.message
+  (state) => state.notifications
 );

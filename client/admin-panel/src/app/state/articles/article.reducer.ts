@@ -17,26 +17,22 @@ export const reducer = createReducer(
     ...state,
     articles: [...state.articles, article],
   })),
-  on(action.createArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.getArticlesSuccess, (state, { articles }) => ({
     ...state,
     articles,
   })),
-  on(action.getArticlesFailed, (state, { error }) => ({ ...state, error })),
   on(action.deleteArticleSuccess, (state, { slug }) => {
     const filteredArticles = cloneDeep(state.articles).filter(
       (value) => value.slug != slug
     );
     return { ...state, articles: filteredArticles };
   }),
-  on(action.deleteArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.updateArticleSuccess, (state, { slug, article }) => {
     const filteredArticles = cloneDeep(state.articles).map((item) =>
       item.slug === slug ? article : item
     );
     return { ...state, articles: filteredArticles };
   }),
-  on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.selectArticle, (state, { article }) => ({
     ...state,
     selectedArticle: article,

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -9,10 +10,14 @@ import { catchError, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './user.actions';
+import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
-import { Message } from '@state/notifications/notification.model';
+import {
+  Notification,
+  NotificationType,
+} from '@state/notifications/notification.model';
 
 @Injectable()
 export class UserEffects {
@@ -31,36 +36,26 @@ export class UserEffects {
         return this.http.login(loginForm).pipe(
           map((loginResponse: User) => {
             this.router.navigate(['']);
+            this.notificationFacade.sendNotification({
+              id: uuid.v4(),
+              message: 'Logged in successfully',
+              notificationType: NotificationType.Message,
+            });
             return action.loginSuccess({ loginResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.loginFailed({ error }),
+            action.loginFailed(),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
     )
-  );
-
-  loginFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.loginFailed),
-        tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  registerFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.registerFailed),
-        tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error);
-        })
-      ),
-    { dispatch: false }
   );
 
   logout$ = createEffect(
@@ -80,29 +75,27 @@ export class UserEffects {
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
-            const message: Message = {
-              message: 'Successfully registered. Please confirm via email.',
-            };
+            this.notificationFacade.sendNotification({
+              id: uuid.v4(),
+              message: 'Article added successfully',
+              notificationType: NotificationType.Message,
+            });
             this.router.navigate(['/login']);
-            return action.registerSuccess({ registerResponse, message });
+            return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.registerFailed({ error }),
+            action.registerFailed(),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
     )
-  );
-
-  registerSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.registerSuccess),
-        tap(({ message }) => {
-          this.notificationFacade.sendSuccessNotification(message);
-        })
-      ),
-    { dispatch: false }
   );
 
   confirmEmail$ = createEffect(() =>
@@ -114,24 +107,25 @@ export class UserEffects {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
+            this.notificationFacade.sendNotification({
+              id: uuid.v4(),
+              message: 'Email confirmed',
+              notificationType: NotificationType.Message,
+            });
             return action.confirmEmailSuccess();
           }),
           catchError((error: HttpErrorResponse) => [
-            action.confirmEmailFailed({ error }),
+            action.confirmEmailFailed(),
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: error.error.error,
+                notificationType: NotificationType.Error,
+              },
+            }),
           ])
         );
       })
     )
-  );
-
-  confirmEmailFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(action.confirmEmailFailed),
-        tap(({ error }) => {
-          this.notificationFacade.sendErrorNotification(error);
-        })
-      ),
-    { dispatch: false }
   );
 }

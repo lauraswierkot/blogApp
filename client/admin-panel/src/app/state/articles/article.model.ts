@@ -26,11 +26,9 @@ export interface ArticleForm {
 export interface ArticleState {
   articles: Article[];
   selectedArticle: Article;
-  error: any;
 }
 
 export const initialState: ArticleState = {
   articles: [],
   selectedArticle: null,
-  error: null,
 };

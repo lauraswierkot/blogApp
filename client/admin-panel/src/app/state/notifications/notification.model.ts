@@ -1,24 +1,27 @@
-export type StatePart<K extends keyof NotificationState> = Pick<NotificationState, K>;
+import * as uuid from 'uuid';
+
+export type StatePart<K extends keyof NotificationState> = Pick<
+  NotificationState,
+  K
+>;
 
 export const notificationFeatureKey = 'notifications';
 
-export interface Error {
-  error: {
-    error: string | string[];
-    statusCode: string;
-  };
+export enum NotificationType {
+  Error = 'error',
+  Message = 'message',
 }
 
-export interface Message {
+export interface Notification {
+  id: uuid.v4;
   message: string;
+  notificationType: NotificationType;
 }
 
 export interface NotificationState {
-  error: Error | null;
-  message: Message | null;
+  notifications: Notification[];
 }
 
 export const initialState: NotificationState = {
-  error: null,
-  message: null
+  notifications: [],
 };
