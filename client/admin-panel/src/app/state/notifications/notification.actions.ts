@@ -4,7 +4,7 @@ import { Notification } from './notification.model';
   
 export const createNotification = createAction(
   '[Notification] Create Notification',
-  props<{ notification: Notification }>()
+  props<{ message: Notification['message'], notificationType: Notification['notificationType'] }>()
 ); 
 
 export const removeNotification = createAction(

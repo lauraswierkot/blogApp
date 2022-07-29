@@ -1,3 +1,5 @@
+import { Error } from "@state/notifications/notification.model";
+
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
 export const articleFeatureKey = 'articles';
@@ -26,11 +28,11 @@ export interface ArticleForm {
 export interface ArticleState {
   articles: Article[];
   selectedArticle: Article;
-  error: Error
+  error: Error;
 }
 
 export const initialState: ArticleState = {
   articles: [],
   selectedArticle: null,
-  error: null
+  error: null,
 };

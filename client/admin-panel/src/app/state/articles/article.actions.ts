@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Error } from '@state/notifications/notification.model';
 
 import { Article } from './article.model';
 
@@ -12,7 +13,10 @@ export const getArticlesSuccess = createAction(
   props<{ articles: Article[] }>()
 );
 
-export const getArticlesFailed = createAction('[Article] Get Articles fail');
+export const getArticlesFailed = createAction(
+  '[Article] Get Articles fail',
+  props<{ error: Error }>()
+);
 
 export const createArticle = createAction(
   '[Article] Create Article',
@@ -25,7 +29,8 @@ export const createArticleSuccess = createAction(
 );
 
 export const createArticleFailed = createAction(
-  '[Article] Create Article fail'
+  '[Article] Create Article fail',
+  props<{ error: Error }>()
 );
 
 export const deleteArticle = createAction(
@@ -39,7 +44,8 @@ export const deleteArticleSuccess = createAction(
 );
 
 export const deleteArticleFailed = createAction(
-  '[Article] Delete Article fail'
+  '[Article] Delete Article fail',
+  props<{ error: Error }>()
 );
 
 export const updateArticle = createAction(
@@ -53,7 +59,8 @@ export const updateArticleSuccess = createAction(
 );
 
 export const updateArticleFailed = createAction(
-  '[Article] Update Article fail'
+  '[Article] Update Article fail',
+  props<{ error: Error }>()
 );
 
 export const selectArticle = createAction(

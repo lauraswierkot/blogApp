@@ -32,22 +32,16 @@ export class UserEffects {
           map((loginResponse: User) => {
             this.router.navigate(['']);
             notificationAction.createNotification({
-              notification: {
-                id: uuid.v4(),
-                message: 'Logged in successfully',
-                notificationType: NotificationType.Message,
-              },
+              message: 'Logged in successfully',
+              notificationType: NotificationType.Message,
             });
             return action.loginSuccess({ loginResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.loginFailed(),
+            action.loginFailed(error),
             notificationAction.createNotification({
-              notification: {
-                id: uuid.v4(),
-                message: error.error.error,
-                notificationType: NotificationType.Error,
-              },
+              message: error.error.error,
+              notificationType: NotificationType.Error,
             }),
           ])
         );
@@ -73,21 +67,17 @@ export class UserEffects {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
             notificationAction.createNotification({
-              notification: {
-                message: 'Article added successfully',
-                notificationType: NotificationType.Message,
-              },
+              message: 'Article added successfully',
+              notificationType: NotificationType.Message,
             });
             this.router.navigate(['/login']);
             return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.registerFailed(),
+            action.registerFailed(error),
             notificationAction.createNotification({
-              notification: {
-                message: error.error.error,
-                notificationType: NotificationType.Error,
-              },
+              message: error.error.error,
+              notificationType: NotificationType.Error,
             }),
           ])
         );
@@ -105,22 +95,16 @@ export class UserEffects {
               this.router.navigate(['/login']);
             }, 2000);
             notificationAction.createNotification({
-              notification: {
-                id: uuid.v4(),
-                message: 'Email confirmed',
-                notificationType: NotificationType.Message,
-              },
+              message: 'Email confirmed',
+              notificationType: NotificationType.Message,
             });
             return action.confirmEmailSuccess();
           }),
           catchError((error: HttpErrorResponse) => [
-            action.confirmEmailFailed(),
+            action.confirmEmailFailed(error),
             notificationAction.createNotification({
-              notification: {
-                id: uuid.v4(),
-                message: error.error.error,
-                notificationType: NotificationType.Error,
-              },
+              message: error.error.error,
+              notificationType: NotificationType.Error,
             }),
           ])
         );
