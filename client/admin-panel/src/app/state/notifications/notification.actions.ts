@@ -1,13 +1,13 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, props } from '@ngrx/store';
 
-import { Error, Message } from "./notification.model";
+import { Notification } from './notification.model';
+  
+export const createNotification = createAction(
+  '[Notification] Create Notification',
+  props<{ message: Notification['message'], notificationType: Notification['notificationType'] }>()
+); 
 
-export const receivedErrorMessage = createAction(
-  '[Notification] Received Error Message',
-  props<{error: Error}>()
-);
-
-export const receivedSuccessMessage = createAction(
-  '[Notification] Received Success Message',
-  props<{message: Message}>()
-);
+export const removeNotification = createAction(
+  '[Notification] Remove Notification',
+  props<{ id: string }>()
+); 

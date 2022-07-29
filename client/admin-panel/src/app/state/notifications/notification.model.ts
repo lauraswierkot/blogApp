@@ -1,17 +1,29 @@
-export interface Error {
-  error: {
-    error: string | string[];
-    statusCode: string;
-  };
+import { HttpErrorResponse } from '@angular/common/http';
+
+export type StatePart<K extends keyof NotificationState> = Pick<
+  NotificationState,
+  K
+>;
+
+export const notificationFeatureKey = 'notifications';
+
+export enum NotificationType {
+  Error = 'error',
+  Message = 'message',
 }
 
-export interface IMessage {
+export interface Error extends HttpErrorResponse {}
+
+export interface Notification {
+  id?: string;
   message: string;
+  notificationType: NotificationType;
 }
 
-export class Message implements IMessage {
-  public message: string;
-  constructor(message = 'success') {
-    this.message = message;
-  }
+export interface NotificationState {
+  notifications: Notification[];
 }
+
+export const initialState: NotificationState = {
+  notifications: [],
+};

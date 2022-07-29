@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { Error } from '@state/notifications/notification.model';
 
 import { Article } from './article.model';
-import { Error } from '@state/notifications/notification.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles',

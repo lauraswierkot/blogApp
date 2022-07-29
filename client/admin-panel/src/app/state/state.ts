@@ -1,8 +1,7 @@
-import { ArticleState, UserState } from ".";
-import { NotificationState } from "./notifications/notification.model";
+import { ArticleState, NotificationState, UserState } from '.';
 
 export interface State {
   users: UserState;
-  articles: ArticleState,
-  notifications: NotificationState
+  articles: ArticleState;
+  notifications: NotificationState;
 }

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -9,9 +10,10 @@ import { catchError, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './user.actions';
+import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
-import { NotificationFacade } from '@state/notifications/notification.facade';
+import { NotificationType } from '@state/notifications/notification.model';
 
 @Injectable()
 export class UserEffects {
@@ -19,7 +21,6 @@ export class UserEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    private notificationFacade: NotificationFacade,
     public snackBar: MatSnackBar
   ) {}
 
@@ -30,34 +31,22 @@ export class UserEffects {
         return this.http.login(loginForm).pipe(
           map((loginResponse: User) => {
             this.router.navigate(['']);
+            notificationAction.createNotification({
+              message: 'Logged in successfully',
+              notificationType: NotificationType.Message,
+            });
             return action.loginSuccess({ loginResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-          action.loginFailed({ error }),
+            action.loginFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
           ])
         );
       })
     )
-  );
-
-  loginFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.loginFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
-    { dispatch: false }
-  );
-
-  registerFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.registerFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
-    { dispatch: false }
   );
 
   logout$ = createEffect(
@@ -77,20 +66,19 @@ export class UserEffects {
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
-            setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 2700);
-            this.snackBar.open(
-              'Successfully registered. Please confirm via email',
-              'x',
-              {
-                duration: 2000,
-              }
-            );
+            notificationAction.createNotification({
+              message: 'Article added successfully',
+              notificationType: NotificationType.Message,
+            });
+            this.router.navigate(['/login']);
             return action.registerSuccess({ registerResponse });
           }),
           catchError((error: HttpErrorResponse) => [
-            action.registerFailed({ error }),
+            action.registerFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
           ])
         );
       })
@@ -106,23 +94,21 @@ export class UserEffects {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
+            notificationAction.createNotification({
+              message: 'Email confirmed',
+              notificationType: NotificationType.Message,
+            });
             return action.confirmEmailSuccess();
           }),
           catchError((error: HttpErrorResponse) => [
-            action.confirmEmailFailed({ error }),
+            action.confirmEmailFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
           ])
         );
       })
     )
-  );
-
-  confirmEmailFailed$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.confirmEmailFailed),
-      tap(({ error }) => {
-        this.notificationFacade.sendErrorMessage(error);
-      })
-    ),
-    { dispatch: false }
   );
 }
