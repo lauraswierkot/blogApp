@@ -15,23 +15,26 @@ import { environment } from 'environments/environment';
 
 import { articleReducer } from './articles/article.reducer';
 import { userReducer } from './user/user.reducer';
+import {notificationReducer} from './notifications/notification.reducer';
 import { UserEffects } from './user/user.effects';
 import { ArticleEffects } from './articles/article.effects';
 import { userFeatureKey } from './user/user.model';
 import { articleFeatureKey } from './articles/article.model';
+import { notificationFeatureKey } from './notifications/notification.model';
 
-const effects = [UserEffects, ArticleEffects];
+const effects = [UserEffects, ArticleEffects ];
 
 const reducers: ActionReducerMap<any> = {
   users: userReducer,
-  articles: articleReducer
+  articles: articleReducer,
+  notifications: notificationReducer
 };
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [userFeatureKey, articleFeatureKey],
+    keys: [userFeatureKey, articleFeatureKey, notificationFeatureKey],
     rehydrate: true,
   })(reducer);
 }
