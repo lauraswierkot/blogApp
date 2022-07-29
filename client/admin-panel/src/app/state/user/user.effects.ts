@@ -13,11 +13,7 @@ import * as action from './user.actions';
 import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
-import { NotificationFacade } from '@state/notifications/notification.facade';
-import {
-  Notification,
-  NotificationType,
-} from '@state/notifications/notification.model';
+import { NotificationType } from '@state/notifications/notification.model';
 
 @Injectable()
 export class UserEffects {
@@ -25,7 +21,6 @@ export class UserEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    private notificationFacade: NotificationFacade,
     public snackBar: MatSnackBar
   ) {}
 
@@ -36,10 +31,12 @@ export class UserEffects {
         return this.http.login(loginForm).pipe(
           map((loginResponse: User) => {
             this.router.navigate(['']);
-            this.notificationFacade.sendNotification({
-              id: uuid.v4(),
-              message: 'Logged in successfully',
-              notificationType: NotificationType.Message,
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: 'Logged in successfully',
+                notificationType: NotificationType.Message,
+              },
             });
             return action.loginSuccess({ loginResponse });
           }),
@@ -75,10 +72,11 @@ export class UserEffects {
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
-            this.notificationFacade.sendNotification({
-              id: uuid.v4(),
-              message: 'Article added successfully',
-              notificationType: NotificationType.Message,
+            notificationAction.createNotification({
+              notification: {
+                message: 'Article added successfully',
+                notificationType: NotificationType.Message,
+              },
             });
             this.router.navigate(['/login']);
             return action.registerSuccess({ registerResponse });
@@ -87,7 +85,6 @@ export class UserEffects {
             action.registerFailed(),
             notificationAction.createNotification({
               notification: {
-                id: uuid.v4(),
                 message: error.error.error,
                 notificationType: NotificationType.Error,
               },
@@ -107,10 +104,12 @@ export class UserEffects {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
-            this.notificationFacade.sendNotification({
-              id: uuid.v4(),
-              message: 'Email confirmed',
-              notificationType: NotificationType.Message,
+            notificationAction.createNotification({
+              notification: {
+                id: uuid.v4(),
+                message: 'Email confirmed',
+                notificationType: NotificationType.Message,
+              },
             });
             return action.confirmEmailSuccess();
           }),

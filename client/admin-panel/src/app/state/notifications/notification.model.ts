@@ -1,4 +1,4 @@
-import * as uuid from 'uuid';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export type StatePart<K extends keyof NotificationState> = Pick<
   NotificationState,
@@ -12,8 +12,10 @@ export enum NotificationType {
   Message = 'message',
 }
 
+export interface Error extends HttpErrorResponse {}
+
 export interface Notification {
-  id: uuid.v4;
+  id?: string;
   message: string;
   notificationType: NotificationType;
 }

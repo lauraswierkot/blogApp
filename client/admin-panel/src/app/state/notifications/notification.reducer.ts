@@ -1,4 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import * as uuid from 'uuid';
 
 import { NotificationState, initialState } from './notification.model';
 
@@ -14,10 +15,13 @@ export function notificationReducer(
 
 export const reducer = createReducer(
   initialState,
-  on(action.createNotification, (state, { notification }) => ({
-    ...state,
-    notifications: [...state.notifications, notification],
-  })),
+  on(action.createNotification, (state, { notification }) => {
+    const newNotification = { ...notification, id: uuid.v4() };
+    return {
+      ...state,
+      notifications: [...state.notifications, newNotification],
+    };
+  }),
   on(action.removeNotification, (state, { id }) => {
     return {
       ...state,

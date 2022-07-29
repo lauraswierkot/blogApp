@@ -13,9 +13,7 @@ import * as action from './article.actions';
 import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { Article } from './article.model';
-import { NotificationFacade } from '@state/notifications/notification.facade';
 import {
-  Notification,
   NotificationType,
 } from '@state/notifications/notification.model';
 
@@ -25,8 +23,7 @@ export class ArticleEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    public snackBar: MatSnackBar,
-    public notificationFacade: NotificationFacade
+    public snackBar: MatSnackBar
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -36,10 +33,11 @@ export class ArticleEffects {
         return this.http.createArticle(articleForm).pipe(
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
-            this.notificationFacade.sendNotification({
-              id: uuid.v4(),
-              message: 'Article created',
-              notificationType: NotificationType.Message,
+            notificationAction.createNotification({
+              notification: {
+                message: 'Article created',
+                notificationType: NotificationType.Message,
+              } 
             });
             return action.createArticleSuccess({ article });
           }),
@@ -47,7 +45,6 @@ export class ArticleEffects {
             action.createArticleFailed(),
             notificationAction.createNotification({
               notification: {
-                id: uuid.v4(),
                 message: error.error.error,
                 notificationType: NotificationType.Error,
               },
@@ -69,7 +66,6 @@ export class ArticleEffects {
           catchError((error: HttpErrorResponse) => [
             notificationAction.createNotification({
               notification: {
-                id: uuid.v4(),
                 message: error.error.error,
                 notificationType: NotificationType.Error,
               },
@@ -86,16 +82,17 @@ export class ArticleEffects {
       switchMap(({ slug }) => {
         return this.http.deleteArticle(slug).pipe(
           map((article: Article) => {
-            this.notificationFacade.sendNotification({
-              message: 'Article deleted',
-              notificationType: NotificationType.Message,
-            } as Notification);
+            notificationAction.createNotification({
+              notification: {
+                message: 'Article deleted',
+                notificationType: NotificationType.Message,
+              },
+            });
             return action.deleteArticleSuccess({ slug });
           }),
           catchError((error: HttpErrorResponse) => [
             notificationAction.createNotification({
               notification: {
-                id: uuid.v4(),
                 message: error.error.error,
                 notificationType: NotificationType.Error,
               },
@@ -113,17 +110,17 @@ export class ArticleEffects {
         return this.http.updateArticle(slug, articleForm).pipe(
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
-            this.notificationFacade.sendNotification({
-              id: uuid.v4(),
-              message: 'Article created',
-              notificationType: NotificationType.Message,
+            notificationAction.createNotification({
+              notification: {
+                message: 'Article created',
+                notificationType: NotificationType.Message,
+              },
             });
             return action.updateArticleSuccess({ slug, article });
           }),
           catchError((error: HttpErrorResponse) => [
             notificationAction.createNotification({
               notification: {
-                id: uuid.v4(),
                 message: error.error.error,
                 notificationType: NotificationType.Error,
               },

@@ -3,11 +3,11 @@ import { createAction, props } from '@ngrx/store';
 import { Notification } from './notification.model';
   
 export const createNotification = createAction(
-  '[Notification] Created Notification',
+  '[Notification] Create Notification',
   props<{ notification: Notification }>()
 ); 
 
 export const removeNotification = createAction(
-  '[Notification] Removed Notification',
+  '[Notification] Remove Notification',
   props<{ id: string }>()
 ); 
