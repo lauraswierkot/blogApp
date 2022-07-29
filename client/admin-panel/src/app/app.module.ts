@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoaderInterceptor } from '@core/services/loader.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,13 +26,7 @@ const modules = [
 @NgModule({
   declarations: [AppComponent],
   imports: [...modules],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
   exports: [AppRoutingModule],
   bootstrap: [AppComponent],
 })
