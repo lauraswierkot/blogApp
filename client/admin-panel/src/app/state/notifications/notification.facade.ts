@@ -14,8 +14,8 @@ export class NotificationFacade {
 
   constructor(private store: Store) {}
 
-  public sendNotification(notification: Notification): void {
-    this.store.dispatch(action.createNotification({ notification }));
+  public sendNotification(message: Notification['message'], notificationType: Notification['notificationType']): void {
+    this.store.dispatch(action.createNotification({ message, notificationType }));
   }
 
   public removeNotification(id: string): void {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationFacade } from '@state/notifications/notification.facade';
-import { Subscription } from 'rxjs';
 
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { NotificationType } from '@state/notifications/notification.model';
@@ -16,7 +15,6 @@ export class AppComponent implements OnInit {
   public title = 'admin-panel';
   public duration = 3000;
   public id: string;
-  public subscription: Subscription;
   public snackBarRef: MatSnackBarRef<any>;
 
   constructor(
@@ -25,7 +23,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.subscription = this.notificationFacade.notifications$
+    this.notificationFacade.notifications$
       .pipe(untilDestroyed(this))
       .subscribe((notification) =>
         notification.forEach((element) => {

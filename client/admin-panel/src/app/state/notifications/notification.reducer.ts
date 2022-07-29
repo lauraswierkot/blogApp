@@ -28,7 +28,7 @@ export const reducer = createReducer(
   on(action.removeNotification, (state, { id }) => {
     return {
       ...state,
-      notifications: state.notifications.filter((value) => value.id != id),
+      notifications: state.notifications.filter((value) => value.id !== id),
     };
   })
 );
