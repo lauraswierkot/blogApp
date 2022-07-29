@@ -77,7 +77,7 @@
         class="container__form__field--input"
         type="file"
         (change)="onFileSelect($event)"
-        formControlName="file"
+        accept="image/*"
         placeholder="Insert image here"
         name="file"
         required/>
@@ -85,6 +85,9 @@
         class="container__form__field--message"
         *ngIf="file.errors && file.touched">
         File is missing.
+      </div>
+      <div class="container__form__field">
+      <img  [src]="fileSource"/>
       </div>
     </div>
     <div class="container__form__field">

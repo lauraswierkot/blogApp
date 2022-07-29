@@ -28,6 +28,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
+  public fileSource: string | ArrayBuffer;
 
   constructor(
     private facade: ArticleFacade,
@@ -89,6 +90,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.articleForm.get('file').setValue(file);
+
+      const reader = new FileReader();
+        reader.onload = e => this.fileSource = reader.result;
+        reader.readAsDataURL(file);
     }
   }
 
@@ -97,7 +102,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public addTag(event: MatChipInputEvent): void {
-    const maxTagLength = 50;
     const value = event?.value?.trim();
     if (value && !!value?.length) {
       this.articleForm.controls['tagList'].patchValue([
