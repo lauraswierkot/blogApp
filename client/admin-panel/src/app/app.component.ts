@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationFacade } from '@state/notifications/notification.facade';
-
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
-import { NotificationType } from '@state/notifications/notification.model';
+
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
+
+import { NotificationType } from '@state/notifications/notification.model';
+import { NotificationFacade } from '@state/notifications/notification.facade';
+import { ActionsFacade } from '@core/actions/actions.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -12,6 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public isLoading: Observable<boolean>
   public title = 'admin-panel';
   public duration = 3000;
   public id: string;
@@ -19,8 +23,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private notificationFacade: NotificationFacade,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private actionsFacade: ActionsFacade
+  ) {
+    this.isLoading = this.actionsFacade.loading$
+  }
 
   public ngOnInit(): void {
     this.notificationFacade.notifications$
