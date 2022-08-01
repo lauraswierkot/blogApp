@@ -12,6 +12,7 @@ import { UserFacade } from '@state/index';
 })
 export class AdminPanelComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
+  public topGap = 56;
   public mobileQuery: MediaQueryList;
   public _mobileQueryListener: () => void;
 

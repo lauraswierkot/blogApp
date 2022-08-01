@@ -16,11 +16,12 @@
   flex: 1;
 }
 
-.menu-is-mobile .toolbar {
-  position: fixed;
-  z-index: 2;
-}
-
-.menu-is-mobile .sidenav {
-  flex: 1 0 auto;
+.isMobile {
+  &__toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+  &__sidenav {
+    flex: 1 0 auto;
+  }
 }

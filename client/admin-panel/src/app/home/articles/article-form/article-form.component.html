@@ -74,10 +74,10 @@
     </div>
     <div class="container__form__field">
       <input
-        class="container__form__field--input"
         type="file"
         (change)="onFileSelect($event)"
         accept="image/*"
+        formControlName="file"
         placeholder="Insert image here"
         name="file"
         required/>

@@ -1,12 +1,13 @@
-<div class="menu__container" [class.menu-is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="toolbar">
+<div class="menu__container" [class.isMobile]="mobileQuery.matches">
+  <mat-toolbar
+    [ngClass]="mobileQuery.matches ? 'isMobile__toolbar' : 'toolbar'">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <h1 class="menu__container--title">Admin panel</h1>
   </mat-toolbar>
   <mat-sidenav-container
-    class="sidenav"
+    [ngClass]="mobileQuery.matches ? 'isMobile__sidenav' : 'sidenav'"
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav
       #snav

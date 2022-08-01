@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -33,17 +33,18 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   constructor(
     private facade: ArticleFacade,
     private router: Router,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private cd: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
-    this.facade.selectedArticles$.pipe(untilDestroyed(this)).subscribe(
-      (article: Article) => (this.selectedArticle = article)
-    );
+    this.facade.selectedArticles$
+      .pipe(untilDestroyed(this))
+      .subscribe((article: Article) => (this.selectedArticle = article));
     this.articleForm = this.formBuilder.group({
       title: [this.selectedArticle?.title, Validators.required],
       body: [this.selectedArticle?.body, Validators.required],
-      file: [this.selectedArticle?.file, Validators.required],
+      file: [null, Validators.required],
       description: [this.selectedArticle?.description, Validators.required],
       tagList: [
         this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
@@ -87,13 +88,19 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public onFileSelect(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.articleForm.get('file').setValue(file);
+    const reader = new FileReader();
 
-      const reader = new FileReader();
-        reader.onload = e => this.fileSource = reader.result;
-        reader.readAsDataURL(file);
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.articleForm.patchValue({
+          file: reader.result,
+        });
+        this.fileSource = reader.result;
+        this.cd.markForCheck();
+      };
     }
   }
 
