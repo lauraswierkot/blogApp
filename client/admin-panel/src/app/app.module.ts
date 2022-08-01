@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,14 +20,14 @@ const modules = [
   HttpClientModule,
   CoreModule,
   HomeModule,
-  BrowserAnimationsModule
+  BrowserAnimationsModule,
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [...modules],
   providers: [],
-  exports:[AppRoutingModule],
-  bootstrap: [AppComponent]
+  exports: [AppRoutingModule],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
