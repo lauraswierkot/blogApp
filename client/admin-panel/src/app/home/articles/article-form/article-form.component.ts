@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -21,8 +28,10 @@ import { Article } from '@state/articles/article.model';
   styleUrls: ['./article-form.component.scss'],
 })
 export class ArticleFormComponent implements OnInit, OnDestroy {
+  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef;
   public articleForm: FormGroup;
   public selectedArticle: Article;
+  public inputFile: File;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
@@ -41,16 +50,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     this.facade.selectedArticles$
       .pipe(untilDestroyed(this))
       .subscribe((article: Article) => (this.selectedArticle = article));
-    this.articleForm = this.formBuilder.group({
-      title: [this.selectedArticle?.title, Validators.required],
-      body: [this.selectedArticle?.body, Validators.required],
-      file: [null, Validators.required],
-      description: [this.selectedArticle?.description, Validators.required],
-      tagList: [
-        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
-        Validators.required,
-      ],
-    });
+    this.initForm();
   }
 
   public get title(): AbstractControl {
@@ -91,13 +91,12 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
+      const fileFromInput = event.currentTarget.files[0];
+      this.articleForm.patchValue({
+        file: fileFromInput,
+      });
+      reader.readAsDataURL(fileFromInput);
       reader.onload = () => {
-        this.articleForm.patchValue({
-          file: reader.result,
-        });
         this.fileSource = reader.result;
         this.cd.markForCheck();
       };
@@ -126,6 +125,19 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       this.articleForm.controls['tagList'].value.splice(index, 1);
       this.articleForm.controls['tagList'].updateValueAndValidity();
     }
+  }
+
+  private initForm(): void {
+    this.articleForm = this.formBuilder.group({
+      title: [this.selectedArticle?.title, Validators.required],
+      body: [this.selectedArticle?.body, Validators.required],
+      file: [this.selectedArticle?.image, Validators.required],
+      description: [this.selectedArticle?.description, Validators.required],
+      tagList: [
+        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
+        Validators.required,
+      ],
+    });
   }
 
   public ngOnDestroy(): void {

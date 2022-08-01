@@ -14,7 +14,7 @@ export interface Article {
   createdAt: Date;
   updatedAt: Date;
   author: string;
-  file: File;
+  image: File;
 }
 
 export interface ArticleForm {

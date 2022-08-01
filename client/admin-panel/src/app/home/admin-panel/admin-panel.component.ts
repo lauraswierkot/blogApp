@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 import { UserFacade } from '@state/index';
@@ -13,6 +13,9 @@ import { UserFacade } from '@state/index';
 export class AdminPanelComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
   public topGap = 56;
+  public bottomGap = 0;
+  public modeOver: MatDrawerMode = 'over';
+  public modeSide: MatDrawerMode = 'side';
   public mobileQuery: MediaQueryList;
   public _mobileQueryListener: () => void;
 
