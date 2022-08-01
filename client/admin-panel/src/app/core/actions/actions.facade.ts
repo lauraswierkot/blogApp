@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 
 import * as userActions from '@state/user/user.actions';
+import * as articleActions from '@state/articles/article.actions';
+
 import * as actionSelectors from './actions.selectors';
 
 @Injectable({
@@ -10,21 +12,15 @@ import * as actionSelectors from './actions.selectors';
 export class ActionsFacade {
   public globalLoaderActions: Action[] = [
     userActions.login,
-    userActions.loginSuccess,
-    userActions.loginFailed
-    //userActions.confirmEmail,
-    //userActions.confirmEmailSuccess,
-    // userActions.logout,
-    // userActions.register,
-    // articleActions.createArticle,
-    // articleActions.deleteArticle,
-    // articleActions.getArticles,
-    // articleActions.getArticlesSuccess,
-    // articleActions.resetArticle,
-    // articleActions.selectArticle,
-    // articleActions.updateArticle,
+    userActions.confirmEmail,
+    userActions.register,
+    articleActions.createArticle,
+    articleActions.deleteArticle,
+    articleActions.updateArticle,
   ];
-  public loading$ = this.store.select(actionSelectors.selectActionsPending(this.globalLoaderActions));
+  public loading$ = this.store.select(
+    actionSelectors.selectActionsPending(this.globalLoaderActions)
+  );
 
   constructor(private store: Store) {}
 }
