@@ -20,6 +20,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -31,25 +32,28 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef;
   public articleForm: FormGroup;
   public selectedArticle: Article;
-  public inputFile: File;
+  public imageFile: SafeResourceUrl;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
-  public fileSource: string | ArrayBuffer;
+  public fileSource: string | ArrayBuffer | SafeResourceUrl | Blob;
 
   constructor(
     private facade: ArticleFacade,
     private router: Router,
     public formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
   ) {}
 
   public ngOnInit(): void {
     this.facade.selectedArticles$
       .pipe(untilDestroyed(this))
-      .subscribe((article: Article) => (this.selectedArticle = article));
+      .subscribe((article: Article) => {
+        this.selectedArticle = article;
+      });
     this.initForm();
   }
 
@@ -89,7 +93,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   public onFileSelect(event: any): void {
     const reader = new FileReader();
-
     if (event.target.files && event.target.files.length) {
       const fileFromInput = event.currentTarget.files[0];
       this.articleForm.patchValue({
@@ -98,7 +101,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(fileFromInput);
       reader.onload = () => {
         this.fileSource = reader.result;
-        this.cd.markForCheck();
+        this.changeDetector.markForCheck();
       };
     }
   }
@@ -138,6 +141,9 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
     });
+    this.fileSource = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.selectedArticle?.image
+    );
   }
 
   public ngOnDestroy(): void {

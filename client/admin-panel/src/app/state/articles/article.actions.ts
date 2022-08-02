@@ -69,3 +69,13 @@ export const selectArticle = createAction(
 );
 
 export const resetArticle = createAction('[Article] Article Reset Request');
+
+export const getArticleImage = createAction(
+  '[Article] Get Article Image Request',
+  props<{ slug: string; imageTitle: string }>()
+);
+
+export const getArticleImageSuccess = createAction(
+  '[Article] Get Article Image Success',
+  props<{ slug: string; blob: string }>()
+);

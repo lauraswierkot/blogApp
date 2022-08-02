@@ -41,5 +41,5 @@ export const reducer = createReducer(
     ...state,
     selectedArticle: article,
   })),
-  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null }))
+  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
 );
