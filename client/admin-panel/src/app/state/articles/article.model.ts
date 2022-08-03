@@ -35,13 +35,6 @@ export interface ArticleForm {
   file: File;
 }
 
-export interface Error {
-  error: {
-    error: string | string[];
-    statusCode: string;
-  };
-}
-
 export interface ArticleState {
   articles: Article[];
   selectedArticle: Article;

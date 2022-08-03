@@ -1,4 +1,4 @@
-import { RouterLink } from "@angular/router";
+import { Error } from "@state/notifications/notification.model";
 
 export type StatePart<K extends keyof UserState> = Pick<UserState, K>;
 
@@ -14,13 +14,6 @@ export interface User {
   bio?: string;
   image?: string;
   token: string;
-}
-
-export interface Error {
-  error: {
-    error: string | string[];
-    statusCode: string;
-  };
 }
 
 export interface UserLogin {
@@ -45,12 +38,12 @@ export enum Role {
 
 export interface UserState {
   user: Omit<User, 'token'>;
-  error: any;
   token: User['token'];
+  error: Error
 }
 
 export const initialState: UserState = {
   user: null,
-  error: null,
   token: null,
+  error: null
 };
