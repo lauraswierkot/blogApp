@@ -36,9 +36,13 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.facade.selectedArticles$.pipe(untilDestroyed(this)).subscribe(
-      (article: Article) => (this.selectedArticle = article)
-    );
+    this.facade.selectedArticle$
+      .pipe(untilDestroyed(this))
+      .subscribe((article: Article) => {
+        console.log(article);
+        this.selectedArticle = article;
+      });
+
     this.articleForm = this.formBuilder.group({
       title: [this.selectedArticle?.title, Validators.required],
       body: [this.selectedArticle?.body, Validators.required],

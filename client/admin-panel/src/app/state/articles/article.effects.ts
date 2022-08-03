@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -12,7 +11,7 @@ import { map } from 'rxjs';
 import * as action from './article.actions';
 import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
-import { Article } from './article.model';
+import { Article, Comment } from './article.model';
 import { NotificationType } from '@state/notifications/notification.model';
 
 @Injectable()
@@ -58,6 +57,27 @@ export class ArticleEffects {
             return action.getArticlesSuccess({ articles });
           }),
           catchError((error: HttpErrorResponse) => [
+            action.getArticlesFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  selectArticle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.selectArticle),
+      switchMap(({ article }) => {
+        return this.http.getArticle(article.slug).pipe(
+          map((article: Article) => {
+            return action.selectArticleSuccess({ article });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.selectArticleFailed(error),
             notificationAction.createNotification({
               message: error.error.error,
               notificationType: NotificationType.Error,
@@ -81,6 +101,7 @@ export class ArticleEffects {
             return action.deleteArticleSuccess({ slug });
           }),
           catchError((error: HttpErrorResponse) => [
+            action.deleteArticleFailed(error),
             notificationAction.createNotification({
               message: error.error.error,
               notificationType: NotificationType.Error,
@@ -105,6 +126,78 @@ export class ArticleEffects {
             return action.updateArticleSuccess({ slug, article });
           }),
           catchError((error: HttpErrorResponse) => [
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  createComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.createComment),
+      switchMap(({slug, body}) => {
+        return this.http.createComment(slug, body).pipe(
+          map((comment: Comment) => {
+            notificationAction.createNotification({
+              message: 'Comment created',
+              notificationType: NotificationType.Message,
+            });
+            return action.createCommentSuccess({slug, comment});
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.createCommentFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  editComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.updateComment),
+      switchMap(({ slug, body, id }) => {
+        return this.http.updateComment(slug, body, id).pipe(
+          map((comment: Comment) => {
+            notificationAction.createNotification({
+              message: 'Comment updated',
+              notificationType: NotificationType.Message,
+            });
+            return action.updateCommentSuccess({ id, comment });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.updateCommentFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  deleteComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.deleteComment),
+      switchMap(({ slug, id }) => {
+        return this.http.deleteComment(slug, id).pipe(
+          map((comment: Comment) => {
+            notificationAction.createNotification({
+              message: 'Comment deleted',
+              notificationType: NotificationType.Message,
+            });
+            return action.deleteCommentSuccess({ slug, id });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.deleteCommentFailed(error),
             notificationAction.createNotification({
               message: error.error.error,
               notificationType: NotificationType.Error,

@@ -87,6 +87,11 @@
         File is missing.
       </div>
     </div>
+    <div *ngIf="selectedArticle.comments">
+      <div *ngFor="let comment of selectedArticle.comments">
+        <p>{{comment.body}}</p>
+      </div>
+    </div>
     <div class="container__form__field">
       <button
         type="submit"

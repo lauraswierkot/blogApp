@@ -41,5 +41,42 @@ export const reducer = createReducer(
     ...state,
     selectedArticle: article,
   })),
-  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null }))
+  on(action.selectArticleSuccess, (state, { article }) => ({
+    ...state,
+    selectedArticle: article,
+    selectedArticleComments: article.comments
+  })),
+  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
+  on(action.createCommentSuccess, (state, { comment }) => ({
+    ...state,
+    selectedArticle: {
+      ...state.selectedArticle,
+      comments: [...state.selectedArticle.comments, comment],
+    },
+    comments: [...state.selectedArticleComments, comment],
+  })),
+  on(action.createCommentFailed, (state, { error }) => ({ ...state, error })),
+  on(action.updateCommentSuccess, (state, { id, comment }) => {
+    const filteredComments = cloneDeep(state.selectedArticleComments).map(
+      (item) => (item.id === id ? comment : item)
+    );
+
+    return {
+      ...state,
+      comments: filteredComments,
+      selectedArticle: { ...state.selectedArticle, comments: filteredComments },
+    };
+  }),
+  on(action.updateCommentFailed, (state, { error }) => ({ ...state, error })),
+  on(action.deleteCommentSuccess, (state, { id }) => {
+    const filteredComments = cloneDeep(state.selectedArticleComments).filter(
+      (value) => value.id != id
+    );
+    return {
+      ...state,
+      comments: filteredComments,
+      selectedArticle: { ...state.selectedArticle, comments: filteredComments },
+    };
+  }),
+  on(action.deleteCommentFailed, (state, { error }) => ({ ...state, error }))
 );

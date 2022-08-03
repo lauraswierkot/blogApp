@@ -15,7 +15,7 @@ export interface Article {
   updatedAt: Date;
   author: string;
   file: File;
-  comments?: Comment[];
+  comments: Comment[];
 }
 
 export interface Comment {

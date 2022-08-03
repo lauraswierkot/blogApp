@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 
-import { Article } from '@state/articles/article.model';
+import { Article, Comment } from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
 
 const apiUrl = environment.apiUrl;
@@ -46,6 +46,12 @@ export class HttpService {
       .pipe(map((response) => response.articles));
   }
 
+  public getArticle(slug: string): Observable<Article> {
+    return this.http
+      .get<{ article: Article }>(`${apiUrl}/articles/${slug}`)
+      .pipe(map((response) => response.article));
+  }
+
   public deleteArticle(slug: string): Observable<Article> {
     return this.http
       .delete<{ article: Article }>(`${apiUrl}/articles/${slug}`)
@@ -59,5 +65,31 @@ export class HttpService {
     return this.http
       .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
       .pipe(map((response) => response.article));
+  }
+
+  public createComment(slug: string, body: string): Observable<Comment> {
+    return this.http
+      .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments`, {
+        comment: { body: body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public updateComment(
+    slug: string,
+    body: string,
+    id: string
+  ): Observable<Comment> {
+    return this.http
+      .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`, {
+        comment: { body: body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public deleteComment(slug: string, id: string): Observable<Comment> {
+    return this.http
+      .delete<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`)
+      .pipe(map((response) => response.comment));
   }
 }

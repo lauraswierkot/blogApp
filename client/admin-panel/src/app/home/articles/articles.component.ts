@@ -36,7 +36,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   public toUpdateArticle(slug: string, article: Article): void {
-    this.router.navigate([`article/${slug}`]);
     this.facade.selectArticle(article);
+    this.router.navigate([`article/${slug}`]);
   }
 }

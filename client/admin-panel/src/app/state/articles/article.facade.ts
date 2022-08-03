@@ -10,8 +10,10 @@ import * as selector from './article.selectors';
 })
 export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
-  public selectedArticles$ = this.store.select(selector.selectSelectedArticle);
-  public selectedArticleComments = this.store.select(selector.selectSelectedArticleComments); 
+  public selectedArticle$ = this.store.select(selector.selectSelectedArticle);
+  public selectedArticleComments = this.store.select(
+    selector.selectSelectedArticleComments
+  );
 
   constructor(private store: Store) {}
 
@@ -37,5 +39,17 @@ export class ArticleFacade {
 
   public resetArticle(): void {
     this.store.dispatch(action.resetArticle());
+  }
+
+  public createComment(slug: string, body: string): void {
+    this.store.dispatch(action.createComment({ slug, body }));
+  }
+
+  public updateComment(slug: string, body: string, id: string): void {
+    this.store.dispatch(action.updateComment({ slug, body, id }));
+  }
+
+  public deleteComment(slug: string, id: string): void {
+    this.store.dispatch(action.deleteComment({ slug, id }));
   }
 }
