@@ -87,9 +87,11 @@
         File is missing.
       </div>
     </div>
-    <div *ngIf="selectedArticle.comments">
+    <div *ngIf="selectedArticle?.comments !== null">
       <div *ngFor="let comment of selectedArticle.comments">
-        <p>{{comment.body}}</p>
+        <p>{{comment.body}}
+           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">REMOVE</button>
+        </p>
       </div>
     </div>
     <div class="container__form__field">

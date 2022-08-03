@@ -71,8 +71,8 @@ export class ArticleEffects {
   selectArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.selectArticle),
-      switchMap(({ article }) => {
-        return this.http.getArticle(article.slug).pipe(
+      switchMap(({ slug }) => {
+        return this.http.getArticle(slug).pipe(
           map((article: Article) => {
             return action.selectArticleSuccess({ article });
           }),

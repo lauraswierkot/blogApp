@@ -33,8 +33,8 @@ export class ArticleFacade {
     this.store.dispatch(action.updateArticle({ slug, articleForm }));
   }
 
-  public selectArticle(article: Article): void {
-    this.store.dispatch(action.selectArticle({ article }));
+  public selectArticle(slug: string): void {
+    this.store.dispatch(action.selectArticle({ slug }));
   }
 
   public resetArticle(): void {
@@ -45,11 +45,11 @@ export class ArticleFacade {
     this.store.dispatch(action.createComment({ slug, body }));
   }
 
-  public updateComment(slug: string, body: string, id: string): void {
+  public updateComment(slug: string, body: string, id: number): void {
     this.store.dispatch(action.updateComment({ slug, body, id }));
   }
 
-  public deleteComment(slug: string, id: string): void {
+  public deleteComment(slug: string, id: number): void {
     this.store.dispatch(action.deleteComment({ slug, id }));
   }
 }

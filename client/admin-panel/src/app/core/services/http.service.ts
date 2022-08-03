@@ -78,7 +78,7 @@ export class HttpService {
   public updateComment(
     slug: string,
     body: string,
-    id: string
+    id: number
   ): Observable<Comment> {
     return this.http
       .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`, {
@@ -87,7 +87,7 @@ export class HttpService {
       .pipe(map((response) => response.comment));
   }
 
-  public deleteComment(slug: string, id: string): Observable<Comment> {
+  public deleteComment(slug: string, id: number): Observable<Comment> {
     return this.http
       .delete<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`)
       .pipe(map((response) => response.comment));

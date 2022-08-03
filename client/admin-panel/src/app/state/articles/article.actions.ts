@@ -65,7 +65,7 @@ export const updateArticleFailed = createAction(
 
 export const selectArticle = createAction(
   '[Article] Select Article Request',
-  props<{ article: Article }>()
+  props<{ slug: string }>()
 );
 
 export const selectArticleSuccess = createAction(
@@ -97,12 +97,12 @@ export const createCommentFailed = createAction(
 
 export const updateComment = createAction(
   '[Comment] Update Comment Request',
-  props<{ slug: string; body: string; id: string }>()
+  props<{ slug: string; body: string; id: number }>()
 );
 
 export const updateCommentSuccess = createAction(
   '[Comment] Update Comment Success',
-  props<{ id: string; comment: Comment }>()
+  props<{ id: number; comment: Comment }>()
 );
 
 export const updateCommentFailed = createAction(
@@ -112,12 +112,12 @@ export const updateCommentFailed = createAction(
 
 export const deleteComment = createAction(
   '[Comment] Delete Comment Request',
-  props<{ slug: string; id: string }>()
+  props<{ slug: string; id: number }>()
 );
 
 export const deleteCommentSuccess = createAction(
   '[Comment] Delete Comment Success',
-  props<{ slug: string; id: string }>()
+  props<{ slug: string; id: number }>()
 );
 
 export const deleteCommentFailed = createAction(

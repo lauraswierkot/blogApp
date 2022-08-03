@@ -1,11 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -32,27 +39,20 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   constructor(
     private facade: ArticleFacade,
     private router: Router,
+    private route: ActivatedRoute,
     public formBuilder: FormBuilder
   ) {}
 
   public ngOnInit(): void {
+    const slug = this.route.snapshot.params['slug'];
+    if (slug) this.facade.selectArticle(slug);
+
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
-      .subscribe((article: Article) => {
-        console.log(article);
-        this.selectedArticle = article;
+      .subscribe((value) => {
+        this.selectedArticle = value;
+        this.initForm();
       });
-
-    this.articleForm = this.formBuilder.group({
-      title: [this.selectedArticle?.title, Validators.required],
-      body: [this.selectedArticle?.body, Validators.required],
-      file: [this.selectedArticle?.file, Validators.required],
-      description: [this.selectedArticle?.description, Validators.required],
-      tagList: [
-        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
-        Validators.required,
-      ],
-    });
   }
 
   public get title(): AbstractControl {
@@ -119,6 +119,23 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       this.articleForm.controls['tagList'].value.splice(index, 1);
       this.articleForm.controls['tagList'].updateValueAndValidity();
     }
+  }
+
+  public deleteComment(slug: string, id: number) : void {
+    this.facade.deleteComment(slug, id)
+  }
+
+  private initForm(): void {
+    this.articleForm = this.formBuilder.group({
+      title: [this.selectedArticle?.title, Validators.required],
+      body: [this.selectedArticle?.body, Validators.required],
+      file: [this.selectedArticle?.file, Validators.required],
+      description: [this.selectedArticle?.description, Validators.required],
+      tagList: [
+        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
+        Validators.required,
+      ],
+    });
   }
 
   public ngOnDestroy(): void {
