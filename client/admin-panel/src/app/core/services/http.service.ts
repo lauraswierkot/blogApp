@@ -60,10 +60,4 @@ export class HttpService {
       .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
       .pipe(map((response) => response.article));
   }
-
-  public getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(`${apiUrl}/articles/image/${imageUrl}`, {
-      responseType: 'blob',
-    });
-  }
 }

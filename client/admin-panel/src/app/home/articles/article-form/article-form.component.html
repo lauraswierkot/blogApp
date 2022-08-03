@@ -45,10 +45,10 @@
     </div>
     <div class="container__form__field">
       <button type="button" mat-raised-button (click)="fileUpload.click()">Choose File</button>
-      <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload" accept="image/*"
-        required />
+      <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
+        accept="image/*" required />
       <div class="container__form__field" *ngIf="fileSource">
-        <img class="container__form__field--img" [src]="fileSource" width="300" height="150"/>
+        <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
       </div>
     </div>
     <div class="container__form__field">

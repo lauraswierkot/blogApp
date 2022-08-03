@@ -15,7 +15,6 @@ export interface Article {
   updatedAt: Date;
   author: string;
   image: string;
-  blob: string;
 }
 
 export interface ArticleForm {

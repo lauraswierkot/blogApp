@@ -12,7 +12,7 @@ export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
   public selectedArticles$ = this.store.select(selector.selectSelectedArticle);
 
-  constructor(private store: Store ) {}
+  constructor(private store: Store) {}
 
   public createArticle(articleForm: FormData): void {
     this.store.dispatch(action.createArticle({ articleForm }));
@@ -36,9 +36,5 @@ export class ArticleFacade {
 
   public resetArticle(): void {
     this.store.dispatch(action.resetArticle());
-  }
-
-  public getImage(slug: string, imageTitle: string): void {
-    this.store.dispatch(action.getArticleImage({ slug, imageTitle }));
   }
 }

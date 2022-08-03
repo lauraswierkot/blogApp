@@ -20,7 +20,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -29,23 +29,21 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./article-form.component.scss'],
 })
 export class ArticleFormComponent implements OnInit, OnDestroy {
-  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef;
   public articleForm: FormGroup;
   public selectedArticle: Article;
-  public imageFile: SafeResourceUrl;
+  private imageUrl: string = environment.apiImageUrl;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
-  public fileSource: string | ArrayBuffer | SafeResourceUrl | Blob;
+  public fileSource: string | ArrayBuffer;
 
   constructor(
     private facade: ArticleFacade,
     private router: Router,
     public formBuilder: FormBuilder,
-    private changeDetector: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
@@ -141,9 +139,9 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
     });
-    this.fileSource = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.selectedArticle?.image
-    );
+    if (this.selectedArticle) {
+      this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
+    }
   }
 
   public ngOnDestroy(): void {

@@ -114,26 +114,4 @@ export class ArticleEffects {
       })
     )
   );
-
-  getArticleImage$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(action.getArticleImage),
-      switchMap(({ slug, imageTitle }) => {
-        return this.http.getImage(imageTitle).pipe(
-          map((blob) => {
-            return action.getArticleImageSuccess({
-              slug,
-              blob: 'blob',
-            });
-          }),
-          catchError((error: HttpErrorResponse) => [
-            notificationAction.createNotification({
-              message: error.error.error,
-              notificationType: NotificationType.Error,
-            }),
-          ])
-        );
-      })
-    )
-  );
 }
