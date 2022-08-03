@@ -11,6 +11,7 @@ import * as selector from './article.selectors';
 export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
   public selectedArticles$ = this.store.select(selector.selectSelectedArticle);
+  public selectedArticleComments = this.store.select(selector.selectSelectedArticleComments); 
 
   constructor(private store: Store) {}
 

@@ -68,3 +68,18 @@ export const selectArticle = createAction(
 );
 
 export const resetArticle = createAction('[Article] Article Reset');
+
+export const createComment = createAction(
+  '[Comment] Create Comment Request',
+  props<{ article: Article }>()
+);
+
+export const createCommentSuccess = createAction(
+  '[Comment] Create Comment Success',
+  props<{ slug: string; article: Article }>()
+);
+
+export const createCommentFailed = createAction(
+  '[Comment] Create Comment Fail',
+  props<{ error: Error }>()
+);

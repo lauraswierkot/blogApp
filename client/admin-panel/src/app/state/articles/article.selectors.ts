@@ -14,3 +14,8 @@ export const selectSelectedArticle = createSelector(
   selectArticleState,
   (state) => state.selectedArticle
 );
+
+export const selectSelectedArticleComments = createSelector(
+  selectArticleState,
+  (state) => state.selectedArticleComments
+);
