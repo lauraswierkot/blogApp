@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +12,7 @@ import { MaterialModule } from './material-module/material.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
@@ -26,7 +26,6 @@ const modules = [
   HomeModule,
   BrowserAnimationsModule,
   TranslateModule.forRoot({
-    defaultLanguage: 'en',
     loader: {
       provide: TranslateLoader,
       useFactory: HttpLoaderFactory,

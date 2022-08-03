@@ -1,0 +1,62 @@
+{
+  "adminPanel": {
+    "logout": "Wyloguj",
+    "toArticles": "Artykuły"
+  },
+
+  "articles": {
+    "placeholder": "Wyszukaj artykuł...",
+    "search": "Szukaj",
+    "create": "Nowy artykuł",
+    "listTitle": "Wszystkie artykuły",
+    "edit": "Edytuj",
+    "delete": "Usuń"
+  },
+
+  "articleForm": {
+    "title": "Nowy artykuł",
+    "titlePlaceholder": "Podaj tytuł",
+    "titleError": "Brak tytułu.",
+    "bodyPlaceholder": "Podaj treść",
+    "bodyError": "Brak treści.",
+    "descriptionPlaceholder": " Podaj opis",
+    "descriptionError": "Brak opisu.",
+    "tagsPlaceholder": "Podaj tag & enter",
+    "filePlaceholder": "Dodaj zdjęcie.",
+    "fileError": "Brak zdjęcia.",
+    "submit": "Dodaj",
+    "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego"
+  },
+
+  "confirmation": {
+    "title": "Panel rejestracji",
+    "confirmation": "Potwierdź swój e-mail poniżej, klikając przycisk potwierdzenia. Po wykonaniu tej czynności zostaniesz przekierowany na stronę logowania.",
+    "submit": "Potwierdzam"
+  },
+
+  "login": {
+    "title": "Panel logowania",
+    "emailPlaceholder": "Podaj email",
+    "emailError": "Email nieporawny.",
+    "passwordPlaceholder": "Podaj hasło",
+    "submit": "Zaloguj",
+    "toRegister": "Nie masz konta? Zarejestruj się"
+  },
+
+  "register": {
+    "title": "Panel rejestracji",
+    "usernamePlaceholder": "Podaj nazwę użytkownika",
+    "usernameError": "Brak nazwy użytkownika",
+    "emailPlaceholder": "Podaj email",
+    "emailError": "Brak emaila",
+    "passwordPlaceholder": "Podaj hasło",
+    "passwordError": "Brak hasła.",
+    "confirmPasswordPlaceholder": "Potwierdź hasło",
+    "confirmPasswordPError": "Hasła muszą być identyczne.",
+    "roleError": "Wybierz rolę",
+    "agePlaceholder": "Podaj datę urodzenia",
+    "ageError": "Musisz być pełnoletni, aby się zarejestrować.",
+    "submit": "Zarejestruj",
+    "toLogin": "Masz już konto? Zaloguj się"
+  }
+}

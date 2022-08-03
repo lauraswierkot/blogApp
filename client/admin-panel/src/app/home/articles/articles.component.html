@@ -1,19 +1,20 @@
 <div class="search">
-  <input class="search__form" type="text" [(ngModel)]="searchTerm" placeholder="Search article..." />
-  <button (click)="search()">Search</button>
+  <input class="search__form" type="text" [(ngModel)]="searchTerm"
+    placeholder="{{ 'articles.placeholder' | translate }}" />
+  <button (click)="search()">{{ 'articles.search' | translate }}</button>
 </div>
-<button (click)="createArticle()">Create</button>
+<button (click)="createArticle()">{{ 'articles.create' | translate }}</button>
 <div class="list">
-  <h3 class="list--title">All articles</h3>
+  <h3 class="list--title">{{ 'articles.listTitle' | translate }}</h3>
   <mat-card class="list__card" *ngFor="let article of articlesList | async">
     <mat-card-title class="list__card__title">
       {{article.title}}
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
       <button mat-button (click)="toUpdateArticle(article.slug, article)">
-        Edit
+        {{ 'articles.edit' | translate }}
       </button>
-      <button mat-button (click)="deleteArticle(article.slug)">Delete</button>
+      <button mat-button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 </div>

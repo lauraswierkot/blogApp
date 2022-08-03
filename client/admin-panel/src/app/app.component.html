@@ -1,1 +1,9 @@
+<div class="container">
+    <mat-label>Change language</mat-label>
+    <mat-select class="container__selector">
+        <mat-option (click)="setLang('pl')">Polski</mat-option>
+        <mat-option (click)="setLang('en')">English</mat-option>
+    </mat-select>
+</div>
+
 <router-outlet></router-outlet>

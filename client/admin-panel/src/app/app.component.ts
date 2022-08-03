@@ -9,8 +9,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   public title = 'admin-panel';
 
-  constructor(translate: TranslateService){
+  constructor(public translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');
+  }
+
+  setLang(language: string) {
+    this.translate.use(language);
   }
 }

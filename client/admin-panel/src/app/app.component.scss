@@ -1,0 +1,13 @@
+.container {
+    font-size: small;
+    float: right;
+    margin-top: 1em;
+    display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+    &__selector {
+        display: block;
+        width:fit-content
+    }
+}

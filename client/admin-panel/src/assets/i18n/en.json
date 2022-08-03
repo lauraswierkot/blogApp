@@ -1,0 +1,62 @@
+{
+  "adminPanel": {
+    "logout": "Logout",
+    "toArticles": "Articles"
+  },
+
+  "articles": {
+    "placeholder": "Search article...",
+    "search": "Search",
+    "create": "Create",
+    "listTitle": "All titles",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "articleForm": {
+    "title": "Create an article",
+    "titlePlaceholder": "Type title here",
+    "titleError": "Title is missing",
+    "bodyPlaceholder": "Type body here",
+    "bodyError": "Body is missing",
+    "descriptionPlaceholder": "Type description here",
+    "descriptionError": "Description is missing",
+    "tagsPlaceholder": "Add tag & hit enter",
+    "filePlaceholder": "Insert image here",
+    "fileError": "File is missing.",
+    "submit": "Submit",
+    "toAdminPanel": "Do not want an article for now? Back to Admin Panel"
+  },
+
+  "confirmation": {
+    "title": "Confirmation panel",
+    "confirmation": "Please confirm your email below by clicking confirmation button. Once done you will be redirected to login page.",
+    "submit": "Confirm"
+  },
+
+  "login": {
+    "title": "Login panel",
+    "emailPlaceholder": "Type email here",
+    "emailError": "Email not valid.",
+    "passwordPlaceholder": "Type your password here",
+    "submit": "Login",
+    "toRegister": "No account? Sign up"
+  },
+
+  "register": {
+    "title": "Register panel",
+    "usernamePlaceholder": "Type your username here",
+    "usernameError": "Username is missing.",
+    "emailPlaceholder": "Type your email here",
+    "emailError": "Email is missing.",
+    "passwordPlaceholder": "Type your password here",
+    "passwordError": "Password is missing.",
+    "confirmPasswordPlaceholder": "Confirm your password here",
+    "confirmPasswordError": "Passwords must match",
+    "roleError": "Choose role",
+    "agePlaceholder": "Type your birthdate here",
+    "ageError": "You must be over 18 years old to register.",
+    "submit": "Sign up",
+    "toLogin": "Already have an account? Sign in"
+  }
+}

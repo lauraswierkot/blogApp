@@ -1,10 +1,8 @@
 <div class="container">
-  <header class="container__title">Confirmation panel</header>
-  <div class="container__content">
-    Please confirm your email below by clicking confirmation button. Once done
-    you will be redirected to login page.
+  <header class="container__title">{{ 'confirmation.title' | translate }}</header>
+  <div class="container__content">{{ 'confirmation.confirmation' | translate }}
   </div>
   <button type="submit" (click)="toLoginForm()">
-    <span>Confirm</span>
+    <span>{{ 'confirmation.submit' | translate }}</span>
   </button>
 </div>
