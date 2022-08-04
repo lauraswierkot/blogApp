@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 
@@ -8,6 +9,11 @@ import { NotificationType } from '@state/notifications/notification.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
 import { ActionsFacade } from '@core/actions/actions.facade';
 
+export enum LanguageTypeEnum {
+  Polish = 'pl',
+  English = 'en',
+}
+
 @UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-root',
@@ -15,18 +21,25 @@ import { ActionsFacade } from '@core/actions/actions.facade';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public isLoading: Observable<boolean>
+  public languages = LanguageTypeEnum;
   public title = 'admin-panel';
   public duration = 3000;
+  public isLoading: Observable<boolean>;
   public id: string;
   public snackBarRef: MatSnackBarRef<any>;
 
   constructor(
+    public translate: TranslateService,
     private notificationFacade: NotificationFacade,
     private snackBar: MatSnackBar,
     private actionsFacade: ActionsFacade
   ) {
-    this.isLoading = this.actionsFacade.loading$
+    translate.setDefaultLang('en');
+    this.isLoading = this.actionsFacade.loading$;
+  }
+
+  public setLang(language: string): void {
+    this.translate.use(language);
   }
 
   public ngOnInit(): void {

@@ -1,3 +1,11 @@
+<div class="translation__container">
+  <mat-label>Change language</mat-label>
+  <mat-select class="translation__container--selector">
+    <mat-option (click)="setLang(languages.Polish)">{{ 'language.polish' | translate }}</mat-option>
+    <mat-option (click)="setLang(languages.English)">{{ 'language.english' | translate }}</mat-option>
+  </mat-select>
+</div>
+
 <div class="loader__container" *ngIf="isLoading | async">
   <mat-spinner class="spinner" mode="indeterminate"></mat-spinner>
 </div>
