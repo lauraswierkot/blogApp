@@ -1,38 +1,25 @@
 <div class="container">
   <form class="container__form" [formGroup]="loginForm" (ngSubmit)="login()">
-    <header class="container__form--title">Login panel</header>
+    <header class="container__form--title">{{ 'login.title' | translate }}</header>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">person</span>
-      <input
-        class="container__form__field--input"
-        formControlName="email"
-        placeholder="Type your email here"
-        name="email"
-        required/>
-      <div *ngIf="email.errors?.['email']">Email not valid.</div>
+      <input class="container__form__field--input" formControlName="email"
+        placeholder="{{ 'login.emailPlaceholder' | translate }}" name="email" required />
+      <div *ngIf="email.errors?.['email']">{{ 'login.emailError' | translate }}</div>
     </div>
     <div class="container__form__field">
       <span class="material-icons container__form__field--icons">key</span>
-      <input
-        class="container__form__field--input"
-        type="password"
-        formControlName="password"
-        placeholder="Type your password here"
-        name="password"
-        required/>
+      <input class="container__form__field--input" type="password" formControlName="password"
+        placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required />
     </div>
     <div class="container__form__field">
-      <button
-        [disabled]="!loginForm.valid"
-        type="submit">
-        <span>Login</span>
+      <button [disabled]="!loginForm.valid" type="submit">
+        <span>{{ 'login.submit' | translate }}</span>
       </button>
     </div>
     <div class="container_form__field container__form__field--register">
-      <span>No account? Sign up</span>
-      <span
-        (click)="toRegisterForm()"
-        class="material-icons container__form__field--icons arrow">
+      <span>{{ 'login.toRegister' | translate }}</span>
+      <span (click)="toRegisterForm()" class="material-icons container__form__field--icons arrow">
         trending_flat
       </span>
     </div>

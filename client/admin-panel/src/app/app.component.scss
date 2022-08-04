@@ -1,3 +1,17 @@
+.translation__container {
+  font-size: small;
+  float: right;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &--selector {
+    display: block;
+    width: fit-content;
+  }
+}
+
 .loader__container {
   position: fixed;
   display: block;
