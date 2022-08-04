@@ -9,6 +9,11 @@ import { NotificationType } from '@state/notifications/notification.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
 import { ActionsFacade } from '@core/actions/actions.facade';
 
+export enum LanguageTypeEnum {
+  Polish = 'pl',
+  English = 'en',
+}
+
 @UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-root',
@@ -16,6 +21,7 @@ import { ActionsFacade } from '@core/actions/actions.facade';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public languages = LanguageTypeEnum;
   public title = 'admin-panel';
   public duration = 3000;
   public isLoading: Observable<boolean>;
@@ -29,7 +35,6 @@ export class AppComponent implements OnInit {
     private actionsFacade: ActionsFacade
   ) {
     translate.setDefaultLang('en');
-    translate.use('en');
     this.isLoading = this.actionsFacade.loading$;
   }
 

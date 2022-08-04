@@ -1,4 +1,9 @@
 {
+  "language": {
+    "english": "english",
+    "polish": "polski"
+  },
+
   "adminPanel": {
     "logout": "Logout",
     "toArticles": "Articles"
