@@ -68,6 +68,26 @@ export class ArticleEffects {
     )
   );
 
+  selectArticle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.selectArticle),
+      switchMap(({ slug }) => {
+        return this.http.getArticle(slug).pipe(
+          map((article: Article) => {
+            return action.selectArticleSuccess({ article });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.selectArticleFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
   deleteArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.deleteArticle),

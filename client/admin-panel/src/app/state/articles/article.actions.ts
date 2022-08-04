@@ -65,7 +65,17 @@ export const updateArticleFailed = createAction(
 
 export const selectArticle = createAction(
   '[Article] Article Selected Request',
+  props<{ slug: string }>()
+);
+
+export const selectArticleSuccess = createAction(
+  '[Article] Select Article Success',
   props<{ article: Article }>()
+);
+
+export const selectArticleFailed  = createAction(
+  '[Article] Select Article Fail',
+  props<{ error: Error }>()
 );
 
 export const resetArticle = createAction('[Article] Article Reset Request');

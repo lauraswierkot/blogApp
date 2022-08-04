@@ -12,7 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -42,17 +42,21 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   constructor(
     private facade: ArticleFacade,
     private router: Router,
+    private route: ActivatedRoute,
     public formBuilder: FormBuilder,
     private changeDetector: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
+    const slug = this.route.snapshot.params['slug'];
+    if (slug) this.facade.selectArticle(slug);
+
     this.facade.selectedArticles$
       .pipe(untilDestroyed(this))
-      .subscribe((article: Article) => {
-        this.selectedArticle = article;
+      .subscribe((value) => {
+        this.selectedArticle = value;
+        this.initForm();
       });
-    this.initForm();
   }
 
   public get title(): AbstractControl {

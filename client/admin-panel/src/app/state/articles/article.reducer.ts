@@ -37,9 +37,9 @@ export const reducer = createReducer(
     return { ...state, articles: filteredArticles };
   }),
   on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
-  on(action.selectArticle, (state, { article }) => ({
+  on(action.selectArticleSuccess, (state, { article }) => ({
     ...state,
     selectedArticle: article,
   })),
-  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
+  on(action.resetArticle, (state) => ({ ...state, selectedArticle: null }))
 );

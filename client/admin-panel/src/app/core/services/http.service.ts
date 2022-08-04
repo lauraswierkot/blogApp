@@ -46,6 +46,12 @@ export class HttpService {
       .pipe(map((response) => response.articles));
   }
 
+  public getArticle(slug: string): Observable<Article> {
+    return this.http
+      .get<{ article: Article }>(`${apiUrl}/articles/${slug}`)
+      .pipe(map((response) => response.article));
+  }
+
   public deleteArticle(slug: string): Observable<Article> {
     return this.http
       .delete<{ article: Article }>(`${apiUrl}/articles/${slug}`)
