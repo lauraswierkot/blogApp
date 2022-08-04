@@ -13,7 +13,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article } from '@state/articles/article.model';
+import { Article, Comment } from '@state/articles/article.model';
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 import { environment } from 'environments/environment';
 
@@ -137,7 +137,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     this.articleForm = this.formBuilder.group({
       title: [this.selectedArticle?.title, Validators.required],
       body: [this.selectedArticle?.body, Validators.required],
-      file: [this.selectedArticle?.file, Validators.required],
+      file: [this.selectedArticle?.image, Validators.required],
       description: [this.selectedArticle?.description, Validators.required],
       tagList: [
         this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
@@ -145,13 +145,13 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       ],
     });
     if (this.selectedArticle) {
-      this.fileSource = `${this.imageUrl}/${this.selectedArticle.file}`;
+      this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
     }
   }
 
-  public openDialog(id: number): void {
+  public openDialog(comment: Comment): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = id;
+    dialogConfig.data = { comment: comment, slug: this.selectedArticle.slug };
     dialogConfig.disableClose = false;
     this.dialog.open(CommentDialogComponent, dialogConfig);
   }

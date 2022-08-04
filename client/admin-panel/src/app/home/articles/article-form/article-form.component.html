@@ -56,8 +56,8 @@
       <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
       <div *ngFor="let comment of selectedArticle.comments">
         <p>{{comment.body}}
-           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">Remove</button>
-           <button type="button" (click)="openDialog(comment.id)">Update</button>
+          <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">Remove</button>
+          <button type="button" (click)="openDialog(comment)">Update</button>
         </p>
       </div>
     </div>
