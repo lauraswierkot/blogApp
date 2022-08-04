@@ -49,12 +49,13 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
-    if (slug) this.facade.selectArticle(slug);
-
+    if (slug) {
+      this.facade.selectArticle(slug);
+    }
     this.facade.selectedArticles$
       .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.selectedArticle = value;
+      .subscribe((article) => {
+        this.selectedArticle = article;
         this.initForm();
       });
   }
