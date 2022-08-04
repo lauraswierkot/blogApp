@@ -3,7 +3,7 @@
     <header class="container__form--title">
       <span *ngIf="selectedArticle === null; else edit">{{ 'articleForm.titleCreate' | translate }}</span>
       <ng-template #edit>
-        <span>{{ 'articleForm.titleEdits' | translate }}</span>
+        <span>{{ 'articleForm.titleEdit' | translate }}</span>
       </ng-template>
     </header>
     <div class="container__form__field">
