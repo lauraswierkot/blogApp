@@ -1,4 +1,4 @@
-import { ProfileResponse } from '@state/user/user.model';
+import { ProfileResponse, User } from '@state/user/user.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -13,7 +13,7 @@ export interface Article {
   tagList: string[];
   createdAt: Date;
   updatedAt: Date;
-  author: string;
+  author: User;
   image: File;
   comments: Comment[];
 }
@@ -23,7 +23,7 @@ export interface Comment {
   createdAt: string | Date;
   updatedAt: string | Date;
   body: string;
-  author: ProfileResponse;
+  author: User;
   article: Article;
   image?: string;
 }

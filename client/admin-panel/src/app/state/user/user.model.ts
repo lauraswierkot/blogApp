@@ -1,4 +1,4 @@
-import { Error } from "@state/notifications/notification.model";
+import { Error } from '@state/notifications/notification.model';
 
 export type StatePart<K extends keyof UserState> = Pick<UserState, K>;
 
@@ -39,11 +39,11 @@ export enum Role {
 export interface UserState {
   user: Omit<User, 'token'>;
   token: User['token'];
-  error: Error
+  error: Error;
 }
 
 export const initialState: UserState = {
   user: null,
   token: null,
-  error: null
+  error: null,
 };

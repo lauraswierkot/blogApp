@@ -17,6 +17,7 @@
     "search": "Search",
     "create": "Create",
     "listTitle": "All titles",
+    "addComment": "Add comment",
     "edit": "Edit",
     "delete": "Delete"
   },
@@ -36,7 +37,10 @@
     "filePlaceholder": "Insert image here",
     "fileError": "File is missing.",
     "submit": "Submit",
-    "toAdminPanel": "Do not want an article for now? Back to Admin Panel"
+    "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
+    "anonymous": "anonymous",
+    "commentDelete": "Delete",
+    "commentUpdate": "Update"
   },
 
   "confirmation": {
@@ -69,5 +73,14 @@
     "ageError": "You must be over 18 years old to register.",
     "submit": "Sign up",
     "toLogin": "Already have an account? Sign in"
+  },
+
+  "comment": {
+    "titleUpdate": "Update Comment",
+    "titleNew": "Create comment",
+    "update": "update",
+    "delete": "delete",
+    "create": "create",
+    "close": "close"
   }
 }

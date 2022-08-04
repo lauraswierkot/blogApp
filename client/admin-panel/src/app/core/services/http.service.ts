@@ -69,7 +69,7 @@ export class HttpService {
 
   public createComment(slug: string, body: string): Observable<Comment> {
     return this.http
-      .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments`, {
+      .post<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments`, {
         comment: { body: body },
       })
       .pipe(map((response) => response.comment));

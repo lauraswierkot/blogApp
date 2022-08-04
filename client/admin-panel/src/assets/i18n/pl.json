@@ -17,6 +17,7 @@
     "search": "Szukaj",
     "create": "Nowy artykuł",
     "listTitle": "Wszystkie artykuły",
+    "addComment": "Dodaj komentarz",
     "edit": "Edytuj",
     "delete": "Usuń"
   },
@@ -36,7 +37,10 @@
     "filePlaceholder": "Dodaj zdjęcie.",
     "fileError": "Brak zdjęcia.",
     "submit": "Dodaj",
-    "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego"
+    "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
+    "anonymous": "anonim",
+    "commentDelete": "Usuń",
+    "commentUpdate": "Edytuj"
   },
 
   "confirmation": {
@@ -69,5 +73,14 @@
     "ageError": "Musisz być pełnoletni, aby się zarejestrować.",
     "submit": "Zarejestruj",
     "toLogin": "Masz już konto? Zaloguj się"
+  },
+
+  "comment": {
+    "titleUpdate": "Edytuj komentarz",
+    "titleNew": "Dodaj komentarz",
+    "update": "Edytuj",
+    "delete": "Usuń",
+    "create": "Dodaj",
+    "close": "Zamknij"
   }
 }

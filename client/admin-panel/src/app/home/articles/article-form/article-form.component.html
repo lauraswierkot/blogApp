@@ -52,12 +52,21 @@
         <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
       </div>
     </div>
-    <div *ngIf="selectedArticle?.comments !== null">
+    <div *ngIf="selectedArticle?.comments && selectedArticle?.comments.length">
       <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
       <div *ngFor="let comment of selectedArticle.comments">
-        <p>{{comment.body}}
-          <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">Remove</button>
-          <button type="button" (click)="openDialog(comment)">Update</button>
+        <p>
+          {{comment.body}} by <span *ngIf="comment.author; else annComment">{{comment.author?.username}}</span>
+          <ng-template #annComment>
+            {{ 'articleForm.anonymous' | translate }}
+          </ng-template>
+          from {{comment.createdAt | date: 'dd/MM/yyyy'}}
+          <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+            {{ 'articleForm.commentDelete' | translate}}
+          </button>
+          <button type="button" (click)="openDialog(comment)">
+            {{ 'articleForm.commentUpdate' | translate}}
+          </button>
         </p>
       </div>
     </div>

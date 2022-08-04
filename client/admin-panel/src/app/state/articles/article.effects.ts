@@ -139,14 +139,14 @@ export class ArticleEffects {
   createComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.createComment),
-      switchMap(({slug, body}) => {
+      switchMap(({ slug, body }) => {
         return this.http.createComment(slug, body).pipe(
           map((comment: Comment) => {
             notificationAction.createNotification({
               message: 'Comment created',
               notificationType: NotificationType.Message,
             });
-            return action.createCommentSuccess({slug, comment});
+            return action.createCommentSuccess({ slug, comment });
           }),
           catchError((error: HttpErrorResponse) => [
             action.createCommentFailed(error),
@@ -170,7 +170,7 @@ export class ArticleEffects {
               message: 'Comment updated',
               notificationType: NotificationType.Message,
             });
-            return action.updateCommentSuccess({ id, comment });
+            return action.updateCommentSuccess({ id, body });
           }),
           catchError((error: HttpErrorResponse) => [
             action.updateCommentFailed(error),

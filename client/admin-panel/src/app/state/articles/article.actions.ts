@@ -102,7 +102,7 @@ export const updateComment = createAction(
 
 export const updateCommentSuccess = createAction(
   '[Comment] Update Comment Success',
-  props<{ id: number; comment: Comment }>()
+  props<{ id: number; body: Comment['body'] }>()
 );
 
 export const updateCommentFailed = createAction(

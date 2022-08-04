@@ -14,7 +14,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article, Comment } from '@state/articles/article.model';
-import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
+import { UpdateCommentDialogComponent } from './update-comment-dialog/update-comment-dialog.component';
 import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
@@ -153,7 +153,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { comment: comment, slug: this.selectedArticle.slug };
     dialogConfig.disableClose = false;
-    this.dialog.open(CommentDialogComponent, dialogConfig);
+    this.dialog.open(UpdateCommentDialogComponent, dialogConfig);
   }
 
   public ngOnDestroy(): void {

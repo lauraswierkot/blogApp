@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{ 'comment.titleNew' | translate }}</h1>
+<div mat-dialog-content>
+    <div>
+        <mat-label>{{body}}</mat-label>
+    </div>
+    <div>
+        <span>by <span *ngIf="author; else annComment">{{author}}</span>
+            <ng-template #annComment>
+                {{ 'articleForm.anonymous' | translate }}
+            </ng-template>
+        </span>
+    </div>
+    <div>
+        <input matInput [(ngModel)]="body" type="text" />
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">{{ 'comment.close' | translate }}</button>
+    <button mat-button (click)="updateComment()" cdkFocusInitial>{{ 'comment.update' | translate }}</button>
+</div>
