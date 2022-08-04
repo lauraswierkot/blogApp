@@ -15,6 +15,8 @@ export class ActionsFacade {
     userActions.confirmEmail,
     userActions.register,
     articleActions.createArticle,
+    articleActions.createArticleSuccess,
+    articleActions.createArticleFailed,
     articleActions.deleteArticle,
     articleActions.updateArticle,
   ];

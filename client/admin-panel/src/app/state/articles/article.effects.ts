@@ -6,7 +6,7 @@ import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, switchMap } from 'rxjs';
+import { catchError, exhaustMap, switchMap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './article.actions';
@@ -58,6 +58,26 @@ export class ArticleEffects {
             return action.getArticlesSuccess({ articles });
           }),
           catchError((error: HttpErrorResponse) => [
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  selectArticle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.selectArticle),
+      switchMap(({ slug }) => {
+        return this.http.getArticle(slug).pipe(
+          map((article: Article) => {
+            return action.selectArticleSuccess({ article });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.selectArticleFailed(error),
             notificationAction.createNotification({
               message: error.error.error,
               notificationType: NotificationType.Error,

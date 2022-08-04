@@ -11,7 +11,7 @@
       {{article.title}}
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
-      <button mat-button (click)="toUpdateArticle(article.slug, article)">
+      <button mat-button (click)="toUpdateArticle(article.slug)">
         {{ 'articles.edit' | translate }}
       </button>
       <button mat-button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>

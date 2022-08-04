@@ -1,6 +1,11 @@
 <div class="container">
   <form class="container__form" [formGroup]="articleForm" (ngSubmit)="submitForm()">
-    <header class="container__form--title">{{ 'articleForm.title' | translate }}</header>
+    <header class="container__form--title">
+      <span *ngIf="selectedArticle === null; else edit">{{ 'articleForm.titleCreate' | translate }}</span>
+      <ng-template #edit>
+        <span>{{ 'articleForm.titleEdit' | translate }}</span>
+      </ng-template>
+    </header>
     <div class="container__form__field">
       <input class="container__form__field--input" formControlName="title"
         placeholder="{{ 'articleForm.titlePlaceholder' | translate }}" name="title" required />
@@ -39,10 +44,12 @@
       </mat-form-field>
     </div>
     <div class="container__form__field">
-      <input class="container__form__field--input" type="file" (change)="onFileSelect($event)" formControlName="file"
-        placeholder="{{ 'articleForm.filePlaceholder' | translate }}" name="file" required />
-      <div class="container__form__field--message" *ngIf="file.errors && file.touched">
-        {{ 'articleForm.fileError' | translate }}
+      <button type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' | translate
+        }}</button>
+      <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
+        accept="image/*" required />
+      <div class="container__form__field" *ngIf="fileSource">
+        <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
       </div>
     </div>
     <div class="container__form__field">

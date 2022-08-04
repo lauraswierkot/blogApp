@@ -5,6 +5,9 @@
   },
 
   "adminPanel": {
+    "title": "Admin Panel",
+    "content": "Click on menu button to see options",
+    "createArticle": "Create new article",
     "logout": "Logout",
     "toArticles": "Articles"
   },
@@ -19,7 +22,8 @@
   },
 
   "articleForm": {
-    "title": "Create an article",
+    "titleCreate": "Create an article",
+    "titleEdit": "Edit an article",
     "titlePlaceholder": "Type title here",
     "titleError": "Title is missing",
     "bodyPlaceholder": "Type body here",

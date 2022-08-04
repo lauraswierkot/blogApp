@@ -1,11 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -13,6 +20,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
+import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -23,32 +31,33 @@ import { Article } from '@state/articles/article.model';
 export class ArticleFormComponent implements OnInit, OnDestroy {
   public articleForm: FormGroup;
   public selectedArticle: Article;
+  private imageUrl: string = environment.apiImageUrl;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
+  public fileSource: string | ArrayBuffer;
 
   constructor(
     private facade: ArticleFacade,
     private router: Router,
-    public formBuilder: FormBuilder
+    private route: ActivatedRoute,
+    public formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
-    this.facade.selectedArticles$.pipe(untilDestroyed(this)).subscribe(
-      (article: Article) => (this.selectedArticle = article)
-    );
-    this.articleForm = this.formBuilder.group({
-      title: [this.selectedArticle?.title, Validators.required],
-      body: [this.selectedArticle?.body, Validators.required],
-      file: [this.selectedArticle?.file, Validators.required],
-      description: [this.selectedArticle?.description, Validators.required],
-      tagList: [
-        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
-        Validators.required,
-      ],
-    });
+    const slug = this.route.snapshot.params['slug'];
+    if (slug) {
+      this.facade.selectArticle(slug);
+    }
+    this.facade.selectedArticles$
+      .pipe(untilDestroyed(this))
+      .subscribe((article) => {
+        this.selectedArticle = article;
+        this.initForm();
+      });
   }
 
   public get title(): AbstractControl {
@@ -86,9 +95,17 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public onFileSelect(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.articleForm.get('file').setValue(file);
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const fileFromInput = event.currentTarget.files[0];
+      this.articleForm.patchValue({
+        file: fileFromInput,
+      });
+      reader.readAsDataURL(fileFromInput);
+      reader.onload = () => {
+        this.fileSource = reader.result;
+        this.changeDetector.markForCheck();
+      };
     }
   }
 
@@ -97,7 +114,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public addTag(event: MatChipInputEvent): void {
-    const maxTagLength = 50;
     const value = event?.value?.trim();
     if (value && !!value?.length) {
       this.articleForm.controls['tagList'].patchValue([
@@ -114,6 +130,22 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     if (index >= 0) {
       this.articleForm.controls['tagList'].value.splice(index, 1);
       this.articleForm.controls['tagList'].updateValueAndValidity();
+    }
+  }
+
+  private initForm(): void {
+    this.articleForm = this.formBuilder.group({
+      title: [this.selectedArticle?.title, Validators.required],
+      body: [this.selectedArticle?.body, Validators.required],
+      file: [this.selectedArticle?.image, Validators.required],
+      description: [this.selectedArticle?.description, Validators.required],
+      tagList: [
+        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
+        Validators.required,
+      ],
+    });
+    if (this.selectedArticle) {
+      this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
     }
   }
 

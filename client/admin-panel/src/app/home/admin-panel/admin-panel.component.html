@@ -1,2 +1,22 @@
-<button (click)="logout()">{{ 'adminPanel.logout' | translate }}</button>
-<button (click)="toArticles()">{{ 'adminPanel.toArticles' | translate }}</button>
+<div class="menu__container" [class.isMobile]="mobileQuery.matches">
+  <mat-toolbar [ngClass]="mobileQuery.matches ? 'isMobile__toolbar' : 'toolbar'">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="menu__container--title">{{ 'adminPanel.title' | translate }}</h1>
+  </mat-toolbar>
+  <mat-sidenav-container [ngClass]="mobileQuery.matches ? 'isMobile__sidenav' : 'sidenav'"
+    [style.marginTop.px]="mobileQuery.matches ? topGap : bottomGap">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? modeOver : modeSide" [fixedInViewport]="mobileQuery.matches"
+      [fixedTopGap]="topGap">
+      <mat-nav-list>
+        <a mat-list-item (click)="toNewArticle()">{{ 'adminPanel.createArticle' | translate }}</a>
+        <a mat-list-item (click)="toArticles()">{{ 'adminPanel.toArticles' | translate }}</a>
+        <a mat-list-item (click)="logout()">{{ 'adminPanel.logout' | translate }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <p>{{ 'adminPanel.content' | translate }}</p>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

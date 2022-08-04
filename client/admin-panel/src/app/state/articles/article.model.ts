@@ -1,4 +1,4 @@
-import { Error } from "@state/notifications/notification.model";
+import { Error } from '@state/notifications/notification.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -14,7 +14,7 @@ export interface Article {
   createdAt: Date;
   updatedAt: Date;
   author: string;
-  file: File;
+  image: string;
 }
 
 export interface ArticleForm {
