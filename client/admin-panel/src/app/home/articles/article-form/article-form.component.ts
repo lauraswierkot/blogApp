@@ -1,8 +1,5 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  OnChanges,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -15,11 +12,13 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
+import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -40,12 +39,15 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     private facade: ArticleFacade,
     private router: Router,
     private route: ActivatedRoute,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
-    if (slug) this.facade.selectArticle(slug);
+    if (slug) {
+      this.facade.selectArticle(slug);
+    }
 
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
@@ -121,8 +123,8 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public deleteComment(slug: string, id: number) : void {
-    this.facade.deleteComment(slug, id)
+  public deleteComment(slug: string, id: number): void {
+    this.facade.deleteComment(slug, id);
   }
 
   private initForm(): void {
@@ -136,6 +138,13 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
     });
+  }
+
+  public openDialog(id: number): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = id;
+    dialogConfig.disableClose = false;
+    this.dialog.open(CommentDialogComponent, dialogConfig);
   }
 
   public ngOnDestroy(): void {

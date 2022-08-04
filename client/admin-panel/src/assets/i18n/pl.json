@@ -20,6 +20,7 @@
 
   "articleForm": {
     "title": "Nowy artykuł",
+    "commentsTitle": "Sekcja komentarzy",
     "titlePlaceholder": "Podaj tytuł",
     "titleError": "Brak tytułu.",
     "bodyPlaceholder": "Podaj treść",

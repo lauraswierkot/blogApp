@@ -16,8 +16,10 @@ import {
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticlesComponent,
+  ArticleFormComponent,
+  CommentDialogComponent
 } from '.';
-import { ArticleFormComponent } from './articles/article-form/article-form.component';
+
 import { MaterialModule } from 'app/material-module/material.module';
 
 const modules = [
@@ -41,6 +43,7 @@ const components = [
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
+  CommentDialogComponent
 ];
 
 @NgModule({

@@ -21,7 +21,7 @@
     "lib": ["es2020", "dom"],
     "paths": {
       "@state/*": ["app/state/*"],
-      "@home": ["app/home/*"],
+      "@home/*": ["app/home/*"],
       "@core/*": ["app/core/*"]
     }
   },

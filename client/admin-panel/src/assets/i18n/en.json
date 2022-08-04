@@ -20,6 +20,7 @@
 
   "articleForm": {
     "title": "Create an article",
+    "commentsTitle": "Comments section",
     "titlePlaceholder": "Type title here",
     "titleError": "Title is missing",
     "bodyPlaceholder": "Type body here",
