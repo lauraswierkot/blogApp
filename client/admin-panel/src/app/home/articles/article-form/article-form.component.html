@@ -1,90 +1,48 @@
 <div class="container">
-  <form
-    class="container__form"
-    [formGroup]="articleForm"
-    (ngSubmit)="submitForm()">
-    <header class="container__form--title">Create an article</header>
+  <form class="container__form" [formGroup]="articleForm" (ngSubmit)="submitForm()">
+    <header class="container__form--title">{{ 'articleForm.title' | translate }}</header>
     <div class="container__form__field">
-      <input
-        class="container__form__field--input"
-        formControlName="title"
-        placeholder="Type title here"
-        name="title"
-        required/>
-      <div
-        class="container__form__field--message"
-        *ngIf="title.errors && title.touched">
-        Title is missing.
+      <input class="container__form__field--input" formControlName="title"
+        placeholder="{{ 'articleForm.titlePlaceholder' | translate }}" name="title" required />
+      <div class="container__form__field--message" *ngIf="title.errors && title.touched">
+        {{ 'articleForm.titleError' | translate }}
       </div>
     </div>
     <div class="container__form__field">
-      <textarea
-        class="container__form__field--input"
-        formControlName="body"
-        placeholder="Type body here"
-        name="body"
-        required>
+      <textarea class="container__form__field--input" formControlName="body"
+        placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}" name="body" required>
       </textarea>
-      <div
-        class="container__form__field--message"
-        *ngIf="body.errors && body.touched">
-        Body is missing.
+      <div class="container__form__field--message" *ngIf="body.errors && body.touched">
+        {{ 'articleForm.bodyError' | translate }}
       </div>
     </div>
     <div class="container__form__field">
-      <textarea
-        class="container__form__field--input"
-        type="text"
-        formControlName="description"
-        placeholder="Type description here"
-        name="description"
-        required>
+      <textarea class="container__form__field--input" type="text" formControlName="description"
+        placeholder="{{ 'articleForm.descriptionPlaceholder' | translate }}" name="description" required>
       </textarea>
-      <div
-        class="container__form__field--message"
-        *ngIf="description.errors && description.touched">
-        Description is missing.
+      <div class="container__form__field--message" *ngIf="description.errors && description.touched">
+        {{ 'articleForm.descriptionError' | translate }}
       </div>
     </div>
     <div class="container__form__field">
-      <mat-form-field
-        appearance="fill"
-        class="container__form__field--input"
-        >
-        <mat-chip-list
-          #chipList
-          aria-label="Enter tags"
-          formControlName="tagList">
-          <mat-chip
-            *ngFor="let tag of articleForm.controls['tagList'].value"
-            [selectable]="selectable"
-            [removable]="removable"
-            (removed)="removeTag(tag)">
+      <mat-form-field appearance="fill" class="container__form__field--input">
+        <mat-chip-list #chipList aria-label="Enter tags" formControlName="tagList">
+          <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
+            [removable]="removable" (removed)="removeTag(tag)">
             {{ tag }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input
-            placeholder="Add tag & hit enter"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addTag($event)"/>
+          <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addTag($event)" />
         </mat-chip-list>
       </mat-form-field>
     </div>
     <div class="container__form__field">
-      <input
-        class="container__form__field--input"
-        type="file"
-        (change)="onFileSelect($event)"
-        formControlName="file"
-        placeholder="Insert image here"
-        name="file"
-        required/>
-      <div
-        class="container__form__field--message"
-        *ngIf="file.errors && file.touched">
-        File is missing.
+      <input class="container__form__field--input" type="file" (change)="onFileSelect($event)" formControlName="file"
+        placeholder="{{ 'articleForm.filePlaceholder' | translate }}" name="file" required />
+      <div class="container__form__field--message" *ngIf="file.errors && file.touched">
+        {{ 'articleForm.fileError' | translate }}
       </div>
     </div>
     <div *ngIf="selectedArticle?.comments !== null">
@@ -95,17 +53,13 @@
       </div>
     </div>
     <div class="container__form__field">
-      <button
-        type="submit"
-        [disabled]="!articleForm.valid">
-        <span>Submit</span>
+      <button type="submit" [disabled]="!articleForm.valid">
+        <span>{{ 'articleForm.submit' | translate }}</span>
       </button>
     </div>
     <div class="container_form__field container__form__field--login">
-      <span>Do not want an article for now? Back to Admin Panel</span>
-      <span
-        class="material-icons container__form__field--icons arrow"
-        (click)="toAdminPanel()">trending_flat
+      <span>{{ 'articleForm.toAdminPanel' | translate }}</span>
+      <span class="material-icons container__form__field--icons arrow" (click)="toAdminPanel()">trending_flat
       </span>
     </div>
   </form>
