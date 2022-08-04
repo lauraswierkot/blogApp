@@ -5,6 +5,9 @@
   },
 
   "adminPanel": {
+    "title": "Panel Admina",
+    "content": "Wybierz ikonę menu, aby zobaczyć opcje panelu",
+    "createArticle": "Stwórz artykuł",
     "logout": "Wyloguj",
     "toArticles": "Artykuły"
   },
@@ -21,6 +24,8 @@
   "articleForm": {
     "title": "Nowy artykuł",
     "commentsTitle": "Sekcja komentarzy",
+    "titleCreate": "Nowy artykuł",
+    "titleEdit": "Edytuj artykuł",
     "titlePlaceholder": "Podaj tytuł",
     "titleError": "Brak tytułu.",
     "bodyPlaceholder": "Podaj treść",

@@ -33,7 +33,7 @@ export class ArticleFacade {
     this.store.dispatch(action.updateArticle({ slug, articleForm }));
   }
 
-  public selectArticle(slug: string): void {
+  public selectArticle(slug: Article['slug']): void {
     this.store.dispatch(action.selectArticle({ slug }));
   }
 

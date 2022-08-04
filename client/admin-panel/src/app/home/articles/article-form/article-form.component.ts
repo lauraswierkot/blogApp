@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -19,6 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
+import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -29,18 +26,21 @@ import { CommentDialogComponent } from './comment-dialog/comment-dialog.componen
 export class ArticleFormComponent implements OnInit, OnDestroy {
   public articleForm: FormGroup;
   public selectedArticle: Article;
+  private imageUrl: string = environment.apiImageUrl;
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
+  public fileSource: string | ArrayBuffer;
 
   constructor(
     private facade: ArticleFacade,
     private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
@@ -48,11 +48,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     if (slug) {
       this.facade.selectArticle(slug);
     }
-
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.selectedArticle = value;
+      .subscribe((article) => {
+        this.selectedArticle = article;
         this.initForm();
       });
   }
@@ -92,9 +91,17 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public onFileSelect(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.articleForm.get('file').setValue(file);
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const fileFromInput = event.currentTarget.files[0];
+      this.articleForm.patchValue({
+        file: fileFromInput,
+      });
+      reader.readAsDataURL(fileFromInput);
+      reader.onload = () => {
+        this.fileSource = reader.result;
+        this.changeDetector.markForCheck();
+      };
     }
   }
 
@@ -103,7 +110,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public addTag(event: MatChipInputEvent): void {
-    const maxTagLength = 50;
     const value = event?.value?.trim();
     if (value && !!value?.length) {
       this.articleForm.controls['tagList'].patchValue([
@@ -138,6 +144,9 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
     });
+    if (this.selectedArticle) {
+      this.fileSource = `${this.imageUrl}/${this.selectedArticle.file}`;
+    }
   }
 
   public openDialog(id: number): void {

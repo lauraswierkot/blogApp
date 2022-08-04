@@ -1,4 +1,5 @@
 import { ProfileResponse } from "@state/user/user.model";
+import { Error } from '@state/notifications/notification.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -25,6 +26,7 @@ export interface Comment {
   body: string;
   author: ProfileResponse;
   article: Article;
+  image: string;
 }
 
 export interface ArticleForm {

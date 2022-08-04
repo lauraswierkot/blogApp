@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, switchMap } from 'rxjs';
+import { catchError, exhaustMap, switchMap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './article.actions';
