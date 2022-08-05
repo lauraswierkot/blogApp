@@ -7,7 +7,8 @@ import {
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticleFormComponent,
-  ArticlesComponent
+  ArticlesComponent,
+  UsersComponent,
 } from './home';
 
 const routes: Routes = [
@@ -29,16 +30,20 @@ const routes: Routes = [
   },
   {
     path: 'article',
-    component: ArticleFormComponent
+    component: ArticleFormComponent,
   },
   {
     path: 'articles-panel',
-    component: ArticlesComponent
+    component: ArticlesComponent,
   },
   {
     path: 'article/:slug',
-    component: ArticleFormComponent
-  }
+    component: ArticleFormComponent,
+  },
+  {
+    path: 'users-panel',
+    component: UsersComponent,
+  },
 ];
 
 @NgModule({

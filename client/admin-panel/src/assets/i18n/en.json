@@ -9,7 +9,8 @@
     "content": "Click on menu button to see options",
     "createArticle": "Create new article",
     "logout": "Logout",
-    "toArticles": "Articles"
+    "toArticles": "Articles",
+    "toUsers": "Users"
   },
 
   "articles": {
@@ -82,5 +83,20 @@
     "delete": "delete",
     "create": "create",
     "close": "close"
+  },
+
+  "users": {
+    "placeholder": "Search user...",
+    "search": "Search",
+    "listTitle": "All users",
+    "view": "View details"
+  },
+
+  "user": {
+    "title": "User details",
+    "close": "Close",
+    "username": "Username: ",
+    "email": "Email: ",
+    "birthdate": "Birthdate: "
   }
 }

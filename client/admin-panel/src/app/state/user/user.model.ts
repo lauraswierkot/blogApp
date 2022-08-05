@@ -12,6 +12,7 @@ export interface User {
   email: number;
   username: string;
   bio?: string;
+  age: string;
   image?: string;
   token: string;
 }
@@ -37,13 +38,17 @@ export enum Role {
 }
 
 export interface UserState {
+  users: User[];
   user: Omit<User, 'token'>;
+  selectedUser: User;
   token: User['token'];
   error: Error;
 }
 
 export const initialState: UserState = {
+  users: [],
   user: null,
+  selectedUser: null,
   token: null,
   error: null,
 };

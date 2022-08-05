@@ -111,4 +111,44 @@ export class UserEffects {
       })
     )
   );
+
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.getUsers),
+      switchMap(({ searchTerm }) => {
+        return this.http.getUsers(searchTerm).pipe(
+          map((users: User[]) => {
+            return action.getUsersSuccess({ users });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.getUsersFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  selectUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.selectUser),
+      switchMap(({ username }) => {
+        return this.http.getUser(username).pipe(
+          map((user: User) => {
+            return action.selectUserSuccess({ user });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.selectUserFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
 }

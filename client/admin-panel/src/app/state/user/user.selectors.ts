@@ -7,7 +7,17 @@ export const selectUserState = createFeatureSelector<UserState>(userFeatureKey);
 export const selectUserData = createSelector(
   selectUserState,
   (state) => state.user
-); 
+);
+
+export const selectSelectedUser = createSelector(
+  selectUserState,
+  (state) => state.selectedUser
+);
+
+export const selectUsersData = createSelector(
+  selectUserState,
+  (state) => state.users
+);
 
 export const selectToken = createSelector(
   selectUserState,

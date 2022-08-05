@@ -16,5 +16,15 @@ export const reducer = createReducer(
     user: loginResponse,
     token: loginResponse.token,
   })),
-  on(action.logout, (state) => ({ ...state, user: null, token: null }))
+  on(action.logout, (state) => ({ ...state, user: null, token: null })),
+  on(action.getUsersSuccess, (state, { users }) => ({
+    ...state,
+    users,
+  })),
+  on(action.getUsersFailed, (state, { error }) => ({ ...state, error })),
+  on(action.selectUserSuccess, (state, { user }) => ({
+    ...state,
+    selectedUser: user,
+  })),
+  on(action.selectUserFailed, (state, { error }) => ({ ...state, error }))
 );

@@ -5,3 +5,6 @@ export { ConfirmationPageComponent } from "./confirmation-page/confirmation-page
 export { ArticlesComponent } from "./articles/articles.component";
 export { ArticleFormComponent } from "./articles/article-form/article-form.component";
 export { UpdateCommentDialogComponent } from "./articles/article-form/update-comment-dialog/update-comment-dialog.component";
+export { UsersComponent } from "./users/users.component";
+export { NewCommentDialogComponent } from "./articles/new-comment-dialog/new-comment-dialog.component";
+export { UserDialogComponent } from "./users/user-dialog/user-dialog.component";

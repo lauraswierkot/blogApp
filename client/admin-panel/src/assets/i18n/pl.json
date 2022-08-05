@@ -9,14 +9,15 @@
     "content": "Wybierz ikonę menu, aby zobaczyć opcje panelu",
     "createArticle": "Stwórz artykuł",
     "logout": "Wyloguj",
-    "toArticles": "Artykuły"
+    "toArticles": "Artykuły",
+    "toUsers": "Użytkownicy"
   },
 
   "articles": {
     "placeholder": "Wyszukaj artykuł...",
     "search": "Szukaj",
     "create": "Nowy artykuł",
-    "listTitle": "Wszystkie artykuły",
+    "listTitle": "Artykuły",
     "addComment": "Dodaj komentarz",
     "edit": "Edytuj",
     "delete": "Usuń"
@@ -82,5 +83,20 @@
     "delete": "Usuń",
     "create": "Dodaj",
     "close": "Zamknij"
+  },
+
+  "users": {
+    "placeholder": "Wyszukaj użytkownika...",
+    "search": "Szukaj",
+    "listTitle": "Użytkownicy",
+    "view": "Pokaż szczegóły"
+  },
+
+  "user": {
+    "title": "Informacje o użytkowniku",
+    "close": "Close",
+    "username": "Nazwa użytkownika: ",
+    "email": "Email: ",
+    "birthdate": "Data urodzin: "
   }
 }

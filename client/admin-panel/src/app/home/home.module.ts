@@ -1,10 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+
+import { MaterialModule } from 'app/material-module/material.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -18,10 +19,11 @@ import {
   ArticlesComponent,
   ArticleFormComponent,
   UpdateCommentDialogComponent,
+  UsersComponent,
+  NewCommentDialogComponent,
+  UserDialogComponent
 } from '.';
 
-import { MaterialModule } from 'app/material-module/material.module';
-import { NewCommentDialogComponent } from './articles/new-comment-dialog/new-comment-dialog.component';
 
 const modules = [
   FormsModule,
@@ -45,10 +47,13 @@ const components = [
   ArticlesComponent,
   ArticleFormComponent,
   UpdateCommentDialogComponent,
+  NewCommentDialogComponent,
+  UsersComponent,
+  UserDialogComponent
 ];
 
 @NgModule({
-  declarations: [...components, NewCommentDialogComponent],
+  declarations: [...components],
   imports: [...modules],
   exports: [...components],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

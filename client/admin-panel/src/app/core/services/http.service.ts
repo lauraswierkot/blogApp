@@ -33,6 +33,19 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
+  public getUsers(searchTerm: string): Observable<User[]> {
+    const params = new HttpParams().set('searchTerm', searchTerm);
+    return this.http
+      .get<{ users: User[] }>(`${apiUrl}/users`, { params })
+      .pipe(map((response) => response.users));
+  }
+
+  public getUser(username: string): Observable<User> {
+    return this.http
+      .get<{ profile: User }>(`${apiUrl}/profiles/${username}`)
+      .pipe(map((response) => response.profile));
+  }
+
   public createArticle(articleForm: FormData): Observable<Article> {
     return this.http
       .post<{ article: Article }>(`${apiUrl}/articles`, articleForm)

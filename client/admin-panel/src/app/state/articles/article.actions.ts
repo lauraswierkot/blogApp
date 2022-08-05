@@ -64,7 +64,7 @@ export const updateArticleFailed = createAction(
 );
 
 export const selectArticle = createAction(
-  '[Article] Article Selected Request',
+  '[Article] Select Article Request',
   props<{ slug: Article['slug'] }>()
 );
 

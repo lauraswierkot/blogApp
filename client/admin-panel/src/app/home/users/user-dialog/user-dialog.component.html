@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{ 'user.title' | translate }}</h1>
+<div mat-dialog-content>
+    <div>
+        {{ 'user.username' | translate }} {{ selectedUser?.username }}
+    </div>
+    <div>
+        {{ 'user.email' | translate }} {{ selectedUser?.email }}
+    </div>
+    <div>
+        {{ 'user.birthdate' | translate }} {{ selectedUser?.age | date }}
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" cdkFocusInitial>{{ 'user.close' | translate }}</button>
+</div>
