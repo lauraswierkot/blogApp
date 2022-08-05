@@ -20,7 +20,8 @@
     "listTitle": "Artykuły",
     "addComment": "Dodaj komentarz",
     "edit": "Edytuj",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "toAdminPanel": "Panel Admina"
   },
 
   "articleForm": {
@@ -35,7 +36,7 @@
     "descriptionPlaceholder": " Podaj opis",
     "descriptionError": "Brak opisu.",
     "tagsPlaceholder": "Podaj tag & enter",
-    "filePlaceholder": "Dodaj zdjęcie.",
+    "filePlaceholder": "Dodaj zdjęcie",
     "fileError": "Brak zdjęcia.",
     "submit": "Dodaj",
     "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
@@ -89,7 +90,8 @@
     "placeholder": "Wyszukaj użytkownika...",
     "search": "Szukaj",
     "listTitle": "Użytkownicy",
-    "view": "Pokaż szczegóły"
+    "view": "Pokaż szczegóły",
+    "toAdminPanel": "Panel Admina"
   },
 
   "user": {

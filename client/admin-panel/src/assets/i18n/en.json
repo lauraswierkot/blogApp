@@ -20,7 +20,8 @@
     "listTitle": "All titles",
     "addComment": "Add comment",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "toAdminPanel": "Admin Panel"
   },
 
   "articleForm": {
@@ -89,7 +90,8 @@
     "placeholder": "Search user...",
     "search": "Search",
     "listTitle": "All users",
-    "view": "View details"
+    "view": "View details",
+    "toAdminPanel": "Admin Panel"
   },
 
   "user": {

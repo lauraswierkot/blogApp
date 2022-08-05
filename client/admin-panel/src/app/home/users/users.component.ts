@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserFacade } from '@state/user/user.facade';
 import { User } from '@state/user/user.model';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,7 @@ export class UsersComponent implements OnInit {
   public articleForm: FormData;
   public searchTerm: string;
 
-  constructor(private facade: UserFacade, public dialog: MatDialog) {}
+  constructor(private facade: UserFacade, public dialog: MatDialog, public router: Router) {}
 
   public ngOnInit(): void {
     this.usersList = this.facade.users$;
@@ -33,5 +34,9 @@ export class UsersComponent implements OnInit {
     dialogConfig.data = { username: username };
     dialogConfig.disableClose = false;
     this.dialog.open(UserDialogComponent, dialogConfig);
+  }
+
+  public toAdminPanel(): void {
+    this.router.navigate(['']);
   }
 }

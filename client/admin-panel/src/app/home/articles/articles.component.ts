@@ -55,4 +55,8 @@ export class ArticlesComponent implements OnInit {
   public toUpdateArticle(slug: string): void {
     this.router.navigate([`article/${slug}`]);
   }
+
+  public toAdminPanel(): void {
+    this.router.navigate(['']);
+  }
 }

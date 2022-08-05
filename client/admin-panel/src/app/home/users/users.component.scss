@@ -1,11 +1,17 @@
 .search {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: 1.5em;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
 
   &__form {
     height: 2.5em;
-    margin-right: 1em;
+    margin-right: 1.5em;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
   }
 }
 
@@ -16,11 +22,10 @@
   align-items: stretch;
   margin-top: 1em;
   max-width: 100%;
+  overflow: hidden;
 
   &__buttons {
     display: flex;
     margin-left: auto;
-    flex-wrap: wrap;
-    gap: 1.5em;
   }
 }

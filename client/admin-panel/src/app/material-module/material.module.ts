@@ -24,6 +24,7 @@ const modules = [
   MatSelectModule,
   MatSidenavModule,
   MatButtonModule,
+  MatCardModule,
   MatListModule,
   MatToolbarModule,
   MatBadgeModule,
