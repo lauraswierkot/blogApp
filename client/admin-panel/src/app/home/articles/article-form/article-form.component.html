@@ -56,11 +56,11 @@
       <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
       <div *ngFor="let comment of selectedArticle.comments">
         <p>
-          {{comment.body}} by <span *ngIf="comment.author; else annComment">{{comment.author?.username}}</span>
-          <ng-template #annComment>
+          {{comment.body}} {{ 'articleForm.by' | translate }} <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
+          <ng-template #anonymousComment>
             {{ 'articleForm.anonymous' | translate }}
           </ng-template>
-          from {{comment.createdAt | date: 'dd/MM/yyyy'}}
+          {{ 'articleForm.from' | translate }} {{comment.createdAt | date: 'dd/MM/yyyy'}}
           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
             {{ 'articleForm.commentDelete' | translate}}
           </button>

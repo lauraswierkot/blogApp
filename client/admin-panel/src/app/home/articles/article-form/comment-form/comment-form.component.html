@@ -1,0 +1,22 @@
+<form class="container__form" [formGroup]="commentForm" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>{{ 'comment.titleNew' | translate }}</h1>
+    <div mat-dialog-content>
+        <div>
+            <mat-label>{{this.data.comment?.body}}</mat-label>
+        </div>
+        <div>
+            <span>{{ 'articleForm.by' | translate }}<span *ngIf="author; else anonymousComment">{{author}}</span>
+                <ng-template #anonymousComment>
+                    {{ 'articleForm.anonymous' | translate }}
+                </ng-template>
+            </span>
+        </div>
+        <div>
+            <input matInput formControlName="body" name="body" type="text" required />
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="closeDialog()">{{ 'comment.close' | translate }}</button>
+        <button mat-button [disabled]="!commentForm.valid" type="submit" (click)="submit()" cdkFocusInitial>{{ 'comment.update' | translate }}</button>
+    </div>
+</form>

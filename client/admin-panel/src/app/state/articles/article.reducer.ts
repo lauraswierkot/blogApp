@@ -45,7 +45,7 @@ export const reducer = createReducer(
   on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
   on(action.createCommentSuccess, (state, { comment }) => {
     const comments =
-      state.selectedArticle?.comments == null
+    !state.selectedArticle?.comments
         ? []
         : state.selectedArticle.comments;
     return {

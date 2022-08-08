@@ -40,7 +40,9 @@
     "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
     "anonymous": "anonim",
     "commentDelete": "Usuń",
-    "commentUpdate": "Edytuj"
+    "commentUpdate": "Edytuj",
+    "by": "przez",
+    "from": "z"
   },
 
   "confirmation": {

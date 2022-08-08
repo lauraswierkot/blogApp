@@ -40,7 +40,9 @@
     "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
     "anonymous": "anonymous",
     "commentDelete": "Delete",
-    "commentUpdate": "Update"
+    "commentUpdate": "Update",
+    "by": "by",
+    "from": "from"
   },
 
   "confirmation": {

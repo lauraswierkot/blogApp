@@ -1,4 +1,4 @@
-import { ProfileResponse, User } from '@state/user/user.model';
+import { User } from '@state/user/user.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -26,6 +26,12 @@ export interface Comment {
   author: User;
   article: Article;
   image?: string;
+}
+
+export interface UpdatedComment {
+  slug: Article['slug'];
+  body: string;
+  id: number;
 }
 
 export interface ArticleForm {

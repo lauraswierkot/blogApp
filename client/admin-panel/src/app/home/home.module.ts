@@ -17,11 +17,10 @@ import {
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
-  UpdateCommentDialogComponent,
+  CommentFormComponent
 } from '.';
 
 import { MaterialModule } from 'app/material-module/material.module';
-import { NewCommentDialogComponent } from './articles/new-comment-dialog/new-comment-dialog.component';
 
 const modules = [
   FormsModule,
@@ -44,11 +43,11 @@ const components = [
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
-  UpdateCommentDialogComponent,
+  CommentFormComponent
 ];
 
 @NgModule({
-  declarations: [...components, NewCommentDialogComponent],
+  declarations: [...components],
   imports: [...modules],
   exports: [...components],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
