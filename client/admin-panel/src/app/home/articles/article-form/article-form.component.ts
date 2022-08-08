@@ -1,23 +1,21 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article, Comment } from '@state/articles/article.model';
-import {
-  CommentFormComponent,
-  CommentInterface,
-} from '@home/articles/article-form/comment-form/comment-form.component';
+import { Article } from '@state/articles/article.model';
 import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
@@ -77,6 +75,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   public get tagList(): AbstractControl {
     return this.articleForm.get('tagList');
+  }
+
+  public get comments(): FormArray {
+    return this.articleForm.get('comments') as FormArray;
   }
 
   public submitForm(): void {
@@ -146,20 +148,21 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
         Validators.required,
       ],
+      comments: this.formBuilder.array([]),
+    });
+
+    this.selectedArticle.comments.forEach((comment) => {
+      this.comments.push(
+        this.formBuilder.group({
+          id: [comment.id],
+          author: [comment.author],
+          body: [comment.body],
+        })
+      );
     });
     if (this.selectedArticle) {
       this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
     }
-  }
-
-  public openDialog(comment: Comment): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      comment,
-      slug: this.selectedArticle.slug,
-    } as CommentInterface;
-    dialogConfig.disableClose = false;
-    this.dialog.open(CommentFormComponent, dialogConfig);
   }
 
   public ngOnDestroy(): void {

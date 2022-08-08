@@ -36,10 +36,6 @@ export class ArticlesComponent implements OnInit {
     this.router.navigate(['article']);
   }
 
-  public addComment(slug: string, body: string): void {
-    this.facade.createComment(slug, body);
-  }
-
   public deleteArticle(slug: string): void {
     this.facade.deleteArticle(slug);
   }

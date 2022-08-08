@@ -4,4 +4,3 @@ export { AdminPanelComponent } from "./admin-panel/admin-panel.component";
 export { ConfirmationPageComponent } from "./confirmation-page/confirmation-page.component";
 export { ArticlesComponent } from "./articles/articles.component";
 export { ArticleFormComponent } from "./articles/article-form/article-form.component";
-export { CommentFormComponent } from "./articles/article-form/comment-form/comment-form.component";

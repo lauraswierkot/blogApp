@@ -41,14 +41,6 @@ export class ArticleFacade {
     this.store.dispatch(action.resetArticle());
   }
 
-  public createComment(slug: string, body: string): void {
-    this.store.dispatch(action.createComment({ slug, body }));
-  }
-
-  public updateComment(updateComment: UpdatedComment): void {
-    this.store.dispatch(action.updateComment({ slug: updateComment.slug, body: updateComment.body, id: updateComment.id }));
-  }
-
   public deleteComment(slug: string, id: number): void {
     this.store.dispatch(action.deleteComment({ slug, id }));
   }

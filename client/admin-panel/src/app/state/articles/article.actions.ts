@@ -81,36 +81,6 @@ export const selectArticleFailed = createAction(
 
 export const resetArticle = createAction('[Article] Article Reset');
 
-export const createComment = createAction(
-  '[Comment] Create Comment Request',
-  props<{ slug: string; body: Comment['body'] }>()
-);
-
-export const createCommentSuccess = createAction(
-  '[Comment] Create Comment Success',
-  props<{ slug: string; comment: Comment }>()
-);
-
-export const createCommentFailed = createAction(
-  '[Comment] Create Comment Fail',
-  props<{ error: Error }>()
-);
-
-export const updateComment = createAction(
-  '[Comment] Update Comment Request',
-  props<{ slug: string; body: Comment['body']; id: Comment['id'] }>()
-);
-
-export const updateCommentSuccess = createAction(
-  '[Comment] Update Comment Success',
-  props<{ id: Comment['id'], body: Comment['body'] }>()
-);
-
-export const updateCommentFailed = createAction(
-  '[Comment] Update Comment Fail',
-  props<{ error: Error }>()
-);
-
 export const deleteComment = createAction(
   '[Comment] Delete Comment Request',
   props<{ slug: string; id: Comment['id'] }>()
