@@ -17,11 +17,14 @@
     "search": "Search",
     "create": "Create",
     "listTitle": "All titles",
+    "addComment": "Add comment",
     "edit": "Edit",
     "delete": "Delete"
   },
 
   "articleForm": {
+    "title": "Create an article",
+    "commentsTitle": "Comments section",
     "titleCreate": "Create an article",
     "titleEdit": "Edit an article",
     "titlePlaceholder": "Type title here",
@@ -34,7 +37,12 @@
     "filePlaceholder": "Insert image here",
     "fileError": "File is missing.",
     "submit": "Submit",
-    "toAdminPanel": "Do not want an article for now? Back to Admin Panel"
+    "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
+    "anonymous": "anonymous",
+    "commentDelete": "Delete",
+    "commentUpdate": "Update",
+    "by": "by",
+    "from": "from"
   },
 
   "confirmation": {
@@ -67,5 +75,24 @@
     "ageError": "You must be over 18 years old to register.",
     "submit": "Sign up",
     "toLogin": "Already have an account? Sign in"
+  },
+
+  "comment": {
+    "titleUpdate": "Update Comment",
+    "titleNew": "Create comment",
+    "update": "update",
+    "delete": "delete",
+    "create": "create",
+    "close": "close"
+  },
+
+  "notification": {
+    "articleCreated": "Article Created",
+    "articleDeleted": "Article Deleted",
+    "articleUpdated": "Article Updated",
+    "commentDeleted": "Comment Deleted",
+    "userLoggedIn": "Logged in successfully",
+    "userRegistered": "Registered successfully",
+    "emailConfirmed": "Email confirmed"
   }
 }

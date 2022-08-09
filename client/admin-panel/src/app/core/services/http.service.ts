@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 
-import { Article } from '@state/articles/article.model';
+import { Article, Comment } from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
 
 const apiUrl = environment.apiUrl;
@@ -65,5 +65,11 @@ export class HttpService {
     return this.http
       .put<{ article: Article }>(`${apiUrl}/articles/${slug}`, articleForm)
       .pipe(map((response) => response.article));
+  }
+
+  public deleteComment(slug: string, id: number): Observable<Comment> {
+    return this.http
+      .delete<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`)
+      .pipe(map((response) => response.comment));
   }
 }

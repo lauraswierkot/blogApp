@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
-import { Article } from './article.model';
+import { Article, Comment } from './article.model';
 import * as selector from './article.selectors';
 
 @Injectable({
@@ -10,7 +10,10 @@ import * as selector from './article.selectors';
 })
 export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
-  public selectedArticles$ = this.store.select(selector.selectSelectedArticle);
+  public selectedArticle$ = this.store.select(selector.selectSelectedArticle);
+  public selectedArticleComments = this.store.select(
+    selector.selectSelectedArticleComments
+  );
 
   constructor(private store: Store) {}
 
@@ -36,5 +39,9 @@ export class ArticleFacade {
 
   public resetArticle(): void {
     this.store.dispatch(action.resetArticle());
+  }
+
+  public deleteComment(slug: Article['slug'], id: Comment['id']): void {
+    this.store.dispatch(action.deleteComment({ slug, id }));
   }
 }

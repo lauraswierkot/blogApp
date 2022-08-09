@@ -1,4 +1,4 @@
-import { Error } from '@state/notifications/notification.model';
+import { User } from '@state/user/user.model';
 
 export type StatePart<K extends keyof ArticleState> = Pick<ArticleState, K>;
 
@@ -13,8 +13,25 @@ export interface Article {
   tagList: string[];
   createdAt: Date;
   updatedAt: Date;
-  author: string;
-  image: string;
+  author: User;
+  image: File;
+  comments: Comment[];
+}
+
+export interface Comment {
+  id: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  body: string;
+  author: User;
+  article: Article;
+  image?: string;
+}
+
+export interface UpdatedComment {
+  slug: Article['slug'];
+  body: string;
+  id: number;
 }
 
 export interface ArticleForm {
@@ -28,11 +45,13 @@ export interface ArticleForm {
 export interface ArticleState {
   articles: Article[];
   selectedArticle: Article;
-  error: Error;
+  selectedArticleComments: Comment[];
+  error: any;
 }
 
 export const initialState: ArticleState = {
   articles: [],
   selectedArticle: null,
+  selectedArticleComments: [],
   error: null,
 };

@@ -1,20 +1,16 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -44,6 +40,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
+    public dialog: MatDialog,
     private changeDetector: ChangeDetectorRef
   ) {}
 
@@ -52,7 +49,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     if (slug) {
       this.facade.selectArticle(slug);
     }
-    this.facade.selectedArticles$
+    this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
         this.selectedArticle = article;
@@ -78,6 +75,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   public get tagList(): AbstractControl {
     return this.articleForm.get('tagList');
+  }
+
+  public get comments(): FormArray {
+    return this.articleForm.get('comments').value;
   }
 
   public submitForm(): void {
@@ -133,6 +134,10 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  public deleteComment(slug: string, id: number): void {
+    this.facade.deleteComment(slug, id);
+  }
+
   private initForm(): void {
     this.articleForm = this.formBuilder.group({
       title: [this.selectedArticle?.title, Validators.required],
@@ -143,7 +148,14 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
         Validators.required,
       ],
+      comments: this.formBuilder.array([]),
     });
+
+    this.articleForm.setControl(
+      'comments',
+      this.formBuilder.array(this.selectedArticle.comments || [])
+    );
+
     if (this.selectedArticle) {
       this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
     }

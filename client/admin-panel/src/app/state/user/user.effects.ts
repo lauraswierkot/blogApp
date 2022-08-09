@@ -32,7 +32,7 @@ export class UserEffects {
           map((loginResponse: User) => {
             this.router.navigate(['']);
             notificationAction.createNotification({
-              message: 'Logged in successfully',
+              message: "{{'notification.userLoggedIn' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.loginSuccess({ loginResponse });
@@ -67,7 +67,7 @@ export class UserEffects {
         return this.http.register(registerForm).pipe(
           map((registerResponse: User) => {
             notificationAction.createNotification({
-              message: 'Article added successfully',
+              message: "{{'notification.userRegistered' | translate}}",
               notificationType: NotificationType.Message,
             });
             this.router.navigate(['/login']);
@@ -95,7 +95,7 @@ export class UserEffects {
               this.router.navigate(['/login']);
             }, 2000);
             notificationAction.createNotification({
-              message: 'Email confirmed',
+              message: "{{'notification.emailConfirmed' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.confirmEmailSuccess();

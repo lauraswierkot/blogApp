@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { createAction, props } from '@ngrx/store';
 import { Error } from '@state/notifications/notification.model';
 
-import { Article } from './article.model';
+import { Article, Comment } from './article.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles Request',
@@ -78,4 +79,19 @@ export const selectArticleFailed = createAction(
   props<{ error: Error }>()
 );
 
-export const resetArticle = createAction('[Article] Article Reset Request');
+export const resetArticle = createAction('[Article] Article Reset');
+
+export const deleteComment = createAction(
+  '[Comment] Delete Comment Request',
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
+);
+
+export const deleteCommentSuccess = createAction(
+  '[Comment] Delete Comment Success',
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
+);
+
+export const deleteCommentFailed = createAction(
+  '[Comment] Delete Comment Fail',
+  props<{ error: Error }>()
+);

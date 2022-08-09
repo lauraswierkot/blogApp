@@ -16,8 +16,9 @@ import {
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticlesComponent,
+  ArticleFormComponent,
 } from '.';
-import { ArticleFormComponent } from './articles/article-form/article-form.component';
+
 import { MaterialModule } from 'app/material-module/material.module';
 
 const modules = [

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-articles',
@@ -13,10 +14,13 @@ import { Article } from '@state/articles/article.model';
 })
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;
-  public articleForm: FormData; 
   public searchTerm: string;
-  
-  constructor(private facade: ArticleFacade, private router: Router) {}
+
+  constructor(
+    private facade: ArticleFacade,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   public ngOnInit(): void {
     this.articlesList = this.facade.articles$;
