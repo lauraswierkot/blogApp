@@ -44,6 +44,7 @@ export interface ArticleForm {
 
 export interface ArticleState {
   articles: Article[];
+  articlesCount: number;
   selectedArticle: Article;
   selectedArticleComments: Comment[];
   error: any;
@@ -51,6 +52,7 @@ export interface ArticleState {
 
 export const initialState: ArticleState = {
   articles: [],
+  articlesCount: 0,
   selectedArticle: null,
   selectedArticleComments: [],
   error: null,

@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-articles',
@@ -13,8 +14,13 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent implements OnInit {
-  public articlesList: Observable<Article[]>;
+  public articlesList$: Observable<Article[]>;
+  public articlesCount$: Observable<number>;
+  public articlesCount = 0;
+  public pageIndex = 0;
   public searchTerm: string;
+  public pageSize = 3;
+  public pageSizeOptions: number[] = [3, 6, 9];
 
   constructor(
     private facade: ArticleFacade,
@@ -23,12 +29,20 @@ export class ArticlesComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.articlesList = this.facade.articles$;
-    this.facade.getArticles();
+    this.articlesCount$ = this.facade.articlesCount$;
+    this.articlesList$ = this.facade.articles$;
+    this.articlesCount$.subscribe((total) => {
+      this.articlesCount = total;
+    });
+    this.facade.getArticles(
+      this.pageSize?.toString(),
+      this.pageIndex?.toString(),
+      ''
+    );
   }
 
   public search(): void {
-    this.facade.getArticles(this.searchTerm);
+    this.facade.getArticles(this.pageSize?.toString(), '0', this.searchTerm);
   }
 
   public createArticle(): void {
@@ -45,5 +59,19 @@ export class ArticlesComponent implements OnInit {
 
   public toAdminPanel(): void {
     this.router.navigate(['']);
+  }
+
+  public setPaginator(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.paginateList();
+  }
+
+  public paginateList(): void {
+    this.facade.getArticles(
+      this.pageSize?.toString(),
+      this.pageIndex?.toString(),
+      this.searchTerm
+    );
   }
 }

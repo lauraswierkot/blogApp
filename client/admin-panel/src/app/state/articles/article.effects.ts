@@ -13,6 +13,8 @@ import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { Article, Comment } from './article.model';
 import { NotificationType } from '@state/notifications/notification.model';
+import { Store } from '@ngrx/store';
+import { setArticlesCount } from './article.actions';
 
 @Injectable()
 export class ArticleEffects {
@@ -20,7 +22,8 @@ export class ArticleEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private store: Store
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -51,9 +54,10 @@ export class ArticleEffects {
   getArticles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.getArticles),
-      switchMap(({ searchTerm }) => {
-        return this.http.getArticles(searchTerm).pipe(
-          map((articles: Article[]) => {
+      switchMap(({ limit, page, searchTerm }) => {
+        return this.http.getArticles(limit, page, searchTerm).pipe(
+          map(({ articles, articlesCount }) => {
+            this.store.dispatch(setArticlesCount({ articlesCount }));
             return action.getArticlesSuccess({ articles });
           }),
           catchError((error: HttpErrorResponse) => [

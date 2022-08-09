@@ -10,6 +10,7 @@ import * as selector from './article.selectors';
 })
 export class ArticleFacade {
   public articles$ = this.store.select(selector.selectArticleData);
+  public articlesCount$ = this.store.select(selector.selectArticlesCount);
   public selectedArticle$ = this.store.select(selector.selectSelectedArticle);
   public selectedArticleComments = this.store.select(
     selector.selectSelectedArticleComments
@@ -21,8 +22,8 @@ export class ArticleFacade {
     this.store.dispatch(action.createArticle({ articleForm }));
   }
 
-  public getArticles(searchTerm: string = ''): void {
-    this.store.dispatch(action.getArticles({ searchTerm }));
+  public getArticles(limit: string, page: string, searchTerm: string = ''): void {
+    this.store.dispatch(action.getArticles({ limit, page, searchTerm}));
   }
 
   public deleteArticle(slug: string): void {

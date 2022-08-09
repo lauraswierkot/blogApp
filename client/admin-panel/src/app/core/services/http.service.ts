@@ -52,11 +52,17 @@ export class HttpService {
       .pipe(map((articleResponse) => articleResponse.article));
   }
 
-  public getArticles(searchTerm: string): Observable<Article[]> {
-    const params = new HttpParams().set('searchTerm', searchTerm);
+  public getArticles(
+    limit: string,
+    page: string,
+    searchTerm: string
+  ): Observable<{ articles: Article[]; articlesCount: number }> {
+    let params = { limit: limit, page: page, searchTerm: searchTerm };
     return this.http
-      .get<{ articles: Article[] }>(`${apiUrl}/articles`, { params })
-      .pipe(map((response) => response.articles));
+      .get<{ articles: Article[]; articlesCount: number }>(`${apiUrl}/articles`, {
+        params: params,
+      })
+      .pipe(map((response) => response));
   }
 
   public getArticle(slug: string): Observable<Article> {

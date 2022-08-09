@@ -6,7 +6,7 @@ import { Article, Comment } from './article.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles Request',
-  props<{ searchTerm: string }>()
+  props<{  limit: string; page: string, searchTerm: string }>()
 );
 
 export const getArticlesSuccess = createAction(
@@ -17,6 +17,11 @@ export const getArticlesSuccess = createAction(
 export const getArticlesFailed = createAction(
   '[Article] Get Articles Fail',
   props<{ error: Error }>()
+);
+
+export const setArticlesCount = createAction(
+  '[Article] Set Articles Count',
+  props<{ articlesCount: number }>()
 );
 
 export const createArticle = createAction(
