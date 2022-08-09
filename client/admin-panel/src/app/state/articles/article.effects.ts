@@ -31,7 +31,7 @@ export class ArticleEffects {
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
             notificationAction.createNotification({
-              message: 'Article created',
+              message: "{{'notification.articleCreated' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.createArticleSuccess({ article });
@@ -95,7 +95,7 @@ export class ArticleEffects {
         return this.http.deleteArticle(slug).pipe(
           map((article: Article) => {
             notificationAction.createNotification({
-              message: 'Article deleted',
+              message: "{{'notification.articleDeleted' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.deleteArticleSuccess({ slug });
@@ -120,7 +120,7 @@ export class ArticleEffects {
           map((article: Article) => {
             this.router.navigate(['articles-panel']);
             notificationAction.createNotification({
-              message: 'Article created',
+              message: "{{'notification.articleUpdated' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.updateArticleSuccess({ slug, article });
@@ -143,7 +143,7 @@ export class ArticleEffects {
         return this.http.deleteComment(slug, id).pipe(
           map((comment: Comment) => {
             notificationAction.createNotification({
-              message: 'Comment deleted',
+              message: "{{'notification.commentDeleted' | translate}}",
               notificationType: NotificationType.Message,
             });
             return action.deleteCommentSuccess({ slug, id });

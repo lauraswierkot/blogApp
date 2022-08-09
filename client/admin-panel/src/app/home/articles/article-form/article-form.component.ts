@@ -78,7 +78,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public get comments(): FormArray {
-    return this.articleForm.get('comments') as FormArray;
+    return this.articleForm.get('comments').value;
   }
 
   public submitForm(): void {
@@ -151,15 +151,11 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       comments: this.formBuilder.array([]),
     });
 
-    this.selectedArticle.comments.forEach((comment) => {
-      this.comments.push(
-        this.formBuilder.group({
-          id: [comment.id],
-          author: [comment.author],
-          body: [comment.body],
-        })
-      );
-    });
+    this.articleForm.setControl(
+      'comments',
+      this.formBuilder.array(this.selectedArticle.comments || [])
+    );
+
     if (this.selectedArticle) {
       this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
     }

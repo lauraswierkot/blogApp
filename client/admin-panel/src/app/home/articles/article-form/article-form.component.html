@@ -44,23 +44,26 @@
       </mat-form-field>
     </div>
     <div class="container__form__field">
-      <button type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' | translate
-        }}</button>
+      <button type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
+        translate}}
+      </button>
       <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
         accept="image/*" required />
       <div class="container__form__field" *ngIf="fileSource">
         <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
       </div>
     </div>
-    <div *ngIf="selectedArticle?.comments && selectedArticle?.comments.length">
+    <div *ngIf="articleForm?.controls['comments']">
       <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
-      <div *ngFor="let comment of selectedArticle.comments">
+      <div *ngFor="let comment of articleForm.controls['comments'].value">
         <p>
-          {{comment.body}} {{ 'articleForm.by' | translate }} <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
+          {{ comment.body | slice: 0 : 20 }}
+          <span *ngIf="comment.body.length >=20">...</span> | 
+          <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
           <ng-template #anonymousComment>
             {{ 'articleForm.anonymous' | translate }}
           </ng-template>
-          {{ 'articleForm.from' | translate }} {{comment.createdAt | date: 'dd/MM/yyyy'}}
+           {{comment.createdAt | date: 'dd/MM/yyyy'}}
           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
             {{ 'articleForm.commentDelete' | translate}}
           </button>

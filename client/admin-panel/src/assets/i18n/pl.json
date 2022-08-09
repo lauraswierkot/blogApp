@@ -34,7 +34,7 @@
     "descriptionPlaceholder": " Podaj opis",
     "descriptionError": "Brak opisu.",
     "tagsPlaceholder": "Podaj tag & enter",
-    "filePlaceholder": "Dodaj zdjęcie.",
+    "filePlaceholder": "Dodaj zdjęcie",
     "fileError": "Brak zdjęcia.",
     "submit": "Dodaj",
     "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
@@ -84,5 +84,15 @@
     "delete": "Usuń",
     "create": "Dodaj",
     "close": "Zamknij"
+  },
+
+  "notification": {
+    "articleCreated": "Artykuł dodany",
+    "articleDeleted": "Artykuł usunięty",
+    "articleUpdated": "Article zaktualizowany",
+    "commentDeleted": "Comment usunięty",
+    "userLoggedIn": "Udane logowanie",
+    "userRegistered": "Rejestracja zakończona",
+    "emailConfirmed": "Email potwierdzony"
   }
 }

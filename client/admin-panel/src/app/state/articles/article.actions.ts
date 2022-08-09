@@ -83,12 +83,12 @@ export const resetArticle = createAction('[Article] Article Reset');
 
 export const deleteComment = createAction(
   '[Comment] Delete Comment Request',
-  props<{ slug: string; id: Comment['id'] }>()
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
 );
 
 export const deleteCommentSuccess = createAction(
   '[Comment] Delete Comment Success',
-  props<{ slug: string; id: Comment['id'] }>()
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
 );
 
 export const deleteCommentFailed = createAction(

@@ -14,7 +14,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class ArticlesComponent implements OnInit {
   public articlesList: Observable<Article[]>;
-  public articleForm: FormData;
   public searchTerm: string;
 
   constructor(

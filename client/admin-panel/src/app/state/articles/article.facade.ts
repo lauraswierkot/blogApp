@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
-import { Article, UpdatedComment } from './article.model';
+import { Article, Comment } from './article.model';
 import * as selector from './article.selectors';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class ArticleFacade {
     this.store.dispatch(action.resetArticle());
   }
 
-  public deleteComment(slug: string, id: number): void {
+  public deleteComment(slug: Article['slug'], id: Comment['id']): void {
     this.store.dispatch(action.deleteComment({ slug, id }));
   }
 }
