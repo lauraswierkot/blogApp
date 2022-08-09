@@ -49,7 +49,7 @@ export const reducer = createReducer(
     );
     return {
       ...state,
-      comments: filteredComments,
+      selectedArticleComments: filteredComments,
       selectedArticle: { ...state.selectedArticle, comments: filteredComments },
     };
   }),
