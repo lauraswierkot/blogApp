@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { UpdateCommentDialogComponent } from '@home/articles/article-form/update-comment-dialog/update-comment-dialog.component';
 import { User } from '@state/user/user.model';
 import { UserFacade } from '@state/user/user.facade';
 
@@ -25,7 +24,7 @@ export class UserDialogComponent implements OnInit {
 
   constructor(
     public facade: UserFacade,
-    private dialogRef: MatDialogRef<UpdateCommentDialogComponent>,
+    private dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { username: string }
   ) {}
 

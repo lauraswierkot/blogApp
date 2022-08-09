@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { createAction, props } from '@ngrx/store';
 import { Error } from '@state/notifications/notification.model';
 
@@ -80,44 +81,14 @@ export const selectArticleFailed = createAction(
 
 export const resetArticle = createAction('[Article] Article Reset');
 
-export const createComment = createAction(
-  '[Comment] Create Comment Request',
-  props<{ slug: string; body: string }>()
-);
-
-export const createCommentSuccess = createAction(
-  '[Comment] Create Comment Success',
-  props<{ slug: string; comment: Comment }>()
-);
-
-export const createCommentFailed = createAction(
-  '[Comment] Create Comment Fail',
-  props<{ error: Error }>()
-);
-
-export const updateComment = createAction(
-  '[Comment] Update Comment Request',
-  props<{ slug: string; body: string; id: number }>()
-);
-
-export const updateCommentSuccess = createAction(
-  '[Comment] Update Comment Success',
-  props<{ id: number; body: Comment['body'] }>()
-);
-
-export const updateCommentFailed = createAction(
-  '[Comment] Update Comment Fail',
-  props<{ error: Error }>()
-);
-
 export const deleteComment = createAction(
   '[Comment] Delete Comment Request',
-  props<{ slug: string; id: number }>()
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
 );
 
 export const deleteCommentSuccess = createAction(
   '[Comment] Delete Comment Success',
-  props<{ slug: string; id: number }>()
+  props<{ slug: Article['slug']; id: Comment['id'] }>()
 );
 
 export const deleteCommentFailed = createAction(

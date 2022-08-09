@@ -42,7 +42,9 @@
     "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
     "anonymous": "anonymous",
     "commentDelete": "Delete",
-    "commentUpdate": "Update"
+    "commentUpdate": "Update",
+    "by": "by",
+    "from": "from"
   },
 
   "confirmation": {
@@ -100,5 +102,15 @@
     "username": "Username: ",
     "email": "Email: ",
     "birthdate": "Birthdate: "
+  },
+
+  "notification": {
+    "articleCreated": "Article Created",
+    "articleDeleted": "Article Deleted",
+    "articleUpdated": "Article Updated",
+    "commentDeleted": "Comment Deleted",
+    "userLoggedIn": "Logged in successfully",
+    "userRegistered": "Registered successfully",
+    "emailConfirmed": "Email confirmed"
   }
 }

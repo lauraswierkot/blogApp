@@ -15,9 +15,6 @@
       {{article.title}}
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
-      <button (click)="openDialog(article.slug)">
-        {{ 'articles.addComment' | translate }}
-      </button>
       <button (click)="toUpdateArticle(article.slug)">
         {{ 'articles.edit' | translate }}
       </button>

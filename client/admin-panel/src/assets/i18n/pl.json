@@ -42,7 +42,9 @@
     "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
     "anonymous": "anonim",
     "commentDelete": "Usuń",
-    "commentUpdate": "Edytuj"
+    "commentUpdate": "Edytuj",
+    "by": "przez",
+    "from": "z"
   },
 
   "confirmation": {
@@ -100,5 +102,15 @@
     "username": "Nazwa użytkownika: ",
     "email": "Email: ",
     "birthdate": "Data urodzin: "
+  },
+
+  "notification": {
+    "articleCreated": "Artykuł dodany",
+    "articleDeleted": "Artykuł usunięty",
+    "articleUpdated": "Article zaktualizowany",
+    "commentDeleted": "Comment usunięty",
+    "userLoggedIn": "Udane logowanie",
+    "userRegistered": "Rejestracja zakończona",
+    "emailConfirmed": "Email potwierdzony"
   }
 }

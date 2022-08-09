@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -18,12 +19,9 @@ import {
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
-  UpdateCommentDialogComponent,
   UsersComponent,
-  NewCommentDialogComponent,
-  UserDialogComponent
+  UserDialogComponent,
 } from '.';
-
 
 const modules = [
   FormsModule,
@@ -46,10 +44,8 @@ const components = [
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
-  UpdateCommentDialogComponent,
-  NewCommentDialogComponent,
   UsersComponent,
-  UserDialogComponent
+  UserDialogComponent,
 ];
 
 @NgModule({

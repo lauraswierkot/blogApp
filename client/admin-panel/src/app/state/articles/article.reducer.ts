@@ -39,44 +39,15 @@ export const reducer = createReducer(
   on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.selectArticleSuccess, (state, { article }) => ({
     ...state,
-    selectedArticle: article,
-    selectedArticleComments: article.comments,
+    selectedArticle: article
   })),
   on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
-  on(action.createCommentSuccess, (state, { comment }) => {
-    const comments =
-      state.selectedArticle?.comments == null
-        ? []
-        : state.selectedArticle.comments;
-    return {
-      ...state,
-      selectedArticle: {
-        ...state.selectedArticle,
-        comments: [...comments, comment],
-      },
-      comments: [...comments, comment],
-    };
-  }),
-  on(action.createCommentFailed, (state, { error }) => ({ ...state, error })),
-  on(action.updateCommentSuccess, (state, { id, body }) => {
-    const filteredComments = cloneDeep(state.selectedArticleComments).map(
-      (item) => (item.id === id ? { ...item, body: body } : item)
-    );
-
-    return {
-      ...state,
-      selectedArticleComments: filteredComments,
-      selectedArticle: { ...state.selectedArticle, comments: filteredComments },
-    };
-  }),
-  on(action.updateCommentFailed, (state, { error }) => ({ ...state, error })),
   on(action.deleteCommentSuccess, (state, { id }) => {
-    const filteredComments = cloneDeep(state.selectedArticleComments).filter(
+    const filteredComments = cloneDeep(state.selectedArticle.comments).filter(
       (value) => value.id != id
     );
     return {
       ...state,
-      comments: filteredComments,
       selectedArticle: { ...state.selectedArticle, comments: filteredComments },
     };
   }),
