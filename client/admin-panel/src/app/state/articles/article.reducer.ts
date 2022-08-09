@@ -39,17 +39,15 @@ export const reducer = createReducer(
   on(action.updateArticleFailed, (state, { error }) => ({ ...state, error })),
   on(action.selectArticleSuccess, (state, { article }) => ({
     ...state,
-    selectedArticle: article,
-    selectedArticleComments: article.comments,
+    selectedArticle: article
   })),
   on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
   on(action.deleteCommentSuccess, (state, { id }) => {
-    const filteredComments = cloneDeep(state.selectedArticleComments).filter(
+    const filteredComments = cloneDeep(state.selectedArticle.comments).filter(
       (value) => value.id != id
     );
     return {
       ...state,
-      selectedArticleComments: filteredComments,
       selectedArticle: { ...state.selectedArticle, comments: filteredComments },
     };
   }),
