@@ -155,7 +155,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
     this.articleForm.setControl(
       'comments',
-      this.formBuilder.array(this.selectedArticle.comments || [])
+      this.formBuilder.array(this.selectedArticle?.comments || [])
     );
 
     if (this.selectedArticle) {
