@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { createAction, props } from '@ngrx/store';
 import { Error } from '@state/notifications/notification.model';
 

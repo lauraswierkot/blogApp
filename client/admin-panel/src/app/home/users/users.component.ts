@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 import { UserFacade } from '@state/user/user.facade';
-import { GetArticlePayload, User } from '@state/user/user.model';
+import { User } from '@state/user/user.model';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   public articleForm: FormData;
   public usersCount: number;
   public pageIndex = 0;
-  public searchTerm: string;
+  public searchTerm = '';
   public pageSize = 3;
   public pageSizeOptions: number[] = [3, 6, 9];
 
@@ -40,8 +40,8 @@ export class UsersComponent implements OnInit {
     this.facade.getUsers({
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
-      searchTerm: (this.searchTerm = ''),
-    } as GetArticlePayload);
+      searchTerm: this.searchTerm,
+    });
   }
 
   public search(): void {
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
       searchTerm: this.searchTerm,
-    } as GetArticlePayload);
+    });
   }
 
   public openDialog(username: User['username']): void {
@@ -75,6 +75,6 @@ export class UsersComponent implements OnInit {
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
       searchTerm: this.searchTerm,
-    } as GetArticlePayload);
+    });
   }
 }

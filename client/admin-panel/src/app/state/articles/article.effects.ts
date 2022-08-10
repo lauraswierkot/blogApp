@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -19,8 +18,7 @@ export class ArticleEffects {
   constructor(
     private actions$: Actions,
     private http: HttpService,
-    private router: Router,
-    public snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -28,13 +26,15 @@ export class ArticleEffects {
       ofType(action.createArticle),
       switchMap(({ articleForm }) => {
         return this.http.createArticle(articleForm).pipe(
-          map((article: Article) => {
+          switchMap((article: Article) => {
             this.router.navigate(['articles-panel']);
-            notificationAction.createNotification({
-              message: "{{'notification.articleCreated' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.createArticleSuccess({ article });
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.articleCreated' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.createArticleSuccess({ article }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.createArticleFailed(error),
@@ -53,10 +53,10 @@ export class ArticleEffects {
       ofType(action.getArticles),
       switchMap(({ payload }) => {
         return this.http.getArticles(payload).pipe(
-          switchMap(({ articles, total }) => {
+          switchMap((response) => {
             return [
-              action.getArticlesSuccess({ articles }),
-              action.setArticlesCount({ articlesCount: total }),
+              action.getArticlesSuccess({ articles: response.users }),
+              action.setArticlesCount({ articlesCount: response.total }),
             ];
           }),
           catchError((error: HttpErrorResponse) => [
@@ -96,12 +96,14 @@ export class ArticleEffects {
       ofType(action.deleteArticle),
       switchMap(({ slug }) => {
         return this.http.deleteArticle(slug).pipe(
-          map((article: Article) => {
-            notificationAction.createNotification({
-              message: "{{'notification.articleDeleted' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.deleteArticleSuccess({ slug });
+          switchMap((article: Article) => {
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.articleDeleted' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.deleteArticleSuccess({ slug }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.deleteArticleFailed(error),
@@ -120,13 +122,15 @@ export class ArticleEffects {
       ofType(action.updateArticle),
       switchMap(({ slug, articleForm }) => {
         return this.http.updateArticle(slug, articleForm).pipe(
-          map((article: Article) => {
+          switchMap((article: Article) => {
             this.router.navigate(['articles-panel']);
-            notificationAction.createNotification({
-              message: "{{'notification.articleUpdated' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.updateArticleSuccess({ slug, article });
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.articleUpdated' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.updateArticleSuccess({ slug, article }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             notificationAction.createNotification({
@@ -144,12 +148,14 @@ export class ArticleEffects {
       ofType(action.deleteComment),
       switchMap(({ slug, id }) => {
         return this.http.deleteComment(slug, id).pipe(
-          map((comment: Comment) => {
-            notificationAction.createNotification({
-              message: "{{'notification.commentDeleted' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.deleteCommentSuccess({ slug, id });
+          switchMap((comment: Comment) => {
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.commentDeleted' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.deleteCommentSuccess({ slug, id }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.deleteCommentFailed(error),

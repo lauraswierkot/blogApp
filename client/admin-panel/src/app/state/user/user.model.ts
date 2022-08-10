@@ -38,10 +38,15 @@ export enum Role {
   Admin = 'admin',
 }
 
-export interface GetArticlePayload {
+export interface GetUserPayload {
   limit: string;
   page: string;
   searchTerm: string;
+}
+
+export interface GetUsersCount {
+  users: User[];
+  total: number;
 }
 
 export interface UserState {

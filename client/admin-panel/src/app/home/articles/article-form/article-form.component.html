@@ -57,7 +57,7 @@
       <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
       <div *ngFor="let comment of articleForm.controls['comments'].value">
         <p>
-          {{ comment.body | slice: 0 : commentMaxLength }}
+          {{ comment.body | slice: commentIndex : commentMaxLength }}
           <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
           <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
           <ng-template #anonymousComment>

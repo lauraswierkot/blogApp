@@ -8,8 +8,10 @@ import {
   Article,
   Comment,
   GetArticlePayload,
+  GetArticlesCount,
 } from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
+import { GetUserPayload, GetUsersCount } from '@state/user/user.model';
 
 const apiUrl = environment.apiUrl;
 
@@ -37,16 +39,14 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
-  public getUsers(
-    payload: GetArticlePayload
-  ): Observable<{ users: User[]; total: number }> {
+  public getUsers(payload: GetUserPayload): Observable<GetUsersCount> {
     let params = {
       limit: payload.limit,
       page: payload.page,
       searchTerm: payload.searchTerm,
     };
     return this.http
-      .get<{ users: User[]; total: number }>(`${apiUrl}/users`, { params })
+      .get<GetUsersCount>(`${apiUrl}/users`, { params })
       .pipe(map((response) => response));
   }
 
@@ -62,16 +62,14 @@ export class HttpService {
       .pipe(map((articleResponse) => articleResponse.article));
   }
 
-  public getArticles(
-    payload: GetArticlePayload
-  ): Observable<{ articles: Article[]; total: number }> {
+  public getArticles(payload: GetArticlePayload): Observable<GetArticlesCount> {
     let params = {
       limit: payload.limit,
       page: payload.page,
       searchTerm: payload.searchTerm,
     };
     return this.http
-      .get<{ articles: Article[]; total: number }>(`${apiUrl}/articles`, {
+      .get<GetArticlesCount>(`${apiUrl}/articles`, {
         params,
       })
       .pipe(map((response) => response));

@@ -48,6 +48,11 @@ export interface GetArticlePayload {
   searchTerm: string;
 }
 
+export interface GetArticlesCount {
+  users: Article[];
+  total: number;
+}
+
 export interface ArticleState {
   articles: Article[];
   articlesCount: number;

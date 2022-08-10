@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 
-import { GetArticlePayload, User, UserLogin, UserRegister } from './user.model';
+import { GetUserPayload, User, UserLogin, UserRegister } from './user.model';
 import { Error } from '@state/notifications/notification.model';
 
 export const getUsers = createAction(
   '[User] Get Users Request',
-  props<{ payload: GetArticlePayload }>()
+  props<{ payload: GetUserPayload }>()
 );
 
 export const getUsersSuccess = createAction(

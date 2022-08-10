@@ -20,7 +20,7 @@ export class ArticlesComponent implements OnInit {
   public articlesCount$: Observable<number>;
   public articlesCount: number;
   public pageIndex = 0;
-  public searchTerm: string;
+  public searchTerm = '';
   public pageSize = 3;
   public pageSizeOptions: number[] = [3, 6, 9];
 
@@ -39,8 +39,8 @@ export class ArticlesComponent implements OnInit {
     this.facade.getArticles({
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
-      searchTerm: (this.searchTerm = ''),
-    } as GetArticlePayload);
+      searchTerm: this.searchTerm,
+    });
   }
 
   public search(): void {
@@ -48,7 +48,7 @@ export class ArticlesComponent implements OnInit {
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
       searchTerm: this.searchTerm,
-    } as GetArticlePayload);
+    });
   }
 
   public createArticle(): void {
@@ -78,6 +78,6 @@ export class ArticlesComponent implements OnInit {
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
       searchTerm: this.searchTerm,
-    } as GetArticlePayload);
+    });
   }
 }

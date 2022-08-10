@@ -1,8 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -20,8 +18,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private http: HttpService,
-    private router: Router,
-    public snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   login$ = createEffect(() =>
@@ -29,13 +26,15 @@ export class UserEffects {
       ofType(action.login),
       switchMap(({ loginForm }) => {
         return this.http.login(loginForm).pipe(
-          map((loginResponse: User) => {
+          switchMap((loginResponse: User) => {
             this.router.navigate(['']);
-            notificationAction.createNotification({
-              message: "{{'notification.userLoggedIn' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.loginSuccess({ loginResponse });
+            return [
+              action.loginSuccess({ loginResponse }),
+              notificationAction.createNotification({
+                message: "{{'notification.userLoggedIn' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.loginFailed(error),
@@ -65,13 +64,15 @@ export class UserEffects {
       ofType(action.register),
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
-          map((registerResponse: User) => {
-            notificationAction.createNotification({
-              message: "{{'notification.userRegistered' | translate}}",
-              notificationType: NotificationType.Message,
-            });
+          switchMap((registerResponse: User) => {
             this.router.navigate(['/login']);
-            return action.registerSuccess({ registerResponse });
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.userRegistered' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.registerSuccess({ registerResponse }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.registerFailed(error),
@@ -90,15 +91,17 @@ export class UserEffects {
       ofType(action.confirmEmail),
       switchMap(({ token }) => {
         return this.http.confirmEmail(token).pipe(
-          map(() => {
+          switchMap(() => {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
-            notificationAction.createNotification({
-              message: "{{'notification.emailConfirmed' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.confirmEmailSuccess();
+            return [
+              notificationAction.createNotification({
+                message: "{{'notification.emailConfirmed' | translate}}",
+                notificationType: NotificationType.Message,
+              }),
+              action.confirmEmailSuccess(),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.confirmEmailFailed(error),
@@ -117,10 +120,10 @@ export class UserEffects {
       ofType(action.getUsers),
       switchMap(({ payload }) => {
         return this.http.getUsers(payload).pipe(
-          switchMap(({ users, total }) => {
+          switchMap((response) => {
             return [
-              action.getUsersSuccess({ users }),
-              action.setUsersCount({ usersCount: total }),
+              action.getUsersSuccess({ users: response.users }),
+              action.setUsersCount({ usersCount: response.total }),
             ];
           }),
           catchError((error: HttpErrorResponse) => [

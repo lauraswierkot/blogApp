@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as selector from './user.selectors';
 import * as action from './user.actions';
-import { GetArticlePayload, User, UserLogin, UserRegister } from './user.model';
+import { GetUserPayload, User, UserLogin, UserRegister } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class UserFacade {
 
   constructor(private store: Store) {}
 
-  public getUsers(payload: GetArticlePayload): void {
+  public getUsers(payload: GetUserPayload): void {
     this.store.dispatch(action.getUsers({ payload }));
   }
 
