@@ -26,5 +26,9 @@ export const reducer = createReducer(
     ...state,
     selectedUser: user,
   })),
-  on(action.selectUserFailed, (state, { error }) => ({ ...state, error }))
+  on(action.selectUserFailed, (state, { error }) => ({ ...state, error })),
+  on(action.setUsersCount, (state, { usersCount }) => ({
+    ...state,
+    usersCount: usersCount,
+  }))
 );

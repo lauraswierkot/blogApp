@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, UserLogin, UserRegister } from './user.model';
+import { GetArticlePayload, User, UserLogin, UserRegister } from './user.model';
 import { Error } from '@state/notifications/notification.model';
 
 export const getUsers = createAction(
   '[User] Get Users Request',
-  props<{ searchTerm: string }>()
+  props<{ payload: GetArticlePayload }>()
 );
 
 export const getUsersSuccess = createAction(
@@ -16,6 +16,11 @@ export const getUsersSuccess = createAction(
 export const getUsersFailed = createAction(
   '[User] Get Users Fail',
   props<{ error: Error }>()
+);
+
+export const setUsersCount = createAction(
+  '[User] Set Users Count',
+  props<{ usersCount: number }>()
 );
 
 export const login = createAction(

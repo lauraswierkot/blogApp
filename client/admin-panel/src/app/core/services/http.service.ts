@@ -4,7 +4,11 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 
-import { Article, Comment } from '@state/articles/article.model';
+import {
+  Article,
+  Comment,
+  GetArticlePayload,
+} from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
 
 const apiUrl = environment.apiUrl;
@@ -33,11 +37,17 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
-  public getUsers(searchTerm: string): Observable<User[]> {
-    const params = new HttpParams().set('searchTerm', searchTerm);
+  public getUsers(
+    payload: GetArticlePayload
+  ): Observable<{ users: User[]; total: number }> {
+    let params = {
+      limit: payload.limit,
+      page: payload.page,
+      searchTerm: payload.searchTerm,
+    };
     return this.http
-      .get<{ users: User[] }>(`${apiUrl}/users`, { params })
-      .pipe(map((response) => response.users));
+      .get<{ users: User[]; total: number }>(`${apiUrl}/users`, { params })
+      .pipe(map((response) => response));
   }
 
   public getUser(username: string): Observable<User> {
@@ -53,14 +63,16 @@ export class HttpService {
   }
 
   public getArticles(
-    limit: string,
-    page: string,
-    searchTerm: string
-  ): Observable<{ articles: Article[]; articlesCount: number }> {
-    let params = { limit: limit, page: page, searchTerm: searchTerm };
+    payload: GetArticlePayload
+  ): Observable<{ articles: Article[]; total: number }> {
+    let params = {
+      limit: payload.limit,
+      page: payload.page,
+      searchTerm: payload.searchTerm,
+    };
     return this.http
-      .get<{ articles: Article[]; articlesCount: number }>(`${apiUrl}/articles`, {
-        params: params,
+      .get<{ articles: Article[]; total: number }>(`${apiUrl}/articles`, {
+        params,
       })
       .pipe(map((response) => response));
   }

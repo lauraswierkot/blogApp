@@ -115,10 +115,13 @@ export class UserEffects {
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.getUsers),
-      switchMap(({ searchTerm }) => {
-        return this.http.getUsers(searchTerm).pipe(
-          map((users: User[]) => {
-            return action.getUsersSuccess({ users });
+      switchMap(({ payload }) => {
+        return this.http.getUsers(payload).pipe(
+          switchMap(({ users, total }) => {
+            return [
+              action.getUsersSuccess({ users }),
+              action.setUsersCount({ usersCount: total }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.getUsersFailed(error),

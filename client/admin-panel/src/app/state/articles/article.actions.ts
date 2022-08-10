@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { createAction, props } from '@ngrx/store';
 import { Error } from '@state/notifications/notification.model';
 
-import { Article, Comment } from './article.model';
+import { Article, Comment, GetArticlePayload } from './article.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles Request',
-  props<{  limit: string; page: string, searchTerm: string }>()
+  props<{ payload: GetArticlePayload }>()
 );
 
 export const getArticlesSuccess = createAction(

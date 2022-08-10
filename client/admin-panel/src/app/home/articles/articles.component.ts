@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article } from '@state/articles/article.model';
+import { Article, GetArticlePayload } from '@state/articles/article.model';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
@@ -16,7 +18,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class ArticlesComponent implements OnInit {
   public articlesList$: Observable<Article[]>;
   public articlesCount$: Observable<number>;
-  public articlesCount = 0;
+  public articlesCount: number;
   public pageIndex = 0;
   public searchTerm: string;
   public pageSize = 3;
@@ -31,18 +33,22 @@ export class ArticlesComponent implements OnInit {
   public ngOnInit(): void {
     this.articlesCount$ = this.facade.articlesCount$;
     this.articlesList$ = this.facade.articles$;
-    this.articlesCount$.subscribe((total) => {
+    this.articlesCount$.pipe(untilDestroyed(this)).subscribe((total) => {
       this.articlesCount = total;
     });
-    this.facade.getArticles(
-      this.pageSize?.toString(),
-      this.pageIndex?.toString(),
-      ''
-    );
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: (this.searchTerm = ''),
+    } as GetArticlePayload);
   }
 
   public search(): void {
-    this.facade.getArticles(this.pageSize?.toString(), '0', this.searchTerm);
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: this.searchTerm,
+    } as GetArticlePayload);
   }
 
   public createArticle(): void {
@@ -68,10 +74,10 @@ export class ArticlesComponent implements OnInit {
   }
 
   public paginateList(): void {
-    this.facade.getArticles(
-      this.pageSize?.toString(),
-      this.pageIndex?.toString(),
-      this.searchTerm
-    );
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: this.searchTerm,
+    } as GetArticlePayload);
   }
 }

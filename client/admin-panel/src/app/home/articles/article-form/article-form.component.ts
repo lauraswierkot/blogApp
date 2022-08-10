@@ -27,6 +27,7 @@ import { environment } from 'environments/environment';
 export class ArticleFormComponent implements OnInit, OnDestroy {
   public articleForm: FormGroup;
   public selectedArticle: Article;
+  public commentMaxLength = 20; 
   private imageUrl: string = environment.apiImageUrl;
 
   readonly separatorKeysCodes = [ENTER, COMMA];

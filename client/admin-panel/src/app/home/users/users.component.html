@@ -1,6 +1,9 @@
 <div class="search">
-    <input class="search__form" type="text" [(ngModel)]="searchTerm"
-        placeholder="{{ 'users.placeholder' | translate }}" />
+    <input 
+    class="search__form" 
+    type="text" 
+    [(ngModel)]="searchTerm"
+    placeholder="{{ 'users.placeholder' | translate }}" />
     <div class="search__buttons">
         <button (click)="search()">{{ 'users.search' | translate }}</button>
         <button (click)="toAdminPanel()">{{ 'users.toAdminPanel' | translate }}</button>
@@ -8,12 +11,15 @@
 </div>
 <div class="list">
     <h3 class="list--title">{{ 'users.listTitle' | translate }}</h3>
-    <mat-card class="list__card" *ngFor="let user of usersList | async">
-        <mat-card-title class="list__card__title">
+    <mat-card class="list__card" *ngFor="let user of usersList$ | async">
+        <mat-card-title>
             {{user.username}}
         </mat-card-title>
         <mat-card-actions class="list__card__buttons">
             <button (click)="openDialog(user.username)">{{ 'users.view' | translate }}</button>
         </mat-card-actions>
     </mat-card>
+    <mat-paginator [length]="usersCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="setPaginator($event)">
+    </mat-paginator>
 </div>

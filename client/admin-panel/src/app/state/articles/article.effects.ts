@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, exhaustMap, switchMap } from 'rxjs';
+import { catchError, switchMap } from 'rxjs';
 import { map } from 'rxjs';
 
 import * as action from './article.actions';
@@ -13,8 +13,6 @@ import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { Article, Comment } from './article.model';
 import { NotificationType } from '@state/notifications/notification.model';
-import { Store } from '@ngrx/store';
-import { setArticlesCount } from './article.actions';
 
 @Injectable()
 export class ArticleEffects {
@@ -22,8 +20,7 @@ export class ArticleEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    public snackBar: MatSnackBar,
-    private store: Store
+    public snackBar: MatSnackBar
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -54,11 +51,13 @@ export class ArticleEffects {
   getArticles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.getArticles),
-      switchMap(({ limit, page, searchTerm }) => {
-        return this.http.getArticles(limit, page, searchTerm).pipe(
-          map(({ articles, articlesCount }) => {
-            this.store.dispatch(setArticlesCount({ articlesCount }));
-            return action.getArticlesSuccess({ articles });
+      switchMap(({ payload }) => {
+        return this.http.getArticles(payload).pipe(
+          switchMap(({ articles, total }) => {
+            return [
+              action.getArticlesSuccess({ articles }),
+              action.setArticlesCount({ articlesCount: total }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.getArticlesFailed(error),

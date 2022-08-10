@@ -42,6 +42,12 @@ export interface ArticleForm {
   file: File;
 }
 
+export interface GetArticlePayload {
+  limit: string;
+  page: string;
+  searchTerm: string;
+}
+
 export interface ArticleState {
   articles: Article[];
   articlesCount: number;

@@ -19,6 +19,11 @@ export const selectUsersData = createSelector(
   (state) => state.users
 );
 
+export const selectUsersCount = createSelector(
+  selectUserState,
+  (state) => state.usersCount
+);
+
 export const selectToken = createSelector(
   selectUserState,
   (state) => state.token
