@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    alert();
     this.notificationFacade.notifications$
       .pipe(untilDestroyed(this))
       .subscribe((notification) =>

@@ -12,13 +12,15 @@ import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
 import { NotificationType } from '@state/notifications/notification.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private http: HttpService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   login$ = createEffect(() =>
@@ -31,7 +33,7 @@ export class UserEffects {
             return [
               action.loginSuccess({ loginResponse }),
               notificationAction.createNotification({
-                message: "{{'notification.userLoggedIn' | translate}}",
+                message: this.translate.instant('notification.userLoggedIn'),
                 notificationType: NotificationType.Message,
               }),
             ];
@@ -68,7 +70,7 @@ export class UserEffects {
             this.router.navigate(['/login']);
             return [
               notificationAction.createNotification({
-                message: "{{'notification.userRegistered' | translate}}",
+                message: this.translate.instant('notification.userRegistered'),
                 notificationType: NotificationType.Message,
               }),
               action.registerSuccess({ registerResponse }),
@@ -97,7 +99,7 @@ export class UserEffects {
             }, 2000);
             return [
               notificationAction.createNotification({
-                message: "{{'notification.emailConfirmed' | translate}}",
+                message: this.translate.instant('notification.emailConfirmed'),
                 notificationType: NotificationType.Message,
               }),
               action.confirmEmailSuccess(),

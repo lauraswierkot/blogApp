@@ -12,13 +12,15 @@ import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { Article, Comment } from './article.model';
 import { NotificationType } from '@state/notifications/notification.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ArticleEffects {
   constructor(
     private actions$: Actions,
     private http: HttpService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   createArticle$ = createEffect(() =>
@@ -30,7 +32,7 @@ export class ArticleEffects {
             this.router.navigate(['articles-panel']);
             return [
               notificationAction.createNotification({
-                message: "{{'notification.articleCreated' | translate}}",
+                message: this.translate.instant('notification.articleCreated'),
                 notificationType: NotificationType.Message,
               }),
               action.createArticleSuccess({ article }),
@@ -99,7 +101,7 @@ export class ArticleEffects {
           switchMap((article: Article) => {
             return [
               notificationAction.createNotification({
-                message: "{{'notification.articleDeleted' | translate}}",
+                message: this.translate.instant('notification.articleDeleted'),
                 notificationType: NotificationType.Message,
               }),
               action.deleteArticleSuccess({ slug }),
@@ -126,7 +128,7 @@ export class ArticleEffects {
             this.router.navigate(['articles-panel']);
             return [
               notificationAction.createNotification({
-                message: "{{'notification.articleUpdated' | translate}}",
+                message: this.translate.instant('notification.articleUpdated'),
                 notificationType: NotificationType.Message,
               }),
               action.updateArticleSuccess({ slug, article }),
@@ -151,7 +153,7 @@ export class ArticleEffects {
           switchMap((comment: Comment) => {
             return [
               notificationAction.createNotification({
-                message: "{{'notification.commentDeleted' | translate}}",
+                message: this.translate.instant('notification.commentDeleted'),
                 notificationType: NotificationType.Message,
               }),
               action.deleteCommentSuccess({ slug, id }),
