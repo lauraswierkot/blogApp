@@ -49,7 +49,7 @@ export interface GetArticlePayload {
 }
 
 export interface GetArticlesCount {
-  users: Article[];
+  articles: Article[];
   total: number;
 }
 

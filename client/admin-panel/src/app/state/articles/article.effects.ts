@@ -57,7 +57,7 @@ export class ArticleEffects {
         return this.http.getArticles(payload).pipe(
           switchMap((response) => {
             return [
-              action.getArticlesSuccess({ articles: response.users }),
+              action.getArticlesSuccess({ articles: response.articles }),
               action.setArticlesCount({ articlesCount: response.total }),
             ];
           }),
