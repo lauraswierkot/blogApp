@@ -3,7 +3,7 @@
     "english": "english",
     "polish": "polski"
   },
-  
+
   "login": {
     "title": "Login panel",
     "emailPlaceholder": "Type email here",
@@ -11,5 +11,9 @@
     "passwordPlaceholder": "Type your password here",
     "submit": "Login",
     "toRegister": "No account? Sign up"
+  },
+
+  "notification": {
+    "userLoggedIn": "Logged in successfully"
   }
 }
