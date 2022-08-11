@@ -12,14 +12,24 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { environment } from 'environments/environment';
+import { userFeatureKey } from './user/user.model';
+import { UserEffects } from './user/user.effects';
+import { userReducer } from './user/user.reducer';
+import { notificationReducer } from './notifications/notification.reducers';
+import { notificationFeatureKey } from './notifications/notification.model';
 
-const reducers: ActionReducerMap<any> = {};
+const effects = [UserEffects];
+
+const reducers: ActionReducerMap<any> = {
+  users: userReducer,
+  notifications: notificationReducer,
+};
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [],
+    keys: [userFeatureKey, notificationFeatureKey],
     rehydrate: true,
   })(reducer);
 }
@@ -33,7 +43,7 @@ export const metaReducers: Array<MetaReducer<any, any>> = [
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot(),
+    EffectsModule.forRoot(effects),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
       maxAge: 25,

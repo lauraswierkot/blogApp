@@ -1,0 +1,15 @@
+{
+  "language": {
+    "english": "english",
+    "polish": "polski"
+  },
+  
+  "login": {
+    "title": "Login panel",
+    "emailPlaceholder": "Type email here",
+    "emailError": "Email not valid.",
+    "passwordPlaceholder": "Type your password here",
+    "submit": "Login",
+    "toRegister": "No account? Sign up"
+  }
+}

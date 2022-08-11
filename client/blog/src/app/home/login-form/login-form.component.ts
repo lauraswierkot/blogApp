@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
-  FormControl,
   FormGroup,
+  FormControl,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserFacade, UserLogin } from '@state/index';
+import { UserFacade } from '@state/user/user.facade';
+import { UserLogin } from '@state/user/user.model';
 
 @Component({
   selector: 'app-login-form',
@@ -43,5 +44,9 @@ export class LoginFormComponent {
       password: this.loginForm.value.password,
     };
     this.facade.login(login);
+  }
+
+  public toRegisterForm(): void {
+    this.router.navigate(['/register']);
   }
 }

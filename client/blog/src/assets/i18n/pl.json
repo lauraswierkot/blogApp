@@ -1,0 +1,15 @@
+{
+  "language": {
+    "english": "english",
+    "polish": "polski"
+  },
+  
+  "login": {
+    "title": "Panel logowania",
+    "emailPlaceholder": "Podaj email",
+    "emailError": "Email nieporawny.",
+    "passwordPlaceholder": "Podaj hasło",
+    "submit": "Zaloguj",
+    "toRegister": "Nie masz konta? Zarejestruj się"
+  }
+}

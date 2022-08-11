@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { LoginFormComponent } from './home';
+
+const routes: Routes = [  
+{
+  path: 'blog-login',
+  component: LoginFormComponent,
+}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
