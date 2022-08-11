@@ -17,19 +17,22 @@ import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
 import { notificationReducer } from './notifications/notification.reducers';
 import { notificationFeatureKey } from './notifications/notification.model';
+import { actionsFeatureKey } from '@core/actions/actions.model';
+import { actionsReducer } from '@core/actions/actions.reducer';
 
 const effects = [UserEffects];
 
 const reducers: ActionReducerMap<any> = {
   users: userReducer,
   notifications: notificationReducer,
+  actions: actionsReducer
 };
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [userFeatureKey, notificationFeatureKey],
+    keys: [userFeatureKey, notificationFeatureKey, actionsFeatureKey],
     rehydrate: true,
   })(reducer);
 }

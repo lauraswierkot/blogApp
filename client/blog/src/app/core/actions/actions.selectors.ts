@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector, Action } from '@ngrx/store';
 
-import { ActionsState, actionsFeatureKey, ActionState } from './actions.model';
+import { ActionsState, actionsFeatureKey } from './actions.model';
 import { getActionName } from './actions.reducer';
 
 export const selectActionsState =
