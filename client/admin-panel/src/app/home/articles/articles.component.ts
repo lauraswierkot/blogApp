@@ -4,17 +4,25 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article } from '@state/articles/article.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Article, GetArticlePayload } from '@state/articles/article.model';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent implements OnInit {
-  public articlesList: Observable<Article[]>;
-  public searchTerm: string;
+  public articlesList$: Observable<Article[]>;
+  public articlesCount$: Observable<number>;
+  public articlesCount: number;
+  public pageIndex = 0;
+  public searchTerm = '';
+  public pageSize = 3;
+  public pageSizeOptions: number[] = [3, 6, 9];
 
   constructor(
     private facade: ArticleFacade,
@@ -23,12 +31,24 @@ export class ArticlesComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.articlesList = this.facade.articles$;
-    this.facade.getArticles();
+    this.articlesCount$ = this.facade.articlesCount$;
+    this.articlesList$ = this.facade.articles$;
+    this.articlesCount$.pipe(untilDestroyed(this)).subscribe((total) => {
+      this.articlesCount = total;
+    });
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: this.searchTerm,
+    });
   }
 
   public search(): void {
-    this.facade.getArticles(this.searchTerm);
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: this.searchTerm,
+    });
   }
 
   public createArticle(): void {
@@ -41,5 +61,23 @@ export class ArticlesComponent implements OnInit {
 
   public toUpdateArticle(slug: string): void {
     this.router.navigate([`article/${slug}`]);
+  }
+
+  public toAdminPanel(): void {
+    this.router.navigate(['']);
+  }
+
+  public setPaginator(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.paginateList();
+  }
+
+  public paginateList(): void {
+    this.facade.getArticles({
+      limit: this.pageSize?.toString(),
+      page: this.pageIndex?.toString(),
+      searchTerm: this.searchTerm,
+    });
   }
 }

@@ -1,12 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { createAction, props } from '@ngrx/store';
 import { Error } from '@state/notifications/notification.model';
 
-import { Article, Comment } from './article.model';
+import { Article, Comment, GetArticlePayload } from './article.model';
 
 export const getArticles = createAction(
   '[Article] Get Articles Request',
-  props<{ searchTerm: string }>()
+  props<{ payload: GetArticlePayload }>()
 );
 
 export const getArticlesSuccess = createAction(
@@ -17,6 +16,11 @@ export const getArticlesSuccess = createAction(
 export const getArticlesFailed = createAction(
   '[Article] Get Articles Fail',
   props<{ error: Error }>()
+);
+
+export const setArticlesCount = createAction(
+  '[Article] Set Articles Count',
+  props<{ articlesCount: number }>()
 );
 
 export const createArticle = createAction(
@@ -65,7 +69,7 @@ export const updateArticleFailed = createAction(
 );
 
 export const selectArticle = createAction(
-  '[Article] Article Selected Request',
+  '[Article] Select Article Request',
   props<{ slug: Article['slug'] }>()
 );
 

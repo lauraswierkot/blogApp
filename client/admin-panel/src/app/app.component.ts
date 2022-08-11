@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { delay, iif, mergeMap, Observable, of } from 'rxjs';
 
 import { NotificationType } from '@state/notifications/notification.model';
 import { NotificationFacade } from '@state/notifications/notification.facade';
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   public isLoading: Observable<boolean>;
   public id: string;
   public snackBarRef: MatSnackBarRef<any>;
+  public isFirstEmittedValue = false;
 
   constructor(
     public translate: TranslateService,
@@ -35,7 +36,18 @@ export class AppComponent implements OnInit {
     private actionsFacade: ActionsFacade
   ) {
     translate.setDefaultLang('en');
-    this.isLoading = this.actionsFacade.loading$;
+    this.isLoading = this.actionsFacade.loading$.pipe(
+      mergeMap((value) => {
+        if (!this.isFirstEmittedValue) {
+          this.isFirstEmittedValue = !this.isFirstEmittedValue;
+          return of(value);
+        }
+        if (this.isFirstEmittedValue) {
+          return iif(() => !!value, of(value), of(false).pipe(delay(500)));
+        }
+        return of(value);
+      })
+    );
   }
 
   public setLang(language: string): void {

@@ -4,8 +4,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 
-import { Article, Comment } from '@state/articles/article.model';
+import {
+  Article,
+  Comment,
+  GetArticlePayload,
+  GetArticlesCount,
+} from '@state/articles/article.model';
 import { User, UserLogin, UserRegister, UserResponse } from '@state/index';
+import { GetUserPayload, GetUsersCount } from '@state/user/user.model';
 
 const apiUrl = environment.apiUrl;
 
@@ -33,17 +39,40 @@ export class HttpService {
       .pipe(map((userResponse) => userResponse.user));
   }
 
+  public getUsers(payload: GetUserPayload): Observable<GetUsersCount> {
+    let params = {
+      limit: payload.limit,
+      page: payload.page,
+      searchTerm: payload.searchTerm,
+    };
+    return this.http
+      .get<GetUsersCount>(`${apiUrl}/users`, { params })
+      .pipe(map((response) => response));
+  }
+
+  public getUser(username: string): Observable<User> {
+    return this.http
+      .get<{ profile: User }>(`${apiUrl}/profiles/${username}`)
+      .pipe(map((response) => response.profile));
+  }
+
   public createArticle(articleForm: FormData): Observable<Article> {
     return this.http
       .post<{ article: Article }>(`${apiUrl}/articles`, articleForm)
       .pipe(map((articleResponse) => articleResponse.article));
   }
 
-  public getArticles(searchTerm: string): Observable<Article[]> {
-    const params = new HttpParams().set('searchTerm', searchTerm);
+  public getArticles(payload: GetArticlePayload): Observable<GetArticlesCount> {
+    let params = {
+      limit: payload.limit,
+      page: payload.page,
+      searchTerm: payload.searchTerm,
+    };
     return this.http
-      .get<{ articles: Article[] }>(`${apiUrl}/articles`, { params })
-      .pipe(map((response) => response.articles));
+      .get<GetArticlesCount>(`${apiUrl}/articles`, {
+        params,
+      })
+      .pipe(map((response) => response));
   }
 
   public getArticle(slug: string): Observable<Article> {

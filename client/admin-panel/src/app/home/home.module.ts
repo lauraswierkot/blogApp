@@ -1,10 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+
+import { MaterialModule } from 'app/material-module/material.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -17,9 +19,9 @@ import {
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
+  UsersComponent,
+  UserDialogComponent,
 } from '.';
-
-import { MaterialModule } from 'app/material-module/material.module';
 
 const modules = [
   FormsModule,
@@ -42,6 +44,8 @@ const components = [
   ConfirmationPageComponent,
   ArticlesComponent,
   ArticleFormComponent,
+  UsersComponent,
+  UserDialogComponent,
 ];
 
 @NgModule({

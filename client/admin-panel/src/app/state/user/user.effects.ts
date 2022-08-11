@@ -1,8 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import * as uuid from 'uuid';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -14,6 +12,7 @@ import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
 import { User } from './user.model';
 import { NotificationType } from '@state/notifications/notification.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class UserEffects {
@@ -21,7 +20,7 @@ export class UserEffects {
     private actions$: Actions,
     private http: HttpService,
     private router: Router,
-    public snackBar: MatSnackBar
+    private translate: TranslateService
   ) {}
 
   login$ = createEffect(() =>
@@ -29,13 +28,15 @@ export class UserEffects {
       ofType(action.login),
       switchMap(({ loginForm }) => {
         return this.http.login(loginForm).pipe(
-          map((loginResponse: User) => {
+          switchMap((loginResponse: User) => {
             this.router.navigate(['']);
-            notificationAction.createNotification({
-              message: "{{'notification.userLoggedIn' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.loginSuccess({ loginResponse });
+            return [
+              action.loginSuccess({ loginResponse }),
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.userLoggedIn'),
+                notificationType: NotificationType.Message,
+              }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.loginFailed(error),
@@ -65,13 +66,15 @@ export class UserEffects {
       ofType(action.register),
       switchMap(({ registerForm }) => {
         return this.http.register(registerForm).pipe(
-          map((registerResponse: User) => {
-            notificationAction.createNotification({
-              message: "{{'notification.userRegistered' | translate}}",
-              notificationType: NotificationType.Message,
-            });
+          switchMap((registerResponse: User) => {
             this.router.navigate(['/login']);
-            return action.registerSuccess({ registerResponse });
+            return [
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.userRegistered'),
+                notificationType: NotificationType.Message,
+              }),
+              action.registerSuccess({ registerResponse }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.registerFailed(error),
@@ -90,18 +93,63 @@ export class UserEffects {
       ofType(action.confirmEmail),
       switchMap(({ token }) => {
         return this.http.confirmEmail(token).pipe(
-          map(() => {
+          switchMap(() => {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
-            notificationAction.createNotification({
-              message: "{{'notification.emailConfirmed' | translate}}",
-              notificationType: NotificationType.Message,
-            });
-            return action.confirmEmailSuccess();
+            return [
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.emailConfirmed'),
+                notificationType: NotificationType.Message,
+              }),
+              action.confirmEmailSuccess(),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.confirmEmailFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.getUsers),
+      switchMap(({ payload }) => {
+        return this.http.getUsers(payload).pipe(
+          switchMap((response) => {
+            return [
+              action.getUsersSuccess({ users: response.users }),
+              action.setUsersCount({ usersCount: response.total }),
+            ];
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.getUsersFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  selectUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.selectUser),
+      switchMap(({ username }) => {
+        return this.http.getUser(username).pipe(
+          map((user: User) => {
+            return action.selectUserSuccess({ user });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.selectUserFailed(error),
             notificationAction.createNotification({
               message: error.error.error,
               notificationType: NotificationType.Error,

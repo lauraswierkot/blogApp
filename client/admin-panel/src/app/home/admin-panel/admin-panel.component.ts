@@ -40,4 +40,8 @@ export class AdminPanelComponent {
   public toArticles(): void {
     this.router.navigate(['articles-panel']);
   }
+
+  public toUsers(): void {
+    this.router.navigate(['users-panel']);
+  }
 }

@@ -9,17 +9,19 @@
     "content": "Click on menu button to see options",
     "createArticle": "Create new article",
     "logout": "Logout",
-    "toArticles": "Articles"
+    "toArticles": "Articles",
+    "toUsers": "Users"
   },
 
   "articles": {
     "placeholder": "Search article...",
     "search": "Search",
     "create": "Create",
-    "listTitle": "All titles",
+    "listTitle": "All articles",
     "addComment": "Add comment",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "toAdminPanel": "Admin Panel"
   },
 
   "articleForm": {
@@ -84,6 +86,22 @@
     "delete": "delete",
     "create": "create",
     "close": "close"
+  },
+
+  "users": {
+    "placeholder": "Search user...",
+    "search": "Search",
+    "listTitle": "All users",
+    "view": "View details",
+    "toAdminPanel": "Admin Panel"
+  },
+
+  "user": {
+    "title": "User details",
+    "close": "Close",
+    "username": "Username: ",
+    "email": "Email: ",
+    "birthdate": "Birthdate: "
   },
 
   "notification": {

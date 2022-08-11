@@ -10,7 +10,7 @@ export interface Article {
   title: string;
   description: string;
   body: string;
-  tagList: string[];
+  tagList: string | string[];
   createdAt: Date;
   updatedAt: Date;
   author: User;
@@ -42,8 +42,20 @@ export interface ArticleForm {
   file: File;
 }
 
+export interface GetArticlePayload {
+  limit: string;
+  page: string;
+  searchTerm: string;
+}
+
+export interface GetArticlesCount {
+  articles: Article[];
+  total: number;
+}
+
 export interface ArticleState {
   articles: Article[];
+  articlesCount: number;
   selectedArticle: Article;
   selectedArticleComments: Comment[];
   error: any;
@@ -51,6 +63,7 @@ export interface ArticleState {
 
 export const initialState: ArticleState = {
   articles: [],
+  articlesCount: 0,
   selectedArticle: null,
   selectedArticleComments: [],
   error: null,

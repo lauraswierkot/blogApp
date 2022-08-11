@@ -4,6 +4,7 @@ export type StatePart<K extends keyof UserState> = Pick<UserState, K>;
 
 export const userFeatureKey = 'users';
 export type UserResponse = Record<'user', User>;
+export type UserData = Omit<User, 'token'>;
 
 export interface User {
   id: string;
@@ -12,6 +13,7 @@ export interface User {
   email: number;
   username: string;
   bio?: string;
+  age: string;
   image?: string;
   token: string;
 }
@@ -36,14 +38,31 @@ export enum Role {
   Admin = 'admin',
 }
 
+export interface GetUserPayload {
+  limit: string;
+  page: string;
+  searchTerm: string;
+}
+
+export interface GetUsersCount {
+  users: User[];
+  total: number;
+}
+
 export interface UserState {
-  user: Omit<User, 'token'>;
+  users: User[];
+  user: UserData;
+  usersCount: number;
+  selectedUser: User;
   token: User['token'];
   error: Error;
 }
 
 export const initialState: UserState = {
+  users: [],
   user: null,
+  usersCount: null,
+  selectedUser: null,
   token: null,
   error: null,
 };

@@ -1,6 +1,27 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, UserLogin, UserRegister } from './user.model';
+import { GetUserPayload, User, UserLogin, UserRegister } from './user.model';
+import { Error } from '@state/notifications/notification.model';
+
+export const getUsers = createAction(
+  '[User] Get Users Request',
+  props<{ payload: GetUserPayload }>()
+);
+
+export const getUsersSuccess = createAction(
+  '[User] Get Users Success',
+  props<{ users: User[] }>()
+);
+
+export const getUsersFailed = createAction(
+  '[User] Get Users Fail',
+  props<{ error: Error }>()
+);
+
+export const setUsersCount = createAction(
+  '[User] Set Users Count',
+  props<{ usersCount: number }>()
+);
 
 export const login = createAction(
   '[User] Login User Request',
@@ -43,5 +64,20 @@ export const confirmEmailSuccess = createAction('[User] Confirm Email Success');
 
 export const confirmEmailFailed = createAction(
   '[User] Confirm Email Fail',
+  props<{ error: Error }>()
+);
+
+export const selectUser = createAction(
+  '[User] Select User Request',
+  props<{ username: User['username'] }>()
+);
+
+export const selectUserSuccess = createAction(
+  '[User] Select User Success',
+  props<{ user: User }>()
+);
+
+export const selectUserFailed = createAction(
+  '[User] Select User Fail',
   props<{ error: Error }>()
 );
