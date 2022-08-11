@@ -60,7 +60,6 @@ export const storage = {
       const filename: string =
         path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
       const extension: string = path.parse(file.originalname).ext;
-
       cb(null, `${filename}${extension}`);
     },
   }),
@@ -159,7 +158,6 @@ export class ArticleController {
     @UploadedFile() file: Express.Multer.File,
     @Body() data: UpdateArticleDTO,
   ): Promise<ResponseObject<'article', ArticleResponse>> {
-    console.log(data);
     const article = await this.articleService.updateArticle(
       slug,
       user,

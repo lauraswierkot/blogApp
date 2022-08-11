@@ -61,7 +61,7 @@ export class CommentsService {
     if (!this.ensureOwnership(user, comment)) {
       throw new UnauthorizedException();
     }
-    
+
     await this.commentRepo.update({ id }, data);
     return comment;
   }
@@ -70,8 +70,6 @@ export class CommentsService {
     const comment = await this.commentRepo.findOne({
       where: { id },
     });
-
-    console.log(comment);
 
     if (this.ensureUserRole) {
       await comment.remove();

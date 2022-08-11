@@ -124,7 +124,7 @@ export class ArticleService {
       title: data.title,
       description: data.description,
       body: data.body,
-      image: file.filename,
+      image: file?.filename ?? article.image,
       tagList: data.tagList,
     };
     await this.articleRepo.update({ slug }, articleData);

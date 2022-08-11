@@ -10,7 +10,7 @@ export interface Article {
   title: string;
   description: string;
   body: string;
-  tagList: string[];
+  tagList: string | string[];
   createdAt: Date;
   updatedAt: Date;
   author: User;
