@@ -11,6 +11,8 @@ import {
   LoginFormComponent,
   NewPasswordFormComponent,
   EmailFormComponent,
+  ArticlesComponent,
+  ArticleComponent,
 } from './';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -35,6 +37,8 @@ const components = [
   LoginFormComponent,
   NewPasswordFormComponent,
   EmailFormComponent,
+  ArticlesComponent,
+  ArticleComponent,
 ];
 
 @NgModule({

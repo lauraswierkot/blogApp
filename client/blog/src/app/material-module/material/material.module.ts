@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const modules = [
   MatFormFieldModule,
@@ -20,7 +22,9 @@ const modules = [
   MatSelectModule,
   MatSidenavModule,
   MatButtonModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 @NgModule({

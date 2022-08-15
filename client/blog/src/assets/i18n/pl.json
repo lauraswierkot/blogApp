@@ -36,5 +36,12 @@
     "emailError": "Brak maila.",
     "submit": "Wyślij",
     "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+  },
+
+  "articles": {
+    "placeholder": "Wyszukaj artykuł...",
+    "search": "Szukaj",
+    "listTitle": "Artykuły",
+    "toAdminPanel": "Panel Admina"
   }
 }

@@ -1,0 +1,22 @@
+<div class="search">
+  <input class="search__form" type="text" [(ngModel)]="searchTerm"
+    placeholder="{{ 'articles.placeholder' | translate }}" />
+
+  <div class="search__buttons">
+    <button (click)="search()">{{ 'articles.search' | translate }}</button>
+  </div>
+</div>
+<div class="list">
+  <h3 class="list--title">{{ 'articles.listTitle' | translate }}</h3>
+  <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
+    <mat-card-title class="list__card__title">
+      {{article.title}}
+    </mat-card-title>
+  </mat-card>
+  <mat-paginator
+    [length]="articlesCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="setPaginator($event)">
+  </mat-paginator>
+</div>

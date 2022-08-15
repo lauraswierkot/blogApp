@@ -2,9 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmailFormComponent } from '@home/login-form/email-form/email-form.component';
 
-import { LoginFormComponent, NewPasswordFormComponent } from './home';
+import {
+  ArticleComponent,
+  ArticlesComponent,
+  LoginFormComponent,
+  NewPasswordFormComponent,
+} from './home';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: ArticlesComponent,
+  },
+  {
+    path: 'article/:slug',
+    component: ArticleComponent,
+  },
   {
     path: 'blog-login',
     component: LoginFormComponent,
@@ -15,8 +28,8 @@ const routes: Routes = [
   },
   {
     path: 'email-form',
-    component: EmailFormComponent
-  }
+    component: EmailFormComponent,
+  },
 ];
 
 @NgModule({

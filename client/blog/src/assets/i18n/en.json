@@ -36,5 +36,13 @@
     "emailError": "Email is missing.",
     "submit": "Send",
     "toLoginForm": "No need to change password? To Login Panel"
+  },
+
+  "articles": {
+    "placeholder": "Search article...",
+    "search": "Search",
+    "create": "Create",
+    "listTitle": "All articles",
+    "toAdminPanel": "Admin Panel"
   }
 }
