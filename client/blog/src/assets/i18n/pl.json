@@ -10,10 +10,31 @@
     "emailError": "Email nieporawny.",
     "passwordPlaceholder": "Podaj hasło",
     "submit": "Zaloguj",
-    "toRegister": "Nie masz konta? Zarejestruj się"
+    "toRegister": "Nie masz konta? Zarejestruj się",
+    "toEmailForm": "Nie pamiętasz hasła?"
   },
 
   "notification": {
-    "userLoggedIn": "Udane logowanie"
+    "userLoggedIn": "Udane logowanie",
+    "reminderSent": "Sprawdź skrzynkę mailową!",
+    "passwordChanged": "Hasło zaktualizowane"
+  },
+
+  "password": {
+    "title": "Zmień hasło",
+    "passwordPlaceholder": "Podaj hasło",
+    "passwordError": "Brak hasła.",
+    "confirmPasswordPlaceholder": "Powtórz hasło",
+    "confirmPasswordError": "Brak hasła.",
+    "submit": "Zapisz",
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+  },
+
+  "email": {
+    "title": "Wyślij przypomnienie",
+    "emailPlaceholder": "Podaj swojego maila",
+    "emailError": "Brak maila.",
+    "submit": "Wyślij",
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
   }
 }

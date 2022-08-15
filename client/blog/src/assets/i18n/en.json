@@ -10,10 +10,31 @@
     "emailError": "Email not valid.",
     "passwordPlaceholder": "Type your password here",
     "submit": "Login",
-    "toRegister": "No account? Sign up"
+    "toRegister": "No account? Sign up",
+    "toEmailForm": "Forgot your password?"
   },
 
   "notification": {
-    "userLoggedIn": "Logged in successfully"
+    "userLoggedIn": "Logged in successfully",
+    "reminderSent": "Check your mailbox!",
+    "passwordChanged": "Password changed successfully"
+  },
+
+  "password": {
+    "title": "Change password",
+    "passwordPlaceholder": "Type your password here",
+    "passwordError": "Password is missing.",
+    "confirmPasswordPlaceholder": "Confirm your password here",
+    "confirmPasswordError": "Confirm password is missing.",
+    "submit": "Save",
+    "toLoginForm": "No need to change password? To Login Panel"
+  },
+
+  "email": {
+    "title": "Send reminder",
+    "emailPlaceholder": "Type your email here",
+    "emailError": "Email is missing.",
+    "submit": "Send",
+    "toLoginForm": "No need to change password? To Login Panel"
   }
 }

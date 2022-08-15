@@ -44,4 +44,8 @@ export class LoginFormComponent {
     };
     this.facade.login(login);
   }
+
+  public toRegisterForm(): void {
+    this.router.navigate(['/register']);
+  }
 }

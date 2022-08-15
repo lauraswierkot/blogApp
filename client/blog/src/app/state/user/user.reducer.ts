@@ -15,5 +15,6 @@ export const reducer = createReducer(
     ...state,
     user: loginResponse,
     token: loginResponse.token,
-  }))
+  })),
+  on(action.logout, (state) => ({ ...state, user: null, token: null }))
 );

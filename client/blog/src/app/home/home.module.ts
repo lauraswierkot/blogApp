@@ -5,9 +5,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { LoginFormComponent } from './login-form/login-form.component';
 import { MaterialModule } from 'app/material-module/material/material.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  LoginFormComponent,
+  NewPasswordFormComponent,
+  EmailFormComponent,
+} from './';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -27,7 +31,11 @@ const modules = [
   }),
 ];
 
-const components = [LoginFormComponent];
+const components = [
+  LoginFormComponent,
+  NewPasswordFormComponent,
+  EmailFormComponent,
+];
 
 @NgModule({
   declarations: [...components],

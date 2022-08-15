@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -46,7 +46,7 @@ export class LoginFormComponent {
     this.facade.login(login);
   }
 
-  public toRegisterForm(): void {
-    this.router.navigate(['/register']);
+  public toEmailForm(): void {
+    this.router.navigate(['/email-form']);
   }
 }

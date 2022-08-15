@@ -23,8 +23,26 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UpdateUser {
+  email?: string;
+  image?: string;
+  bio?: string;
+  password: string;
+}
+
+export interface AuthResponse extends User {
+  confirmToken?: string;
+  token: string;
+  reminderToken?: string;
+}
+
 export interface ProfileResponse extends UserResponse {
-  following: boolean;
+  following: boolean | null;
+}
+
+export enum TokenType {
+  Confirm = 'confirmToken',
+  Reminder = 'reminderToken',
 }
 
 export interface UserState {
@@ -36,5 +54,5 @@ export interface UserState {
 export const initialState: UserState = {
   user: null,
   error: null,
-  token: null
+  token: null,
 };

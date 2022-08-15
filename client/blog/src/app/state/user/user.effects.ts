@@ -48,4 +48,71 @@ export class UserEffects {
       })
     )
   );
+
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(action.logout),
+        tap(() => {
+          return this.router.navigate(['/login']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  sendEmailReminderPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.sendReminderPasswordEmail),
+      switchMap(({ email }) => {
+        return this.http.sendReminderPasswordEmail(email).pipe(
+          switchMap(() => {
+            setTimeout(() => {
+              this.router.navigate(['/blog-login']);
+            }, 1000);
+            return [
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.reminderSent'),
+                notificationType: NotificationType.Message,
+              }),
+              action.sendReminderPasswordEmailSuccess(),
+            ];
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.sendReminderPasswordEmailFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  changePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.changePassword),
+      switchMap(({ token, user }) => {
+        return this.http.changePassword(token, user).pipe(
+          switchMap(() => {
+            this.router.navigate(['/blog-login']);
+            return [
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.passwordChanged'),
+                notificationType: NotificationType.Message,
+              }),
+              action.changePasswordSuccess(),
+            ];
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.changePasswordFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
 }

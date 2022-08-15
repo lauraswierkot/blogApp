@@ -1,0 +1,22 @@
+<div class="container">
+    <form class="container__form" [formGroup]="emailForm" (ngSubmit)="sendReminder()">
+        <header class="container__form--title">{{ 'email.title' | translate }}</header>
+        <div class="container__form__field">
+            <span class="material-icons container__form__field--icons">person</span>
+            <input class="container__form__field--input" formControlName="email"
+                placeholder="{{ 'email.emailPlaceholder' | translate }}" name="email" required />
+            <div *ngIf="email?.errors?.['email']">{{ 'email.emailError' | translate }}</div>
+        </div>
+        <div class="container__form__field">
+            <button [disabled]="!emailForm.valid" type="submit">
+                <span>{{ 'email.submit' | translate }}</span>
+            </button>
+        </div>
+        <div class="container_form__field container__form__field--register">
+            <span>{{ 'email.toLoginForm' | translate }}</span>
+            <span (click)="toLoginForm()" class="material-icons container__form__field--icons arrow">
+                trending_flat
+            </span>
+        </div>
+    </form>
+</div>
