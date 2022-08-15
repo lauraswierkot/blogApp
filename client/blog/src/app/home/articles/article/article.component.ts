@@ -47,8 +47,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
         this.selectedArticle = article;
+        this.fileSource = `${this.imageUrl}${this.selectedArticle?.image}`
       });
-    this.fileSource = `${this.imageUrl}/${this.selectedArticle?.image}`
   }
 
   public toAdminPanel(): void {
