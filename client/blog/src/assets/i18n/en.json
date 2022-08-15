@@ -41,8 +41,14 @@
   "articles": {
     "placeholder": "Search article...",
     "search": "Search",
-    "create": "Create",
     "listTitle": "All articles",
-    "toAdminPanel": "Admin Panel"
+    "toAdminPanel": "Admin Panel",
+    "details": "Read",
+    "logout": "Logout"
+  },
+
+  "article": {
+    "toArticles": "Back to articles",
+    "commentsTitle": "Comments"
   }
 }

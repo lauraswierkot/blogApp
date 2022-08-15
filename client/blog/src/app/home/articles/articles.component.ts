@@ -7,6 +7,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
+import { Router } from '@angular/router';
+import { UserFacade } from '@state/user/user.facade';
+import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -18,6 +21,9 @@ export class ArticlesComponent implements OnInit {
   public articlesList$: Observable<Article[]>;
   public articlesCount$: Observable<number>;
   public articlesCount: number;
+  public fileSource: string;
+  public imageUrl: string = environment.apiImageUrl;
+  
   public pageIndex = 0;
   public searchTerm = '';
   public pageSize = 3;
@@ -25,7 +31,9 @@ export class ArticlesComponent implements OnInit {
 
   constructor(
     private facade: ArticleFacade,
-    public dialog: MatDialog
+    public userFacade: UserFacade,
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -49,6 +57,10 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  public toArticle(slug: string): void {
+    this.router.navigate([`article/${slug}`]);
+  }
+
   public setPaginator(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
@@ -61,5 +73,9 @@ export class ArticlesComponent implements OnInit {
       page: this.pageIndex?.toString(),
       searchTerm: this.searchTerm,
     });
+  }
+
+  public logout(): void {
+    this.userFacade.logout()
   }
 }

@@ -7,11 +7,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 const modules = [
   MatFormFieldModule,
@@ -22,9 +26,15 @@ const modules = [
   MatSelectModule,
   MatSidenavModule,
   MatButtonModule,
+  MatCardModule,
+  MatListModule,
+  MatToolbarModule,
+  MatBadgeModule,
+  MatDividerModule,
   MatProgressSpinnerModule,
-  MatPaginatorModule,
-  MatDialogModule
+  MatSidenavModule,
+  MatDialogModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

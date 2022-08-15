@@ -50,3 +50,13 @@ export const initialState: ArticleState = {
   selectedArticle: null,
   error: null,
 };
+
+export interface Comment {
+  id: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  body: string;
+  author: User;
+  article: Article;
+  image?: string;
+}

@@ -42,6 +42,13 @@
     "placeholder": "Wyszukaj artykuł...",
     "search": "Szukaj",
     "listTitle": "Artykuły",
-    "toAdminPanel": "Panel Admina"
+    "toAdminPanel": "Panel Admina",
+    "details": "Czytaj",
+    "logout": "Wyloguj się"
+  },
+
+  "article": {
+    "toArticles": "Do artykułów",
+    "commentsTitle": "Komentarze"
   }
 }

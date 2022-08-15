@@ -24,16 +24,10 @@ import { environment } from 'environments/environment';
   styleUrls: ['./article.component.scss'],
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-  public articleForm: FormGroup;
   public selectedArticle: Article;
   public commentIndex = 0;
   public commentMaxLength = 20;
-  private imageUrl: string = environment.apiImageUrl;
-
-  readonly separatorKeysCodes = [ENTER, COMMA];
-  public selectable = true;
-  public removable = true;
-  public addOnBlur = true;
+  public imageUrl: string = environment.apiImageUrl;
   public fileSource: string | ArrayBuffer;
 
   constructor(
@@ -42,7 +36,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private changeDetector: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
@@ -54,83 +47,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
         this.selectedArticle = article;
-        this.initForm();
       });
-  }
-
-  public get title(): AbstractControl {
-    return this.articleForm.get('title');
-  }
-
-  public get body(): AbstractControl {
-    return this.articleForm.get('body');
-  }
-
-  public get file(): AbstractControl {
-    return this.articleForm.get('file');
-  }
-
-  public get description(): AbstractControl {
-    return this.articleForm.get('description');
-  }
-
-  public get tagList(): AbstractControl {
-    return this.articleForm.get('tagList');
-  }
-
-  public get comments(): FormArray {
-    return this.articleForm.get('comments').value;
-  }
-
-  public submitForm(): void {
-    const formData: FormData = new FormData();
-    formData.append('title', this.title.value);
-    formData.append('description', this.description.value);
-    formData.append('body', this.body.value);
-    formData.append('file', this.file.value);
-    formData.append('tagList', this.tagList.value);
-  }
-
-  public onFileSelect(event: any): void {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const fileFromInput = event.currentTarget.files[0];
-      this.articleForm.patchValue({
-        file: fileFromInput,
-      });
-      reader.readAsDataURL(fileFromInput);
-      reader.onload = () => {
-        this.fileSource = reader.result;
-        this.changeDetector.markForCheck();
-      };
-    }
+    this.fileSource = `${this.imageUrl}/${this.selectedArticle?.image}`
   }
 
   public toAdminPanel(): void {
     this.router.navigate(['']);
   }
 
-  private initForm(): void {
-    this.articleForm = this.formBuilder.group({
-      title: [this.selectedArticle?.title, Validators.required],
-      body: [this.selectedArticle?.body, Validators.required],
-      file: [this.selectedArticle?.image, Validators.required],
-      description: [this.selectedArticle?.description, Validators.required],
-      tagList: [
-        this.selectedArticle === null ? '' : this.selectedArticle?.tagList,
-        Validators.required,
-      ],
-      comments: this.formBuilder.array([]),
-    });
-
-    this.articleForm.setControl(
-      'comments',
-      this.formBuilder.array(this.selectedArticle?.comments || [])
-    );
-
-    if (this.selectedArticle) {
-      this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
-    }
+  public toArticles(): void {
+    this.router.navigate(['']);
   }
 
   public ngOnDestroy(): void {
