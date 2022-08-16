@@ -9,14 +9,16 @@ import { map } from 'rxjs';
 import * as action from './article.actions';
 import * as notificationAction from '@state/notifications/notification.actions';
 import { HttpService } from '@core/index';
-import { Article } from './article.model';
+import { Article, Comment } from './article.model';
 import { NotificationType } from '@state/notifications/notification.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ArticleEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpService
+    private http: HttpService,
+    private translate: TranslateService
   ) {}
 
   getArticles$ = createEffect(() =>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
-import { Article, GetArticlePayload } from './article.model';
+import { Article, GetArticlePayload, UpdatedComment, Comment } from './article.model';
 import * as selector from './article.selectors';
 
 @Injectable({

@@ -13,6 +13,7 @@ import {
   GetArticlePayload,
   GetArticlesCount,
   Article,
+  Comment
 } from '@state/articles/article.model';
 
 const apiUrl = environment.apiUrl;

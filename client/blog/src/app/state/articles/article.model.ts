@@ -39,6 +39,7 @@ export interface GetArticlesCount {
 
 export interface Comment {
   id: number;
+  slug: Article['slug'];
   createdAt: string | Date;
   updatedAt: string | Date;
   body: string;
