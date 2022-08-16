@@ -20,6 +20,7 @@ export const reducer = createReducer(
   on(action.getArticlesFailed, (state, { error }) => ({ ...state, error })),
   on(action.selectArticleSuccess, (state, { article }) => ({
     ...state,
+    selectedArticleComments: article.comments,
     selectedArticle: article,
   })),
   on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
@@ -46,7 +47,6 @@ export const reducer = createReducer(
     const filteredComments = cloneDeep(state.selectedArticleComments).map(
       (item) => (item.id === id ? { ...item, body: body } : item)
     );
- 
     return {
       ...state,
       selectedArticleComments: filteredComments,
@@ -54,7 +54,6 @@ export const reducer = createReducer(
     };
   }),
   on(action.updateCommentFailed, (state, { error }) => ({ ...state, error })),
-
   on(action.deleteCommentSuccess, (state, { id }) => {
     const filteredComments = cloneDeep(state.selectedArticle.comments).filter(
       (value) => value.id != id

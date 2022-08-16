@@ -61,7 +61,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe((article) => {
         this.selectedArticle = article;
         this.fileSource = `${this.imageUrl}${this.selectedArticle?.image}`;
-        this.data = this.selectedArticle.comments[0];
+        this.data = this.selectedArticle?.comments[0];
       });
     this.commentForm = this.formBuilder.group({
       slug: [this.data?.slug, Validators.required],
@@ -69,7 +69,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       body: ['', Validators.required],
     });
     this.updatedComment = this.commentForm?.value as UpdatedComment;
-    this.author = this.selectedArticle?.comments[0].author.username;
+    this.author = this.selectedArticle?.comments[0].author?.username;
   }
 
   public get body(): AbstractControl {
