@@ -45,13 +45,17 @@ export interface Comment {
   body: string;
   author: User;
   article: Article;
-  image?: string;
 }
 
 export interface UpdatedComment {
   slug: Article['slug'];
   body: string;
   id: number;
+}
+
+export interface CommentInterface {
+  comment: Comment;
+  slug: Article['slug'];
 }
 
 export interface ArticleState {

@@ -6,14 +6,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article, UpdatedComment } from '@state/articles/article.model';
+import {
+  Article,
+  UpdatedComment,
+  Comment,
+  CommentInterface,
+} from '@state/articles/article.model';
 import { environment } from 'environments/environment';
-import { User } from '@state/user/user.model';
+import { UserFacade } from '@state/user/user.facade';
+import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -34,9 +40,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public comment: Comment;
 
   public data: UpdatedComment;
+  public user$ = this.userFacade.user$;
 
   constructor(
     private facade: ArticleFacade,
+    private userFacade: UserFacade,
     private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
@@ -55,15 +63,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.fileSource = `${this.imageUrl}${this.selectedArticle?.image}`;
         this.data = this.selectedArticle.comments[0];
       });
-    if (this.selectedArticle?.comments) {
-      this.commentForm = this.formBuilder.group({
-        slug: [this.data?.slug, Validators.required],
-        id: [this.data?.id, Validators.required],
-        body: ['', Validators.required],
-      });
-      this.updatedComment = this.commentForm?.value as UpdatedComment;
-      this.author = this.selectedArticle.comments[0].author.username;
-    }
+    this.commentForm = this.formBuilder.group({
+      slug: [this.data?.slug, Validators.required],
+      id: [this.data?.id, Validators.required],
+      body: ['', Validators.required],
+    });
+    this.updatedComment = this.commentForm?.value as UpdatedComment;
+    this.author = this.selectedArticle?.comments[0].author.username;
   }
 
   public get body(): AbstractControl {
@@ -71,15 +77,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
-    if (this.selectedArticle?.comments[0]) {
-      this.updatedComment.body = this.commentForm.value.body;
-      this.facade.updateComment(this.updatedComment);
-    } else {
-      this.facade.createComment(
-        this.selectedArticle.slug,
-        this.updatedComment.body
-      );
-    }
+    this.facade.createComment(
+      this.selectedArticle.slug,
+      this.commentForm?.value['body']
+    );
   }
 
   public toAdminPanel(): void {
@@ -88,6 +89,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   public toArticles(): void {
     this.router.navigate(['']);
+  }
+
+  public openDialog(comment: Comment): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      comment,
+      slug: this.selectedArticle.slug,
+    } as CommentInterface;
+    dialogConfig.disableClose = false;
+    this.dialog.open(CommentDialogComponent, dialogConfig);
   }
 
   public ngOnDestroy(): void {
