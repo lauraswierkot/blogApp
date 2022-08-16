@@ -9,7 +9,11 @@ import {
   UserLogin,
   UserResponse,
 } from '@state/user/user.model';
-import { GetArticlePayload, GetArticlesCount, Article } from '@state/articles/article.model';
+import {
+  GetArticlePayload,
+  GetArticlesCount,
+  Article,
+} from '@state/articles/article.model';
 
 const apiUrl = environment.apiUrl;
 
@@ -57,5 +61,31 @@ export class HttpService {
     return this.http
       .get<{ article: Article }>(`${apiUrl}/articles/${slug}`)
       .pipe(map((response) => response.article));
+  }
+
+  public createComment(slug: string, body: string): Observable<Comment> {
+    return this.http
+      .post<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments`, {
+        comment: { body: body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public updateComment(
+    slug: string,
+    body: string,
+    id: number
+  ): Observable<Comment> {
+    return this.http
+      .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`, {
+        comment: { body: body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public deleteComment(slug: string, id: number): Observable<Comment> {
+    return this.http
+      .delete<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`)
+      .pipe(map((response) => response.comment));
   }
 }

@@ -61,4 +61,78 @@ export class ArticleEffects {
       })
     )
   );
+
+  createComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.createComment),
+      switchMap(({ slug, body }) => {
+        return this.http.createComment(slug, body).pipe(
+          map((comment: Comment) => {
+            notificationAction.createNotification({
+              message: 'Comment created',
+              notificationType: NotificationType.Message,
+            });
+            return action.createCommentSuccess({ slug, comment });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.createCommentFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+ 
+  editComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.updateComment),
+      switchMap(({ slug, body, id }) => {
+        return this.http.updateComment(slug, body, id).pipe(
+          map((comment: Comment) => {
+            notificationAction.createNotification({
+              message: 'Comment updated',
+              notificationType: NotificationType.Message,
+            });
+            return action.updateCommentSuccess({ id, body });
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.updateCommentFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
+  deleteComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.deleteComment),
+      switchMap(({ slug, id }) => {
+        return this.http.deleteComment(slug, id).pipe(
+          switchMap((comment: Comment) => {
+            return [
+              notificationAction.createNotification({
+                message: this.translate.instant('notification.commentDeleted'),
+                notificationType: NotificationType.Message,
+              }),
+              action.deleteCommentSuccess({ slug, id }),
+            ];
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.deleteCommentFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
 }

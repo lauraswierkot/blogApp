@@ -19,3 +19,8 @@ export const selectArticlesCount = createSelector(
   selectArticleState,
   (state) => state.articlesCount
 );
+
+export const selectSelectedArticleComments = createSelector(
+  selectArticleState,
+  (state) => state.selectedArticleComments
+);
