@@ -1,7 +1,8 @@
 .search {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row nowrap;
   margin: auto;
+  justify-content: space-between;
 
   &__form {
     height: 2.5em;
@@ -16,19 +17,30 @@
 }
 
 .list__card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: stretch;
-  margin-top: 1em;
-  max-width: 100%;
-  overflow: hidden;
-
   &__buttons {
     display: flex;
     flex-wrap: wrap;
     margin-left: auto;
     flex-wrap: wrap;
     gap: 1.5em;
+    justify-content: center;
   }
+
+  &--title {
+    padding: 3em 5em;
+    font-weight: bolder;
+    font-size: larger;
+  }
+}
+
+
+.list__card--container {
+  justify-items: center;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.list__card__title {
+  font-weight: bolder;
 }

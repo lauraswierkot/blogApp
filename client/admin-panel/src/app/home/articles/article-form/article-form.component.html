@@ -1,84 +1,88 @@
-<div class="container">
-  <form class="container__form" [formGroup]="articleForm" (ngSubmit)="submitForm()">
-    <header class="container__form--title">
-      <span *ngIf="selectedArticle === null; else edit">{{ 'articleForm.titleCreate' | translate }}</span>
+<mat-card class="container">
+  <mat-card-header class="container__title">
+    <mat-card-title><span *ngIf="selectedArticle === null; else edit">{{
+        'articleForm.titleCreate' | translate }}</span>
       <ng-template #edit>
         <span>{{ 'articleForm.titleEdit' | translate }}</span>
       </ng-template>
-    </header>
-    <div class="container__form__field">
-      <input class="container__form__field--input" formControlName="title"
-        placeholder="{{ 'articleForm.titlePlaceholder' | translate }}" name="title" required />
-      <div class="container__form__field--message" *ngIf="title.errors && title.touched">
-        {{ 'articleForm.titleError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <textarea class="container__form__field--input" formControlName="body"
-        placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}" name="body" required>
-      </textarea>
-      <div class="container__form__field--message" *ngIf="body.errors && body.touched">
-        {{ 'articleForm.bodyError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <textarea class="container__form__field--input" type="text" formControlName="description"
-        placeholder="{{ 'articleForm.descriptionPlaceholder' | translate }}" name="description" required>
-      </textarea>
-      <div class="container__form__field--message" *ngIf="description.errors && description.touched">
-        {{ 'articleForm.descriptionError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <mat-form-field appearance="fill" class="container__form__field--input">
-        <mat-chip-list #chipList aria-label="Enter tags" formControlName="tagList">
-          <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
-            [removable]="removable" (removed)="removeTag(tag)">
-            {{ tag }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addTag($event)" />
-        </mat-chip-list>
-      </mat-form-field>
-    </div>
-    <div class="container__form__field">
-      <button type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
-        translate}}
-      </button>
-      <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
-        accept="image/*" required />
-      <div class="container__form__field" *ngIf="fileSource">
-        <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
-      </div>
-    </div>
-    <div *ngIf="articleForm?.controls['comments']">
-      <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
-      <div *ngFor="let comment of articleForm.controls['comments'].value">
-        <p>
-          {{ comment.body | slice: commentIndex : commentMaxLength }}
-          <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
-          <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
-          <ng-template #anonymousComment>
-            {{ 'articleForm.anonymous' | translate }}
-          </ng-template> |
-          {{comment.createdAt | date: 'dd/MM/yyyy'}} 
-          <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
-            {{ 'articleForm.commentDelete' | translate}}
-          </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="articleForm" (ngSubmit)="submitForm()">
+      <p>
+        <mat-form-field class="container__field" appearance="fill">
+          <mat-label>{{ 'articleForm.titlePlaceholder' | translate }}</mat-label>
+          <input matInput formControlName="title" placeholder="{{ 'articleForm.titlePlaceholder' | translate }}"
+            name="title" required>
+          <mat-error *ngIf="title.errors?.['title']">{{ 'articleForm.titleError' | translate }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="container__field" appearance="fill">
+          <mat-label>{{ 'articleForm.bodyPlaceholder' | translate }}</mat-label>
+          <textarea matInput formControlName="body" placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}"
+            name="email" required></textarea>
+          <mat-error *ngIf="body.errors?.['body']">{{ 'articleForm.bodyError' | translate }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="container__field" appearance="fill">
+          <mat-label>{{ 'articleForm.descriptionPlaceholder' | translate }}</mat-label>
+          <textarea matInput formControlName="description"
+            placeholder="{{ 'articleForm.descriptionPlaceholder' | translate }}" name="description" required></textarea>
+          <mat-error *ngIf="description.errors?.['description']">{{ 'articleForm.descriptionError' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill" class="container__field">
+          <mat-chip-list #chipList aria-label="Enter tags" formControlName="tagList">
+            <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
+              [removable]="removable" (removed)="removeTag(tag)">
+              {{ tag }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTag($event)" />
+          </mat-chip-list>
+        </mat-form-field>
         </p>
-      </div>
-    </div>
-    <div class="container__form__field">
-      <button type="submit" [disabled]="!articleForm.valid">
-        <span>{{ 'articleForm.submit' | translate }}</span>
+          <button type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
+            translate}}
+          </button>
+          <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
+            accept="image/*" required />
+          <div class="container__form__field" *ngIf="fileSource">
+            <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
+          </div>
+          <div *ngIf="articleForm?.controls['comments']">
+            <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
+            <div *ngFor="let comment of articleForm.controls['comments'].value">
+              <p>
+                {{ comment.body | slice: commentIndex : commentMaxLength }}
+                <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
+                <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
+                <ng-template #anonymousComment>
+                  {{ 'articleForm.anonymous' | translate }}
+                </ng-template> |
+                {{comment.createdAt | date: 'dd/MM/yyyy'}}
+                <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+                  {{ 'articleForm.commentDelete' | translate}}
+                </button>
+              </p>
+            </div>
+          </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'articleForm.submit' | translate
+      }}</button>
+    <div class="container__bottom">
+      <span>{{ 'articleForm.toAdminPanel' | translate }}</span>
+      <button mat-button>
+        <mat-icon (click)="toAdminPanel()">arrow_right_alt</mat-icon>
       </button>
     </div>
-    <div class="container_form__field container__form__field--login">
-      <span>{{ 'articleForm.toAdminPanel' | translate }}</span>
-      <span class="material-icons container__form__field--icons arrow" (click)="toAdminPanel()">trending_flat
-      </span>
-    </div>
-  </form>
-</div>
+  </mat-card-actions>
+</mat-card>

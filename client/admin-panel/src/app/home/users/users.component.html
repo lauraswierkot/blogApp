@@ -1,22 +1,26 @@
-<div class="search">
-    <input 
-    class="search__form" 
-    type="text" 
-    [(ngModel)]="searchTerm"
-    placeholder="{{ 'users.placeholder' | translate }}" />
+<mat-toolbar class="search">
     <div class="search__buttons">
-        <button (click)="search()">{{ 'users.search' | translate }}</button>
-        <button (click)="toAdminPanel()">{{ 'users.toAdminPanel' | translate }}</button>
+        <button mat-raised-button (click)="toAdminPanel()" color="primary">{{ 'users.toAdminPanel' | translate }}</button>
     </div>
-</div>
+</mat-toolbar>
+<form>
+    <mat-form-field>
+        <span matPrefix></span>
+        <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
+            placeholder="{{ 'users.placeholder' | translate }}" />
+        <button matSuffix mat-button (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
 <div class="list">
-    <h3 class="list--title">{{ 'users.listTitle' | translate }}</h3>
+    <header class="list__card--title">{{ 'users.listTitle' | translate }}</header>
     <mat-card class="list__card" *ngFor="let user of usersList$ | async">
         <mat-card-title>
             {{user.username}}
         </mat-card-title>
         <mat-card-actions class="list__card__buttons">
-            <button (click)="openDialog(user.username)">{{ 'users.view' | translate }}</button>
+            <button mat-stroked-button (click)="openDialog(user.username)">{{ 'users.view' | translate }}</button>
         </mat-card-actions>
     </mat-card>
     <mat-paginator [length]="usersCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"

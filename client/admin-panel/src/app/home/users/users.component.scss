@@ -28,4 +28,10 @@
     display: flex;
     margin-left: auto;
   }
+
+  &--title {
+    font-size: large;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 }

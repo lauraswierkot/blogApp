@@ -1,4 +1,4 @@
-<div class="search">
+<!-- <div class="search">
   <input class="search__form" type="text" [(ngModel)]="searchTerm"
     placeholder="{{ 'articles.placeholder' | translate }}" />
   <div class="search__buttons">
@@ -23,4 +23,39 @@
   <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
     (page)="setPaginator($event)">
   </mat-paginator>
+</div> -->
+
+<mat-toolbar class="search">
+  <div>
+    <button matSuffix mat-button (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
+    placeholder="{{ 'articles.placeholder' | translate }}" />
+  </div>
+   
+  <div class="search__buttons">
+    <button mat-raised-button (click)="logout()" color="primary">{{ 'articles.toAdminPanel' | translate }}</button>
+  </div>
+</mat-toolbar>
+ 
+<header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
+<div class="list__card--container" >
+  <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
+    <mat-card-title class="list__card__title">{{article.title}}</mat-card-title>
+    <mat-card-content>
+      <p>
+        {{article.description}}
+      </p>
+      <img [src]="imageUrl+article.image" width="300" height="150">
+    </mat-card-content>
+    <mat-card-actions class="list__card__buttons">
+      <button mat-stroked-button (click)="toArticle(article.slug)">
+        {{ 'articles.details' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
+<mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+  (page)="setPaginator($event)">
+</mat-paginator>

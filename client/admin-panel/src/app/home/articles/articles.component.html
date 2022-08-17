@@ -1,30 +1,33 @@
-<div class="search">
-  <input class="search__form" type="text" [(ngModel)]="searchTerm"
-    placeholder="{{ 'articles.placeholder' | translate }}" />
-
+<mat-toolbar class="search">
   <div class="search__buttons">
-    <button (click)="search()">{{ 'articles.search' | translate }}</button>
-    <button (click)="createArticle()">{{ 'articles.create' | translate }}</button>
-    <button (click)="toAdminPanel()">{{ 'articles.toAdminPanel' | translate }}</button>
+    <button mat-raised-button (click)="createArticle()" color="warn">{{ 'articles.create' | translate }}</button>
+    <button mat-raised-button (click)="toAdminPanel()" color="primary">{{ 'articles.toAdminPanel' | translate }}</button>
   </div>
-</div>
+</mat-toolbar>
+<form>
+  <mat-form-field>
+    <span matPrefix></span>
+    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
+      placeholder="{{ 'articles.placeholder' | translate }}" />
+    <button matSuffix mat-button (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
 <div class="list">
-  <h3 class="list--title">{{ 'articles.listTitle' | translate }}</h3>
+  <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
   <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
     <mat-card-title class="list__card__title">
-      {{article.title}}
+      {{ article.title }}
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
-      <button (click)="toUpdateArticle(article.slug)">
+      <button mat-stroked-button (click)="toUpdateArticle(article.slug)">
         {{ 'articles.edit' | translate }}
       </button>
-      <button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
+      <button mat-stroked-button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
     </mat-card-actions>
   </mat-card>
-  <mat-paginator
-    [length]="articlesCount"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
+  <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
     (page)="setPaginator($event)">
   </mat-paginator>
 </div>
