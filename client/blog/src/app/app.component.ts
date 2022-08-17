@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     private actionsFacade: ActionsFacade
   ) {
     translate.setDefaultLang('en');
-    this.isLoading = this.actionsFacade.loading$.pipe(
+    this.isLoading = this.actionsFacade.loading$.pipe(untilDestroyed(this))
       mergeMap((value) => {
         if (!this.isFirstEmittedValue) {
           this.isFirstEmittedValue = !this.isFirstEmittedValue;
@@ -47,7 +47,6 @@ export class AppComponent implements OnInit {
         }
         return of(value);
       })
-    );
   }
 
   public setLang(language: string): void {
