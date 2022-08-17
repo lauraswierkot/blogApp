@@ -63,7 +63,7 @@
           <ng-template #anonymousComment>
             {{ 'articleForm.anonymous' | translate }}
           </ng-template> |
-          {{comment.createdAt | date: 'dd/MM/yyyy'}} 
+          {{ comment.createdAt | date: 'dd/MM/yyyy' }}
           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
             {{ 'articleForm.commentDelete' | translate}}
           </button>

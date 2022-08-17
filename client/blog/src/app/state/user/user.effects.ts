@@ -54,7 +54,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.logout),
         tap(() => {
-          return this.router.navigate(['/login']);
+          return this.router.navigate(['/blog-login']);
         })
       ),
     { dispatch: false }

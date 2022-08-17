@@ -8,7 +8,6 @@
   margin: 3em auto 0;
 
   &__form {
-    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -25,41 +24,39 @@
 
   &__field {
     margin: 0.5em;
-  }
-}
 
-.container__form__field {
-  &--input {
-    max-width: 80%;
-    min-width: 80%;
-    min-height: 3em;
-    margin-bottom: 0.5em;
-    margin-left: 0.5em;
-    border: black;
-  }
+    &--input {
+      max-width: 80%;
+      min-width: 80%;
+      min-height: 3em;
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+      border: black;
+    }
 
-  &--icons {
-    font-size: 30px;
-    display: inline-flex;
-    vertical-align: text-bottom;
-  }
+    &--icons {
+      font-size: 30px;
+      display: inline-flex;
+      vertical-align: text-bottom;
+    }
 
-  &--login {
-    margin: 2em 0 1em 0;
-  }
+    &--login {
+      margin: 2em 0 1em 0;
+    }
 
-  &--age {
-    font-size: 15px;
-    padding-bottom: 1em;
-  }
-  
-  &--message {
-    font-size: 13px;
-    padding-bottom: 1em;
-  }
+    &--age {
+      font-size: 15px;
+      padding-bottom: 1em;
+    }
 
-  &--img {
-    margin-top: 1em;
+    &--message {
+      font-size: 13px;
+      padding-bottom: 1em;
+    }
+
+    &--img {
+      margin-top: 1em;
+    }
   }
 }
 
