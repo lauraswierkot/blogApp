@@ -10,48 +10,23 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   overflow: hidden;
+  text-align: center;
 
-  &__form {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 600px;
-    justify-content: center;
-    text-align: -webkit-center;
-
-    &--title {
-      font-size: 30px;
-      margin: 1em 0 2em 0;
-      text-decoration: underline brown 4px;
-    }
+  &__title {
+    margin: 3em 0 3em 3em;
   }
 
-  &_field {
-    margin: 0.5em;
-  }
-}
-
-.container__form__field {
-  &--input {
-    width: 80%;
-    min-height: 3em;
-    margin-bottom: 2em;
-    margin-left: 0.5em;
-    border: black;
+  &__field {
+    max-width: 500px;
+    width: 100%;
   }
 
-  &--icons {
-    font-size: 30px;
-    display: inline-flex;
-    vertical-align: text-bottom;
+  &--button {
+    max-width: 200px;
+    width: 100%;
   }
 
-  &--register {
-    margin: 2em 0 1em 0;
+  &__bottom {
+    margin: 1em;
   }
-}
-
-.arrow:hover {
-  cursor: pointer;
-  opacity: 70%;
 }

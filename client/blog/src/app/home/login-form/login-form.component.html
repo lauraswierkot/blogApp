@@ -1,27 +1,33 @@
-<div class="container">
-    <form class="container__form" [formGroup]="loginForm" (ngSubmit)="login()">
-        <header class="container__form--title">{{ 'login.title' | translate }}</header>
-        <div class="container__form__field">
-            <span class="material-icons container__form__field--icons">person</span>
-            <input class="container__form__field--input" formControlName="email"
-                placeholder="{{ 'login.emailPlaceholder' | translate }}" name="email" required />
-            <div *ngIf="email.errors?.['email']">{{ 'login.emailError' | translate }}</div>
-        </div>
-        <div class="container__form__field">
-            <span class="material-icons container__form__field--icons">key</span>
-            <input class="container__form__field--input" type="password" formControlName="password"
-                placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required />
-        </div>
-        <div class="container__form__field">
-            <button [disabled]="!loginForm.valid" type="submit">
-                <span>{{ 'login.submit' | translate }}</span>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title class="container__title">{{ 'login.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <p>
+                <mat-form-field class="container__field" appearance="fill">
+                    <mat-label>{{ 'login.emailPlaceholder' | translate }}</mat-label>
+                    <input matInput formControlName="email" placeholder="{{ 'login.emailPlaceholder' | translate }}"
+                        name="email" required>
+                    <mat-error *ngIf="email.errors?.['email']">{{ 'login.emailError' | translate }}</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="container__field" appearance="fill">
+                    <mat-label>{{ 'login.passwordPlaceholder' | translate }}</mat-label>
+                    <input matInput type="password" formControlName="password"
+                        placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="container--button" mat-raised-button type="submit" (click)="login()" color="primary">{{ 'login.submit' | translate }}</button>
+        <div class="container__bottom">
+            <span>{{ 'login.toEmailForm' | translate }}</span>
+            <button mat-button>
+                <mat-icon (click)="toEmailForm()">arrow_right_alt</mat-icon>
             </button>
         </div>
-        <div class="container_form__field container__form__field--register">
-            <span>{{ 'login.toEmailForm' | translate }}</span>
-            <span (click)="toEmailForm()" class="material-icons container__form__field--icons arrow">
-                trending_flat
-            </span>
-        </div>
-    </form>
-</div>
+    </mat-card-actions>
+</mat-card>

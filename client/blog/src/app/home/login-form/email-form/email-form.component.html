@@ -1,22 +1,27 @@
-<div class="container">
-    <form class="container__form" [formGroup]="emailForm" (ngSubmit)="sendReminder()">
-        <header class="container__form--title">{{ 'email.title' | translate }}</header>
-        <div class="container__form__field">
-            <span class="material-icons container__form__field--icons">person</span>
-            <input class="container__form__field--input" formControlName="email"
-                placeholder="{{ 'email.emailPlaceholder' | translate }}" name="email" required />
-            <div *ngIf="email?.errors?.['email']">{{ 'email.emailError' | translate }}</div>
-        </div>
-        <div class="container__form__field">
-            <button [disabled]="!emailForm.valid" type="submit">
-                <span>{{ 'email.submit' | translate }}</span>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title class="container__title">{{ 'email.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="emailForm" (ngSubmit)="sendReminder()">
+            <p>
+                <mat-form-field class="container__field" appearance="fill">
+                    <mat-label>{{ 'email.emailPlaceholder' | translate }}</mat-label>
+                    <input matInput formControlName="email" placeholder="{{ 'email.emailPlaceholder' | translate }}"
+                        name="email" required>
+                    <mat-error *ngIf="email.errors?.['email']">{{ 'email.emailError' | translate }}</mat-error>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'email.submit' | translate
+            }}</button>
+        <div class="container__bottom">
+            <span>{{ 'email.toLoginForm' | translate }}</span>
+            <button mat-button>
+                <mat-icon (click)="toLoginForm()">arrow_right_alt</mat-icon>
             </button>
         </div>
-        <div class="container_form__field container__form__field--register">
-            <span>{{ 'email.toLoginForm' | translate }}</span>
-            <span (click)="toLoginForm()" class="material-icons container__form__field--icons arrow">
-                trending_flat
-            </span>
-        </div>
-    </form>
-</div>
+    </mat-card-actions>
+</mat-card>
