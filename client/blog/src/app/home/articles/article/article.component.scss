@@ -2,69 +2,48 @@
   background-color: #f2f2f2;
   border-radius: 7px;
   height: auto;
-  max-width: 1200px;
+  max-width: 900px;
   overflow: hidden;
   width: 70%;
   margin: 3em auto 0;
+  text-align: center;
 
-  &__form {
-    
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
-    justify-content: center;
-    text-align: -webkit-center;
+  &__header {
+    place-content: center;
+  }
 
-    &--title {
-      font-size: 30px;
-      font-weight: bolder;
-      margin: 1em 0 2em 0;
-      text-decoration: underline brown 4px;
-    }
+  &__title {
+    font-weight: bolder;
+    font-size: larger;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
   }
 
   &__field {
-    margin: 0.5em;
-  }
-}
+    max-width: 750px;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    margin-left: 2em;
+    margin-top: 1em;
 
-.container__form__field {
-  &--input {
-    max-width: 80%;
-    min-width: 80%;
-    min-height: 3em;
-    margin-bottom: 0.5em;
-    margin-left: 0.5em;
-    border: black;
-  }
+    &--button {
+      margin-top: 1em;
+    }
 
-  &--icons {
-    font-size: 30px;
-    display: inline-flex;
-    vertical-align: text-bottom;
+    &--image {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
   }
 
-  &--login {
-    margin: 2em 0 1em 0;
-  }
-
-  &--age {
-    font-size: 15px;
-    padding-bottom: 1em;
-  }
-  
-  &--message {
-    font-size: 13px;
-    padding-bottom: 1em;
-  }
-
-  &--img {
+  &--button {
+    max-width: 200px;
+    width: 100%;
     margin-top: 1em;
   }
-}
 
-.arrow:hover {
-  cursor: pointer;
-  opacity: 70%;
+  &__bottom {
+    margin: 1em;
+  }
 }

@@ -12,8 +12,15 @@
   overflow: hidden;
   text-align: center;
 
+  &__header {
+    place-content: center;
+  }
+
   &__title {
-    margin: 3em 0 3em 3em;
+    font-weight: bolder;
+    font-size: large;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
   }
 
   &__field {

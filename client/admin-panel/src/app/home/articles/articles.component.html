@@ -1,19 +1,17 @@
 <mat-toolbar class="search">
+  <div>
+    <span matPrefix></span>
+    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
+    placeholder="{{ 'articles.placeholder' | translate }}" />
+    <button matSuffix mat-button (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
   <div class="search__buttons">
     <button mat-raised-button (click)="createArticle()" color="warn">{{ 'articles.create' | translate }}</button>
     <button mat-raised-button (click)="toAdminPanel()" color="primary">{{ 'articles.toAdminPanel' | translate }}</button>
   </div>
 </mat-toolbar>
-<form>
-  <mat-form-field>
-    <span matPrefix></span>
-    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
-      placeholder="{{ 'articles.placeholder' | translate }}" />
-    <button matSuffix mat-button (click)="search()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
-</form>
 <div class="list">
   <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
   <mat-card class="list__card" *ngFor="let article of articlesList$ | async">

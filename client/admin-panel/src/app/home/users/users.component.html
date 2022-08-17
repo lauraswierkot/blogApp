@@ -1,18 +1,16 @@
 <mat-toolbar class="search">
+    <div>
+      <span matPrefix></span>
+      <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
+      placeholder="{{ 'users.placeholder' | translate }}" />
+      <button matSuffix mat-button (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
     <div class="search__buttons">
         <button mat-raised-button (click)="toAdminPanel()" color="primary">{{ 'users.toAdminPanel' | translate }}</button>
     </div>
-</mat-toolbar>
-<form>
-    <mat-form-field>
-        <span matPrefix></span>
-        <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
-            placeholder="{{ 'users.placeholder' | translate }}" />
-        <button matSuffix mat-button (click)="search()">
-            <mat-icon>search</mat-icon>
-        </button>
-    </mat-form-field>
-</form>
+  </mat-toolbar>
 <div class="list">
     <header class="list__card--title">{{ 'users.listTitle' | translate }}</header>
     <mat-card class="list__card" *ngFor="let user of usersList$ | async">

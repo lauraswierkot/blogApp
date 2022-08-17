@@ -5,7 +5,7 @@
   },
 
   "login": {
-    "title": "Panel logowania",
+    "title": "Panel Logowania",
     "emailPlaceholder": "Podaj email",
     "emailError": "Email nieporawny.",
     "passwordPlaceholder": "Podaj hasło",
@@ -42,7 +42,7 @@
     "placeholder": "Wyszukaj artykuł...",
     "search": "Szukaj",
     "listTitle": "Artykuły",
-    "toAdminPanel": "Panel Admina",
+    "toLogout": "Wyloguj się",
     "details": "Czytaj",
     "logout": "Wyloguj się"
   },
@@ -54,6 +54,11 @@
 
   "comment": {
     "title": "Dodaj komentarz",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "placeholder": "Dodaj swój komentarz",
+    "error": "Brak komentarza",
+    "titleNew": "Edytuj komentarz",
+    "update": "Zapisz",
+    "close": "Zamknij"
   }
 }

@@ -2,36 +2,46 @@
   display: flex;
   flex-wrap: wrap;
   margin: auto;
+  justify-content: space-between;
 
   &__form {
     height: 2.5em;
-    margin-right: 1.5em;
+    margin-left: 2em;
   }
 
   &__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5em;
+    margin-right: 2em;
   }
 }
 
-.list__card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: stretch;
-  margin-top: 1em;
-  max-width: 100%;
-  overflow: hidden;
+.list {
+  margin: 3em;
 
-  &__buttons {
+  &__card {
     display: flex;
-    margin-left: auto;
-  }
-
-  &--title {
-    font-size: large;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
     margin-top: 1em;
-    margin-bottom: 1em;
+    max-width: 100%;
+    overflow: hidden;
+
+    &__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: auto;
+      flex-wrap: wrap;
+      gap: 1.5em;
+    }
+
+    &--title {
+      font-size: large;
+      font-weight: bolder;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
   }
 }

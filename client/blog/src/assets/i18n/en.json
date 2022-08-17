@@ -5,7 +5,7 @@
   },
 
   "login": {
-    "title": "Login panel",
+    "title": "Login Panel",
     "emailPlaceholder": "Type email here",
     "emailError": "Email not valid.",
     "passwordPlaceholder": "Type your password here",
@@ -42,7 +42,7 @@
     "placeholder": "Search article...",
     "search": "Search",
     "listTitle": "All articles",
-    "toAdminPanel": "Admin Panel",
+    "toLogout": "Logout",
     "details": "Read",
     "logout": "Logout"
   },
@@ -54,6 +54,11 @@
 
   "comment": {
     "title": "Add comment",
-    "save": "Save"
+    "save": "Save",
+    "placeholder": "Type your comment here",
+    "error": "Comment is missing",
+    "titleNew": "Edit your comment",
+    "update": "Update",
+    "close": "Close"
   }
 }

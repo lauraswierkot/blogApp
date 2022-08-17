@@ -1,46 +1,52 @@
 .search {
   display: flex;
-  flex-flow: row nowrap;
+  flex-wrap: wrap;
   margin: auto;
   justify-content: space-between;
 
   &__form {
     height: 2.5em;
-    margin-right: 1.5em;
+    margin-left: 2em;
   }
 
   &__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5em;
+    margin-right: 2em;
   }
 }
 
-.list__card {
-  &__buttons {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: auto;
-    flex-wrap: wrap;
-    gap: 1.5em;
-    justify-content: center;
+.list {
+  margin: 3em;
+
+  &__card {
+
+    &__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: auto;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      justify-content: center;
+    }
+
+    &--title {
+      font-size: large;
+      font-weight: bolder;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    &--container {
+      justify-items: center;
+      display: grid;
+      gap: 1em;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__title {
+      font-weight: bolder;
+    }
   }
-
-  &--title {
-    padding: 3em 5em;
-    font-weight: bolder;
-    font-size: larger;
-  }
-}
-
-
-.list__card--container {
-  justify-items: center;
-  display: grid;
-  gap: 1em;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.list__card__title {
-  font-weight: bolder;
 }
