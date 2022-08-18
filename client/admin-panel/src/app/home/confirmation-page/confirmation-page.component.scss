@@ -12,9 +12,15 @@
   overflow: hidden;
   text-align: center;
 
+  &__header {
+    place-content: center;
+  }
+
   &__title {
-    margin: 1.5em;;
-    justify-content: center;
+    font-weight: bolder;
+    font-size: large;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
   }
 
   &__field {
@@ -26,6 +32,10 @@
     max-width: 200px;
     width: 100%;
     margin-bottom: 1em;
+  }
+
+  &__content {
+    font-size: small;
   }
 
   &__bottom {

@@ -69,12 +69,12 @@
             <p>
               {{ comment.body | slice: commentIndex : commentMaxLength }}
               <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
-              <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
+              <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}} |</span>
               <ng-template #anonymousComment>
                 {{ 'articleForm.anonymous' | translate }}
               </ng-template>
-              {{comment.createdAt | date: 'short'}} |
-              <button mat-raised-button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+              {{comment.createdAt | date: 'short'}} 
+              <button mat-raised-button class="container__form--button" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
                 {{ 'articleForm.commentDelete' | translate}}
               </button>
             </p>

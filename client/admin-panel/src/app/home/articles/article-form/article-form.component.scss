@@ -33,6 +33,20 @@
     }
   }
 
+  &__form {
+
+    &--title {
+      margin-top: 3em;
+      font-size: medium;
+      margin-bottom: 1.0em;
+      font-weight: bolder;
+    }
+
+    &--button {
+      margin-left: 0.5em;
+    }
+  }
+
   &--button {
     max-width: 200px;
     width: 100%;

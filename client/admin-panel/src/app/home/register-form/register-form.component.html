@@ -57,10 +57,10 @@
           <mat-error *ngIf="age.errors?.['age']">{{ 'register.ageError' | translate }}</mat-error>
         </mat-form-field>
       </p>
+      <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'register.submit' | translate }}</button>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'register.submit' | translate }}</button>
     <div class="container__bottom">
       <span>{{ 'register.toLogin' | translate }}</span>
       <button mat-button>
