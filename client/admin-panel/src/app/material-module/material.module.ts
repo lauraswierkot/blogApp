@@ -19,6 +19,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 const modules = [
   MatFormFieldModule,
@@ -40,7 +41,8 @@ const modules = [
   MatPaginatorModule,
   MatInputModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  TextFieldModule
 ];
 
 @NgModule({

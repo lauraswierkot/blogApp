@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -17,6 +17,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
 import { environment } from 'environments/environment';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -25,6 +26,8 @@ import { environment } from 'environments/environment';
   styleUrls: ['./article-form.component.scss'],
 })
 export class ArticleFormComponent implements OnInit, OnDestroy {
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  
   public articleForm: FormGroup;
   public selectedArticle: Article;
   public commentIndex = 0;
@@ -159,7 +162,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     );
 
     if (this.selectedArticle) {
-      this.fileSource = `${this.imageUrl}/${this.selectedArticle.image}`;
+      this.fileSource = `${this.imageUrl}${this.selectedArticle.image}`;
     }
   }
 

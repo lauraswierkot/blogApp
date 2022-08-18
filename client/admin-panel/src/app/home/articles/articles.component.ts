@@ -8,6 +8,7 @@ import { Article, GetArticlePayload } from '@state/articles/article.model';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { environment } from 'environments/environment';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -23,6 +24,7 @@ export class ArticlesComponent implements OnInit {
   public searchTerm = '';
   public pageSize = 3;
   public pageSizeOptions: number[] = [3, 6, 9];
+  public imageUrl: string = environment.apiImageUrl;
 
   constructor(
     private facade: ArticleFacade,

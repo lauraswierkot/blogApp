@@ -14,10 +14,15 @@
 </mat-toolbar>
 <div class="list">
   <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
-  <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
-    <mat-card-title class="list__card__title">
-      {{ article.title }}
-    </mat-card-title>
+  <div class="list__card--container" >
+    <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
+      <mat-card-title class="list__card__title">{{article.title}}</mat-card-title>
+      <mat-card-content>
+        <p>
+          {{article.description}}
+        </p>
+        <img [src]="imageUrl+article.image" width="300" height="150">
+      </mat-card-content>
     <mat-card-actions class="list__card__buttons">
       <button mat-stroked-button (click)="toUpdateArticle(article.slug)">
         {{ 'articles.edit' | translate }}
@@ -25,6 +30,7 @@
       <button mat-stroked-button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
     </mat-card-actions>
   </mat-card>
+  </div>
   <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
     (page)="setPaginator($event)">
   </mat-paginator>

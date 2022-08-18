@@ -29,7 +29,7 @@ export class UserEffects {
       switchMap(({ loginForm }) => {
         return this.http.login(loginForm).pipe(
           switchMap((loginResponse: User) => {
-            this.router.navigate(['']);
+            this.router.navigate(['articles-panel']);
             return [
               action.loginSuccess({ loginResponse }),
               notificationAction.createNotification({

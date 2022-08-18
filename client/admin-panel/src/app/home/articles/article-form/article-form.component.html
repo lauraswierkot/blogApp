@@ -23,7 +23,10 @@
         <p>
           <mat-form-field class="container__field" appearance="fill">
             <mat-label>{{ 'articleForm.bodyPlaceholder' | translate }}</mat-label>
-            <textarea matInput formControlName="body" placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}"
+            <textarea matInput 
+              cdkTextareaAutosize 
+              #autosize="cdkTextareaAutosize"
+              formControlName="body" placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}"
               name="body" required></textarea>
             <mat-error *ngIf="body.errors?.['body']">{{ 'articleForm.bodyError' | translate }}</mat-error>
           </mat-form-field>
@@ -31,7 +34,10 @@
         <p>
           <mat-form-field class="container__field" appearance="fill">
             <mat-label>{{ 'articleForm.descriptionPlaceholder' | translate }}</mat-label>
-            <textarea matInput formControlName="description"
+            <textarea matInput 
+              cdkTextareaAutosize 
+              #autosize="cdkTextareaAutosize" 
+              formControlName="description"
               placeholder="{{ 'articleForm.descriptionPlaceholder' | translate }}" name="description"
               required></textarea>
             <mat-error *ngIf="description.errors?.['description']">{{ 'articleForm.descriptionError' | translate }}
