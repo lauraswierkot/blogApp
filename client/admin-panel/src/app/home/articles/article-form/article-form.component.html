@@ -50,7 +50,7 @@
       <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
         accept="image/*" required />
       <div class="container__form__field" *ngIf="fileSource">
-        <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
+        <img class="container__form__field--img" [src]="fileSource"/>
       </div>
     </div>
     <div *ngIf="articleForm?.controls['comments']">

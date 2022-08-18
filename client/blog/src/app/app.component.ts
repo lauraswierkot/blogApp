@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { TranslateService } from '@ngx-translate/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   public duration = 3000;
   public isLoading: Observable<boolean>;
   public id: string;
-  public snackBarRef: MatSnackBarRef<any>;
+  public snackBarRef: MatSnackBarRef<TextOnlySnackBar>;
   public isFirstEmittedValue = false;
 
   constructor(

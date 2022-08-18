@@ -12,7 +12,7 @@
     <mat-card-title class="list__card__title">
       <h2>{{ article.title }}</h2>
       <h3>{{ article.description }}</h3>
-      <img [src]="imageUrl+article.image" width="300" height="150">
+      <img class="list__card--image" [src]="imageUrl+article.image">
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
       <button (click)="toArticle(article.slug)">
