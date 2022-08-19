@@ -69,12 +69,13 @@ export class ArticleEffects {
       ofType(action.createComment),
       switchMap(({ slug, body }) => {
         return this.http.createComment(slug, body).pipe(
-          map((comment: Comment) => {
+          switchMap((comment: Comment) => {
+            return [
             notificationAction.createNotification({
               message: 'Comment created',
               notificationType: NotificationType.Message,
-            });
-            return action.createCommentSuccess({ slug, comment });
+            }),
+            action.createCommentSuccess({ slug, comment })]
           }),
           catchError((error: HttpErrorResponse) => [
             action.createCommentFailed(error),
@@ -93,12 +94,13 @@ export class ArticleEffects {
       ofType(action.updateComment),
       switchMap(({ slug, body, id }) => {
         return this.http.updateComment(slug, body, id).pipe(
-          map((comment: Comment) => {
+          switchMap((comment: Comment) => {
+            return [
             notificationAction.createNotification({
               message: 'Comment updated',
               notificationType: NotificationType.Message,
-            });
-            return action.updateCommentSuccess({ id, body });
+            }),
+             action.updateCommentSuccess({ id, body })]
           }),
           catchError((error: HttpErrorResponse) => [
             action.updateCommentFailed(error),

@@ -35,7 +35,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public fileSource: string | ArrayBuffer;
 
   public commentForm: FormGroup;
-  public updatedComment: UpdatedComment;
   public author: string;
   public comment: Comment;
 
@@ -68,7 +67,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
       id: [this.data?.id, Validators.required],
       body: ['', Validators.required],
     });
-    this.updatedComment = this.commentForm?.value as UpdatedComment;
     this.author = this.selectedArticle?.comments[0].author?.username;
   }
 
