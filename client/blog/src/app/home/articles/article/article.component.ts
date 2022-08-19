@@ -35,11 +35,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public fileSource: string | ArrayBuffer;
 
   public commentForm: FormGroup;
-  public updatedComment: UpdatedComment;
   public author: string;
   public comment: Comment;
 
-  public data: UpdatedComment;
   public user$ = this.userFacade.user$;
 
   constructor(
@@ -61,14 +59,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe((article) => {
         this.selectedArticle = article;
         this.fileSource = `${this.imageUrl}${this.selectedArticle?.image}`;
-        this.data = this.selectedArticle?.comments[0];
       });
     this.commentForm = this.formBuilder.group({
-      slug: [this.data?.slug, Validators.required],
-      id: [this.data?.id, Validators.required],
       body: ['', Validators.required],
     });
-    this.updatedComment = this.commentForm?.value as UpdatedComment;
     this.author = this.selectedArticle?.comments[0].author?.username;
   }
 

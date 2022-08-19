@@ -21,12 +21,16 @@
     <div *ngFor="let comment of selectedArticle?.comments">
       <p>
         {{ comment.body | slice: commentIndex : commentMaxLength }}
-        <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
+        <span *ngIf="comment.body.length >=commentMaxLength">...</span>
         <span *ngIf="comment.author; else anonymousComment">{{ comment.author?.username }}</span>
         <ng-template #anonymousComment>
           {{ 'articleForm.anonymous' | translate }}
         </ng-template>
-        {{ comment.createdAt | date: 'dd/MM/yyyy' }} |
+        {{ comment.createdAt | date: 'short' }}
+        <button mat-raised-button *ngIf="comment.author.username === (user$ | async).username"
+          (click)="openDialog(comment)">
+          Edit
+        </button>
       </p>
     </div>
   </div>
@@ -42,7 +46,7 @@
   <h1>{{ 'comment.title' | translate }}</h1>
   <div>
     <div>
-      <input formControlName="body" name="body" type="text" required />
+      <textarea formControlName="body" name="body" type="text" required></textarea>
     </div>
   </div>
   <div>
