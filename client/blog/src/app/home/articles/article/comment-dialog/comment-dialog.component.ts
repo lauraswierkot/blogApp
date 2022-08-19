@@ -46,6 +46,4 @@ export class CommentDialogComponent implements OnInit {
   public closeDialog(): void {
       this.dialogRef.close();
   }
-
-
 }
