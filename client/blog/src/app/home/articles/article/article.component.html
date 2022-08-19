@@ -1,12 +1,12 @@
 <mat-card class="container">
   <mat-card-header>
-    <mat-card-title class="container__form__field">{{selectedArticle?.title}}</mat-card-title>
-    <mat-card-subtitle class="container__form__field">{{selectedArticle?.description}}</mat-card-subtitle>
+    <mat-card-title class="container__form__field">{{ selectedArticle?.title }}</mat-card-title>
+    <mat-card-subtitle class="container__form__field">{{ selectedArticle?.description }}</mat-card-subtitle>
   </mat-card-header>
   <img [src]="fileSource" width="300" height="150">
   <mat-card-content>
     <div class="container__form__field">
-      {{selectedArticle?.body}}
+      {{ selectedArticle?.body }}
     </div>
     <div class="container__form__field">
       <mat-chip-list #chipList>
@@ -22,21 +22,18 @@
       <p>
         {{ comment.body | slice: commentIndex : commentMaxLength }}
         <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
-        <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
+        <span *ngIf="comment.author; else anonymousComment">{{ comment.author?.username }}</span>
         <ng-template #anonymousComment>
           {{ 'articleForm.anonymous' | translate }}
         </ng-template>
-        {{comment.createdAt | date: 'dd/MM/yyyy'}}
-        <button *ngIf="comment.author.username === (user$ | async).username" (click)="openDialog(comment)">Edit</button>
+        {{ comment.createdAt | date: 'dd/MM/yyyy' }} |
       </p>
     </div>
   </div>
   <mat-card-actions>
-    <div class="container_form__field">
+    <div class="container__form__field">
       <span>{{ 'article.toArticles' | translate }}</span>
-      <span (click)="toArticles()" class="material-icons container__form__field--icons arrow">
-        trending_flat
-      </span>
+      <span (click)="toArticles()" class="material-icons container__form__field--icons arrow">trending_flat</span>
     </div>
   </mat-card-actions>
 </mat-card>

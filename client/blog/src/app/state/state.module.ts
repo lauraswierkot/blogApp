@@ -29,14 +29,19 @@ const reducers: ActionReducerMap<any> = {
   users: userReducer,
   notifications: notificationReducer,
   actions: actionsReducer,
-  articles: articleReducer
+  articles: articleReducer,
 };
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [userFeatureKey, notificationFeatureKey, actionsFeatureKey, articleFeatureKey],
+    keys: [
+      userFeatureKey,
+      notificationFeatureKey,
+      actionsFeatureKey,
+      articleFeatureKey,
+    ],
     rehydrate: true,
   })(reducer);
 }

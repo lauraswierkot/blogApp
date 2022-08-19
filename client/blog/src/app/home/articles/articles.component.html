@@ -10,9 +10,9 @@
   <h1 class="list--title">{{ 'articles.listTitle' | translate }}</h1>
   <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
     <mat-card-title class="list__card__title">
-      <h2>{{article.title}}</h2>
-      <h3>{{article.description}}</h3>
-      <img [src]="imageUrl+article.image" width="300" height="150">
+      <h2>{{ article.title }}</h2>
+      <h3>{{ article.description }}</h3>
+      <img class="list__card--image" [src]="imageUrl+article.image">
     </mat-card-title>
     <mat-card-actions class="list__card__buttons">
       <button (click)="toArticle(article.slug)">
