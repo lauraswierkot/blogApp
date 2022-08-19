@@ -15,7 +15,7 @@ export class MailService {
     user: UserResponse,
     token: AuthResponse['token'],
   ): Promise<void> {
-    const url = `http://localhost:4200/email-confirmation/${token}`;
+    const url = `${process.env.EMAIL_CONFIRMATION_URL}${token}`;
     await this.mailerService
       .sendMail({
         to: user?.email,
@@ -38,9 +38,7 @@ export class MailService {
     user: UserResponse,
     token: AuthResponse['token'],
   ): Promise<void> {
-    const url = `${this.configService.get(
-      process.env.LOCALHOST_URL,
-    )}/${token}`;
+    const url = `${process.env.PASSWORD_RESET_URL}${token}`;
     await this.mailerService
       .sendMail({
         to: user?.email,

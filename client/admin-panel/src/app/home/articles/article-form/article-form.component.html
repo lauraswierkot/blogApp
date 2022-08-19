@@ -50,7 +50,7 @@
       <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
         accept="image/*" required />
       <div class="container__form__field" *ngIf="fileSource">
-        <img class="container__form__field--img" [src]="fileSource" width="300" height="150" />
+        <img class="container__form__field--img" [src]="fileSource"/>
       </div>
     </div>
     <div *ngIf="articleForm?.controls['comments']">
@@ -62,8 +62,8 @@
           <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}}</span>
           <ng-template #anonymousComment>
             {{ 'articleForm.anonymous' | translate }}
-          </ng-template>
-          {{comment.createdAt | date: 'dd/MM/yyyy'}} |
+          </ng-template> |
+          {{ comment.createdAt | date: 'dd/MM/yyyy' }}
           <button type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
             {{ 'articleForm.commentDelete' | translate}}
           </button>
