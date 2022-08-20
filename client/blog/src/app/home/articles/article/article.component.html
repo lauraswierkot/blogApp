@@ -18,7 +18,7 @@
   </mat-card-content>
   <div *ngIf="selectedArticle?.comments">
     <h3 class="container__form--title">{{ 'article.commentsTitle' | translate }}</h3>
-    <div *ngFor="let comment of selectedArticle?.comments">
+    <!-- <div *ngFor="let comment of selectedArticle?.comments">
       <p>
         {{ comment.body | slice: commentIndex : commentMaxLength }}
         <span *ngIf="comment.body.length >=commentMaxLength">...</span>
@@ -32,6 +32,21 @@
           Edit
         </button>
       </p>
+    </div> -->
+    <div [formGroup]="editCommentsForm">
+      <ng-container formArrayName="comments">
+        <ng-container *ngFor="let comment of comments; let i = index">
+          <div class="lesson-form-row" [formGroup]="comment">
+            <ng-container *ngIf="comment.value.author ==  (user$ | async).username else noCommentUpdate">
+              <input type="text" formControlName="body" />
+              <button type="submit"  (click)="saveUpdatedComment(i)"> save</button>    
+            </ng-container>
+            <ng-template #noCommentUpdate>
+              {{comment.value.body}}
+            </ng-template>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
   <mat-card-actions>
@@ -42,7 +57,7 @@
   </mat-card-actions>
 </mat-card>
 
-<form class="container__form" [formGroup]="commentForm" (ngSubmit)="submit()">
+<form class="container__form" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
   <h1>{{ 'comment.title' | translate }}</h1>
   <div>
     <div>
@@ -50,6 +65,6 @@
     </div>
   </div>
   <div>
-    <button type="submit" (click)="submit()" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
+    <button type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
   </div>
 </form>

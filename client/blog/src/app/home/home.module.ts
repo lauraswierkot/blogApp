@@ -13,7 +13,6 @@ import {
   EmailFormComponent,
   ArticlesComponent,
   ArticleComponent,
-  CommentDialogComponent
 } from './';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -40,7 +39,6 @@ const components = [
   EmailFormComponent,
   ArticlesComponent,
   ArticleComponent,
-  CommentDialogComponent
 ];
 
 @NgModule({

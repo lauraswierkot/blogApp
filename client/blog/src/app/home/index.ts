@@ -3,4 +3,3 @@ export { NewPasswordFormComponent } from "./login-form/new-password-form/new-pas
 export { EmailFormComponent } from './login-form/email-form/email-form.component';
 export { ArticlesComponent } from "./articles/articles.component";
 export { ArticleComponent } from "./articles/article/article.component";
-export { CommentDialogComponent } from "./articles/article/comment-dialog/comment-dialog.component";
