@@ -28,10 +28,9 @@ export const reducer = createReducer(
     articlesCount: articlesCount,
   })),
   on(action.createCommentSuccess, (state, { comment }) => {
-    const comments =
-    !state.selectedArticle?.comments
-        ? []
-        : state.selectedArticle.comments;
+    const comments = !state.selectedArticle?.comments
+      ? []
+      : state.selectedArticle.comments;
     return {
       ...state,
       selectedArticle: {
