@@ -42,12 +42,12 @@ export const reducer = createReducer(
   }),
   on(action.createCommentFailed, (state, { error }) => ({ ...state, error })),
   on(action.updateCommentSuccess, (state, { id, body }) => {
-    const filteredComments = cloneDeep(state.selectedArticle.comments).map(
-      (item) => (item.id === id ? { ...item, body: body } : item)
+    const comment = cloneDeep(state.selectedArticle.comments).map((item) =>
+      item.id === id ? { ...item, body: body } : item
     );
     return {
       ...state,
-      selectedArticle: { ...state.selectedArticle, comments: filteredComments },
+      selectedArticle: { ...state.selectedArticle, comments: comment },
     };
   }),
   on(action.updateCommentFailed, (state, { error }) => ({ ...state, error })),

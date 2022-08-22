@@ -29,7 +29,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public selectedArticle: Article;
   public imageUrl: string = environment.apiImageUrl;
   public fileSource: string | ArrayBuffer;
-  public comment: Comment;
   public user$ = this.userFacade.user$;
 
   public createCommentForm: FormGroup;
@@ -45,7 +44,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
-    if (slug) this.facade.selectArticle(slug);
+    this.facade.selectArticle(slug);
 
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
@@ -83,12 +82,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.editCommentsForm = this.formBuilder.group({
       comments: this.formBuilder.array([]),
     });
-    this.selectedArticle?.comments?.forEach((el) => {
-      this.addCommentToEditFormArray(el.body, el.author.username, el.id);
+    this.selectedArticle?.comments?.forEach((comment) => {
+      this.addCommentToEditFormArray(
+        comment.body,
+        comment.author.username,
+        comment.id
+      );
     });
   }
 
-  private addCommentToEditFormArray(body: string, author: string, id: number): void {
+  private addCommentToEditFormArray(
+    body: string,
+    author: string,
+    id: number
+  ): void {
     const comment = this.formBuilder.group({
       body: this.formBuilder.control(body),
       author: this.formBuilder.control(author),
@@ -109,7 +116,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public get comments(): FormGroup[] {
-    return this.editCommentsForm.controls['comments']['controls'] as FormGroup[];
+    return this.editCommentsForm.controls['comments'][
+      'controls'
+    ] as FormGroup[];
   }
 
   public ngOnDestroy(): void {

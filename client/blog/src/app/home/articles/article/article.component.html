@@ -22,7 +22,7 @@
       <ng-container formArrayName="comments">
         <ng-container *ngFor="let comment of comments; let i = index">
           <div [formGroup]="comment" *ngIf="comment.value.body">
-            <ng-container *ngIf="comment.value.author == (user$ | async).username else noCommentUpdate">
+            <ng-container *ngIf="comment?.value?.author === (user$ | async).username else noCommentUpdate">
               <p *ngIf="!comment.value.editable">{{comment.value.body}}</p>
               <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text" required></textarea>
               <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)"> 
@@ -51,9 +51,7 @@
 <form class="container__form" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
   <h1>{{ 'comment.title' | translate }}</h1>
   <div>
-    <div>
       <textarea formControlName="body" name="body" type="text" required></textarea>
-    </div>
   </div>
   <div>
     <button type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
