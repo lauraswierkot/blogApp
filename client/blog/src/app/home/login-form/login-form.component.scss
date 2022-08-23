@@ -11,29 +11,4 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   text-align: center;
-
-  &__header {
-    place-content: center;
-  }
-
-  &__title {
-    font-weight: bolder;
-    font-size: large;
-    margin-top: 3em;
-    margin-bottom: 1.5em;
-  }
-
-  &__field {
-    max-width: 500px;
-    width: 100%;
-  }
-
-  &--button {
-    max-width: 200px;
-    width: 100%;  
-  }
-
-  &__bottom {
-    margin: 3em;
-  }
 }
