@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as action from './article.actions';
-import { Article, GetArticlePayload } from './article.model';
+import { Article, GetArticlePayload, UpdatedComment, Comment } from './article.model';
 import * as selector from './article.selectors';
 
 @Injectable({
@@ -25,5 +25,17 @@ export class ArticleFacade {
 
   public resetArticle(): void {
     this.store.dispatch(action.resetArticle());
+  }
+
+  public createComment(slug: string, body: string): void {
+    this.store.dispatch(action.createComment({ slug, body }));
+  }
+ 
+  public updateComment(updateComment: UpdatedComment): void {
+    this.store.dispatch(action.updateComment({ slug: updateComment.slug, body: updateComment.body, id: updateComment.id }));
+  }
+
+  public deleteComment(slug: Article['slug'], id: Comment['id']): void {
+    this.store.dispatch(action.deleteComment({ slug, id }));
   }
 }

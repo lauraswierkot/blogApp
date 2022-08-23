@@ -37,6 +37,27 @@ export interface GetArticlesCount {
   total: number;
 }
 
+export interface Comment {
+  id: number;
+  slug: Article['slug'];
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  body: string;
+  author: User;
+  article: Article;
+}
+
+export interface UpdatedComment {
+  slug: Article['slug'];
+  body: string;
+  id: number;
+}
+
+export interface CommentInterface {
+  comment: Comment;
+  slug: Article['slug'];
+}
+
 export interface ArticleState {
   articles: Article[];
   articlesCount: number;
@@ -50,13 +71,3 @@ export const initialState: ArticleState = {
   selectedArticle: null,
   error: null,
 };
-
-export interface Comment {
-  id: number;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-  body: string;
-  author: User;
-  article: Article;
-  image?: string;
-}

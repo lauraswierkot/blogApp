@@ -18,22 +18,43 @@
   </mat-card-content>
   <div *ngIf="selectedArticle?.comments">
     <h3 class="container__form--title">{{ 'article.commentsTitle' | translate }}</h3>
-    <div *ngFor="let comment of selectedArticle?.comments">
-      <p>
-        {{ comment.body | slice: commentIndex : commentMaxLength }}
-        <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
-        <span *ngIf="comment.author; else anonymousComment">{{ comment.author?.username }}</span>
-        <ng-template #anonymousComment>
-          {{ 'articleForm.anonymous' | translate }}
-        </ng-template>
-        {{ comment.createdAt | date: 'dd/MM/yyyy' }} |
-      </p>
+    <div [formGroup]="editCommentsForm">
+      <ng-container formArrayName="comments">
+        <ng-container *ngFor="let comment of comments; let i = index">
+          <div [formGroup]="comment" *ngIf="comment.value.body">
+            <ng-container *ngIf="comment?.value?.author === (user$ | async).username else noCommentUpdate">
+              <p *ngIf="!comment.value.editable">{{comment.value.body}}</p>
+              <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text" required></textarea>
+              <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)"> 
+                Edit comment
+              </button>
+              <button *ngIf="comment.value.editable" type="button" (click)="saveUpdatedComment(i)">
+                Save change
+              </button>
+            </ng-container>
+            <ng-template #noCommentUpdate>
+              <p>{{comment.value.date | date: 'short' }}</p>
+              <p>{{comment.value.body}}</p>
+            </ng-template>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
   <mat-card-actions>
     <div class="container__form__field">
       <span>{{ 'article.toArticles' | translate }}</span>
-      <span (click)="toArticles()" class="material-icons container__form__field--icons arrow">trending_flat</span>
+      <span routerLink="/" class="material-icons container__form__field--icons arrow">trending_flat</span>
     </div>
   </mat-card-actions>
 </mat-card>
+
+<form class="container__form" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
+  <h1>{{ 'comment.title' | translate }}</h1>
+  <div>
+      <textarea formControlName="body" name="body" type="text" required></textarea>
+  </div>
+  <div>
+    <button type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
+  </div>
+</form>

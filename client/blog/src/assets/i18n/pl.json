@@ -50,5 +50,10 @@
   "article": {
     "toArticles": "Do artykułów",
     "commentsTitle": "Komentarze"
+  },
+
+  "comment": {
+    "title": "Dodaj komentarz",
+    "save": "Zapisz"
   }
 }

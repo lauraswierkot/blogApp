@@ -9,7 +9,12 @@ import {
   UserLogin,
   UserResponse,
 } from '@state/user/user.model';
-import { GetArticlePayload, GetArticlesCount, Article } from '@state/articles/article.model';
+import {
+  GetArticlePayload,
+  GetArticlesCount,
+  Article,
+  Comment,
+} from '@state/articles/article.model';
 
 const apiUrl = environment.apiUrl;
 
@@ -57,5 +62,37 @@ export class HttpService {
     return this.http
       .get<{ article: Article }>(`${apiUrl}/articles/${slug}`)
       .pipe(map((response) => response.article));
+  }
+
+  public createComment(
+    slug: Article['slug'],
+    body: Comment['body']
+  ): Observable<Comment> {
+    return this.http
+      .post<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments`, {
+        comment: { body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public updateComment(
+    slug: Article['slug'],
+    body: Comment['body'],
+    id: Comment['id']
+  ): Observable<Comment> {
+    return this.http
+      .put<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`, {
+        comment: { body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
+  public deleteComment(
+    slug: Article['slug'],
+    id: Comment['id']
+  ): Observable<Comment> {
+    return this.http
+      .delete<{ comment: Comment }>(`${apiUrl}/articles/${slug}/comments/${id}`)
+      .pipe(map((response) => response.comment));
   }
 }
