@@ -27,7 +27,7 @@
     "confirmPasswordPlaceholder": "Confirm your password here",
     "confirmPasswordError": "Confirm password is missing.",
     "submit": "Save",
-    "toLoginForm": "No need to change password? To Login Panel"
+    "toLoginForm": "No need to change password?"
   },
 
   "email": {
@@ -35,7 +35,7 @@
     "emailPlaceholder": "Type your email here",
     "emailError": "Email is missing.",
     "submit": "Send",
-    "toLoginForm": "No need to change password? To Login Panel"
+    "toLoginForm": "No need to change password?"
   },
 
   "articles": {

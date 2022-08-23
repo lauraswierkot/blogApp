@@ -27,7 +27,7 @@
     "confirmPasswordPlaceholder": "Powtórz hasło",
     "confirmPasswordError": "Brak hasła.",
     "submit": "Zapisz",
-    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła?"
   },
 
   "email": {
@@ -35,7 +35,7 @@
     "emailPlaceholder": "Podaj swojego maila",
     "emailError": "Brak maila.",
     "submit": "Wyślij",
-    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła?"
   },
 
   "articles": {
