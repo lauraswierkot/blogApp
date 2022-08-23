@@ -15,9 +15,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatInputModule} from '@angular/material/input';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const modules = [
   MatFormFieldModule,
@@ -38,7 +38,7 @@ const modules = [
   MatDialogModule,
   MatPaginatorModule,
   MatInputModule,
-  MatGridListModule
+  MatGridListModule,
 ];
 
 @NgModule({

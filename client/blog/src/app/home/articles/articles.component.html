@@ -1,35 +1,33 @@
-<mat-toolbar class="search">
-  <div>
-    <span matPrefix></span>
-    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
-    placeholder="{{ 'articles.placeholder' | translate }}" />
-    <button matSuffix mat-button (click)="search()">
-      <mat-icon>search</mat-icon>
-    </button>
+<nav class="navbar navbar-expand-lg">
+  <div class="container navbar-container">
+    <a class="navbar-brand">
+      Blog
+    </a>
+    <div class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="{{ 'articles.placeholder' | translate }}"
+        aria-label="Search" [(ngModel)]="searchTerm">
+      <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
+    </div>
+    <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="logout()">{{ 'articles.toLogout' | translate
+      }}</button>
   </div>
-  <div class="search__buttons">
-    <button mat-raised-button (click)="logout()" color="primary">{{ 'articles.toLogout' | translate }}</button>
+</nav>
+<div class="container">
+  <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
+  <div class="row">
+    <div class="col-3 py-2" *ngFor="let article of articlesList$ | async">
+      <div class="card h-100 text-center">
+        <img class="bd-placeholder-img card-img-top" width="100%" height="140" [src]="imageUrl+article.image" role="img"
+          aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <div class="card-body">
+          <h5 class="card-title">{{article.title}}</h5>
+          <p class="card-text">{{article.description}}</p>
+          <a class="btn btn-primary" (click)="toArticle(article.slug)">{{ 'articles.details' | translate }}</a>
+        </div>
+      </div>
+    </div>
+    <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="setPaginator($event)">
+    </mat-paginator>
   </div>
-</mat-toolbar>
-<div class="list">
-<header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
-<div class="list__card--container" >
-  <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
-    <mat-card-title class="list__card__title">{{article.title}}</mat-card-title>
-    <mat-card-content>
-      <p>
-        {{article.description}}
-      </p>
-      <img [src]="imageUrl+article.image" width="300" height="150">
-    </mat-card-content>
-    <mat-card-actions class="list__card__buttons">
-      <button mat-stroked-button (click)="toArticle(article.slug)">
-        {{ 'articles.details' | translate }}
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-<mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-  (page)="setPaginator($event)">
-</mat-paginator>
 </div>

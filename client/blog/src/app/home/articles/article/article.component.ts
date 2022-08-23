@@ -86,7 +86,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
       this.addCommentToEditFormArray(
         comment.body,
         comment.author.username,
-        comment.id
+        comment.id,
+        comment.createdAt
       );
     });
   }
@@ -94,13 +95,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
   private addCommentToEditFormArray(
     body: string,
     author: string,
-    id: number
+    id: number,
+    date: Date | string
   ): void {
     const comment = this.formBuilder.group({
       body: this.formBuilder.control(body),
       author: this.formBuilder.control(author),
       id: this.formBuilder.control(id),
       editable: this.formBuilder.control(false),
+      date: this.formBuilder.control(date)
     });
     this.comments.push(comment);
   }

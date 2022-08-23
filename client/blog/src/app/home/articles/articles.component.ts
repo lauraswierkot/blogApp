@@ -26,8 +26,8 @@ export class ArticlesComponent implements OnInit {
   
   public pageIndex = 0;
   public searchTerm = '';
-  public pageSize = 3;
-  public pageSizeOptions: number[] = [3, 6, 9];
+  public pageSize = 4;
+  public pageSizeOptions: number[] = [4, 6, 9];
 
   constructor(
     private facade: ArticleFacade,

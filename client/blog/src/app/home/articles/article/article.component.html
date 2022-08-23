@@ -23,7 +23,10 @@
         <ng-container *ngFor="let comment of comments; let i = index">
           <div [formGroup]="comment" *ngIf="comment.value.body">
             <ng-container *ngIf="comment?.value?.author === (user$ | async).username else noCommentUpdate">
-              <p *ngIf="!comment.value.editable">{{comment.value.body}}</p>
+              <p *ngIf="!comment.value.editable">
+                <span>{{comment?.value.author}}</span>
+                <span>{{comment?.value.date | date: 'short'}}</span>
+                {{comment.value.body}}</p>
               <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text" required></textarea>
               <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)"> 
                 Edit comment
@@ -33,8 +36,9 @@
               </button>
             </ng-container>
             <ng-template #noCommentUpdate>
-              <p>{{comment.value.date | date: 'short' }}</p>
-              <p>{{comment.value.body}}</p>
+              <p>{{comment?.value.author}}</p>
+              <p>{{comment?.value.date | date: 'short' }}</p>
+              <p>{{comment?.value.body}}</p>
             </ng-template>
           </div>
         </ng-container>
