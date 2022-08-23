@@ -20,7 +20,6 @@ export const reducer = createReducer(
   on(action.getArticlesFailed, (state, { error }) => ({ ...state, error })),
   on(action.selectArticleSuccess, (state, { article }) => ({
     ...state,
-    selectedArticleComments: article.comments,
     selectedArticle: article,
   })),
   on(action.resetArticle, (state) => ({ ...state, selectedArticle: null })),
@@ -29,10 +28,9 @@ export const reducer = createReducer(
     articlesCount: articlesCount,
   })),
   on(action.createCommentSuccess, (state, { comment }) => {
-    const comments =
-    !state.selectedArticle?.comments
-        ? []
-        : state.selectedArticle.comments;
+    const comments = !state.selectedArticle?.comments
+      ? []
+      : state.selectedArticle.comments;
     return {
       ...state,
       selectedArticle: {
@@ -44,19 +42,18 @@ export const reducer = createReducer(
   }),
   on(action.createCommentFailed, (state, { error }) => ({ ...state, error })),
   on(action.updateCommentSuccess, (state, { id, body }) => {
-    const filteredComments = cloneDeep(state.selectedArticleComments).map(
-      (item) => (item.id === id ? { ...item, body: body } : item)
+    const comment = cloneDeep(state.selectedArticle.comments).map((item) =>
+      item.id === id ? { ...item, body: body } : item
     );
     return {
       ...state,
-      selectedArticleComments: filteredComments,
-      selectedArticle: { ...state.selectedArticle, comments: filteredComments },
+      selectedArticle: { ...state.selectedArticle, comments: comment },
     };
   }),
   on(action.updateCommentFailed, (state, { error }) => ({ ...state, error })),
   on(action.deleteCommentSuccess, (state, { id }) => {
     const filteredComments = cloneDeep(state.selectedArticle.comments).filter(
-      (value) => value.id != id
+      (value) => value.id !== id
     );
     return {
       ...state,

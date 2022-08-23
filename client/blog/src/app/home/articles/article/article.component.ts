@@ -6,20 +6,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ArticleFacade } from '@state/articles/article.facade';
 import {
   Article,
-  UpdatedComment,
   Comment,
-  CommentInterface,
+  UpdatedComment,
 } from '@state/articles/article.model';
 import { environment } from 'environments/environment';
 import { UserFacade } from '@state/user/user.facade';
-import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -29,22 +27,16 @@ import { CommentDialogComponent } from './comment-dialog/comment-dialog.componen
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   public selectedArticle: Article;
-  public commentIndex = 0;
-  public commentMaxLength = 20;
   public imageUrl: string = environment.apiImageUrl;
   public fileSource: string | ArrayBuffer;
-
-  public commentForm: FormGroup;
-  public author: string;
-  public comment: Comment;
-
-  public data: UpdatedComment;
   public user$ = this.userFacade.user$;
+
+  public createCommentForm: FormGroup;
+  public editCommentsForm: FormGroup;
 
   constructor(
     private facade: ArticleFacade,
     private userFacade: UserFacade,
-    private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
     public dialog: MatDialog
@@ -52,51 +44,81 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
-    if (slug) {
-      this.facade.selectArticle(slug);
-    }
+    this.facade.selectArticle(slug);
+
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
         this.selectedArticle = article;
-        this.fileSource = `${this.imageUrl}${this.selectedArticle?.image}`;
-        this.data = this.selectedArticle?.comments[0];
+        this.fileSource = `${this.imageUrl}${article?.image}`;
+        this.initEditCommentsForm();
+        this.initCreateCommentForm();
       });
-    this.commentForm = this.formBuilder.group({
-      slug: [this.data?.slug, Validators.required],
-      id: [this.data?.id, Validators.required],
-      body: ['', Validators.required],
-    });
-    this.author = this.selectedArticle?.comments[0].author?.username;
   }
 
-  public get body(): AbstractControl {
-    return this.commentForm.get('body');
+  public toggleCommentEdit(index: number): void {
+    this.comments[index].patchValue({ editable: true });
   }
 
-  public submit(): void {
+  public submitCreateCommentForm(): void {
     this.facade.createComment(
       this.selectedArticle.slug,
-      this.commentForm?.value['body']
+      this.createCommentForm?.value['body']
     );
   }
 
-  public toAdminPanel(): void {
-    this.router.navigate(['']);
-  }
-
-  public toArticles(): void {
-    this.router.navigate(['']);
-  }
-
-  public openDialog(comment: Comment): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      comment,
+  public saveUpdatedComment(index: number): void {
+    this.comments[index].patchValue({ editable: false });
+    this.facade.updateComment({
       slug: this.selectedArticle.slug,
-    } as CommentInterface;
-    dialogConfig.disableClose = false;
-    this.dialog.open(CommentDialogComponent, dialogConfig);
+      body: this.editCommentsForm.controls['comments']['controls'][index].value
+        .body,
+      id: this.editCommentsForm.controls['comments']['controls'][index].value
+        .id,
+    });
+  }
+
+  private initEditCommentsForm(): void {
+    this.editCommentsForm = this.formBuilder.group({
+      comments: this.formBuilder.array([]),
+    });
+    this.selectedArticle?.comments?.forEach((comment) => {
+      this.addCommentToEditFormArray(
+        comment.body,
+        comment.author.username,
+        comment.id
+      );
+    });
+  }
+
+  private addCommentToEditFormArray(
+    body: string,
+    author: string,
+    id: number
+  ): void {
+    const comment = this.formBuilder.group({
+      body: this.formBuilder.control(body),
+      author: this.formBuilder.control(author),
+      id: this.formBuilder.control(id),
+      editable: this.formBuilder.control(false),
+    });
+    this.comments.push(comment);
+  }
+
+  private initCreateCommentForm(): void {
+    this.createCommentForm = this.formBuilder.group({
+      body: ['', Validators.required],
+    });
+  }
+
+  public get body(): AbstractControl {
+    return this.createCommentForm.get('body');
+  }
+
+  public get comments(): FormGroup[] {
+    return this.editCommentsForm.controls['comments'][
+      'controls'
+    ] as FormGroup[];
   }
 
   public ngOnDestroy(): void {

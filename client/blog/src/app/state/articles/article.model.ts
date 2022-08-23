@@ -61,7 +61,6 @@ export interface CommentInterface {
 export interface ArticleState {
   articles: Article[];
   articlesCount: number;
-  selectedArticleComments: Comment[];
   selectedArticle: Article;
   error: any;
 }
@@ -69,7 +68,6 @@ export interface ArticleState {
 export const initialState: ArticleState = {
   articles: [],
   articlesCount: 0,
-  selectedArticleComments: [],
   selectedArticle: null,
   error: null,
 };
