@@ -33,6 +33,7 @@
               </button>
             </ng-container>
             <ng-template #noCommentUpdate>
+              <p>{{comment.value.date | date: 'short' }}</p>
               <p>{{comment.value.body}}</p>
             </ng-template>
           </div>
