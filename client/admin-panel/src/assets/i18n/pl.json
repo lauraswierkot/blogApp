@@ -21,7 +21,8 @@
     "addComment": "Dodaj komentarz",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "toAdminPanel": "Panel Admina"
+    "toAdminPanel": "Panel Admina",
+    "logout": "Wyloguj"
   },
 
   "articleForm": {

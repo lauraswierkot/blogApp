@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from 'environments/environment';
+import { UserFacade } from '@state/user/user.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -28,6 +29,7 @@ export class ArticlesComponent implements OnInit {
 
   constructor(
     private facade: ArticleFacade,
+    private userFacade: UserFacade,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -67,6 +69,10 @@ export class ArticlesComponent implements OnInit {
 
   public toAdminPanel(): void {
     this.router.navigate(['']);
+  }
+
+  public logout(): void {
+    this.userFacade.logout();
   }
 
   public setPaginator(event: PageEvent): void {

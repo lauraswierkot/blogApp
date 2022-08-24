@@ -1,5 +1,6 @@
 .menu__container {
   display: flex;
+  font-size: medium;
   flex-direction: column;
   position: absolute;
   top: 0;
@@ -9,6 +10,7 @@
 
   &--title {
     margin-left: 8px;
+    font-size: large;
   }
 
   &__content {
@@ -18,6 +20,7 @@
 
 .sidenav {
   flex: 1;
+  font-size: medium;
 }
 
 .isMobile {

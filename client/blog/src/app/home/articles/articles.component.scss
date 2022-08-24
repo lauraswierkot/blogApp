@@ -7,6 +7,10 @@
   .navbar-container {
     padding: 1em 2em;
   }
+  .article-image {
+    width: 540px;
+    height: 250px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -30,11 +34,4 @@
 .article-image {
   height: 240px;
   width: 360px;
-}
-
-@media (max-width: 768px) {
-  .article-image {
-    width: 540px;
-    height: 250px;
-  }
 }

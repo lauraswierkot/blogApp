@@ -3,30 +3,49 @@
   padding: 16px 12px 16px 28px;
 }
 
+@media (max-width: 575.98px) {
+  .article-image {
+    height: 100px;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-container {
-      padding: 1em 2em;
+    padding: 1em 2em;
+  }
+
+  .article-image {
+    height: 300px;
   }
 }
 
 @media (max-width: 992px) {
   .navbar-container {
-      padding: 1em 2em;
+    padding: 1em 2em;
   }
   .article-image {
-    width: 510px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .article-image {
     height: 300px;
   }
 }
 
 @media (max-width: 1200px) {
   .navbar-container {
-      padding: 1em 2em;
+    padding: 1em 2em;
+  }
+
+  .article-image {
+    height: 300px;
   }
 }
 
 @media (max-width: 1400px) {
   .navbar-container {
-      padding: 1em 2em;
+    padding: 1em 2em;
   }
 }

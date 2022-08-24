@@ -1,7 +1,7 @@
 <div class="menu__container" [class.isMobile]="mobileQuery.matches">
   <mat-toolbar [ngClass]="mobileQuery.matches ? 'isMobile__toolbar' : 'toolbar'">
     <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
+      <i class="bi bi-list"></i>
     </button>
     <h1 class="menu__container--title">{{ 'adminPanel.title' | translate }}</h1>
   </mat-toolbar>

@@ -41,13 +41,22 @@
     <a class="navbar-brand">
       Admin Panel
     </a>
-    <div class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="{{ 'articles.placeholder' | translate }}"
-        aria-label="Search" [(ngModel)]="searchTerm">
-      <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">{{ 'articles.toAdminPanel' | translate }}</button>
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
+      </ul>
+      <div class="form-inline my-2 my-lg-0" role="search">
+        <input class="form-control mr-sm-2" type="search" placeholder="{{ 'articles.placeholder' | translate }}"
+          aria-label="Search" [(ngModel)]="searchTerm">
+        </div>
+        <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
     </div>
-    <button class="btn btn-primary my-2 my-sm-0 d-flex" type="button" (click)="toAdminPanel()">{{ 'articles.toAdminPanel' | translate }}</button>
-    <button class="btn btn-primary my-2 my-sm-0 d-flex" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
   </div>
 </nav>
 <div class="container">
@@ -55,14 +64,15 @@
   <div class="row">
     <div class="col-lg-3 py-2" *ngFor="let article of articlesList$ | async">
       <div class="card h-100 text-center">
-        <img class="bd-placeholder-img card-img-top article-image" width="100%" height="140" [src]="imageUrl+article.image" role="img"
-          aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img class="bd-placeholder-img card-img-top article-image" width="100%" height="140"
+          [src]="imageUrl+article.image" role="img" aria-label="Placeholder: Image cap"
+          preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">{{article.title}}</h5>
           <p class="card-text">{{article.description}}</p>
         </div>
         <a class="btn" (click)="toUpdateArticle(article.slug)">{{ 'articles.edit' | translate }}</a>
-        <a class="btn"  (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</a>
+        <a class="btn" (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</a>
       </div>
     </div>
     <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
