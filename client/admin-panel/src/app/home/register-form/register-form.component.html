@@ -1,71 +1,43 @@
-<mat-card class="container">
-  <header class="container__header">
-    <div class="container__title">{{ 'register.title' | translate }}</div>
-  </header>
-  <mat-card-content>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'register.usernamePlaceholder' | translate }}</mat-label>
-          <input matInput formControlName="username" placeholder="{{ 'register.usernamePlaceholder' | translate }}"
-            name="username" required>
-          <mat-error *ngIf="username.errors?.['username']">{{ 'register.usernameError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'register.emailPlaceholder' | translate }}</mat-label>
-          <input matInput formControlName="email" placeholder="{{ 'register.emailPlaceholder' | translate }}"
-            name="email" required>
-          <mat-error *ngIf="email.errors?.['email']">{{ 'register.emailError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'login.passwordPlaceholder' | translate }}</mat-label>
-          <input matInput type="password" formControlName="password"
-            placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required>
-          <mat-error *ngIf="password.errors?.['password']">{{ 'register.passwordError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'register.confirmPasswordPlaceholder' | translate }}</mat-label>
-          <input matInput type="password" formControlName="confirmPassword"
-            placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}" name="confirmPassword" required>
-          <mat-error *ngIf="confirmPassword.errors?.['confirmPassword']">{{ 'register.confirmPasswordError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'login.rolePlaceholder' | translate }}</mat-label>
-          <mat-select formControlName="role" name="role">
-            <mat-option *ngFor="let option of options" [value]="option">
-              {{ option }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="role.errors?.['role']">{{ 'register.roleError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="container__field" appearance="fill">
-          <mat-label>{{ 'register.agePlaceholder' | translate }}</mat-label>
-          <input matInput formControlName="age" placeholder="{{ 'register.agePlaceholder' | translate }}" name="age"
-            [matDatepicker]="picker" required>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="age.errors?.['age']">{{ 'register.ageError' | translate }}</mat-error>
-        </mat-form-field>
-      </p>
-      <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'register.submit' | translate }}</button>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <div class="container__bottom">
-      <span>{{ 'register.toLogin' | translate }}</span>
-      <button mat-button>
-        <mat-icon (click)="toLoginForm()">arrow_right_alt</mat-icon>
-      </button>
+<div class="container">
+  <div class="row justify-content-center px-4 py-4">
+    <div class="col-md-7 col-lg-9">
+      <div class="login-wrap p-1 p-md-1">
+        <h3 class="text-center py-3">{{ 'login.title' | translate }}</h3>
+        <form action="#" class="login-form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="form-group d-flex">
+            <input type="text" class="form-control rounded-left" formControlName="username"
+              placeholder="{{ 'register.usernamePlaceholder' | translate }}" required>
+          </div>
+          <div class="form-group d-flex">
+            <input type="text" class="form-control rounded-left" formControlName="email"
+              placeholder="{{ 'register.emailPlaceholder' | translate }}" required>
+          </div>
+          <div class="form-group d-flex">
+            <input type="password" class="form-control rounded-left" formControlName="password"
+              placeholder="{{ 'register.passwordPlaceholder' | translate }}" required>
+          </div>
+          <div class="form-group d-flex">
+            <input type="password" class="form-control rounded-left" formControlName="confirmPassword"
+              placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}" required>
+          </div>
+          <div class="form-group d-flex">
+            <select formcontrolName="role" class="form-select" aria-label="Default select example">
+              <option selected>{{ 'login.rolePlaceholder' | translate }}</option>
+              <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div class="form-group d-flex">
+            <input data-provide="datepicker" type="date" class="form-control rounded-left" formControlName="age"
+              placeholder="{{ 'register.agePlaceholder' | translate }}" required>
+          </div>
+          <div class="form-group py-4 px-5">
+            <button type="submit" class="form-control btn btn-primary rounded submit px-3">{{ 'register.submit' | translate }}</button>
+          </div>
+        </form>
+        <div class="w-90 text-md-right py-3 text-center">
+          <a href="login">{{ 'register.toLogin' | translate }}</a>
+        </div>
+      </div>
     </div>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>

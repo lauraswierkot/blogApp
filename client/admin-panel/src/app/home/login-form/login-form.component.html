@@ -1,33 +1,25 @@
-<mat-card class="container">
-  <header class="container__header">
-      <div class="container__title">{{ 'login.title' | translate }}</div>
-  </header>
-  <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <p>
-              <mat-form-field class="container__field" appearance="fill">
-                  <mat-label>{{ 'login.emailPlaceholder' | translate }}</mat-label>
-                  <input matInput formControlName="email" placeholder="{{ 'login.emailPlaceholder' | translate }}"
-                      name="email" required>
-                  <mat-error *ngIf="email.errors?.['email']">{{ 'login.emailError' | translate }}</mat-error>
-              </mat-form-field>
-          </p>
-          <p>
-              <mat-form-field class="container__field" appearance="fill">
-                  <mat-label>{{ 'login.passwordPlaceholder' | translate }}</mat-label>
-                  <input matInput type="password" formControlName="password"
-                      placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required>
-              </mat-form-field>
-          </p>
-      </form>
-  </mat-card-content>
-  <mat-card-actions>
-      <button class="container--button" type="submit" mat-raised-button type="submit" (click)="login()" color="primary">{{ 'login.submit' | translate }}</button>
-      <div class="container__bottom">
-          <span>{{ 'login.toRegister' | translate }}</span>
-          <button mat-button>
-              <mat-icon (click)="toRegisterForm()">arrow_right_alt</mat-icon>
-          </button>
-      </div>
-  </mat-card-actions>
-</mat-card>
+<div class="container">
+    <div class="row justify-content-center px-4 py-4">
+        <div class="col-md-7 col-lg-9">
+            <div class="login-wrap p-1 p-md-1">
+                <h3 class="text-center py-3">{{ 'login.title' | translate }}</h3>
+                <form action="#" class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="form-group py-3">
+                        <input type="text" class="form-control rounded-left" formControlName="email"
+                            placeholder="{{ 'login.emailPlaceholder' | translate }}" required>
+                    </div>
+                    <div class="form-group d-flex">
+                        <input type="password" class="form-control rounded-left" formControlName="password"
+                            placeholder="{{ 'login.passwordPlaceholder' | translate }}" required>
+                    </div>
+                    <div class="form-group py-4 px-5">
+                        <button type="submit" class="form-control btn btn-primary rounded submit px-3">{{ 'login.submit' | translate }}</button>
+                    </div>
+                </form>
+                <div class="w-90 text-md-right py-3 text-center">
+                    <a href="register">{{ 'login.toRegister' | translate }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

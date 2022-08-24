@@ -1,12 +1,15 @@
-<mat-card class="container">
-  <header class="container__header">
-    <div class="container__title">{{ 'confirmation.title' | translate }}</div>
-  </header>
-  <mat-card-content class="container__content">
-    {{ 'confirmation.confirmation' | translate }}
-  </mat-card-content>
-  <mat-card-actions>
-    <button class="container--button" type="submit" mat-raised-button type="submit" (click)="toLoginForm()"
-      color="warn">{{ 'confirmation.submit' | translate }}</button>
-  </mat-card-actions>
-</mat-card>
+<div class="container">
+  <div class="row justify-content-center px-4 py-4">
+    <div class="col-md-7 col-lg-9">
+      <div class="login-wrap p-1 p-md-1">
+        <div class="card-body">
+          <h5 class="card-title py-3">{{ 'confirmation.title' | translate }}</h5>
+          <p class="card-text py-2">{{ 'confirmation.confirmation' | translate }}</p>
+        </div>
+        <div class="w-90 text-md-right py-4">
+          <button type="submit" (click)="toLoginForm()" class="form-control btn btn-primary rounded submit px-3">{{ 'confirmation.submit' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
