@@ -59,7 +59,7 @@
           </mat-form-field>
         </p>
         <div>
-          <button class="btn btn-primary" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
+          <button class="btn btn-primary my-1" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
             translate}}
           </button>
           <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
@@ -68,7 +68,7 @@
             <img class="container__field--image" [src]="fileSource" width="300" height="150" />
           </div>
         </div>
-        <button class="btn btn-primary" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
+        <button class="btn btn-primary my-2" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
         <div *ngIf="selectedArticle?.comments">
           <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
           <div *ngFor="let comment of articleForm.controls['comments'].value">
@@ -80,7 +80,7 @@
                 {{ 'articleForm.anonymous' | translate }}
               </ng-template>
               {{comment.createdAt | date: 'short'}} 
-              <button mat-raised-button class="container__form--button" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+              <button class="container__form--button" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
                 {{ 'articleForm.commentDelete' | translate}}
               </button>
             </p>
