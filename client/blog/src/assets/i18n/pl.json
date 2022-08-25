@@ -9,6 +9,7 @@
     "emailPlaceholder": "Podaj email",
     "emailError": "Email nieporawny.",
     "passwordPlaceholder": "Podaj hasło",
+    "passwordError": "Brak hasła.",
     "submit": "Zaloguj",
     "toRegister": "Nie masz konta? Zarejestruj się",
     "toEmailForm": "Nie pamiętasz hasła?"

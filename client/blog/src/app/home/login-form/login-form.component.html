@@ -4,16 +4,18 @@
             <div class="login-wrap p-1 p-md-1">
                 <h3 class="text-center py-3">{{ 'login.title' | translate }}</h3>
                 <form action="#" class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-                    <div class="form-group py-3">
-                        <input type="text" class="form-control rounded-left" formControlName="email"
+                    <div class="form-group py-1">
+                        <input [ngClass]="{'is-invalid' : email.errors && email.touched}" type="text" class="form-control rounded-left" formControlName="email"
                             placeholder="{{ 'login.emailPlaceholder' | translate }}" required>
+                            <div class="invalid-feedback">{{ 'login.emailError' | translate }}</div>
                     </div>
-                    <div class="form-group d-flex">
-                        <input type="password" class="form-control rounded-left" formControlName="password"
+                    <div class="form-group py-1">
+                        <input [ngClass]="{'is-invalid' : password.errors && password.touched}" type="password" class="form-control rounded-left" formControlName="password"
                             placeholder="{{ 'login.passwordPlaceholder' | translate }}" required>
+                            <div class="invalid-feedback">{{ 'login.passwordError' | translate }}</div>
                     </div>
-                    <div class="form-group py-4 px-5">
-                        <button type="submit" class="form-control btn btn-primary rounded submit px-3">{{ 'login.submit'
+                    <div class="form-group py-3 px-5">
+                        <button  [disabled]="!loginForm.valid" type="submit" class="form-control btn btn-primary rounded submit px-3">{{ 'login.submit'
                             | translate }}</button>
                     </div>
                 </form>

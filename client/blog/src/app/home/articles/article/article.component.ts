@@ -42,6 +42,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     public dialog: MatDialog
   ) {}
 
+  public user : any = {}
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
     this.facade.selectArticle(slug);
@@ -54,6 +55,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.initEditCommentsForm();
         this.initCreateCommentForm();
       });
+
+    this.user$.subscribe(user => this.user = user)
+
   }
 
   public toggleCommentEdit(index: number): void {
@@ -61,10 +65,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public submitCreateCommentForm(): void {
+    if(this.user){
     this.facade.createComment(
       this.selectedArticle.slug,
       this.createCommentForm?.value['body']
-    );
+    );}
+    else {
+      this.facade.createCommentByAnonim(
+        this.selectedArticle.slug,
+        this.createCommentForm?.value['body']
+      )
+    }
+    
   }
 
   public saveUpdatedComment(index: number): void {
@@ -85,7 +97,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.selectedArticle?.comments?.forEach((comment) => {
       this.addCommentToEditFormArray(
         comment.body,
-        comment.author.username,
+        comment?.author?.username,
         comment.id,
         comment.createdAt
       );
@@ -106,6 +118,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       date: this.formBuilder.control(date)
     });
     this.comments.push(comment);
+    console.log(this.comments)
   }
 
   private initCreateCommentForm(): void {

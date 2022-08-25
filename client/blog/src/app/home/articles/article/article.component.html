@@ -22,13 +22,15 @@
       <ng-container formArrayName="comments">
         <ng-container *ngFor="let comment of comments; let i = index">
           <div [formGroup]="comment" *ngIf="comment.value.body">
-            <ng-container *ngIf="comment?.value?.author === (user$ | async).username else noCommentUpdate">
+            <span> {{ comment?.value?.author == null ? 'anonimowy123' : comment?.value?.author }}</span>
+            <ng-container *ngIf="comment?.value?.author === (user$ | async)?.username else noCommentUpdate">
               <p *ngIf="!comment.value.editable">
-                <span>{{comment?.value.author}}</span>
                 <span>{{comment?.value.date | date: 'short'}}</span>
-                {{comment.value.body}}</p>
-              <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text" required></textarea>
-              <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)"> 
+                {{comment.value.body}}
+              </p>
+              <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text"
+                required></textarea>
+              <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)">
                 Edit comment
               </button>
               <button *ngIf="comment.value.editable" type="button" (click)="saveUpdatedComment(i)">
@@ -36,11 +38,11 @@
               </button>
             </ng-container>
             <ng-template #noCommentUpdate>
-              <p>{{comment?.value.author}}</p>
               <p>{{comment?.value.date | date: 'short' }}</p>
               <p>{{comment?.value.body}}</p>
             </ng-template>
           </div>
+          <hr />
         </ng-container>
       </ng-container>
     </div>
@@ -56,7 +58,7 @@
 <form class="container__form" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
   <h1>{{ 'comment.title' | translate }}</h1>
   <div>
-      <textarea formControlName="body" name="body" type="text" required></textarea>
+    <textarea formControlName="body" name="body" type="text" required></textarea>
   </div>
   <div>
     <button type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
