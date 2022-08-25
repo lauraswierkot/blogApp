@@ -4,7 +4,7 @@
             <div class="login-wrap p-1 p-md-1">
                 <h3 class="text-center py-3">{{ 'login.title' | translate }}</h3>
                 <form action="#" class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-                    <div class ="form-group py-2">
+                    <div class="form-group py-2">
                         <input [ngClass]="{'is-invalid' : email.errors && email.touched}" type="text" class="form-control rounded-left" formControlName="email"
                             placeholder="{{ 'login.emailPlaceholder' | translate }}" required>
                             <div class="invalid-feedback">{{ 'login.emailError' | translate }}</div>

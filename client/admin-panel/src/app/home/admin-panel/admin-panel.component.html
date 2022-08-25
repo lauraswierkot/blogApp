@@ -9,11 +9,11 @@
     [style.marginTop.px]="mobileQuery.matches ? topGap : bottomGap">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? modeOver : modeSide" [fixedInViewport]="mobileQuery.matches"
       [fixedTopGap]="topGap">
-      <mat-nav-list>
-        <a mat-list-item (click)="toNewArticle()">{{ 'adminPanel.createArticle' | translate }}</a>
-        <a mat-list-item (click)="toArticles()">{{ 'adminPanel.toArticles' | translate }}</a>
-        <a mat-list-item (click)="toUsers()">{{ 'adminPanel.toUsers' | translate }}</a>
-        <a mat-list-item (click)="logout()">{{ 'adminPanel.logout' | translate }}</a>
+      <mat-nav-list> 
+        <a mat-list-item class="menu__container__button" (click)="toNewArticle()">{{ 'adminPanel.createArticle' | translate }}</a>
+        <a mat-list-item class="menu__container__button" (click)="toArticles()">{{ 'adminPanel.toArticles' | translate }}</a>
+        <a mat-list-item class="menu__container__button" (click)="toUsers()">{{ 'adminPanel.toUsers' | translate }}</a>
+        <a mat-list-item class="menu__container__button" (click)="logout()">{{ 'adminPanel.logout' | translate }}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="menu__container__content">
