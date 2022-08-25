@@ -1,41 +1,3 @@
-<!-- <mat-toolbar class="search">
-  <div>
-    <span matPrefix></span>
-    <input matInput class="search__form" type="tel" [(ngModel)]="searchTerm"
-    placeholder="{{ 'articles.placeholder' | translate }}" />
-    <button matSuffix mat-button (click)="search()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </div>
-  <div class="search__buttons">
-    <button mat-raised-button (click)="createArticle()" color="warn">{{ 'articles.create' | translate }}</button>
-    <button mat-raised-button (click)="toAdminPanel()" color="primary">{{ 'articles.toAdminPanel' | translate }}</button>
-  </div>
-</mat-toolbar>
-<div class="list">
-  <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
-  <div class="list__card--container" >
-    <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
-      <mat-card-title class="list__card__title">{{article.title}}</mat-card-title>
-      <mat-card-content>
-        <p>
-          {{article.description}}
-        </p>
-        <img [src]="imageUrl+article.image" width="300" height="150">
-      </mat-card-content>
-    <mat-card-actions class="list__card__buttons">
-      <button mat-stroked-button (click)="toUpdateArticle(article.slug)">
-        {{ 'articles.edit' | translate }}
-      </button>
-      <button mat-stroked-button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
-    </mat-card-actions>
-  </mat-card>
-  </div>
-  <mat-paginator [length]="articlesCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-    (page)="setPaginator($event)">
-  </mat-paginator>
-</div> -->
-
 <nav class="navbar navbar-expand-lg">
   <div class="container navbar-container">
     <a class="navbar-brand">
@@ -51,7 +13,7 @@
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
       </ul>
-      <div class="form-inline my-2 my-lg-0" role="search">
+      <div class="form-inline mx-2 my-2 my-lg-0" role="search">
         <input class="form-control mr-sm-2" type="search" placeholder="{{ 'articles.placeholder' | translate }}"
           aria-label="Search" [(ngModel)]="searchTerm">
         </div>

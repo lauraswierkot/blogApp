@@ -22,7 +22,7 @@
       <ng-container formArrayName="comments">
         <ng-container *ngFor="let comment of comments; let i = index">
           <div [formGroup]="comment" *ngIf="comment.value.body">
-            <span> {{ comment?.value?.author == null ? 'anonimowy123' : comment?.value?.author }}</span>
+            <span> {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
             <ng-container *ngIf="comment?.value?.author === (user$ | async)?.username else noCommentUpdate">
               <p *ngIf="!comment.value.editable">
                 <span>{{comment?.value.date | date: 'short'}}</span>

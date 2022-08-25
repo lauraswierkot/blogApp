@@ -116,7 +116,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public toAdminPanel(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['articles']);
   }
 
   public addTag(event: MatChipInputEvent): void {

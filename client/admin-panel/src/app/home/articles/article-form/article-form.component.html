@@ -50,7 +50,7 @@
               <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
                 [removable]="removable" (removed)="removeTag(tag)">
                 {{ tag }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                <span matChipRemove class="bi bi-x" *ngIf="removable"></span>
               </mat-chip>
               <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
@@ -59,7 +59,7 @@
           </mat-form-field>
         </p>
         <div>
-          <button class="container__field--button" type="button" mat-raised-button (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
+          <button class="btn btn-primary" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
             translate}}
           </button>
           <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
@@ -68,7 +68,7 @@
             <img class="container__field--image" [src]="fileSource" width="300" height="150" />
           </div>
         </div>
-        <button class="container--button" mat-raised-button type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
+        <button class="btn btn-primary" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
         <div *ngIf="selectedArticle?.comments">
           <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
           <div *ngFor="let comment of articleForm.controls['comments'].value">
@@ -89,7 +89,7 @@
         <div class="container__bottom">
           <span>{{ 'articleForm.toAdminPanel' | translate }}</span>
           <button mat-button>
-            <mat-icon (click)="toAdminPanel()">arrow_right_alt</mat-icon>
+            <span class="bi bi-arrow-right" (click)="toAdminPanel()"></span>
           </button>
         </div>
       </form>
