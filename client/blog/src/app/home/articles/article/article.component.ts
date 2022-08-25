@@ -39,7 +39,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   public user : any = {}
@@ -135,6 +136,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
     return this.editCommentsForm.controls['comments'][
       'controls'
     ] as FormGroup[];
+  }
+
+  public logout(): void {
+    this.userFacade.logout()
+  }
+
+  public login(): void {
+   this.router.navigate([`blog-login`]);
+  }
+
+  public toArticles(): void {
+    this.router.navigate([''])
   }
 
   public ngOnDestroy(): void {

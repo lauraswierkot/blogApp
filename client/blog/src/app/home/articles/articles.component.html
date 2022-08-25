@@ -13,7 +13,7 @@
   </div>
 </nav>
 <div class="container">
-  <header class="list__card--title">{{ 'articles.listTitle' | translate }}</header>
+  <h5 class="py-2">{{ 'articles.listTitle' | translate }}</h5>
   <div class="row row-cols-1">
     <div class="py-2" *ngFor="let article of articlesList$ | async">
       <div class="card mb-3">

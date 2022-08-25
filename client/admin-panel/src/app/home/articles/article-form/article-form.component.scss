@@ -1,4 +1,10 @@
-.container {
+
+.navbar-container {
+  border-bottom: 1px solid rgb(208, 208, 208);
+  padding: 16px 12px 16px 28px;
+}
+
+.wrapper {
   border-color: black;
   box-shadow: 0px 0px 18px -5px rgba(66, 68, 90, 1);
   border-radius: 7px;
@@ -42,8 +48,12 @@
     }
   }
 
+  &__comment {
+    font-size: small;
+  }
+}
   mat-form-field {
     font-size: medium;
   }
 
-}
+

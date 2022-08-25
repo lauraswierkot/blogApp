@@ -1,19 +1,37 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container navbar-container">
+    <a class="navbar-brand">
+      Admin Panel
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">Articles</button>
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div>
-  <mat-card class="container">
-    <header class="container__header">
-      <div class="container__title">
-        <span class="container__title" *ngIf="selectedArticle === null; else edit">
+  <mat-card class="wrapper">
+    <header class="wrapper__header">
+      <div class="wrapper__title">
+        <span class="wrapper__title" *ngIf="selectedArticle === null; else edit">
          {{ 'articleForm.titleCreate' | translate }}
         </span>
         <ng-template #edit>
-          <span class="container__title">{{ 'articleForm.titleEdit' | translate }}</span>
+          <span class="wrapper__title">{{ 'articleForm.titleEdit' | translate }}</span>
         </ng-template>
       </div>
     </header>
     <mat-card-content>
       <form [formGroup]="articleForm" (ngSubmit)="submitForm()">
         <p>
-          <mat-form-field class="container__field" appearance="fill">
+          <mat-form-field class="wrapper__field" appearance="fill">
             <mat-label>{{ 'articleForm.titlePlaceholder' | translate }}</mat-label>
             <input matInput formControlName="title" placeholder="{{ 'articleForm.titlePlaceholder' | translate }}"
               name="title" required>
@@ -21,7 +39,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field class="container__field" appearance="fill">
+          <mat-form-field class="wrapper__field" appearance="fill">
             <mat-label>{{ 'articleForm.bodyPlaceholder' | translate }}</mat-label>
             <textarea matInput 
               cdkTextareaAutosize 
@@ -32,7 +50,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field class="container__field" appearance="fill">
+          <mat-form-field class="wrapper__field" appearance="fill">
             <mat-label>{{ 'articleForm.descriptionPlaceholder' | translate }}</mat-label>
             <textarea matInput 
               cdkTextareaAutosize 
@@ -45,7 +63,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field appearance="fill" class="container__field">
+          <mat-form-field appearance="fill" class="wrapper__field">
             <mat-chip-list #chipList aria-label="Enter tags" formControlName="tagList">
               <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
                 [removable]="removable" (removed)="removeTag(tag)">
@@ -59,20 +77,18 @@
           </mat-form-field>
         </p>
         <div>
-          <button class="btn btn-primary my-1" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' |
-            translate}}
-          </button>
+          <button class="btn btn-primary my-1" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' | translate}}</button>
           <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
             accept="image/*" required />
           <div *ngIf="fileSource">
-            <img class="container__field--image" [src]="fileSource" width="300" height="150" />
+            <img class="wrapper__field--image" [src]="fileSource" width="300" height="150" />
           </div>
         </div>
-        <button class="btn btn-primary my-2" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
+        <button class="btn btn-primary my-4 px-5" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
         <div *ngIf="selectedArticle?.comments">
-          <header class="container__form--title">{{ 'articleForm.commentsTitle' | translate }}</header>
+          <h5 class="text-center my-4">{{ 'articleForm.commentsTitle' | translate }}</h5>
           <div *ngFor="let comment of articleForm.controls['comments'].value">
-            <p>
+            <p class="wrapper__comment">
               {{ comment.body | slice: commentIndex : commentMaxLength }}
               <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
               <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}} |</span>
@@ -80,13 +96,13 @@
                 {{ 'articleForm.anonymous' | translate }}
               </ng-template>
               {{comment.createdAt | date: 'short'}} 
-              <button class="container__form--button" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+              <button class="btn btn-primary" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
                 {{ 'articleForm.commentDelete' | translate}}
               </button>
             </p>
           </div>
         </div>
-        <div class="container__bottom">
+        <div class="text-center my-4">
           <span>{{ 'articleForm.toAdminPanel' | translate }}</span>
           <button mat-button>
             <span class="bi bi-arrow-right" (click)="toAdminPanel()"></span>

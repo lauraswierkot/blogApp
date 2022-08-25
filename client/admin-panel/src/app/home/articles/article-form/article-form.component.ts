@@ -18,6 +18,7 @@ import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
 import { environment } from 'environments/environment';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { UserFacade } from '@state/user/user.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -42,6 +43,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private facade: ArticleFacade,
+    private userFacade: UserFacade,
     private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
@@ -116,7 +118,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   public toAdminPanel(): void {
-    this.router.navigate(['articles']);
+    this.router.navigate(['articles-panel']);
   }
 
   public addTag(event: MatChipInputEvent): void {
@@ -164,6 +166,14 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     if (this.selectedArticle) {
       this.fileSource = `${this.imageUrl}${this.selectedArticle.image}`;
     }
+  }
+
+  public createArticle(): void {
+    this.router.navigate(['article']);
+  }
+
+  public logout(): void {
+    this.userFacade.logout();
   }
 
   public ngOnDestroy(): void {
