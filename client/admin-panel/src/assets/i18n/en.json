@@ -59,6 +59,7 @@
     "emailPlaceholder": "Type email here",
     "emailError": "Email not valid.",
     "passwordPlaceholder": "Type your password here",
+    "passwordError": "Password is missing.",
     "submit": "Login",
     "toRegister": "No account? Sign up",
     "rolePlaceholder": "Choose your role"

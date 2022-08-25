@@ -23,6 +23,8 @@ export class ArticlesComponent implements OnInit {
   public articlesCount: number;
   public fileSource: string;
   public imageUrl: string = environment.apiImageUrl;
+
+  public user$ = this.userFacade.user$;
   
   public pageIndex = 0;
   public searchTerm = '';
@@ -77,5 +79,9 @@ export class ArticlesComponent implements OnInit {
 
   public logout(): void {
     this.userFacade.logout()
+  }
+
+  public login(): void {
+   this.router.navigate([`blog-login`]);
   }
 }

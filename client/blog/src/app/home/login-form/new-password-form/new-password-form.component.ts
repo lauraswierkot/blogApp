@@ -27,7 +27,6 @@ export class NewPasswordFormComponent implements OnInit {
     this.passwordForm = new FormGroup({
       password: new FormControl('', {
         validators: Validators.email,
-        updateOn: 'blur',
       }),
       confirmPassword: new FormControl('', {
         validators: Validators.required,
