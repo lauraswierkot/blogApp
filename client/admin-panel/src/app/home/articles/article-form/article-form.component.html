@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">Articles</button>
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">{{ 'articles.articles' | translate }}</button>
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
       </ul>
@@ -86,12 +86,12 @@
           <div *ngFor="let comment of articleForm.controls['comments'].value">
             <div class="wrapper__comment">
               <div class="comment d-flex">
-                <p  class="comment__author" *ngIf="comment.author; else anonymousComment">By {{comment.author?.username}}</p>
+                <p  class="comment__author" *ngIf="comment.author; else anonymousComment">{{'articleForm.by' | translate}} {{comment.author?.username}}</p>
                 {{ comment.body | slice: commentIndex : commentMaxLength }}
                 <p *ngIf="comment.body.length >=commentMaxLength">...</p> 
                 |
                 <ng-template class="comment__author" #anonymousComment>
-                 By  {{ 'articleForm.anonymous' | translate }}
+                 {{ 'articleForm.anonymous' | translate }}
                 </ng-template>
                 {{comment.createdAt | date: 'short'}}
               </div>

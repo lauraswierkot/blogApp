@@ -1,5 +1,8 @@
 .translation__container {
   display: flex;
+  position: fixed;
+  z-index: 1;
+  right: 20px;
   flex-direction: row;
   justify-content: right;
   &--selector {

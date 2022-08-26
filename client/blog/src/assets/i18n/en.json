@@ -45,12 +45,18 @@
     "listTitle": "All articles",
     "toLogout": "Logout",
     "details": "Read",
-    "logout": "Logout"
+    "logout": "Logout",
+    "login": "Login",
+    "by": "By",
+    "articles": "Articles"
   },
 
   "article": {
     "toArticles": "Back to articles",
-    "commentsTitle": "Comments"
+    "commentsTitle": "Comments",
+    "createdAt": "Created at",
+    "edit": "Edit",
+    "save": "Save"
   },
 
   "comment": {
@@ -60,6 +66,7 @@
     "error": "Comment is missing",
     "titleNew": "Edit your comment",
     "update": "Update",
-    "close": "Close"
+    "close": "Close",
+    "by": "By"
   }
 }

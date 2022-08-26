@@ -5,7 +5,7 @@
   },
 
   "adminPanel": {
-    "title": "Admin Panel",
+    "title": "Menu",
     "content": "Click on menu button to see options",
     "createArticle": "Create new article",
     "logout": "Logout",
@@ -16,13 +16,14 @@
   "articles": {
     "placeholder": "Search an article...",
     "search": "Search",
-    "create": "Create an article",
+    "create": "Create new article",
     "listTitle": "All articles",
     "addComment": "Add comment",
     "edit": "Edit",
     "delete": "Delete",
     "toAdminPanel": "Admin Panel",
-    "logout": "Logout"
+    "logout": "Logout",
+    "articles": "Articles"
   },
 
   "articleForm": {
@@ -41,7 +42,7 @@
     "fileError": "File is missing.",
     "submit": "Save",
     "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
-    "anonymous": "anonymous",
+    "anonymous": "By anonymous",
     "commentDelete": "Delete",
     "commentUpdate": "Update",
     "by": "by",
@@ -96,7 +97,7 @@
     "search": "Search",
     "listTitle": "All users",
     "view": "View details",
-    "toAdminPanel": "Admin Panel"
+    "toAdminPanel": "Main"
   },
 
   "user": {

@@ -64,10 +64,6 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  public logout(): void {
-    this.facade.logout();
-  }
-
   public setPaginator(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;

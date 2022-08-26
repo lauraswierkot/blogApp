@@ -5,7 +5,7 @@
   },
 
   "adminPanel": {
-    "title": "Panel Admina",
+    "title": "Menu",
     "content": "Wybierz ikonę menu, aby zobaczyć opcje panelu",
     "createArticle": "Stwórz artykuł",
     "logout": "Wyloguj",
@@ -22,7 +22,8 @@
     "edit": "Edytuj",
     "delete": "Usuń",
     "toAdminPanel": "Panel Admina",
-    "logout": "Wyloguj"
+    "logout": "Wyloguj",
+    "articles": "Artykuły"
   },
 
   "articleForm": {
@@ -41,10 +42,10 @@
     "fileError": "Brak zdjęcia.",
     "submit": "Zapisz",
     "toAdminPanel": "Nie chcesz artykułu? Powrót do panelu administracyjnego",
-    "anonymous": "anonim",
+    "anonymous": "Od anonima",
     "commentDelete": "Usuń",
     "commentUpdate": "Edytuj",
-    "by": "przez",
+    "by": "Od",
     "from": "z"
   },
 
@@ -96,12 +97,12 @@
     "search": "Szukaj",
     "listTitle": "Użytkownicy",
     "view": "Pokaż szczegóły",
-    "toAdminPanel": "Panel Admina"
+    "toAdminPanel": "Strona główna"
   },
 
   "user": {
     "title": "Informacje o użytkowniku",
-    "close": "Close",
+    "close": "Zamknij",
     "username": "Nazwa użytkownika: ",
     "email": "Email: ",
     "birthdate": "Data urodzin: "

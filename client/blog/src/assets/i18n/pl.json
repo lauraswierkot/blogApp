@@ -45,12 +45,18 @@
     "listTitle": "Artykuły",
     "toLogout": "Wyloguj się",
     "details": "Czytaj",
-    "logout": "Wyloguj się"
+    "logout": "Wyloguj się",
+    "login": "Zaloguj się",
+    "by": "Od",
+    "articles": "Artykuły"
   },
 
   "article": {
     "toArticles": "Do artykułów",
-    "commentsTitle": "Komentarze"
+    "commentsTitle": "Komentarze",
+    "createdAt": "Utworzony",
+    "edit": "Edytuj",
+    "save": "Zapisz"
   },
 
   "comment": {
@@ -60,6 +66,7 @@
     "error": "Brak komentarza",
     "titleNew": "Edytuj komentarz",
     "update": "Zapisz",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "by": "Od"
   }
 }

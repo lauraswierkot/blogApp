@@ -38,7 +38,7 @@ export class AdminPanelComponent {
   }
 
   public toArticles(): void {
-    this.router.navigate(['articles-panel']);
+    this.router.navigate(['']);
   }
 
   public toUsers(): void {
