@@ -32,17 +32,19 @@
         <ng-container formArrayName="comments">
           <ng-container *ngFor="let comment of comments; let i = index">
             <div [formGroup]="comment" *ngIf="comment.value.body">
-              <span> {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
+              <span class="author">By {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
               <ng-container *ngIf="comment?.value?.author === (user$ | async)?.username else noCommentUpdate">
-                <p *ngIf="!comment.value.editable">
+                <p class="comment-editable" *ngIf="!comment.value.editable">
                   <span>{{comment?.value.date | date: 'short'}}</span>
                   <span> {{comment.value.body}}</span>
                 </p>
+                <div class="comment-editable">
                 <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text"
                   required></textarea>
-                <button class="btn btn-primary rounded" *ngIf="!comment.value.editable" type="button"
+                <button class="btn btn-outline-primary rounded" *ngIf="!comment.value.editable" type="button"
                   (click)="toggleCommentEdit(i)">Edit comment</button>
-                <button class="btn btn-primary rounded" *ngIf="comment.value.editable" type="button"
+                </div>
+                <button class="btn btn-outline-success rounded" *ngIf="comment.value.editable" type="button"
                   (click)="saveUpdatedComment(i)">Save change</button>
               </ng-container>
               <ng-template #noCommentUpdate>
@@ -63,7 +65,7 @@
       <textarea formControlName="body" name="body" type="text" required></textarea>
     </div>
     <div>
-      <button class="px-4 my-3 btn btn-primary rounded" type="submit" cdkFocusInitial>{{ 'comment.save' | translate
+      <button class="px-4 my-3 btn btn-outline-success rounded" type="submit" cdkFocusInitial>{{ 'comment.save' | translate
         }}</button>
     </div>
   </form>

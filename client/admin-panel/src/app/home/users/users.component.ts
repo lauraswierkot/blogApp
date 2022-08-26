@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   public pageIndex = 0;
   public searchTerm = '';
   public pageSize = 4;
-  public pageSizeOptions: number[] = [4, 6, 9];
+  public pageSizeOptions: number[] = [4, 8, 12];
 
   constructor(
     private facade: UserFacade,

@@ -10,3 +10,13 @@
   width: 70%;
   margin: 3em auto 0;
 }
+
+.comment-editable {
+  display: flex;
+  gap: 1em;
+}
+
+.author {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}

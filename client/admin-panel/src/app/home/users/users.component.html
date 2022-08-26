@@ -12,11 +12,13 @@
           <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">{{ 'users.toAdminPanel' | translate }}</button>
           <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
         </ul>
+        <div class="d-flex">
         <div class="form-inline mx-2 my-2 my-lg-0" role="search">
           <input class="form-control mr-sm-2" type="search" placeholder="{{ 'users.placeholder' | translate }}"
             aria-label="Search" [(ngModel)]="searchTerm">
           </div>
           <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
+        </div>
       </div>
     </div>
   </nav>

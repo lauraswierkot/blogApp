@@ -21,7 +21,7 @@
     <header class="wrapper__header">
       <div class="wrapper__title">
         <span class="wrapper__title" *ngIf="selectedArticle === null; else edit">
-         {{ 'articleForm.titleCreate' | translate }}
+          {{ 'articleForm.titleCreate' | translate }}
         </span>
         <ng-template #edit>
           <span class="wrapper__title">{{ 'articleForm.titleEdit' | translate }}</span>
@@ -41,21 +41,15 @@
         <p>
           <mat-form-field class="wrapper__field" appearance="fill">
             <mat-label>{{ 'articleForm.bodyPlaceholder' | translate }}</mat-label>
-            <textarea matInput 
-              cdkTextareaAutosize 
-              #autosize="cdkTextareaAutosize"
-              formControlName="body" placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}"
-              name="body" required></textarea>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="body"
+              placeholder="{{ 'articleForm.bodyPlaceholder' | translate }}" name="body" required></textarea>
             <mat-error *ngIf="body.errors?.['body']">{{ 'articleForm.bodyError' | translate }}</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field class="wrapper__field" appearance="fill">
             <mat-label>{{ 'articleForm.descriptionPlaceholder' | translate }}</mat-label>
-            <textarea matInput 
-              cdkTextareaAutosize 
-              #autosize="cdkTextareaAutosize" 
-              formControlName="description"
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="description"
               placeholder="{{ 'articleForm.descriptionPlaceholder' | translate }}" name="description"
               required></textarea>
             <mat-error *ngIf="description.errors?.['description']">{{ 'articleForm.descriptionError' | translate }}
@@ -77,29 +71,34 @@
           </mat-form-field>
         </p>
         <div>
-          <button class="btn btn-primary my-1" type="button" (click)="fileUpload.click()">{{ 'articleForm.filePlaceholder' | translate}}</button>
+          <button class="btn btn-outline-secondary my-1" type="button" (click)="fileUpload.click()">{{
+            'articleForm.filePlaceholder' | translate}}</button>
           <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
             accept="image/*" required />
           <div *ngIf="fileSource">
             <img class="wrapper__field--image" [src]="fileSource" width="300" height="150" />
           </div>
         </div>
-        <button class="btn btn-primary my-4 px-5" type="submit" color="warn">{{ 'articleForm.submit' | translate }}</button>
+        <button class="btn btn-outline-success my-4 px-5" type="submit" color="warn">{{ 'articleForm.submit' | translate
+          }}</button>
         <div *ngIf="selectedArticle?.comments">
           <h5 class="text-center my-4">{{ 'articleForm.commentsTitle' | translate }}</h5>
           <div *ngFor="let comment of articleForm.controls['comments'].value">
-            <p class="wrapper__comment">
-              {{ comment.body | slice: commentIndex : commentMaxLength }}
-              <span *ngIf="comment.body.length >=commentMaxLength">...</span> |
-              <span *ngIf="comment.author; else anonymousComment">{{comment.author?.username}} |</span>
-              <ng-template #anonymousComment>
-                {{ 'articleForm.anonymous' | translate }}
-              </ng-template>
-              {{comment.createdAt | date: 'short'}} 
-              <button class="btn btn-primary" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+            <div class="wrapper__comment">
+              <div class="comment d-flex">
+                <p  class="comment__author" *ngIf="comment.author; else anonymousComment">By {{comment.author?.username}}</p>
+                {{ comment.body | slice: commentIndex : commentMaxLength }}
+                <p *ngIf="comment.body.length >=commentMaxLength">...</p> 
+                |
+                <ng-template class="comment__author" #anonymousComment>
+                 By  {{ 'articleForm.anonymous' | translate }}
+                </ng-template>
+                {{comment.createdAt | date: 'short'}}
+              </div>
+              <button class="btn btn-outline-danger" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
                 {{ 'articleForm.commentDelete' | translate}}
               </button>
-            </p>
+            </div>
           </div>
         </div>
         <div class="text-center my-4">
