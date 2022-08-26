@@ -67,14 +67,6 @@ export class ArticlesComponent implements OnInit {
     this.router.navigate([`article/${slug}`]);
   }
 
-  public toAdminPanel(): void {
-    this.router.navigate(['']);
-  }
-
-  public logout(): void {
-    this.userFacade.logout();
-  }
-
   public setPaginator(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;

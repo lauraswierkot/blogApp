@@ -13,7 +13,7 @@
 <div class="card border-0">
   <div class="card-body">
     <img class="card-img py-2" [src]="fileSource" width="800px" height="400px">
-    <p class="card-text"> {{ 'article.createdAt' | translate }} {{selectedArticle?.createdAt | date: 'short'}}</p>
+    <p class="card-text"> {{ 'article.createdAt' | translate }} {{ selectedArticle?.createdAt | date: 'short' }}</p>
     <h3 class="card-title py-2">{{ selectedArticle?.title }}</h3>
     <h6 class="card-subtitle py-2">{{ selectedArticle?.description }}</h6>
     <div class="card-text py-2">
@@ -32,14 +32,14 @@
         <ng-container formArrayName="comments">
           <ng-container *ngFor="let comment of comments; let i = index">
             <div [formGroup]="comment" *ngIf="comment.value.body">
-              <span class="author">{{ 'comment.by' | translate }} {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
+              <span class="comment__author">{{ 'comment.by' | translate }} {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
               <ng-container *ngIf="comment?.value?.author === (user$ | async)?.username else noCommentUpdate">
                 <p class="comment-editable" *ngIf="!comment.value.editable">
                   <span>{{comment?.value.date | date: 'short'}}</span>
                   <span> {{comment.value.body}}</span>
                 </p>
-                <div class="comment-editable">
-                <textarea class="comment__form" *ngIf="comment.value.editable" formControlName="body" name="body" type="text"
+                <div class="card__editable">
+                <textarea class="comment" *ngIf="comment.value.editable" formControlName="body" name="body" type="text"
                   required></textarea>
                 <button class="btn btn-outline-primary rounded" *ngIf="!comment.value.editable" type="button"
                   (click)="toggleCommentEdit(i)">{{ 'article.edit' | translate }}</button>
@@ -62,10 +62,12 @@
   <form class="text-center" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
     <h5>{{ 'comment.title' | translate }}</h5>
     <div class="text-center">
-      <textarea  class="comment__form" formControlName="body" name="body" type="text" required></textarea>
+      <textarea  class="comment" formControlName="body" name="body" type="text" required></textarea>
     </div>
     <div>
-      <button class="px-4 my-3 btn btn-outline-success rounded" type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
+      <button class="px-4 my-3 btn btn-outline-success rounded" type="submit" cdkFocusInitial>
+        {{ 'comment.save' | translate }}
+      </button>
     </div>
   </form>
 </div>

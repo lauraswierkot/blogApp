@@ -9,19 +9,19 @@
   overflow: hidden;
   width: 70%;
   margin: 3em auto 0;
+
+  &__editable {
+    display: flex;
+    gap: 1em;
+  }
 }
 
-.comment-editable {
-  display: flex;
-  gap: 1em;
-}
-
-.author {
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.comment__form {
+.comment {
   border-radius: 0.4em;
   width: 600px;
+
+  &__author {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
 }

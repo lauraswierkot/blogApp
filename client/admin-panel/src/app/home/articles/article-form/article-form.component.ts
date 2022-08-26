@@ -172,10 +172,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['article']);
   }
 
-  public logout(): void {
-    this.userFacade.logout();
-  }
-
   public ngOnDestroy(): void {
     this.facade.resetArticle();
   }

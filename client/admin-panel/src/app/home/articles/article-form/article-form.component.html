@@ -11,7 +11,6 @@
       <ul class="navbar-nav mr-auto">
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">{{ 'articles.articles' | translate }}</button>
         <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">{{ 'articles.create' | translate }}</button>
-        <button class="btn btn-primary mx-2 my-2" type="button" (click)="logout()">{{ 'articles.logout' | translate }}</button>
       </ul>
     </div>
   </div>
@@ -59,43 +58,51 @@
         <p>
           <mat-form-field appearance="fill" class="wrapper__field">
             <mat-chip-list #chipList aria-label="Enter tags" formControlName="tagList">
-              <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" [selectable]="selectable"
-                [removable]="removable" (removed)="removeTag(tag)">
+              <mat-chip *ngFor="let tag of articleForm.controls['tagList'].value" 
+                [selectable]="selectable"
+                [removable]="removable" 
+                (removed)="removeTag(tag)">
                 {{ tag }}
                 <span matChipRemove class="bi bi-x" *ngIf="removable"></span>
               </mat-chip>
-              <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="addTag($event)" />
+              <input placeholder="{{ 'articleForm.tagsPlaceholder' | translate }}" 
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addTag($event)"/>
             </mat-chip-list>
           </mat-form-field>
         </p>
         <div>
-          <button class="btn btn-outline-secondary my-1" type="button" (click)="fileUpload.click()">{{
-            'articleForm.filePlaceholder' | translate}}</button>
+          <button class="btn btn-outline-secondary my-1" type="button" (click)="fileUpload.click()">
+            {{ 'articleForm.filePlaceholder' | translate }}
+          </button>
           <input hidden type="file" (change)="onFileSelect($event)" #fileUpload id="fileUpload" name="fileUpload"
             accept="image/*" required />
           <div *ngIf="fileSource">
-            <img class="wrapper__field--image" [src]="fileSource" width="300" height="150" />
+            <img class="wrapper__field--image" [src]="fileSource"/>
           </div>
         </div>
-        <button class="btn btn-outline-success my-4 px-5" type="submit" color="warn">{{ 'articleForm.submit' | translate
-          }}</button>
+        <button class="btn btn-outline-success my-4 px-5" type="submit" color="warn">
+          {{ 'articleForm.submit' | translate }}
+        </button>
         <div *ngIf="selectedArticle?.comments">
           <h5 class="text-center my-4">{{ 'articleForm.commentsTitle' | translate }}</h5>
           <div *ngFor="let comment of articleForm.controls['comments'].value">
             <div class="wrapper__comment">
               <div class="comment d-flex">
-                <p  class="comment__author" *ngIf="comment.author; else anonymousComment">{{'articleForm.by' | translate}} {{comment.author?.username}}</p>
+                <p class="comment__author" *ngIf="comment.author; else anonymousComment">
+                  {{ 'articleForm.by' | translate }} {{ comment.author?.username }}
+                </p>
                 {{ comment.body | slice: commentIndex : commentMaxLength }}
-                <p *ngIf="comment.body.length >=commentMaxLength">...</p> 
-                |
+                <p *ngIf="comment.body.length >=commentMaxLength">...</p>
                 <ng-template class="comment__author" #anonymousComment>
-                 {{ 'articleForm.anonymous' | translate }}
+                  {{ 'articleForm.anonymous' | translate }}
                 </ng-template>
-                {{comment.createdAt | date: 'short'}}
+                {{ comment.createdAt | date: 'short' }}
               </div>
-              <button class="btn btn-outline-danger" type="button" (click)="deleteComment(selectedArticle.slug, comment.id)">
+              <button class="btn btn-outline-danger" type="button"
+                (click)="deleteComment(selectedArticle.slug, comment.id)">
                 {{ 'articleForm.commentDelete' | translate}}
               </button>
             </div>
