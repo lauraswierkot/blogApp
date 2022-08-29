@@ -2,13 +2,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomMatPaginatorIntl } from './services/custom-paginator.provider';
 
-import { MaterialModule } from 'app/material-module/material.module';
+import { CustomMatPaginatorIntl } from './services/custom-paginator.provider';
+import { MaterialModule } from '../material-module/material.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -16,7 +16,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 import {
   LoginFormComponent,
-  AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticlesComponent,
@@ -41,7 +40,6 @@ const modules = [
 
 const components = [
   LoginFormComponent,
-  AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticlesComponent,
