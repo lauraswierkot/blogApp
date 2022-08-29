@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './services/custom-paginator.provider';
 
 import { MaterialModule } from 'app/material-module/material.module';
 
@@ -53,5 +55,6 @@ const components = [
   imports: [...modules],
   exports: [...components],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [{ provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }],
 })
 export class HomeModule {}

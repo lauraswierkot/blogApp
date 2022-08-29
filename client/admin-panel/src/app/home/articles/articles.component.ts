@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article, GetArticlePayload } from '@state/articles/article.model';
+import { Article } from '@state/articles/article.model';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { PageEvent } 
+from '@angular/material/paginator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from 'environments/environment';
 import { UserFacade } from '@state/user/user.facade';
@@ -51,7 +52,7 @@ export class ArticlesComponent implements OnInit {
     this.facade.getArticles({
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
-      searchTerm: this.searchTerm,
+      searchTerm: this.searchTerm
     });
   }
 

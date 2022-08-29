@@ -45,7 +45,7 @@
         <a class="btn" (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</a>
       </div>
     </div>
-    <mat-paginator 
+    <mat-paginator #paginator
       [length]="articlesCount" 
       [pageSize]="pageSize" 
       [pageSizeOptions]="pageSizeOptions"

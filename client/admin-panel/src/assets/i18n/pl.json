@@ -116,5 +116,12 @@
     "userLoggedIn": "Udane logowanie",
     "userRegistered": "Rejestracja zakończona",
     "emailConfirmed": "Email potwierdzony"
+  },
+
+  "paginator": {
+    "itemsPerPage": "Elementy na stronie",
+    "nextPage": "Następna strona",
+    "previousPage": "Poprzednia strona",
+    "of": "z"
   }
 }

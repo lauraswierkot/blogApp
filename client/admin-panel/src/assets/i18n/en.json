@@ -116,5 +116,12 @@
     "userLoggedIn": "Logged in successfully",
     "userRegistered": "Registered successfully",
     "emailConfirmed": "Email confirmed"
+  },
+
+  "paginator": {
+    "itemsPerPage": "Items per page",
+    "nextPage": "Next Page",
+    "previousPage": "Previous Page",
+    "of": "of"
   }
 }
