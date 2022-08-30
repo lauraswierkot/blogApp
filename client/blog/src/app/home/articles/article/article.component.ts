@@ -30,7 +30,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public imageUrl: string = environment.apiImageUrl;
   public fileSource: string | ArrayBuffer;
   public user$ = this.userFacade.user$;
-
   public createCommentForm: FormGroup;
   public editCommentsForm: FormGroup;
 
@@ -43,11 +42,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
     public router: Router
   ) {}
 
-  public user : any = {}
+  public user: any = {};
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
     this.facade.selectArticle(slug);
-
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
@@ -56,9 +54,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.initEditCommentsForm();
         this.initCreateCommentForm();
       });
-
-    this.user$.subscribe(user => this.user = user)
-
+    this.user$.subscribe((user) => (this.user = user));
   }
 
   public toggleCommentEdit(index: number): void {
@@ -66,18 +62,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public submitCreateCommentForm(): void {
-    if(this.user){
-    this.facade.createComment(
-      this.selectedArticle.slug,
-      this.createCommentForm?.value['body']
-    );}
+    if (this.user) {
+      this.facade.createComment(
+        this.selectedArticle.slug,
+        this.createCommentForm?.value['body']);
+    } 
     else {
       this.facade.createCommentByAnonim(
         this.selectedArticle.slug,
-        this.createCommentForm?.value['body']
-      )
+        this.createCommentForm?.value['body']);
     }
-    
   }
 
   public saveUpdatedComment(index: number): void {
@@ -100,8 +94,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         comment.body,
         comment?.author?.username,
         comment.id,
-        comment.createdAt
-      );
+        comment.createdAt);
     });
   }
 
@@ -116,10 +109,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
       author: this.formBuilder.control(author),
       id: this.formBuilder.control(id),
       editable: this.formBuilder.control(false),
-      date: this.formBuilder.control(date)
+      date: this.formBuilder.control(date),
     });
     this.comments.push(comment);
-    console.log(this.comments)
   }
 
   private initCreateCommentForm(): void {
@@ -139,15 +131,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
-    this.userFacade.logout()
+    this.userFacade.logout();
   }
 
   public login(): void {
-   this.router.navigate([`blog-login`]);
+    this.router.navigate([`blog-login`]);
   }
 
   public toArticles(): void {
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 
   public ngOnDestroy(): void {

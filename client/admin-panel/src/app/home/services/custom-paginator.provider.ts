@@ -6,12 +6,9 @@ import { Subject } from 'rxjs';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable()
-export class CustomMatPaginatorIntl
-  extends MatPaginatorIntl
-  implements OnDestroy
-{
-  unsubscribe: Subject<void> = new Subject<void>();
-  OF_LABEL = 'of';
+export class CustomMatPaginatorIntl extends MatPaginatorIntl implements OnDestroy {
+  public unsubscribe: Subject<void> = new Subject<void>();
+  public OF_LABEL = 'of';
 
   constructor(private translate: TranslateService) {
     super();
@@ -23,12 +20,12 @@ export class CustomMatPaginatorIntl
     this.getAndInitTranslations();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
 
-  getAndInitTranslations() {
+  public getAndInitTranslations(): void {
     this.translate
       .get([
         'paginator.itemsPerPage',
@@ -46,7 +43,7 @@ export class CustomMatPaginatorIntl
       });
   }
 
-  override getRangeLabel = (page: number, pageSize: number, length: number) => {
+  public override getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
       return `0 ${this.OF_LABEL} ${length}`;
     }

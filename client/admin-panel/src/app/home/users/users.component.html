@@ -1,39 +1,42 @@
 <nav class="navbar navbar-expand-lg">
-    <div class="container navbar-container">
-      <a class="navbar-brand">
-        Admin Panel
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">{{ 'users.toAdminPanel' | translate }}</button>
-        </ul>
-        <div class="d-flex">
+  <div class="container navbar-container">
+    <a class="navbar-brand">
+      {{ 'title' | translate }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="toAdminPanel()">
+          {{ 'users.toAdminPanel' | translate }}
+        </button>
+      </ul>
+      <div class="d-flex">
         <div class="form-inline mx-2 my-2 my-lg-0" role="search">
           <input class="form-control mr-sm-2" type="search" placeholder="{{ 'users.placeholder' | translate }}"
             aria-label="Search" [(ngModel)]="searchTerm">
-          </div>
-          <button class="btn btn-outline-success" type="button" (click)="search()">{{ 'articles.search' | translate }}</button>
         </div>
+        <button class="btn btn-outline-success" type="button" (click)="search()">{{ 'articles.search' | translate
+          }}</button>
       </div>
-    </div>
-  </nav>
-  <div class="container">
-    <h5 class="py-2">{{ 'users.listTitle' | translate }}</h5>
-    <div class="row">
-      <div class="col-lg-3 py-2" *ngFor="let user of usersList$ | async">
-        <div class="card h-100 text-center">
-          <div class="card-body">
-            <h5 class="card-title">{{user.username}}</h5>
-          </div>
-          <a class="btn" (click)="openDialog(user.username)">{{ 'users.view' | translate }}</a>
-        </div>
-      </div>
-      <mat-paginator [length]="usersCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-        (page)="setPaginator($event)">
-      </mat-paginator>
     </div>
   </div>
+</nav>
+<div class="container">
+  <h5 class="py-2">{{ 'users.listTitle' | translate }}</h5>
+  <div class="row">
+    <div class="col-lg-3 py-2" *ngFor="let user of usersList$ | async">
+      <div class="card h-100 text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.username }}</h5>
+        </div>
+        <a class="btn" (click)="openDialog(user.username)">{{ 'users.view' | translate }}</a>
+      </div>
+    </div>
+    <mat-paginator [length]="usersCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="setPaginator($event)">
+    </mat-paginator>
+  </div>
+</div>

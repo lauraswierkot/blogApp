@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
 import { ArticleFacade } from '@state/articles/article.facade';
 import { Article } from '@state/articles/article.model';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } 
-from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from 'environments/environment';
 import { UserFacade } from '@state/user/user.facade';
@@ -24,13 +23,12 @@ export class ArticlesComponent implements OnInit {
   public articlesCount: number;
   public pageIndex = 0;
   public searchTerm = '';
-  public pageSize = 4;
   public pageSizeOptions: number[] = [4, 8, 12];
+  public pageSize = this.pageSizeOptions[0];
   public imageUrl: string = environment.apiImageUrl;
 
   constructor(
     private facade: ArticleFacade,
-    private userFacade: UserFacade,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -52,7 +50,7 @@ export class ArticlesComponent implements OnInit {
     this.facade.getArticles({
       limit: this.pageSize?.toString(),
       page: this.pageIndex?.toString(),
-      searchTerm: this.searchTerm
+      searchTerm: this.searchTerm,
     });
   }
 
