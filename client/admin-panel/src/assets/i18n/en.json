@@ -9,8 +9,8 @@
     "content": "Click on menu button to see options",
     "createArticle": "Create new article",
     "logout": "Logout",
-    "toArticles": "Articles",
-    "toUsers": "Users"
+    "articles": "Articles Panel",
+    "toUsers": "Users Panel"
   },
 
   "articles": {
