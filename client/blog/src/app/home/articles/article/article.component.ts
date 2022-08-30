@@ -30,7 +30,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   public imageUrl: string = environment.apiImageUrl;
   public fileSource: string | ArrayBuffer;
   public user$ = this.userFacade.user$;
-
   public createCommentForm: FormGroup;
   public editCommentsForm: FormGroup;
 
@@ -39,13 +38,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
+  public user: any = {};
   public ngOnInit(): void {
     const slug = this.route.snapshot.params['slug'];
     this.facade.selectArticle(slug);
-
     this.facade.selectedArticle$
       .pipe(untilDestroyed(this))
       .subscribe((article) => {
@@ -54,6 +54,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.initEditCommentsForm();
         this.initCreateCommentForm();
       });
+    this.user$.subscribe((user) => (this.user = user));
   }
 
   public toggleCommentEdit(index: number): void {
@@ -61,10 +62,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   public submitCreateCommentForm(): void {
-    this.facade.createComment(
-      this.selectedArticle.slug,
-      this.createCommentForm?.value['body']
-    );
+    if (this.user) {
+      this.facade.createComment(
+        this.selectedArticle.slug,
+        this.createCommentForm?.value['body']);
+    } 
+    else {
+      this.facade.createCommentByAnonim(
+        this.selectedArticle.slug,
+        this.createCommentForm?.value['body']);
+    }
   }
 
   public saveUpdatedComment(index: number): void {
@@ -85,22 +92,24 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.selectedArticle?.comments?.forEach((comment) => {
       this.addCommentToEditFormArray(
         comment.body,
-        comment.author.username,
-        comment.id
-      );
+        comment?.author?.username,
+        comment.id,
+        comment.createdAt);
     });
   }
 
   private addCommentToEditFormArray(
     body: string,
     author: string,
-    id: number
+    id: number,
+    date: Date | string
   ): void {
     const comment = this.formBuilder.group({
       body: this.formBuilder.control(body),
       author: this.formBuilder.control(author),
       id: this.formBuilder.control(id),
       editable: this.formBuilder.control(false),
+      date: this.formBuilder.control(date),
     });
     this.comments.push(comment);
   }
@@ -119,6 +128,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
     return this.editCommentsForm.controls['comments'][
       'controls'
     ] as FormGroup[];
+  }
+
+  public logout(): void {
+    this.userFacade.logout();
+  }
+
+  public login(): void {
+    this.router.navigate([`blog-login`]);
+  }
+
+  public toArticles(): void {
+    this.router.navigate(['']);
   }
 
   public ngOnDestroy(): void {

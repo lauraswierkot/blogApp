@@ -22,8 +22,8 @@ export class UsersComponent implements OnInit {
   public usersCount: number;
   public pageIndex = 0;
   public searchTerm = '';
-  public pageSize = 3;
-  public pageSizeOptions: number[] = [3, 6, 9];
+  public pageSize = 4;
+  public pageSizeOptions: number[] = [4, 8, 12];
 
   constructor(
     private facade: UserFacade,

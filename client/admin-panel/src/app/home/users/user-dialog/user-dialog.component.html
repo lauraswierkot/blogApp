@@ -1,17 +1,19 @@
 <div class="dialog__container">
-    <h1 mat-dialog-title>{{ 'user.title' | translate }}</h1>
-    <div mat-dialog-content>
-        <div>
+    <div class="dialog__container--title">{{ 'user.title' | translate }}</div>
+    <div mat-dialog-content class="dialog__container__field">
+        <div class="dialog__container__field">
             {{ 'user.username' | translate }} {{ selectedUser?.username }}
         </div>
-        <div>
+        <div class="dialog__container__field">
             {{ 'user.email' | translate }} {{ selectedUser?.email }}
         </div>
-        <div>
+        <div class="dialog__container__field">
             {{ 'user.birthdate' | translate }} {{ selectedUser?.age | date }}
         </div>
     </div>
-    <button class="dialog__container--button" (click)="closeDialog()" cdkFocusInitial>
-        {{ 'user.close' | translate }}
-    </button>
+    <div class="text-center my-3 mx-2">
+        <button class="btn btn-outline-secondary" (click)="closeDialog()" cdkFocusInitial>
+            {{ 'user.close' | translate }}
+        </button>
+    </div>
 </div>

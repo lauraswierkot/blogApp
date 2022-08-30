@@ -1,27 +1,31 @@
 {
+  "title": "Admin Panel",
+
   "language": {
     "english": "english",
     "polish": "polski"
   },
 
   "adminPanel": {
-    "title": "Admin Panel",
+    "title": "Menu",
     "content": "Click on menu button to see options",
     "createArticle": "Create new article",
     "logout": "Logout",
-    "toArticles": "Articles",
-    "toUsers": "Users"
+    "articles": "Articles Panel",
+    "toUsers": "Users Panel"
   },
 
   "articles": {
-    "placeholder": "Search article...",
+    "placeholder": "Search an article...",
     "search": "Search",
-    "create": "Create",
+    "create": "Create new article",
     "listTitle": "All articles",
     "addComment": "Add comment",
     "edit": "Edit",
     "delete": "Delete",
-    "toAdminPanel": "Admin Panel"
+    "toAdminPanel": "Admin Panel",
+    "logout": "Logout",
+    "articles": "Articles"
   },
 
   "articleForm": {
@@ -40,7 +44,7 @@
     "fileError": "File is missing.",
     "submit": "Save",
     "toAdminPanel": "Do not want an article for now? Back to Admin Panel",
-    "anonymous": "anonymous",
+    "anonymous": "By anonymous",
     "commentDelete": "Delete",
     "commentUpdate": "Update",
     "by": "by",
@@ -54,16 +58,18 @@
   },
 
   "login": {
-    "title": "Login panel",
+    "title": "Login Panel",
     "emailPlaceholder": "Type email here",
     "emailError": "Email not valid.",
     "passwordPlaceholder": "Type your password here",
+    "passwordError": "Password is missing.",
     "submit": "Login",
-    "toRegister": "No account? Sign up"
+    "toRegister": "No account? Sign up",
+    "rolePlaceholder": "Choose your role"
   },
 
   "register": {
-    "title": "Register panel",
+    "title": "Register Panel",
     "usernamePlaceholder": "Type your username here",
     "usernameError": "Username is missing.",
     "emailPlaceholder": "Type your email here",
@@ -93,7 +99,7 @@
     "search": "Search",
     "listTitle": "All users",
     "view": "View details",
-    "toAdminPanel": "Admin Panel"
+    "toAdminPanel": "Main"
   },
 
   "user": {
@@ -112,5 +118,12 @@
     "userLoggedIn": "Logged in successfully",
     "userRegistered": "Registered successfully",
     "emailConfirmed": "Email confirmed"
+  },
+
+  "paginator": {
+    "itemsPerPage": "Items per page",
+    "nextPage": "Next Page",
+    "previousPage": "Previous Page",
+    "of": "of"
   }
 }

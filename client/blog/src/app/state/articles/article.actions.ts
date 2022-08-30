@@ -55,6 +55,21 @@ export const createCommentFailed = createAction(
   props<{ error: Error }>()
 );
 
+export const createCommentByAnonim = createAction(
+  '[Comment] Create Comment By Anonim Request',
+  props<{ slug: string; body: Comment['body'] }>()
+);
+
+export const createCommentByAnonimSuccess = createAction(
+  '[Comment] Create Comment By Anonim Success',
+  props<{ slug: string; comment: Comment }>()
+);
+
+export const createCommentByAnonimFailed = createAction(
+  '[Comment] Create Comment By Anonim Fail',
+  props<{ error: Error }>()
+);
+
 export const updateComment = createAction(
   '[Comment] Update Comment Request',
   props<{ slug: string; body: Comment['body']; id: Comment['id'] }>()

@@ -41,6 +41,20 @@ export const reducer = createReducer(
     };
   }),
   on(action.createCommentFailed, (state, { error }) => ({ ...state, error })),
+  on(action.createCommentByAnonimSuccess, (state, { comment }) => {
+    const comments = !state.selectedArticle?.comments
+      ? []
+      : state.selectedArticle.comments;
+    return {
+      ...state,
+      selectedArticle: {
+        ...state.selectedArticle,
+        comments: [...comments, comment],
+      },
+      comments: [...comments, comment],
+    };
+  }),
+  on(action.createCommentByAnonimFailed, (state, { error }) => ({ ...state, error})),
   on(action.updateCommentSuccess, (state, { id, body }) => {
     const comment = cloneDeep(state.selectedArticle.comments).map((item) =>
       item.id === id ? { ...item, body: body } : item

@@ -30,6 +30,10 @@ export class ArticleFacade {
   public createComment(slug: string, body: string): void {
     this.store.dispatch(action.createComment({ slug, body }));
   }
+
+  public createCommentByAnonim(slug: string, body: string): void {
+    this.store.dispatch(action.createCommentByAnonim({ slug, body }));
+  }
  
   public updateComment(updateComment: UpdatedComment): void {
     this.store.dispatch(action.updateComment({ slug: updateComment.slug, body: updateComment.body, id: updateComment.id }));

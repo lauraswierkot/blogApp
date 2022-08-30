@@ -75,6 +75,17 @@ export class HttpService {
       .pipe(map((response) => response.comment));
   }
 
+  public createCommentByAnonim(
+    slug: Article['slug'],
+    body: Comment['body']
+  ): Observable<Comment> {
+    return this.http
+      .post<{ comment: Comment }>(`${apiUrl}/articles/${slug}/commentsByA`, {
+        comment: { body },
+      })
+      .pipe(map((response) => response.comment));
+  }
+
   public updateComment(
     slug: Article['slug'],
     body: Comment['body'],

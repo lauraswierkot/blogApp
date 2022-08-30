@@ -1,60 +1,78 @@
-<mat-card class="container">
-  <mat-card-header>
-    <mat-card-title class="container__form__field">{{ selectedArticle?.title }}</mat-card-title>
-    <mat-card-subtitle class="container__form__field">{{ selectedArticle?.description }}</mat-card-subtitle>
-  </mat-card-header>
-  <img [src]="fileSource" width="300" height="150">
-  <mat-card-content>
-    <div class="container__form__field">
-      {{ selectedArticle?.body }}
+<nav class="navbar navbar-expand-lg">
+  <div class="container navbar-container">
+    <a class="navbar-brand">
+      Blog
+    </a>
+    <div>
+      <button class="btn btn-primary my-2 my-sm-0 mx-4" type="button" (click)="toArticles()">{{ 'articles.articles' | translate }}</button>
+      <button *ngIf="(user$ | async) !== null" class="btn btn-primary my-2 my-sm-0" type="button" (click)="logout()">{{ 'articles.toLogout' | translate }}</button>
+      <button *ngIf="(user$ | async) === null" class="btn btn-primary my-2 my-sm-0" type="button" (click)="login()">{{ 'articles.login' | translate }}</button>
     </div>
-    <div class="container__form__field">
+  </div>
+</nav>
+<div class="card border-0">
+  <div class="card-body">
+    <img class="card-img py-2" [src]="fileSource" width="800px" height="400px">
+    <p class="card-text"> {{ 'article.createdAt' | translate }} {{ selectedArticle?.createdAt | date: 'short' }}</p>
+    <h3 class="card-title py-2">{{ selectedArticle?.title }}</h3>
+    <h6 class="card-subtitle py-2">{{ selectedArticle?.description }}</h6>
+    <div class="card-text py-2">
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let tag of selectedArticle?.tagList">
           {{ tag }}
         </mat-chip>
       </mat-chip-list>
     </div>
-  </mat-card-content>
-  <div *ngIf="selectedArticle?.comments">
-    <h3 class="container__form--title">{{ 'article.commentsTitle' | translate }}</h3>
-    <div [formGroup]="editCommentsForm">
-      <ng-container formArrayName="comments">
-        <ng-container *ngFor="let comment of comments; let i = index">
-          <div [formGroup]="comment" *ngIf="comment.value.body">
-            <ng-container *ngIf="comment?.value?.author === (user$ | async).username else noCommentUpdate">
-              <p *ngIf="!comment.value.editable">{{comment.value.body}}</p>
-              <textarea *ngIf="comment.value.editable" formControlName="body" name="body" type="text" required></textarea>
-              <button *ngIf="!comment.value.editable" type="button" (click)="toggleCommentEdit(i)"> 
-                Edit comment
-              </button>
-              <button *ngIf="comment.value.editable" type="button" (click)="saveUpdatedComment(i)">
-                Save change
-              </button>
-            </ng-container>
-            <ng-template #noCommentUpdate>
-              <p>{{comment.value.date | date: 'short' }}</p>
-              <p>{{comment.value.body}}</p>
-            </ng-template>
-          </div>
+    <div class="card-text py-3">
+      {{ selectedArticle?.body }}
+    </div>
+    <div class="card-text py-4" *ngIf="selectedArticle?.comments">
+      <h5 class="card-title py-2">{{ 'article.commentsTitle' | translate }}</h5>
+      <div [formGroup]="editCommentsForm">
+        <ng-container formArrayName="comments">
+          <ng-container *ngFor="let comment of comments; let i = index">
+            <div [formGroup]="comment" *ngIf="comment.value.body">
+              <span class="comment__author">{{ 'comment.by' | translate }} {{ comment?.value?.author == null ? 'anonim' : comment?.value?.author }}</span>
+              <ng-container *ngIf="comment?.value?.author === (user$ | async)?.username else noCommentUpdate">
+                <p class="comment-editable" *ngIf="!comment.value.editable">
+                  <span>{{comment?.value.date | date: 'short'}}</span>
+                  <span> {{comment.value.body}}</span>
+                </p>
+                <div class="card__editable">
+                <textarea class="comment" *ngIf="comment.value.editable" formControlName="body" name="body" type="text"
+                  required></textarea>
+                <button class="btn btn-outline-primary rounded" *ngIf="!comment.value.editable" type="button"
+                  (click)="toggleCommentEdit(i)">{{ 'article.edit' | translate }}</button>
+                </div>
+                <button class="btn btn-outline-success rounded" *ngIf="comment.value.editable" type="button"
+                  (click)="saveUpdatedComment(i)">{{ 'article.save' | translate }}</button>
+              </ng-container>
+              <ng-template #noCommentUpdate>
+                <p>{{comment?.value.date | date: 'short' }}</p>
+                <p>{{comment?.value.body}}</p>
+              </ng-template>
+            </div>
+            <hr />
+          </ng-container>
         </ng-container>
-      </ng-container>
+      </div>
     </div>
   </div>
-  <mat-card-actions>
-    <div class="container__form__field">
-      <span>{{ 'article.toArticles' | translate }}</span>
-      <span routerLink="/" class="material-icons container__form__field--icons arrow">trending_flat</span>
-    </div>
-  </mat-card-actions>
-</mat-card>
 
-<form class="container__form" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
-  <h1>{{ 'comment.title' | translate }}</h1>
-  <div>
-      <textarea formControlName="body" name="body" type="text" required></textarea>
-  </div>
-  <div>
-    <button type="submit" cdkFocusInitial>{{ 'comment.save' | translate }}</button>
-  </div>
-</form>
+  <form class="text-center" [formGroup]="createCommentForm" (ngSubmit)="submitCreateCommentForm()">
+    <h5>{{ 'comment.title' | translate }}</h5>
+    <div class="text-center">
+      <textarea  class="comment" formControlName="body" name="body" type="text" required></textarea>
+    </div>
+    <div>
+      <button class="px-4 my-3 btn btn-outline-success rounded" type="submit" cdkFocusInitial>
+        {{ 'comment.save' | translate }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="text-center py-4">
+  <span>{{ 'article.toArticles' | translate }}</span>
+  <i routerLink="/" class="bi bi-arrow-right"></i>
+</div>

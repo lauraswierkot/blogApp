@@ -23,11 +23,13 @@ export class ArticlesComponent implements OnInit {
   public articlesCount: number;
   public fileSource: string;
   public imageUrl: string = environment.apiImageUrl;
+
+  public user$ = this.userFacade.user$;
   
   public pageIndex = 0;
   public searchTerm = '';
-  public pageSize = 3;
-  public pageSizeOptions: number[] = [3, 6, 9];
+  public pageSizeOptions: number[] = [4, 6, 9];
+  public pageSize = this.pageSizeOptions[0];
 
   constructor(
     private facade: ArticleFacade,
@@ -77,5 +79,9 @@ export class ArticlesComponent implements OnInit {
 
   public logout(): void {
     this.userFacade.logout()
+  }
+
+  public login(): void {
+   this.router.navigate([`blog-login`]);
   }
 }

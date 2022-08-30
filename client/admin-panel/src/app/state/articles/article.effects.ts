@@ -29,7 +29,7 @@ export class ArticleEffects {
       switchMap(({ articleForm }) => {
         return this.http.createArticle(articleForm).pipe(
           switchMap((article: Article) => {
-            this.router.navigate(['articles-panel']);
+            this.router.navigate(['']);
             return [
               notificationAction.createNotification({
                 message: this.translate.instant('notification.articleCreated'),
@@ -125,7 +125,7 @@ export class ArticleEffects {
       switchMap(({ slug, articleForm }) => {
         return this.http.updateArticle(slug, articleForm).pipe(
           switchMap((article: Article) => {
-            this.router.navigate(['articles-panel']);
+            this.router.navigate(['']);
             return [
               notificationAction.createNotification({
                 message: this.translate.instant('notification.articleUpdated'),

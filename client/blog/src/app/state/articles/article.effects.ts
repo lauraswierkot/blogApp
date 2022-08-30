@@ -69,12 +69,14 @@ export class ArticleEffects {
       ofType(action.createComment),
       switchMap(({ slug, body }) => {
         return this.http.createComment(slug, body).pipe(
-          map((comment: Comment) => {
-            notificationAction.createNotification({
-              message: 'Comment created',
-              notificationType: NotificationType.Message,
-            });
-            return action.createCommentSuccess({ slug, comment });
+          switchMap((comment: Comment) => {
+            return [
+              notificationAction.createNotification({
+                message: 'Comment created',
+                notificationType: NotificationType.Message,
+              }),
+              action.createCommentSuccess({ slug, comment }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.createCommentFailed(error),
@@ -87,18 +89,46 @@ export class ArticleEffects {
       })
     )
   );
- 
+
+  createCommentByAnonim$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(action.createCommentByAnonim),
+      switchMap(({ slug, body }) => {
+        return this.http.createCommentByAnonim(slug, body).pipe(
+          switchMap((comment: Comment) => {
+            return [
+              notificationAction.createNotification({
+                message: 'Comment created',
+                notificationType: NotificationType.Message,
+              }),
+              action.createCommentByAnonimSuccess({ slug, comment }),
+            ];
+          }),
+          catchError((error: HttpErrorResponse) => [
+            action.createCommentByAnonimFailed(error),
+            notificationAction.createNotification({
+              message: error.error.error,
+              notificationType: NotificationType.Error,
+            }),
+          ])
+        );
+      })
+    )
+  );
+
   editComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(action.updateComment),
       switchMap(({ slug, body, id }) => {
         return this.http.updateComment(slug, body, id).pipe(
-          map((comment: Comment) => {
-            notificationAction.createNotification({
-              message: 'Comment updated',
-              notificationType: NotificationType.Message,
-            });
-            return action.updateCommentSuccess({ id, body });
+          switchMap((comment: Comment) => {
+            return [
+              notificationAction.createNotification({
+                message: 'Comment updated',
+                notificationType: NotificationType.Message,
+              }),
+              action.updateCommentSuccess({ id, body }),
+            ];
           }),
           catchError((error: HttpErrorResponse) => [
             action.updateCommentFailed(error),

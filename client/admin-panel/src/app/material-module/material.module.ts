@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -14,7 +15,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 const modules = [
   MatFormFieldModule,
@@ -33,7 +38,11 @@ const modules = [
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatDialogModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  TextFieldModule,
 ];
 
 @NgModule({

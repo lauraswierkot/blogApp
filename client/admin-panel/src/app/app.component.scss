@@ -1,9 +1,10 @@
 .translation__container {
-  font-size: small;
   display: flex;
+  position: fixed;
+  z-index: 1;
+  right: 20px;
   flex-direction: row;
   justify-content: right;
-  
   &--selector {
     width: fit-content;
   }
@@ -25,4 +26,45 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.menu__container {
+  display: flex;
+  font-size: medium;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &--title {
+    margin-left: 8px;
+    font-size: large;
+  }
+
+  &__content {
+    padding-left: 1em;
+    font-size: medium;
+  }
+
+  &__button {
+    font-size: medium;
+  }
+}
+
+.sidenav {
+  flex: 1;
+  font-size: medium;
+}
+
+.isMobile {
+  &__toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+
+  &__sidenav {
+    flex: 1 0 auto;
+  }
 }
