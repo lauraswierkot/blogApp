@@ -38,9 +38,7 @@ export class MailService {
     user: UserResponse,
     token: AuthResponse['token'],
   ): Promise<void> {
-    const url = `${this.configService.get(
-      process.env.LOCALHOST_URL,
-    )}/${token}`;
+    const url = `http://localhost:4200/password-reset/${token}`;
     await this.mailerService
       .sendMail({
         to: user?.email,
