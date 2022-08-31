@@ -21,6 +21,9 @@ export class CommentEntity extends AbstractEntity {
   @ManyToOne(
     type => ArticleEntity,
     article => article.comments,
+    {
+      onDelete: 'CASCADE'
+    }
   )
   article: ArticleEntity;
 

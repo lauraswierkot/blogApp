@@ -5,6 +5,7 @@ import {
   MinLength,
   MaxLength,
   IsOptional,
+  IsDateString,
 } from 'class-validator';
 
 export class LoginDTO {
@@ -31,6 +32,15 @@ export class RegisterDTO extends LoginDTO {
   @MaxLength(20)
   @ApiProperty()
   username: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  role: Role;
+
+  @IsDateString()
+  @ApiProperty()
+  age: Date;
 }
 
 export class RegisterBody {
@@ -48,6 +58,11 @@ export class UpdateUserDTO {
 
   @IsOptional()
   bio: string;
+  
+  @IsString()
+  @MinLength(4)
+  @ApiProperty()
+  password: string;
 }
 
 export class UpdateUserBody {
@@ -60,16 +75,31 @@ export interface AuthPayload {
 }
 
 export interface UserResponse {
+  id?: number;
+  isActive?: boolean
   email: string;
   username?: string;
+  age: Date;
   bio: string;
   image: string | null;
 }
 
 export interface AuthResponse extends UserResponse {
+  confirmToken?: string;
   token: string;
+  reminderToken?: string;
 }
 
 export interface ProfileResponse extends UserResponse {
   following: boolean | null;
+}
+
+export enum TokenType {
+  Confirm = 'confirmToken',
+  Reminder = 'reminderToken',
+}
+
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
 }

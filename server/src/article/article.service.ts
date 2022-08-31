@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, FindManyOptions } from 'typeorm';
 
 import { ArticleEntity } from 'src/entities/article.entity';
 import { UserEntity } from 'src/entities/user.entity';
@@ -8,10 +8,10 @@ import { TagEntity } from 'src/entities/tag.entity';
 import {
   CreateArticleDTO,
   UpdateArticleDTO,
-  FindAllQuery,
   FindFeedQuery,
   ArticleResponse,
 } from 'src/models/article.models';
+import { Role } from 'src/models/user.model';
 
 @Injectable()
 export class ArticleService {
@@ -34,29 +34,34 @@ export class ArticleService {
 
   async findAll(
     user: UserEntity,
-    query: FindAllQuery,
-  ): Promise<ArticleResponse[]> {
-    let findOptions: any = {
-      where: {},
+    limit = '5',
+    page = '0',
+    searchTerm = null,
+  ): Promise<{ articles: ArticleResponse[]; total: number }> {
+    const options: FindManyOptions<ArticleResponse> = {
+      order: {
+        createdAt: 'DESC',
+      },
+      skip: parseInt(limit) * parseInt(page),
+      take: parseInt(limit),
+      where: !!searchTerm
+        ? [
+            {
+              title: Like(`%${searchTerm}%`),
+            },
+            {
+              body: Like(`%${searchTerm}%`),
+            },
+          ]
+        : [],
     };
-    if (query.author) {
-      findOptions.where['author.username'] = query.author;
-    }
-    if (query.favorited) {
-      findOptions.where['favoritedBy.username'] = query.favorited;
-    }
-    if (query.tag) {
-      findOptions.where.tagList = Like(`%${query.tag}%`);
-    }
-    if (query.offset) {
-      findOptions.offset = query.offset;
-    }
-    if (query.limit) {
-      findOptions.limit = query.limit;
-    }
-    return (await this.articleRepo.find(findOptions)).map(article =>
-      article.toArticle(user),
-    );
+
+    const [articles, total] = await this.articleRepo.findAndCount(options);
+
+    return {
+      articles: articles.map(article => article.toArticle(user)),
+      total,
+    };
   }
 
   async findFeed(
@@ -79,7 +84,12 @@ export class ArticleService {
   findBySlug(slug: string): Promise<ArticleEntity> {
     return this.articleRepo.findOne({
       where: { slug },
+      relations: ['comments'],
     });
+  }
+
+  private ensureUserRole(user: UserEntity): boolean {
+    return user.role === Role.Admin;
   }
 
   private ensureOwnership(user: UserEntity, article: ArticleEntity): boolean {
@@ -88,11 +98,13 @@ export class ArticleService {
 
   async createArticle(
     user: UserEntity,
+    file: Express.Multer.File,
     data: CreateArticleDTO,
   ): Promise<ArticleResponse> {
     const article = this.articleRepo.create(data);
+    article.image = file.filename;
     article.author = user;
-    await this.upsertTags(data.tagList);
+    await this.upsertTags([data.tagList]);
     const { slug } = await article.save();
     return (await this.articleRepo.findOne({ slug })).toArticle(user);
   }
@@ -100,13 +112,22 @@ export class ArticleService {
   async updateArticle(
     slug: string,
     user: UserEntity,
+    file: Express.Multer.File,
     data: UpdateArticleDTO,
   ): Promise<ArticleResponse> {
     const article = await this.findBySlug(slug);
-    if (!this.ensureOwnership(user, article)) {
+    if (!this.ensureOwnership(user, article) && !this.ensureUserRole(user)) {
       throw new UnauthorizedException();
     }
-    await this.articleRepo.update({ slug }, data);
+
+    const articleData: UpdateArticleDTO = {
+      title: data.title,
+      description: data.description,
+      body: data.body,
+      image: file?.filename ?? article.image,
+      tagList: data.tagList,
+    };
+    await this.articleRepo.update({ slug }, articleData);
     return article.toArticle(user);
   }
 
@@ -115,7 +136,7 @@ export class ArticleService {
     user: UserEntity,
   ): Promise<ArticleResponse> {
     const article = await this.findBySlug(slug);
-    if (!this.ensureOwnership(user, article)) {
+    if (!this.ensureOwnership(user, article) && !this.ensureUserRole(user)) {
       throw new UnauthorizedException();
     }
     await this.articleRepo.remove(article);
@@ -129,7 +150,6 @@ export class ArticleService {
     const article = await this.findBySlug(slug);
     article.favoritedBy.push(user);
     await article.save();
-    console.log(article);
     return (await this.findBySlug(slug)).toArticle(user);
   }
 

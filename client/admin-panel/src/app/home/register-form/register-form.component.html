@@ -1,0 +1,66 @@
+<div class="container">
+  <form class="container__form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <header class="container__form--title">{{ 'register.title' | translate }}</header>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">person</span>
+      <input class="container__form__field--input" formControlName="username"
+        placeholder="{{ 'register.usernamePlaceholder' | translate }}" name="username" required />
+      <div class="container__form__field--message" *ngIf="username.errors && username.touched">
+        {{ 'register.usernameError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">email</span>
+      <input class="container__form__field--input" formControlName="email"
+        placeholder="{{ 'register.emailPlaceholder' | translate }}" name="email" required />
+      <div class="container__form__field--message" *ngIf="email.errors && email.touched">
+        {{ 'register.emailError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">key</span>
+      <input class="container__form__field--input" type="password" formControlName="password"
+        placeholder="{{ 'register.passwordPlaceholder' | translate }}" name="password" required />
+      <div class="container__form__field--message" *ngIf="password.errors && password.touched">
+        {{ 'register.passwordError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">key</span>
+      <input class="container__form__field--input" type="password" formControlName="confirmPassword"
+        placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}" name="confirmPassword" required />
+      <div *ngIf="confirmPassword.errors?.['confirmPasswordValidation'] && confirmPassword.touched">
+        {{ 'register.confirmPasswordError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">admin_panel_settings</span>
+      <select formControlName="role" name="role" class="container__form__field--input">
+        <option *ngFor="let option of options" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+      <div class="container__form__field--message" *ngIf="role.errors && role.touched">
+        {{ 'register.roleError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <span class="material-icons container__form__field--icons">cake</span>
+      <input class="container__form__field--input" type="date" formControlName="age"
+        placeholder="{{ 'register.agePlaceholder' | translate }}" name="age" required />
+      <div class="container__form__field--message" *ngIf="age.errors?.['adolescent'] && age.touched">
+        {{ 'register.ageError' | translate }}
+      </div>
+    </div>
+    <div class="container__form__field">
+      <button [disabled]="!registerForm.valid" type="submit">
+        <span>{{ 'register.submit' | translate }}</span>
+      </button>
+    </div>
+    <div class="container_form__field container__form__field--login">
+      <span>{{ 'register.toLogin' | translate }}</span>
+      <span class="material-icons container__form__field--icons arrow" (click)="toLoginForm()">trending_flat
+      </span>
+    </div>
+  </form>
+</div>

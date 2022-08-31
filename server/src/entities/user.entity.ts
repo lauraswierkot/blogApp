@@ -8,21 +8,36 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Exclude, classToPlain } from 'class-transformer';
-import { IsEmail } from 'class-validator';
+import { IsBoolean, IsDateString, IsEmail } from 'class-validator';
 
 import { AbstractEntity } from './abstract-entity';
 import { ArticleEntity } from './article.entity';
 import { CommentEntity } from './comment.entity';
-import { UserResponse } from 'src/models/user.model';
+import { Role, UserResponse } from 'src/models/user.model';
 
 @Entity('users')
 export class UserEntity extends AbstractEntity {
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 
   @Column({ unique: true })
   username: string;
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.User,
+  })
+  role: Role;
+
+  @Column({ default: false })
+  @IsBoolean()
+  isActive: boolean;
+
+  @Column()
+  @IsDateString()
+  age: Date;
 
   @Column({ default: '' })
   bio: string;
