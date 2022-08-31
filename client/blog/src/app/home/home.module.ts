@@ -11,7 +11,10 @@ import {
   LoginFormComponent,
   NewPasswordFormComponent,
   EmailFormComponent,
+  ArticlesComponent,
+  ArticleComponent,
 } from './';
+import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -22,6 +25,7 @@ const modules = [
   ReactiveFormsModule,
   CommonModule,
   MaterialModule,
+  RouterModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -35,6 +39,8 @@ const components = [
   LoginFormComponent,
   NewPasswordFormComponent,
   EmailFormComponent,
+  ArticlesComponent,
+  ArticleComponent,
 ];
 
 @NgModule({

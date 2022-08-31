@@ -5,10 +5,11 @@
   },
 
   "login": {
-    "title": "Panel logowania",
+    "title": "Panel Logowania",
     "emailPlaceholder": "Podaj email",
     "emailError": "Email nieporawny.",
     "passwordPlaceholder": "Podaj hasło",
+    "passwordError": "Brak hasła.",
     "submit": "Zaloguj",
     "toRegister": "Nie masz konta? Zarejestruj się",
     "toEmailForm": "Nie pamiętasz hasła?"
@@ -27,7 +28,7 @@
     "confirmPasswordPlaceholder": "Powtórz hasło",
     "confirmPasswordError": "Brak hasła.",
     "submit": "Zapisz",
-    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła?"
   },
 
   "email": {
@@ -35,6 +36,37 @@
     "emailPlaceholder": "Podaj swojego maila",
     "emailError": "Brak maila.",
     "submit": "Wyślij",
-    "toLoginForm": "Nie potrzebujesz zmieniać hasła? Do Panelu Logowania"
+    "toLoginForm": "Nie potrzebujesz zmieniać hasła?"
+  },
+
+  "articles": {
+    "placeholder": "Wyszukaj artykuł...",
+    "search": "Szukaj",
+    "listTitle": "Artykuły",
+    "toLogout": "Wyloguj się",
+    "details": "Czytaj",
+    "logout": "Wyloguj się",
+    "login": "Zaloguj się",
+    "by": "Od",
+    "articles": "Artykuły"
+  },
+
+  "article": {
+    "toArticles": "Do artykułów",
+    "commentsTitle": "Komentarze",
+    "createdAt": "Utworzony",
+    "edit": "Edytuj",
+    "save": "Zapisz"
+  },
+
+  "comment": {
+    "title": "Dodaj komentarz",
+    "save": "Zapisz",
+    "placeholder": "Dodaj swój komentarz",
+    "error": "Brak komentarza",
+    "titleNew": "Edytuj komentarz",
+    "update": "Zapisz",
+    "close": "Zamknij",
+    "by": "Od"
   }
 }

@@ -5,10 +5,11 @@
   },
 
   "login": {
-    "title": "Login panel",
+    "title": "Login Panel",
     "emailPlaceholder": "Type email here",
     "emailError": "Email not valid.",
     "passwordPlaceholder": "Type your password here",
+    "passwordError": "Password is missing.",
     "submit": "Login",
     "toRegister": "No account? Sign up",
     "toEmailForm": "Forgot your password?"
@@ -27,7 +28,7 @@
     "confirmPasswordPlaceholder": "Confirm your password here",
     "confirmPasswordError": "Confirm password is missing.",
     "submit": "Save",
-    "toLoginForm": "No need to change password? To Login Panel"
+    "toLoginForm": "No need to change password?"
   },
 
   "email": {
@@ -35,6 +36,37 @@
     "emailPlaceholder": "Type your email here",
     "emailError": "Email is missing.",
     "submit": "Send",
-    "toLoginForm": "No need to change password? To Login Panel"
+    "toLoginForm": "No need to change password?"
+  },
+
+  "articles": {
+    "placeholder": "Search article...",
+    "search": "Search",
+    "listTitle": "All articles",
+    "toLogout": "Logout",
+    "details": "Read",
+    "logout": "Logout",
+    "login": "Login",
+    "by": "By",
+    "articles": "Articles"
+  },
+
+  "article": {
+    "toArticles": "Back to articles",
+    "commentsTitle": "Comments",
+    "createdAt": "Created at",
+    "edit": "Edit",
+    "save": "Save"
+  },
+
+  "comment": {
+    "title": "Add comment",
+    "save": "Save",
+    "placeholder": "Type your comment here",
+    "error": "Comment is missing",
+    "titleNew": "Edit your comment",
+    "update": "Update",
+    "close": "Close",
+    "by": "By"
   }
 }

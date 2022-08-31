@@ -11,7 +11,7 @@
     }
   },
   "projects": {
-    "admin-panel": {
+    "blog": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -21,7 +21,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/admin-panel",
+            "allowedCommonJsDependencies": ["lodash"],
+            "outputPath": "dist/blog",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "admin-panel:build:production"
+              "browserTarget": "blog:build:production"
             },
             "development": {
-              "browserTarget": "admin-panel:build:development"
+              "browserTarget": "blog:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "admin-panel:build"
+            "browserTarget": "blog:build"
           }
         },
         "test": {

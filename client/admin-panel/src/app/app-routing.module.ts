@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
   LoginFormComponent,
-  AdminPanelComponent,
   RegisterFormComponent,
   ConfirmationPageComponent,
   ArticleFormComponent,
@@ -14,7 +13,7 @@ import {
 const routes: Routes = [
   {
     path: '',
-    component: AdminPanelComponent,
+    component: ArticlesComponent,
   },
   {
     path: 'login',
@@ -32,10 +31,7 @@ const routes: Routes = [
     path: 'article',
     component: ArticleFormComponent,
   },
-  {
-    path: 'articles-panel',
-    component: ArticlesComponent,
-  },
+  
   {
     path: 'article/:slug',
     component: ArticleFormComponent,

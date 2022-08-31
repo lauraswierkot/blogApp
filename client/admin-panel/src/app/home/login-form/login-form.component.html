@@ -1,27 +1,29 @@
 <div class="container">
-  <form class="container__form" [formGroup]="loginForm" (ngSubmit)="login()">
-    <header class="container__form--title">{{ 'login.title' | translate }}</header>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">person</span>
-      <input class="container__form__field--input" formControlName="email"
-        placeholder="{{ 'login.emailPlaceholder' | translate }}" name="email" required />
-      <div *ngIf="email.errors?.['email']">{{ 'login.emailError' | translate }}</div>
+    <div class="row justify-content-center px-4 py-4">
+        <div class="col-md-7 col-lg-9">
+            <div class="login-wrap p-1 p-md-1">
+                <h3 class="text-center py-3">{{ 'login.title' | translate }}</h3>
+                <form action="#" class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="form-group py-2">
+                        <input [ngClass]="{'is-invalid' : email.errors && email.touched}" type="text" class="form-control rounded-left" formControlName="email"
+                            placeholder="{{ 'login.emailPlaceholder' | translate }}" required>
+                            <div class="invalid-feedback">{{ 'login.emailError' | translate }}</div>
+                    </div>
+                    <div class="form-group py-2">
+                        <input [ngClass]="{'is-invalid' : password.errors && password.touched}" type="password" class="form-control rounded-left" formControlName="password"
+                            placeholder="{{ 'login.passwordPlaceholder' | translate }}" required>
+                            <div class="invalid-feedback">{{ 'login.passwordError' | translate }}</div>
+                    </div>
+                    <div class="form-group py-4 px-5">
+                        <button [disabled]="!loginForm.valid" type="submit" class="form-control btn btn-primary rounded submit px-3">
+                            {{ 'login.submit' | translate }}
+                        </button>
+                    </div>
+                </form>
+                <div class="w-90 text-md-right py-3 text-center">
+                    <a href="register">{{ 'login.toRegister' | translate }}</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">key</span>
-      <input class="container__form__field--input" type="password" formControlName="password"
-        placeholder="{{ 'login.passwordPlaceholder' | translate }}" name="password" required />
-    </div>
-    <div class="container__form__field">
-      <button [disabled]="!loginForm.valid" type="submit">
-        <span>{{ 'login.submit' | translate }}</span>
-      </button>
-    </div>
-    <div class="container_form__field container__form__field--register">
-      <span>{{ 'login.toRegister' | translate }}</span>
-      <span (click)="toRegisterForm()" class="material-icons container__form__field--icons arrow">
-        trending_flat
-      </span>
-    </div>
-  </form>
 </div>

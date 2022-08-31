@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { ArticleFacade } from '@state/articles/article.facade';
-import { Article, GetArticlePayload } from '@state/articles/article.model';
+import { Article } from '@state/articles/article.model';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { environment } from 'environments/environment';
+import { UserFacade } from '@state/user/user.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -21,8 +23,9 @@ export class ArticlesComponent implements OnInit {
   public articlesCount: number;
   public pageIndex = 0;
   public searchTerm = '';
-  public pageSize = 3;
-  public pageSizeOptions: number[] = [3, 6, 9];
+  public pageSizeOptions: number[] = [4, 8, 12];
+  public pageSize = this.pageSizeOptions[0];
+  public imageUrl: string = environment.apiImageUrl;
 
   constructor(
     private facade: ArticleFacade,
@@ -61,10 +64,6 @@ export class ArticlesComponent implements OnInit {
 
   public toUpdateArticle(slug: string): void {
     this.router.navigate([`article/${slug}`]);
-  }
-
-  public toAdminPanel(): void {
-    this.router.navigate(['']);
   }
 
   public setPaginator(event: PageEvent): void {

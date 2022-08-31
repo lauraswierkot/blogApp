@@ -1,66 +1,54 @@
 <div class="container">
-  <form class="container__form" [formGroup]="registerForm" (ngSubmit)="register()">
-    <header class="container__form--title">{{ 'register.title' | translate }}</header>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">person</span>
-      <input class="container__form__field--input" formControlName="username"
-        placeholder="{{ 'register.usernamePlaceholder' | translate }}" name="username" required />
-      <div class="container__form__field--message" *ngIf="username.errors && username.touched">
-        {{ 'register.usernameError' | translate }}
+  <div class="row justify-content-center px-4 py-4">
+    <div class="col-md-7 col-lg-9">
+      <div class="login-wrap p-1 p-md-1">
+        <h3 class="text-center py-3">{{ 'register.title' | translate }}</h3>
+        <form class="login-form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="form-group py-1">
+            <input [ngClass]="{'is-invalid' : username.errors && username.touched}" type="text"
+              class="form-control rounded-left" formControlName="username"
+              placeholder="{{ 'register.usernamePlaceholder' | translate }}" required>
+            <div class="invalid-feedback">{{ 'register.usernameError' | translate }}</div>
+          </div>
+          <div class="form-group py-1">
+            <input [ngClass]="{'is-invalid' : email.errors?.['email']}" type="text" class="form-control rounded-left"
+              formControlName="email" placeholder="{{ 'register.emailPlaceholder' | translate }}" required>
+            <div class="invalid-feedback">{{ 'register.emailError' | translate }}</div>
+          </div>
+          <div class="form-group py-1">
+            <input [ngClass]="{'is-invalid' : password.errors?.['password']}" type="password"
+              class="form-control rounded-left" formControlName="password"
+              placeholder="{{ 'register.passwordPlaceholder' | translate }}" required>
+            <div class="invalid-feedback">{{ 'register.passwordError' | translate }}</div>
+          </div>
+          <div class="form-group py-1">
+            <input [ngClass]="{'is-invalid' : confirmPassword.errors?.['confirmPasswordValidation']}" type="password"
+              class="form-control rounded-left" formControlName="confirmPassword"
+              placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}" required>
+            <div class="invalid-feedback">{{ 'register.confirmPasswordError' | translate }}</div>
+          </div>
+          <div class="form-group py-1">
+            <select [ngClass]="{'is-invalid' : role.errors?.['role']}" formcontrolName="role" class="form-select"
+              aria-label="Default select example">
+              <option selected>{{ 'login.rolePlaceholder' | translate }}</option>
+              <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div class="form-group py-1">
+            <input [ngClass]="{'is-invalid' : age.errors?.['adolescent']}" data-provide="datepicker" type="date"
+              class="form-control rounded-left" formControlName="age"
+              placeholder="{{ 'register.agePlaceholder' | translate }}" required>
+            <div class="invalid-feedback">{{ 'register.ageError' | translate }}</div>
+          </div>
+          <div class="form-group py-3 px-5">
+            <button [disabled]="!registerForm.valid" type="submit"
+              class="form-control btn btn-primary rounded submit px-3">{{ 'register.submit' | translate }}</button>
+          </div>
+        </form>
+        <div class="w-90 text-md-right py-3 text-center">
+          <a href="login">{{ 'register.toLogin' | translate }}</a>
+        </div>
       </div>
     </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">email</span>
-      <input class="container__form__field--input" formControlName="email"
-        placeholder="{{ 'register.emailPlaceholder' | translate }}" name="email" required />
-      <div class="container__form__field--message" *ngIf="email.errors && email.touched">
-        {{ 'register.emailError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">key</span>
-      <input class="container__form__field--input" type="password" formControlName="password"
-        placeholder="{{ 'register.passwordPlaceholder' | translate }}" name="password" required />
-      <div class="container__form__field--message" *ngIf="password.errors && password.touched">
-        {{ 'register.passwordError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">key</span>
-      <input class="container__form__field--input" type="password" formControlName="confirmPassword"
-        placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}" name="confirmPassword" required />
-      <div *ngIf="confirmPassword.errors?.['confirmPasswordValidation'] && confirmPassword.touched">
-        {{ 'register.confirmPasswordError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">admin_panel_settings</span>
-      <select formControlName="role" name="role" class="container__form__field--input">
-        <option *ngFor="let option of options" [value]="option">
-          {{ option }}
-        </option>
-      </select>
-      <div class="container__form__field--message" *ngIf="role.errors && role.touched">
-        {{ 'register.roleError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <span class="material-icons container__form__field--icons">cake</span>
-      <input class="container__form__field--input" type="date" formControlName="age"
-        placeholder="{{ 'register.agePlaceholder' | translate }}" name="age" required />
-      <div class="container__form__field--message" *ngIf="age.errors?.['adolescent'] && age.touched">
-        {{ 'register.ageError' | translate }}
-      </div>
-    </div>
-    <div class="container__form__field">
-      <button [disabled]="!registerForm.valid" type="submit">
-        <span>{{ 'register.submit' | translate }}</span>
-      </button>
-    </div>
-    <div class="container_form__field container__form__field--login">
-      <span>{{ 'register.toLogin' | translate }}</span>
-      <span class="material-icons container__form__field--icons arrow" (click)="toLoginForm()">trending_flat
-      </span>
-    </div>
-  </form>
+  </div>
 </div>

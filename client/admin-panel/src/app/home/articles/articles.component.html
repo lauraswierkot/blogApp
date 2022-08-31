@@ -1,30 +1,55 @@
-<div class="search">
-  <input class="search__form" type="text" [(ngModel)]="searchTerm"
-    placeholder="{{ 'articles.placeholder' | translate }}" />
-
-  <div class="search__buttons">
-    <button (click)="search()">{{ 'articles.search' | translate }}</button>
-    <button (click)="createArticle()">{{ 'articles.create' | translate }}</button>
-    <button (click)="toAdminPanel()">{{ 'articles.toAdminPanel' | translate }}</button>
+<nav class="navbar navbar-expand-lg">
+  <div class="container navbar-container">
+    <a class="navbar-brand">
+      {{ 'title' | translate }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <button class="btn btn-primary mx-2 my-2" type="button" (click)="createArticle()">
+          {{ 'articles.create' |  translate }} 
+        </button>
+      </ul>
+      <div class="d-flex">
+        <div class="form-inline mx-2 my-2 my-lg-0" role="search">
+          <input class="form-control mr-sm-2" type="search" placeholder="{{ 'articles.placeholder' | translate }}"
+            aria-label="Search" [(ngModel)]="searchTerm">
+        </div>
+        <button class="btn btn-outline-success" type="button" (click)="search()">
+          {{ 'articles.search' | translate }}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-<div class="list">
-  <h3 class="list--title">{{ 'articles.listTitle' | translate }}</h3>
-  <mat-card class="list__card" *ngFor="let article of articlesList$ | async">
-    <mat-card-title class="list__card__title">
-      {{article.title}}
-    </mat-card-title>
-    <mat-card-actions class="list__card__buttons">
-      <button (click)="toUpdateArticle(article.slug)">
-        {{ 'articles.edit' | translate }}
-      </button>
-      <button (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-paginator
-    [length]="articlesCount"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="setPaginator($event)">
-  </mat-paginator>
+</nav>
+<div class="container">
+  <h5 class="py-2">{{ 'articles.listTitle' | translate }}</h5>
+  <div class="row">
+    <div class="col-lg-3 py-2" *ngFor="let article of articlesList$ | async">
+      <div class="card h-100 text-center">
+        <img 
+          class="bd-placeholder-img card-img-top article-image" 
+          [src]="imageUrl+article.image" 
+          role="img" 
+          aria-label="Placeholder: Image cap"
+          preserveAspectRatio="xMidYMid slice" 
+          focusable="false">
+        <div class="card-body">
+          <h5 class="card-title">{{ article.title }}</h5>
+          <p class="card-text">{{ article.description }}</p>
+        </div>
+        <a class="btn" (click)="toUpdateArticle(article.slug)">{{ 'articles.edit' | translate }}</a>
+        <a class="btn" (click)="deleteArticle(article.slug)">{{ 'articles.delete' | translate }}</a>
+      </div>
+    </div>
+    <mat-paginator #paginator
+      [length]="articlesCount" 
+      [pageSize]="pageSize" 
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="setPaginator($event)">
+    </mat-paginator>
+  </div>
 </div>

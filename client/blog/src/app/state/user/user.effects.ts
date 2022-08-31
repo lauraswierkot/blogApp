@@ -54,7 +54,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(action.logout),
         tap(() => {
-          return this.router.navigate(['/login']);
+          return this.router.navigate(['/blog-login']);
         })
       ),
     { dispatch: false }
@@ -66,9 +66,7 @@ export class UserEffects {
       switchMap(({ email }) => {
         return this.http.sendReminderPasswordEmail(email).pipe(
           switchMap(() => {
-            setTimeout(() => {
-              this.router.navigate(['/blog-login']);
-            }, 1000);
+            this.router.navigate(['/blog-login']);
             return [
               notificationAction.createNotification({
                 message: this.translate.instant('notification.reminderSent'),
